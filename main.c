@@ -3,14 +3,21 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-int main()
+char *get_prompt(char **env)
 {
-	char history[1000000];
-	char *str;
-	while (str = readline("ICI="))
-	{
-		add_history(str);
-		printf("str=%s\n", str);
-		free(str);
-	}
+
+}
+
+int main(int argc, char **argv, char **env)
+{
+	char *prompt;
+
+	prompt = get_prompt();
+	// char *str;
+	// while (str = readline("ICI="))
+	// {
+	// 	add_history(str);
+	// 	printf("str=%s\n", str);
+	// 	free(str);
+	// }
 }
