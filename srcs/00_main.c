@@ -41,33 +41,33 @@ int main(int argc, char **argv, char **env)
 	// char *prompt;
 	t_lexed_list	*lexed_lst;
 	char *readline_str;
-	char			cmd_line[] ="<<\tbien\"ko\'\'\"\'\' h\' test|fd \"ec\"ho \'bonjour\' \"\'|wesh || bien\" ||| echo 2 >> test >>>\"><<<>>>>";
+	char			cmd_line[] ="<< eof < test\tbien\"ko\'\'\"\'\' h\' test|fd \"ec\"ho \'bonjour\' \"\'|wesh || bien\" ||| echo 2 >> test >>>\"><<<>>>>";
 	// char **paths;
 
 	// paths = get_paths(env);
 	// for (int i = 0;paths[i];i++)
 	// // 	printf("%s\n", paths[i]);
-	// printf("%s\n------------------\n", cmd_line);
-	// lexed_lst = lexer(cmd_line);
+	printf("%s\n------------------\n", cmd_line);
+	lexed_lst = lexer(cmd_line);
 	// token(lexed_lst);
-	// printf("--------Command lst lexed--------\n");
-	// ft_read_lst(lexed_lst);
-	// free_lst(lexed_lst);
+
+
+	free_lst(lexed_lst);
 
 
 
 
 
-	while (readline_str = readline("minishell>"))
-	{
-		add_history(readline_str);
-		// if (!check_empty_line(readline_str) && check_builtins(command_data));
-		// else
-		// 	printf("Do pipex...\n");
-		printf("%s\n", readline_str);
+	// while (readline_str = readline("minishell>"))
+	// {
+	// 	add_history(readline_str);
+	// 	// if (!check_empty_line(readline_str) && check_builtins(command_data));
+	// 	// else
+	// 	// 	printf("Do pipex...\n");
+	// 	printf("%s\n", readline_str);
 
-		free(readline_str);
-	}
+	// 	free(readline_str);
+	// }
 }
 
 	// "cat file | ls | wc -l"

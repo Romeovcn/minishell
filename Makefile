@@ -2,16 +2,7 @@ SRCS_DIR = srcs
 
 OBJS_DIR = objs
 
-SRCS	=	00_main.c \
-			01_built_in.c \
-			02_check_access.c \
-			03_env.c \
-			04_utils.c \
-			05_lexer.c \
-			06_lexer_lst_utils.c \
-			07_lexer_utils.c \
-			08_token.c \
-			09_token_lst_utils.c \
+SRCS	=	$(shell find srcs/*.c -exec basename \ {} \;)
 
 OBJS = ${patsubst %.c,${OBJS_DIR}/%.o,${SRCS}}
 
@@ -37,7 +28,7 @@ ${NAME}: ${OBJS_DIR} ${OBJS} ${HEADERS} ${LIB}
 all: ${NAME}
 
 ${LIB}:
-	@make -C ./libft
+	@make -sC ./libft
 
 $(OBJS_DIR):
 	@mkdir -p ${OBJS_DIR}
@@ -51,7 +42,7 @@ clean:
 	@echo "\033[32mClean !\033[0m"
 
 fclean: clean
-	@make fclean -C ./libft
+	@make fclean -sC ./libft
 	@rm -f ${NAME}
 
 re: fclean all

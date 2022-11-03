@@ -52,5 +52,7 @@ t_lexed_list *lexer(char *readline_str)
 		else
 			readline_str++;
 	}
+	printf("--------Command lst lexed--------\n");
+	ft_read_lst(lexed_lst);
 	return (lexed_lst);
 }

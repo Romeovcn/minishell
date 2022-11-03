@@ -36,7 +36,8 @@ typedef struct t_list
 	char			*args;
 
 	int				input;
-	char			*delimiteur;
+	char			*filename;
+	char			*delimiter;
 	int				output;
 	struct t_list	*next;
 }					t_token_list;
@@ -93,7 +94,7 @@ void				token(t_lexed_list *lexed_lst);
 //----------------------------------------------------------------------------//
 //							 	Token lst utils								  //
 //----------------------------------------------------------------------------//
-t_token_list		*ft_lstnew_token(void *command, int operator);
+t_token_list		*ft_lstnew_token();
 t_token_list		*ft_lstlast_token(t_token_list *lst);
 void				ft_lstadd_back_token(t_token_list **lst, t_token_list *new);
 void				ft_read_lst_token(t_token_list *lst);

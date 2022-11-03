@@ -28,7 +28,7 @@ int get_word_size(char *readline_str)
 	{
 		if (quote == 0 && is_operator(readline_str))
 			break ;
-		if (*readline_str == ' ' && quote == 0)
+		if ((*readline_str == ' ' || *readline_str == '\t') && quote == 0)
 			break ;
 		if ((*readline_str == '\'' || *readline_str == '\"') && quote == 0)
 		{
@@ -59,7 +59,7 @@ void get_word(char *readline_str, char **word)
 	{
 		if (quote == 0 && is_operator(readline_str))
 			break ;
-		if (*readline_str == ' ' && quote == 0)
+		if ((*readline_str == ' ' || *readline_str == '\t') && quote == 0)
 			break ;
 		if ((*readline_str == '\'' || *readline_str == '\"') && quote == 0)
 		{
@@ -89,7 +89,7 @@ void go_to_word_end(char **readline_str)
 	{
 		if (quote == 0 && is_operator(*readline_str))
 			break ;
-		if (**readline_str == ' ' && quote == 0)
+		if ((**readline_str == ' ' || **readline_str == '\t') && quote == 0)
 			break ;
 		if ((**readline_str == '\'' || **readline_str == '\"') && quote == 0)
 		{
