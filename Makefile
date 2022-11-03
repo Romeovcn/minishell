@@ -23,8 +23,9 @@ NAME = minishell
 
 CC = gcc
 
+# --suppressions=path_ficher
 # CFLAGS = -Werror -Wall -Wextra
-CFLAGS = 
+CFLAGS =
 
 # -- RULES -- #
 
@@ -50,6 +51,7 @@ clean:
 	@echo "\033[32mClean !\033[0m"
 
 fclean: clean
+	@make fclean -C ./libft
 	@rm -f ${NAME}
 
 re: fclean all
