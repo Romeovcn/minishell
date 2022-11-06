@@ -11,9 +11,10 @@ t_token_list	*ft_lstnew_token()
 	result->flags = NULL;
 	result->args = NULL;
 	result->input = 0;
-	result->output = 1;
+	result->in_file = NULL;
 	result->delimiter = NULL;
-	result->filename = NULL;
+	result->output = 1;
+	result->out_file = NULL;
 	result->next = NULL;
 	return (result);
 }

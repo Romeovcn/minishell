@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-t_lexed_list	*ft_lstnew_lexer(void *content, int operator)
+t_lexed_list	*ft_lstnew_lexer(void *content, int operator, t_malloc_list **malloc_lst)
 {
 	t_lexed_list	*result;
 
@@ -10,6 +10,8 @@ t_lexed_list	*ft_lstnew_lexer(void *content, int operator)
 	result->content = content;
 	result->operator = operator;
 	result->next = NULL;
+	ft_lstadd_back_malloc(malloc_lst, ft_lstnew_malloc(result->content));
+	ft_lstadd_back_malloc(malloc_lst, ft_lstnew_malloc(result));
 	return (result);
 }
 

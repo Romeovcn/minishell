@@ -14,13 +14,17 @@ typedef struct command_data
 }					t_command_data;
 
 # define WORD 0 // file name ou command ou argument
-# define STR_DQ 1 // str double quote
-# define STR_SQ 2 // str single quote
-# define PIPE 3 
-# define REDIR_INPUT 4 // <
-# define REDIR_OUTPUT 5 // >
-# define HERE_DOC 6 // <<
-# define APPEND_OUTPUT 7 // >>
+# define PIPE 1 
+# define REDIR_INPUT 2 // <
+# define REDIR_OUTPUT 3 // >
+# define HERE_DOC 4 // <<
+# define APPEND_OUTPUT 5 // >>
+
+typedef struct m_list
+{
+	void			*adr;
+	struct m_list	*next;
+}					t_malloc_list;
 
 typedef struct l_list
 {
@@ -36,9 +40,10 @@ typedef struct t_list
 	char			*args;
 
 	int				input;
-	char			*filename;
+	char			*in_file;
 	char			*delimiter;
 	int				output;
+	char			*out_file;
 	struct t_list	*next;
 }					t_token_list;
 
@@ -67,12 +72,12 @@ char				**ft_export_env(char **env, char *new_line_str);
 //----------------------------------------------------------------------------//
 //							 		Lexer									  //
 //----------------------------------------------------------------------------//
-t_lexed_list		*lexer(char *readline_str);
+t_lexed_list		*lexer(char *readline_str, t_malloc_list **malloc_lst);
 
 //----------------------------------------------------------------------------//
 //							 	Lexer lst utils								  //
 //----------------------------------------------------------------------------//
-t_lexed_list		*ft_lstnew_lexer(void *content, int operator);
+t_lexed_list		*ft_lstnew_lexer(void *content, int operator, t_malloc_list **malloc_lst);
 t_lexed_list		*ft_lstlast_lexer(t_lexed_list *lst);
 void				ft_lstadd_back_lexer(t_lexed_list **lst, t_lexed_list *new);
 void				ft_read_lst(t_lexed_list *lst);
@@ -100,4 +105,22 @@ void				ft_lstadd_back_token(t_token_list **lst, t_token_list *new);
 void				ft_read_lst_token(t_token_list *lst);
 void				free_lst_token(t_token_list *lst);
 
+//----------------------------------------------------------------------------//
+//							 	Check error									  //
+//----------------------------------------------------------------------------//
+int					check_error(t_lexed_list *lexed_list);
+
+//----------------------------------------------------------------------------//
+//							 	Token lst utils								  //
+//----------------------------------------------------------------------------//
+t_malloc_list		*ft_lstnew_malloc(void *adr);
+t_malloc_list		*ft_lstlast_malloc(t_malloc_list *lst);
+void				ft_lstadd_back_malloc(t_malloc_list **lst, t_malloc_list *new);
+void				free_lst_malloc(t_malloc_list *lst);
+
+// To do :
+// Env in linked list
+// cas tricky : <<$env
+// cas tricky : << end << end << env = ctrl c should exit all
+// "" | ""
 #endif

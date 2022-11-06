@@ -40,20 +40,33 @@ int main(int argc, char **argv, char **env)
 {
 	// char *prompt;
 	t_lexed_list	*lexed_lst;
-	char *readline_str;
-	char			cmd_line[] ="<< eof < test\tbien\"ko\'\'\"\'\' h\' test|fd \"ec\"ho \'bonjour\' \"\'|wesh || bien\" ||| echo 2 >> test >>>\"><<<>>>>";
+	t_malloc_list 	*malloc_lst;
+	char 			*readline_str;
+	char			cmd_line[] ="<< eof < test\tbienko\'\'\"\'\' h\'\" test|fd \"ec\"ho \'bonjour\"\'|wesh | bien\" | echo 2 >> test >>>><<<>>>>";
 	// char **paths;
 
 	// paths = get_paths(env);
 	// for (int i = 0;paths[i];i++)
 	// // 	printf("%s\n", paths[i]);
 	printf("%s\n------------------\n", cmd_line);
-	lexed_lst = lexer(cmd_line);
+
+	malloc_lst = NULL;
+// ---------------------------------------------------------- //
+//								Lexer                         //
+// ---------------------------------------------------------- //
+	lexed_lst = lexer(cmd_line, &malloc_lst);
+// ---------------------------------------------------------- //
+//						Check syntax error                    //
+// ---------------------------------------------------------- //
+	// if (check_error(lexed_lst))
+	// {
+		// exit (1);
+	// }
+
 	// token(lexed_lst);
 
 
-	free_lst(lexed_lst);
-
+	free_lst_malloc(malloc_lst);
 
 
 

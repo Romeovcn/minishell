@@ -13,7 +13,7 @@ void token(t_lexed_list *lexed_lst)
 	{
 		if (lexed_lst->operator == PIPE)
 		{
-			printf("new token input=%d delimiter=%s file=%s\n", token->input, token->delimiter, token->filename);
+			printf("new token input=%d delimiter=%s in_file=%s output=%d out_file=%s\n", token->input, token->delimiter, token->in_file, token->output, token->out_file);
 			ft_lstadd_back_token(&token, ft_lstnew_token());
 			token = token->next;
 		}
@@ -27,10 +27,25 @@ void token(t_lexed_list *lexed_lst)
 		}
 		if (lexed_lst->operator == REDIR_INPUT && lexed_lst->next)
 		{
-			// printf("FOUND\n");
 			token->input = REDIR_INPUT;
 			lexed_lst = lexed_lst->next;
-			token->filename = lexed_lst->content;
+			token->in_file = lexed_lst->content;
+			lexed_lst = lexed_lst->next;
+			continue;
+		}
+		if (lexed_lst->operator == REDIR_OUTPUT && lexed_lst->next)
+		{
+			token->output = REDIR_OUTPUT;
+			lexed_lst = lexed_lst->next;
+			token->out_file = lexed_lst->content;
+			lexed_lst = lexed_lst->next;
+			continue;
+		}
+		if (lexed_lst->operator == APPEND_OUTPUT && lexed_lst->next)
+		{
+			token->output = APPEND_OUTPUT;
+			lexed_lst = lexed_lst->next;
+			token->out_file = lexed_lst->content;
 			lexed_lst = lexed_lst->next;
 			continue;
 		}
