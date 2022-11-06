@@ -58,15 +58,15 @@ int main(int argc, char **argv, char **env)
 // ---------------------------------------------------------- //
 //						Check syntax error                    //
 // ---------------------------------------------------------- //
-	// if (check_error(lexed_lst))
-	// {
-		// exit (1);
-	// }
+	if (check_error(lexed_lst))
+	{
+		free_lst_malloc(malloc_lst);
+		exit (1);
+	}
 
 	// token(lexed_lst);
 
 
-	free_lst_malloc(malloc_lst);
 
 
 
@@ -82,16 +82,3 @@ int main(int argc, char **argv, char **env)
 	// 	free(readline_str);
 	// }
 }
-
-	// "cat file | ls | wc -l"
-	// "< infile cat | ls | wc -l"
-	// "<< EOF cat | ls | wc -l"
-	// "cat file | ls | wc -l >> outfile"
-	// "cat file | ls | wc -l > outfile"
-
-	// -- Token --
-	// 1 - Split '|' sep in linked list
-	// 2 - Check input redirect in first node
-	// 3 - Check out redirect in last node
-	// 4 - Parse quotes
-	// 5 - Exec

@@ -4,20 +4,20 @@ void manage_operator(char **readline_str, t_lexed_list **lexed_lst, t_malloc_lis
 {
 	if ((*readline_str)[1] && (*readline_str)[0] == '<' && (*readline_str)[1] == '<')
 	{
-		ft_lstadd_back_lexer(lexed_lst, ft_lstnew_lexer(ft_strdup("<<"), HERE_DOC, malloc_lst));
+		lstadd_back_lexer(lexed_lst, lstnew_lexer(ft_strdup("<<"), HERE_DOC, malloc_lst));
 		(*readline_str)++;
 	}
 	else if ((*readline_str)[1] && (*readline_str)[0] == '>' && (*readline_str)[1] == '>')
 	{
-		ft_lstadd_back_lexer(lexed_lst, ft_lstnew_lexer(ft_strdup(">>"), APPEND_OUTPUT, malloc_lst));
+		lstadd_back_lexer(lexed_lst, lstnew_lexer(ft_strdup(">>"), APPEND_OUTPUT, malloc_lst));
 		(*readline_str)++;
 	}
 	else if ((*readline_str)[0] == '|')
-		ft_lstadd_back_lexer(lexed_lst, ft_lstnew_lexer(ft_strdup("|"), PIPE, malloc_lst));
+		lstadd_back_lexer(lexed_lst, lstnew_lexer(ft_strdup("|"), PIPE, malloc_lst));
 	else if ((*readline_str)[0] == '<') 
-		ft_lstadd_back_lexer(lexed_lst, ft_lstnew_lexer(ft_strdup("<"), REDIR_INPUT, malloc_lst));
+		lstadd_back_lexer(lexed_lst, lstnew_lexer(ft_strdup("<"), REDIR_INPUT, malloc_lst));
 	else if ((*readline_str)[0] == '>')
-		ft_lstadd_back_lexer(lexed_lst, ft_lstnew_lexer(ft_strdup(">"), REDIR_OUTPUT, malloc_lst));
+		lstadd_back_lexer(lexed_lst, lstnew_lexer(ft_strdup(">"), REDIR_OUTPUT, malloc_lst));
 	(*readline_str)++;
 }
 
@@ -29,7 +29,7 @@ char *manage_word(char *readline_str, t_lexed_list **lexed_lst, t_malloc_list **
 	size = get_word_size(readline_str);
 	word = malloc((size + 1) * sizeof(char));
 	get_word(readline_str, &word);
-	ft_lstadd_back_lexer(lexed_lst, ft_lstnew_lexer(word, WORD, malloc_lst));
+	lstadd_back_lexer(lexed_lst, lstnew_lexer(word, WORD, malloc_lst));
 }
 
 t_lexed_list *lexer(char *readline_str, t_malloc_list **malloc_lst)
@@ -46,8 +46,6 @@ t_lexed_list *lexer(char *readline_str, t_malloc_list **malloc_lst)
 		{
 			manage_word(readline_str, &lexed_lst, malloc_lst);
 			go_to_word_end(&readline_str);
-			// printf("next=%s\n", readline_str);
-			// break ;
 		}
 		else
 			readline_str++;

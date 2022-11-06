@@ -35,15 +35,13 @@ typedef struct l_list
 
 typedef struct t_list
 {
-	char			*command;
-	char			*flags;
-	char			*args;
+	char			**token;
 
-	int				input;
-	char			*in_file;
-	char			*delimiter;
-	int				output;
-	char			*out_file;
+	int				input_fd;
+	char			**in_file;
+	char			**delimiter;
+	int				output_fd;
+	char			**out_file;
 	struct t_list	*next;
 }					t_token_list;
 
@@ -77,9 +75,9 @@ t_lexed_list		*lexer(char *readline_str, t_malloc_list **malloc_lst);
 //----------------------------------------------------------------------------//
 //							 	Lexer lst utils								  //
 //----------------------------------------------------------------------------//
-t_lexed_list		*ft_lstnew_lexer(void *content, int operator, t_malloc_list **malloc_lst);
+t_lexed_list		*lstnew_lexer(void *content, int operator, t_malloc_list **malloc_lst);
 t_lexed_list		*ft_lstlast_lexer(t_lexed_list *lst);
-void				ft_lstadd_back_lexer(t_lexed_list **lst, t_lexed_list *new);
+void				lstadd_back_lexer(t_lexed_list **lst, t_lexed_list *new);
 void				ft_read_lst(t_lexed_list *lst);
 void				free_lst(t_lexed_list *lst);
 
