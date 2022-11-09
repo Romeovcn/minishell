@@ -2,7 +2,7 @@ SRCS_DIR = srcs
 
 OBJS_DIR = objs
 
-SRCS	=	$(shell find srcs/*.c -exec basename \ {} \;)
+SRCS	:=	$(shell find srcs/*.c -exec basename \ {} \;)
 
 OBJS = ${patsubst %.c,${OBJS_DIR}/%.o,${SRCS}}
 

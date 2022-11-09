@@ -37,17 +37,6 @@ void	ft_lstadd_back_malloc(t_malloc_list **lst, t_malloc_list *new)
 		*lst = new;
 }
 
-// void ft_read_lst_token(t_malloc_list *lst)
-// {
-// 	int i = 0;
-
-// 	while (lst)
-// 	{
-// 		printf("index=%d %d\n", i, lst->output);
-// 		lst = lst->next;
-// 	}
-// }
-
 void free_lst_malloc(t_malloc_list *lst)
 {
 	t_malloc_list *tmp;

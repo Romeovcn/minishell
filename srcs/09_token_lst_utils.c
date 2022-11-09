@@ -1,19 +1,18 @@
 #include "minishell.h"
 
-t_token_list	*ft_lstnew_token()
+t_token_list	*ft_lstnew_token(t_malloc_list **malloc_lst)
 {
 	t_token_list	*result;
 
 	result = malloc(sizeof(t_token_list));
 	if (!result)
 		return (0);
-	result->command = NULL;
-	result->flags = NULL;
-	result->args = NULL;
-	result->input = 0;
+	ft_lstadd_back_malloc(malloc_lst, ft_lstnew_malloc(result));
+	result->options = NULL;
+	result->input_fd = 0;
 	result->in_file = NULL;
 	result->delimiter = NULL;
-	result->output = 1;
+	result->output_fd = 1;
 	result->out_file = NULL;
 	result->next = NULL;
 	return (result);
@@ -50,7 +49,7 @@ void ft_read_lst_token(t_token_list *lst)
 
 	while (lst)
 	{
-		printf("index=%d %d\n", i, lst->output);
+		printf("index=%d %d\n", i, lst->output_fd);
 		lst = lst->next;
 	}
 }

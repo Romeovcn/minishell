@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent <rvincent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/11 15:27:39 by rvincent          #+#    #+#             */
-/*   Updated: 2022/09/11 15:45:39 by rvincent         ###   ########.fr       */
+/*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
+/*   Updated: 2022/11/07 20:03:29 by rvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_printf.h"
 
-//int main()
-//{
-//	char *line;
-//	int fd;
-
-//	fd = open("infile", O_RDONLY);
-//	fd = 0;
-//	while ((line = get_next_line(fd)))
-//		ft_printf("%s", line);
-//}
+int	ft_isspace(char c)
+{
+	if ((c >= '\t' && c <= '\r') || c == ' ')
+		return (1);
+	return (0);
+}

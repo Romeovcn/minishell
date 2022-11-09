@@ -39,6 +39,7 @@ int					ft_isascii(int c);
 int					ft_isdigit(char c);
 int					ft_isprint(int c);
 int					ft_isprint(int c);
+int					ft_isspace(char c);
 char				*ft_itoa(int n);
 void				*ft_memchr(const void *memoryBlock, int c, size_t size);
 int					ft_memcmp(const void *pointer1, const void *pointer2,

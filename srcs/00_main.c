@@ -15,7 +15,7 @@ char *get_prompt(char **env)
 	return NULL;
 }
 
-int check_empty_line(char *readline_str)
+int check_empty_line(char *readline_str) // to fix
 {
 	int size;
 	int i;
@@ -26,31 +26,33 @@ int check_empty_line(char *readline_str)
 	i = 0;
 	while (readline_str[i])
 	{
-		if (readline_str[i] == ' ' || readline_str[i] == '\t')
-			i++;
-		else
-			break ;
+		if (!ft_isspace(readline_str[i]))
+			return (1);
+		i++;
 	}
-	if (i == size)
-		return (1);
 	return (0);
 }
 
 int main(int argc, char **argv, char **env)
 {
-	// char *prompt;
 	t_lexed_list	*lexed_lst;
 	t_malloc_list 	*malloc_lst;
+	t_env_list 		*env_lst;
 	char 			*readline_str;
-	char			cmd_line[] ="<< eof < test\tbienko\'\'\"\'\' h\'\" test|fd \"ec\"ho \'bonjour\"\'|wesh | bien\" | echo 2 >> test >>>><<<>>>>";
-	// char **paths;
+	char			cmd_line[] ="<< eof < test\tbie$test \'\'nko\'\'\"\'\' h\'\" test|fd \"ec\"ho \'bonjour\"\'|wesh | bien\" | echo 2 >> test \"";
 
-	// paths = get_paths(env);
-	// for (int i = 0;paths[i];i++)
-	// // 	printf("%s\n", paths[i]);
+
 	printf("%s\n------------------\n", cmd_line);
 
 	malloc_lst = NULL;
+// ---------------------------------------------------------- //
+//								Get env                       //
+// ---------------------------------------------------------- //
+	env_lst = NULL;
+	get_env(&env_lst, env, &malloc_lst);
+	
+	// printf("\n\n%s\n\n", get_env_value("lol", env_lst));
+	// ft_read_lst_env(env_lst);
 // ---------------------------------------------------------- //
 //								Lexer                         //
 // ---------------------------------------------------------- //
@@ -63,20 +65,20 @@ int main(int argc, char **argv, char **env)
 		free_lst_malloc(malloc_lst);
 		exit (1);
 	}
+	parsing(lexed_lst, &malloc_lst, env_lst);
 
-	// token(lexed_lst);
+	printf("--------Command lst lexed after--------\n");
+	ft_read_lst(lexed_lst);
+	// token(lexed_lst, &malloc_lst);
 
-
-
-
+	free_lst_malloc(malloc_lst);
+	// char *options[] = {"hey", "oi\"\"", NULL};
+	// execve("/bin/echo", options, env);
 
 
 	// while (readline_str = readline("minishell>"))
 	// {
 	// 	add_history(readline_str);
-	// 	// if (!check_empty_line(readline_str) && check_builtins(command_data));
-	// 	// else
-	// 	// 	printf("Do pipex...\n");
 	// 	printf("%s\n", readline_str);
 
 	// 	free(readline_str);
