@@ -39,7 +39,7 @@ int main(int argc, char **argv, char **env)
 	t_malloc_list 	*malloc_lst;
 	t_env_list 		*env_lst;
 	char 			*readline_str;
-	char			cmd_line[] ="<< eof < test\tbie$test \'\'nko\'\'\"\'\' h\'\" test|fd \"ec\"ho \'bonjour\"\'|wesh | bien\" | echo 2 >> test \"";
+	char			cmd_line[] ="<< eof < test\t\"bie$test OK\"\'\'nko\'\'\"\'\' h\'\" test|fd \"ec\"ho \'bonjour$test\"\'|wesh | bien\" | echo 2 >> test\" $test";
 
 
 	printf("%s\n------------------\n", cmd_line);
@@ -50,7 +50,6 @@ int main(int argc, char **argv, char **env)
 // ---------------------------------------------------------- //
 	env_lst = NULL;
 	get_env(&env_lst, env, &malloc_lst);
-	
 	// printf("\n\n%s\n\n", get_env_value("lol", env_lst));
 	// ft_read_lst_env(env_lst);
 // ---------------------------------------------------------- //
@@ -61,16 +60,20 @@ int main(int argc, char **argv, char **env)
 //						Check syntax error                    //
 // ---------------------------------------------------------- //
 	if (check_error(lexed_lst))
-	{
-		free_lst_malloc(malloc_lst);
-		exit (1);
-	}
+		return (free_lst_malloc(malloc_lst), 1);
+// ---------------------------------------------------------- //
+//							Parsing				              //
+// ---------------------------------------------------------- //
 	parsing(lexed_lst, &malloc_lst, env_lst);
-
-	printf("--------Command lst lexed after--------\n");
-	ft_read_lst(lexed_lst);
+// ---------------------------------------------------------- //
+//							Tokenizer			              //
+// ---------------------------------------------------------- //
 	// token(lexed_lst, &malloc_lst);
-
+	printf("--------Command lst lexed after--------\n");
+// ---------------------------------------------------------- //
+//							Shit				              //
+// ---------------------------------------------------------- //
+	ft_read_lst(lexed_lst);
 	free_lst_malloc(malloc_lst);
 	// char *options[] = {"hey", "oi\"\"", NULL};
 	// execve("/bin/echo", options, env);

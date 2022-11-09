@@ -12,7 +12,7 @@ void free_string_array(char **array)
 	printf("array freed\n");
 }
 
-char	*ft_strjoin_char(char const *s1, char c)
+char	*ft_strjoin_char(char const *s1, char c, t_malloc_list **malloc_lst)
 {
 	char	*result;
 	int		i;
@@ -21,6 +21,9 @@ char	*ft_strjoin_char(char const *s1, char c)
 	i = 0;
 	j = 0;
 	result = malloc((ft_strlen(s1) + 1 + 1) * sizeof(char));
+	if (!result)
+		return NULL;
+	ft_lstadd_back_malloc(malloc_lst, ft_lstnew_malloc(result));
 	while (s1[i])
 		result[j++] = s1[i++];
 	i = 0;

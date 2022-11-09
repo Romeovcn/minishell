@@ -79,7 +79,7 @@ typedef struct t_list
 //						 			Utils				 					  //
 //----------------------------------------------------------------------------//
 void				free_string_array(char **array);
-char				*ft_strjoin_char(char const *s1, char c);
+char				*ft_strjoin_char(char const *s1, char c, t_malloc_list **malloc_lst);
 
 //----------------------------------------------------------------------------//
 //							 	Check access			 					  //
@@ -152,7 +152,6 @@ int					check_error(t_lexed_list *lexed_list);
 //							 		Parsing									  //
 //----------------------------------------------------------------------------//
 void				parsing(t_lexed_list *lexer_lst, t_malloc_list **malloc_lst, t_env_list *env_lst);
-int					is_env(char *str, int i);
 char				*manage_quotes(char *str, t_malloc_list **malloc_lst, t_env_list *env_lst);
 
 //----------------------------------------------------------------------------//
