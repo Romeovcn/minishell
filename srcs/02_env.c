@@ -1,18 +1,18 @@
 #include "minishell.h"
 
-void get_env(t_env_list **env_lst, char **env, t_malloc_list **malloc_lst)
+void get_env(t_env_lst **env_lst, char **env, t_mal_lst **mal_lst)
 {
 	int i;
 
 	i = 0;
 	while (env[i])
 	{
-		ft_lstadd_back_env(env_lst, ft_lstnew_env(env[i], malloc_lst));
+		lstadd_back_env(env_lst, lstnew_env(env[i], mal_lst));
 		i++;
 	}
 }
 
-char *get_env_value(char *name, t_env_list *env_lst)
+char *get_env_value(char *name, t_env_lst *env_lst)
 {
 	char *env_value;
 

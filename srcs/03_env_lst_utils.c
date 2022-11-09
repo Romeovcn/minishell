@@ -1,21 +1,21 @@
 #include "minishell.h"
 
-t_env_list	*ft_lstnew_env(char *content, t_malloc_list **malloc_lst)
+t_env_lst	*lstnew_env(char *content, t_mal_lst **mal_lst)
 {
-	t_env_list	*result;
+	t_env_lst	*result;
 
-	result = malloc(sizeof(t_env_list));
+	result = malloc(sizeof(t_env_lst));
 	if (!result)
 		return (0);
-	ft_lstadd_back_malloc(malloc_lst, ft_lstnew_malloc(result));
+	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
 	result->content = content;
 	result->next = NULL;
 	return (result);
 }
 
-t_env_list	*ft_lstlast_env(t_env_list *lst)
+t_env_lst	*lstlast_env(t_env_lst *lst)
 {
-	t_env_list	*head;
+	t_env_lst	*head;
 
 	if (lst == NULL)
 		return (0);
@@ -25,20 +25,20 @@ t_env_list	*ft_lstlast_env(t_env_list *lst)
 	return (head);
 }
 
-void	ft_lstadd_back_env(t_env_list **lst, t_env_list *new)
+void	lstadd_back_env(t_env_lst **lst, t_env_lst *new)
 {
-	t_env_list	*last;
+	t_env_lst	*last;
 
 	if (*lst)
 	{
-		last = ft_lstlast_env(*lst);
+		last = lstlast_env(*lst);
 		last->next = new;
 	}
 	else
 		*lst = new;
 }
 
-void ft_read_lst_env(t_env_list *lst)
+void read_lst_env(t_env_lst *lst)
 {
 	int i = 0;
 

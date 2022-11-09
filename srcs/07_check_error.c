@@ -26,7 +26,7 @@ int check_not_closed_string(char *str)
 	return (0);
 }
 
-int check_redir(t_lexed_list *lexed_list)
+int check_redir(t_lex_lst *lexed_list)
 {
 	if (!lexed_list->next)
 		return (printf("No key word after redir\n"), 1);
@@ -34,7 +34,7 @@ int check_redir(t_lexed_list *lexed_list)
 		return (printf("Operator after redir\n"), 1);
 }
 
-int check_pipe(t_lexed_list *lexed_list)
+int check_pipe(t_lex_lst *lexed_list)
 {
 	if (!lexed_list->next)
 		return (printf("No key word after pipe\n"), 1);
@@ -42,7 +42,7 @@ int check_pipe(t_lexed_list *lexed_list)
 		return (printf("Double pipe error\n"), 1);
 }
 
-int check_error(t_lexed_list *lexed_list)
+int check_error(t_lex_lst *lexed_list)
 {
 	if (lexed_list->operator == PIPE)
 		return (printf("No command before pipe\n"), 1);

@@ -1,23 +1,23 @@
 #include "minishell.h"
 
-t_lexed_list	*lstnew_lexer(void *content, int operator, t_malloc_list **malloc_lst)
+t_lex_lst	*lstnew_lexer(void *content, int operator, t_mal_lst **mal_lst)
 {
-	t_lexed_list	*result;
+	t_lex_lst	*result;
 
-	result = malloc(sizeof(t_lexed_list));
+	result = malloc(sizeof(t_lex_lst));
 	if (!result)
 		return (0);
 	result->content = content;
 	result->operator = operator;
 	result->next = NULL;
-	ft_lstadd_back_malloc(malloc_lst, ft_lstnew_malloc(result->content));
-	ft_lstadd_back_malloc(malloc_lst, ft_lstnew_malloc(result));
+	lstadd_back_malloc(mal_lst, lstnew_malloc(result->content));
+	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
 	return (result);
 }
 
-t_lexed_list	*ft_lstlast_lexer(t_lexed_list *lst)
+t_lex_lst	*lstlast_lexer(t_lex_lst *lst)
 {
-	t_lexed_list	*head;
+	t_lex_lst	*head;
 
 	if (lst == NULL)
 		return (0);
@@ -27,20 +27,20 @@ t_lexed_list	*ft_lstlast_lexer(t_lexed_list *lst)
 	return (head);
 }
 
-void	lstadd_back_lexer(t_lexed_list **lst, t_lexed_list *new)
+void	lstadd_back_lexer(t_lex_lst **lst, t_lex_lst *new)
 {
-	t_lexed_list	*last;
+	t_lex_lst	*last;
 
 	if (*lst)
 	{
-		last = ft_lstlast_lexer(*lst);
+		last = lstlast_lexer(*lst);
 		last->next = new;
 	}
 	else
 		*lst = new;
 }
 
-void ft_read_lst(t_lexed_list *lst)
+void read_lst(t_lex_lst *lst)
 {
 	while (lst)
 	{
@@ -49,9 +49,9 @@ void ft_read_lst(t_lexed_list *lst)
 	}
 }
 
-void free_lst(t_lexed_list *lst)
+void free_lst(t_lex_lst *lst)
 {
-	t_lexed_list *tmp;
+	t_lex_lst *tmp;
 
 	while (lst)
 	{

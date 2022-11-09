@@ -35,46 +35,43 @@ int check_empty_line(char *readline_str) // to fix
 
 int main(int argc, char **argv, char **env)
 {
-	t_lexed_list	*lexed_lst;
-	t_malloc_list 	*malloc_lst;
-	t_env_list 		*env_lst;
+	t_lex_lst	*lexed_lst;
+	t_mal_lst 	*mal_lst;
+	t_env_lst 		*env_lst;
 	char 			*readline_str;
-	char			cmd_line[] ="<< eof < test\t\"bie$test OK\"\'\'nko\'\'\"\'\' h\'\" test|fd \"ec\"ho \'bonjour$test\"\'|wesh | bien\" | echo 2 >> test\" $test";
+	char			cmd_line[] ="<< EOF cat -la | grep \"o\" | wc -l >> outfile > outfile2";
 
-
-	printf("%s\n------------------\n", cmd_line);
-
-	malloc_lst = NULL;
+	mal_lst = NULL;
+	printf("%s\n", cmd_line);
 // ---------------------------------------------------------- //
 //								Get env                       //
 // ---------------------------------------------------------- //
 	env_lst = NULL;
-	get_env(&env_lst, env, &malloc_lst);
+	get_env(&env_lst, env, &mal_lst);
 	// printf("\n\n%s\n\n", get_env_value("lol", env_lst));
 	// ft_read_lst_env(env_lst);
 // ---------------------------------------------------------- //
 //								Lexer                         //
 // ---------------------------------------------------------- //
-	lexed_lst = lexer(cmd_line, &malloc_lst);
+	lexed_lst = lexer(cmd_line, &mal_lst);
 // ---------------------------------------------------------- //
 //						Check syntax error                    //
 // ---------------------------------------------------------- //
 	if (check_error(lexed_lst))
-		return (free_lst_malloc(malloc_lst), 1);
+		return (free_lst_malloc(mal_lst), 1);
 // ---------------------------------------------------------- //
-//							Parsing				              //
+//							parser				              //
 // ---------------------------------------------------------- //
-	parsing(lexed_lst, &malloc_lst, env_lst);
+	// parser(lexed_lst, &mal_lst, env_lst);
 // ---------------------------------------------------------- //
 //							Tokenizer			              //
 // ---------------------------------------------------------- //
-	// token(lexed_lst, &malloc_lst);
-	printf("--------Command lst lexed after--------\n");
+	token(lexed_lst, &mal_lst);
 // ---------------------------------------------------------- //
 //							Shit				              //
 // ---------------------------------------------------------- //
-	ft_read_lst(lexed_lst);
-	free_lst_malloc(malloc_lst);
+
+	free_lst_malloc(mal_lst);
 	// char *options[] = {"hey", "oi\"\"", NULL};
 	// execve("/bin/echo", options, env);
 

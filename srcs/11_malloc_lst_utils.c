@@ -1,10 +1,10 @@
 #include "minishell.h"
 
-t_malloc_list	*ft_lstnew_malloc(void *adr)
+t_mal_lst	*lstnew_malloc(void *adr)
 {
-	t_malloc_list	*result;
+	t_mal_lst	*result;
 
-	result = malloc(sizeof(t_malloc_list));
+	result = malloc(sizeof(t_mal_lst));
 	if (!result)
 		return (0);
 	result->adr = adr;
@@ -12,9 +12,9 @@ t_malloc_list	*ft_lstnew_malloc(void *adr)
 	return (result);
 }
 
-t_malloc_list	*ft_lstlast_malloc(t_malloc_list *lst)
+t_mal_lst	*lstlast_malloc(t_mal_lst *lst)
 {
-	t_malloc_list	*head;
+	t_mal_lst	*head;
 
 	if (lst == NULL)
 		return (0);
@@ -24,22 +24,22 @@ t_malloc_list	*ft_lstlast_malloc(t_malloc_list *lst)
 	return (head);
 }
 
-void	ft_lstadd_back_malloc(t_malloc_list **lst, t_malloc_list *new)
+void	lstadd_back_malloc(t_mal_lst **lst, t_mal_lst *new)
 {
-	t_malloc_list	*last;
+	t_mal_lst	*last;
 
 	if (*lst)
 	{
-		last = ft_lstlast_malloc(*lst);
+		last = lstlast_malloc(*lst);
 		last->next = new;
 	}
 	else
 		*lst = new;
 }
 
-void free_lst_malloc(t_malloc_list *lst)
+void free_lst_malloc(t_mal_lst *lst)
 {
-	t_malloc_list *tmp;
+	t_mal_lst *tmp;
 
 	while (lst)
 	{
