@@ -57,7 +57,9 @@ void parser(t_lex_lst *lex_lst, t_mal_lst **mal_lst, t_env_lst *env_lst)
 	t_lex_lst *head = lex_lst;
 	while (lex_lst)
 	{
-		if (lex_lst->operator == WORD)
+		if (lex_lst->operator == HERE_DOC)
+			lex_lst = lex_lst->next;
+		else if (lex_lst->operator == WORD)
 			lex_lst->content = parse_quote_env(lex_lst->content, mal_lst, env_lst);
 		lex_lst = lex_lst->next;
 	}

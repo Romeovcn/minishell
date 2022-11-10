@@ -71,7 +71,7 @@ char		**get_paths(char **env);
 //----------------------------------------------------------------------------//
 //							 	Built-in			 						  //
 //----------------------------------------------------------------------------//
-void		ft_env(char **env);
+void		ft_env(t_env_lst *env_lst);
 void		ft_exit(t_command_data command_data);
 
 //----------------------------------------------------------------------------//
@@ -79,7 +79,8 @@ void		ft_exit(t_command_data command_data);
 //----------------------------------------------------------------------------//
 void		get_env(t_env_lst **env_lst, char **env, t_mal_lst **mal_lst);
 char		*get_env_value(char *name, t_env_lst *env_lst);
-
+void		export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **options);
+void		unset_env(t_env_lst *env_lst, char *name);
 //----------------------------------------------------------------------------//
 //							 	Env lst			 							  //
 //----------------------------------------------------------------------------//
