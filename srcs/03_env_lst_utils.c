@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-t_env_lst	*lstnew_env(char *content, t_mal_lst **mal_lst)
+t_env_lst	*lstnew_env(char *name, char *value, t_mal_lst **mal_lst)
 {
 	t_env_lst	*result;
 
@@ -8,7 +8,8 @@ t_env_lst	*lstnew_env(char *content, t_mal_lst **mal_lst)
 	if (!result)
 		return (0);
 	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
-	result->content = content;
+	result->name = name;
+	result->value = value;
 	result->next = NULL;
 	return (result);
 }
@@ -36,15 +37,4 @@ void	lstadd_back_env(t_env_lst **lst, t_env_lst *new)
 	}
 	else
 		*lst = new;
-}
-
-void read_lst_env(t_env_lst *lst)
-{
-	int i = 0;
-
-	while (lst)
-	{
-		printf("%s\n",  lst->content);
-		lst = lst->next;
-	}
 }

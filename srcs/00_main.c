@@ -53,9 +53,11 @@ int main(int argc, char **argv, char **env)
 	// export_env(&env_lst, &mal_lst, options);
 	// unset_env(env_lst, "test");
 	// ft_env(env_lst);
-	// printf("-----------------------------------------------------------------------------\n");
+	// printf("---------------------------------------------\n");
 	// export_env(&env_lst, &mal_lst, option2);
 	// ft_env(env_lst);
+
+	// printf("%s", ft_strjoin("Hello", NULL));
 // ---------------------------------------------------------- //
 //								Lexer                         //
 // ---------------------------------------------------------- //
@@ -72,7 +74,7 @@ int main(int argc, char **argv, char **env)
 // ---------------------------------------------------------- //
 //							Tokenizer			              //
 // ---------------------------------------------------------- //
-	token(lexed_lst, &mal_lst);
+	// token(lexed_lst, &mal_lst);
 // ---------------------------------------------------------- //
 //							Shit				              //
 // ---------------------------------------------------------- //
@@ -80,11 +82,15 @@ int main(int argc, char **argv, char **env)
 // ---------------------------------------------------------- //
 //							Readline			              //
 // ---------------------------------------------------------- //
-	// while (readline_str = readline("minishell>"))
+	// char *test[] = {"echo", "-nn", "", NULL};
+	// ft_echo(test);
+	// ft_cd("./srcs");
+	// ft_pwd(env);
+
+	// while (readline_str = readline("\e[38;5;46mminishell> \e[0m"))
 	// {
 	// 	add_history(readline_str);
 	// 	printf("%s\n", readline_str);
-
 	// 	free(readline_str);
 	// }
 }
