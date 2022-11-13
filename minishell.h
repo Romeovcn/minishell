@@ -71,7 +71,7 @@ char		**get_paths(char **env);
 //							 	Built-in			 						  //
 //----------------------------------------------------------------------------//
 void		ft_env(t_env_lst *env_lst);
-void		ft_pwd(char **env);
+void		ft_pwd();
 void		ft_exit(t_mal_lst *mal_lst);
 void		ft_echo(char **cmd);
 void		ft_cd(char *path);
@@ -139,7 +139,7 @@ char		*manage_quotes(char *str, t_mal_lst **mal_lst, t_env_lst *env_lst);
 //							 		parser utils							  //
 //----------------------------------------------------------------------------//
 int			is_env(char *str);
-char		*parse_env_name(char *str, t_mal_lst **mal_lst);
+char		*parse_env_name(char *str);
 void		go_end_env_name(char **str);
 //----------------------------------------------------------------------------//
 //							 	Malloc lst utils							  //

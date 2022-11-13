@@ -6,9 +6,8 @@ void	parse_env(char **str, t_mal_lst **mal_lst, t_env_lst *env_lst, char **resul
 	char *env_value;
 	
 	(*str)++;
-	env_name =  parse_env_name(*str, mal_lst);
+	env_name =  parse_env_name(*str);
 	env_value =  get_env_value(env_name, env_lst);
-	printf("NAME=%s\n", env_name);
 	if (env_value)
 		*result = ft_strjoin(*result, env_value);
 	else

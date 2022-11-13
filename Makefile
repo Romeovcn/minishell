@@ -14,9 +14,10 @@ NAME = minishell
 
 CC = gcc
 
-# --suppressions=path_ficher
-# CFLAGS = -Werror -Wall -Wextra
+# make && valgrind --suppressions=./suppres.txt ./minishell
+# --suppressions=./suppres.txt
 CFLAGS =
+# CFLAGS = -Werror -Wall -Wextra
 
 # -- RULES -- #
 

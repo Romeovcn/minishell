@@ -16,7 +16,7 @@ void ft_exit(t_mal_lst *mal_lst)
 	exit (0);
 }
 
-void ft_pwd(char **env)
+void ft_pwd()
 {
 	char *pwd_path;
 	char buff[PATH_MAX];
@@ -30,7 +30,6 @@ void ft_pwd(char **env)
 
 void ft_echo(char **cmd)
 {
-	char *result;
 	int i;
 	int nl;
 

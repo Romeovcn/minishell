@@ -12,9 +12,8 @@ int	is_env(char *str)
 	return 0;
 }
 
-char	*parse_env_name(char *str, t_mal_lst **mal_lst)
+char	*parse_env_name(char *str)
 {
-	int		size;
 	int		i;
 	char	*env_name;
 

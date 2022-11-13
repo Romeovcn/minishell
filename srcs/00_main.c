@@ -37,9 +37,9 @@ int main(int argc, char **argv, char **env)
 {
 	t_lex_lst	*lexed_lst;
 	t_mal_lst 	*mal_lst;
-	t_env_lst 		*env_lst;
+	t_env_lst 	*env_lst;
 	char 			*readline_str;
-	char			cmd_line[] ="<< $USER $USER \"salutt\'t\"'\"'ok|bien et toi $USER \"$USER ok\" \'$USER\'";
+	char			cmd_line[] ="<< $USER cat |> cat | cat | cat | cat > outfile";
 
 	mal_lst = NULL;
 	printf("%s\n", cmd_line);
@@ -47,11 +47,11 @@ int main(int argc, char **argv, char **env)
 //								Get env                       //
 // ---------------------------------------------------------- //
 	env_lst = NULL;
-	char *unset[] = {"unset", NULL};
-	char *export[] = {"export", NULL};
+	// char *unset[] = {"unset", NULL};
+	char *export[] = {"export", "RICK=MORTY", "USER=EHOH", NULL};
 	get_env_lst(&env_lst, env, &mal_lst);
 	export_env(&env_lst, &mal_lst, export);
-	unset_env(&env_lst, unset);
+	// unset_env(&env_lst, unset);
 	ft_env(env_lst);
 	// printf("---------------------------------------------\n");
 	// export_env(&env_lst, &mal_lst, option2);
@@ -61,20 +61,20 @@ int main(int argc, char **argv, char **env)
 // ---------------------------------------------------------- //
 //								Lexer                         //
 // ---------------------------------------------------------- //
-	// lexed_lst = lexer(cmd_line, &mal_lst);
+	lexed_lst = lexer(cmd_line, &mal_lst);
 // ---------------------------------------------------------- //
 //						Check syntax error                    //
 // ---------------------------------------------------------- //
-	// if (check_error(lexed_lst))
-	// 	return (free_lst_malloc(mal_lst), 1);
+	if (check_error(lexed_lst))
+		return (free_lst_malloc(mal_lst), printf("EXIT BEBE\n"), 1);
 // ---------------------------------------------------------- //
 //							parser				              //
 // ---------------------------------------------------------- //
-	// parser(lexed_lst, &mal_lst, env_lst);
+	parser(lexed_lst, &mal_lst, env_lst);
 // ---------------------------------------------------------- //
 //							Tokenizer			              //
 // ---------------------------------------------------------- //
-	// token(lexed_lst, &mal_lst);
+	token(lexed_lst, &mal_lst);
 // ---------------------------------------------------------- //
 //							Shit				              //
 // ---------------------------------------------------------- //
@@ -87,10 +87,14 @@ int main(int argc, char **argv, char **env)
 	// ft_cd("./srcs");
 	// ft_pwd(env);
 
-	// while (readline_str = readline("\e[38;5;46mminishell> \e[0m"))
+	// (void)argc;
+	// (void)argv;
+	// readline_str = readline("\e[38;5;46mminishell> \e[0m");
+	// while (readline_str)
 	// {
 	// 	add_history(readline_str);
 	// 	printf("%s\n", readline_str);
 	// 	free(readline_str);
+	// 	readline_str = readline("\e[38;5;46mminishell> \e[0m");
 	// }
 }

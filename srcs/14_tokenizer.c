@@ -3,18 +3,15 @@
 void token(t_lex_lst *lexed_lst, t_mal_lst **mal_lst)
 {
 	t_tok_list *token;
-	t_tok_list *head;
 
 	token = NULL;
 	lstadd_back_token(&token, lstnew_token(mal_lst));
-	head = token;
 	printf("--------Command lst token--------\n");
 
 	while (lexed_lst)
 	{
 		if (lexed_lst->operator == PIPE)
 		{
-			printf("New token created\n");
 			read_lst_array(token->options, "options");
 			printf("intput_fd: %d\n", token->input_fd);
 			read_lst_array(token->delimiter, "delimiter");
@@ -66,7 +63,6 @@ void token(t_lex_lst *lexed_lst, t_mal_lst **mal_lst)
 			continue;
 		}
 	}
-	printf("New token created\n");
 	read_lst_array(token->options, "options");
 	printf("intput_fd: %d\n", token->input_fd);
 	read_lst_array(token->delimiter, "delimiter");

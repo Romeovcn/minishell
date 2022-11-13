@@ -32,6 +32,7 @@ int check_redir(t_lex_lst *lexed_list)
 		return (printf("No key word after redir\n"), 1);
 	if (lexed_list->next->operator != WORD) // Check next is a word
 		return (printf("Operator after redir\n"), 1);
+	return (0);
 }
 
 int check_pipe(t_lex_lst *lexed_list)
@@ -40,6 +41,7 @@ int check_pipe(t_lex_lst *lexed_list)
 		return (printf("No key word after pipe\n"), 1);
 	if (lexed_list->next->operator == PIPE) // Check multiple pipe in a row
 		return (printf("Double pipe error\n"), 1);
+	return (0);
 }
 
 int check_error(t_lex_lst *lexed_list)

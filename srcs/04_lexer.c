@@ -21,7 +21,7 @@ void manage_operator(char **readline_str, t_lex_lst **lexed_lst, t_mal_lst **mal
 	(*readline_str)++;
 }
 
-char *manage_word(char *readline_str, t_lex_lst **lexed_lst, t_mal_lst **mal_lst)
+void manage_word(char *readline_str, t_lex_lst **lexed_lst, t_mal_lst **mal_lst)
 {
 	char *word;
 	int size;
@@ -35,7 +35,6 @@ char *manage_word(char *readline_str, t_lex_lst **lexed_lst, t_mal_lst **mal_lst
 t_lex_lst *lexer(char *readline_str, t_mal_lst **mal_lst)
 {
 	t_lex_lst *lexed_lst;
-	char *str;
 
 	lexed_lst = NULL;
 	while (*readline_str)

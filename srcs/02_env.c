@@ -77,7 +77,7 @@ void export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **options)
 			{
 				if (*(options[i]) == '=' && *(options[i])++)
 					break ;
-				*(options[i])++;
+				options[i]++;
 			}
 			value_found = get_env_value(name, *env_lst);
 			if (value_found)
@@ -124,8 +124,6 @@ void unset_env(t_env_lst **env_lst, char **options)
 
 char *get_env_value(char *name, t_env_lst *env_lst)
 {
-	char *env_value;
-
 	while (env_lst)
 	{
 		if (ft_strmatch(name, env_lst->name))
