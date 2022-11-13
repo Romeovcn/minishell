@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   11_malloc_lst_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
+/*   Updated: 2022/11/13 02:50:11 by rvincent         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_mal_lst	*lstnew_malloc(void *adr)
@@ -37,9 +49,9 @@ void	lstadd_back_malloc(t_mal_lst **lst, t_mal_lst *new)
 		*lst = new;
 }
 
-void free_lst_malloc(t_mal_lst *lst)
+void	free_lst_malloc(t_mal_lst *lst)
 {
-	t_mal_lst *tmp;
+	t_mal_lst	*tmp;
 
 	while (lst)
 	{

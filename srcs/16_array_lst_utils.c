@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   16_array_lst_utils.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
+/*   Updated: 2022/11/09 18:04:30 by rvincent         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_array_lst	*lstnew_array(char *content, t_mal_lst **mal_lst)
@@ -38,7 +50,7 @@ void	lstadd_back_array(t_array_lst **lst, t_array_lst *new)
 		*lst = new;
 }
 
-void read_lst_array(t_array_lst *lst, char *type)
+void	read_lst_array(t_array_lst *lst, char *type)
 {
 	printf("%s:", type);
 	while (lst)

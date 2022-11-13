@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   05_lexer_lst_utils.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
+/*   Updated: 2022/11/09 17:40:33 by rvincent         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-t_lex_lst	*lstnew_lexer(void *content, int operator, t_mal_lst **mal_lst)
+t_lex_lst	*lstnew_lex(void *content, int operator, t_mal_lst **mal_lst)
 {
 	t_lex_lst	*result;
 
@@ -27,7 +39,7 @@ t_lex_lst	*lstlast_lexer(t_lex_lst *lst)
 	return (head);
 }
 
-void	lstadd_back_lexer(t_lex_lst **lst, t_lex_lst *new)
+void	lstadd_back_lex(t_lex_lst **lst, t_lex_lst *new)
 {
 	t_lex_lst	*last;
 
@@ -40,7 +52,7 @@ void	lstadd_back_lexer(t_lex_lst **lst, t_lex_lst *new)
 		*lst = new;
 }
 
-void read_lst(t_lex_lst *lst)
+void	read_lst(t_lex_lst *lst)
 {
 	while (lst)
 	{
@@ -49,9 +61,9 @@ void read_lst(t_lex_lst *lst)
 	}
 }
 
-void free_lst(t_lex_lst *lst)
+void	free_lst(t_lex_lst *lst)
 {
-	t_lex_lst *tmp;
+	t_lex_lst	*tmp;
 
 	while (lst)
 	{

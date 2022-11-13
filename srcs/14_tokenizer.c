@@ -1,16 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   14_tokenizer.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
+/*   Updated: 2022/11/13 03:15:56 by rvincent         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void token(t_lex_lst *lexed_lst, t_mal_lst **mal_lst)
+void	token(t_lex_lst *lex_lst, t_mal_lst **mal_lst)
 {
-	t_tok_list *token;
+	t_tok_list	*token;
 
 	token = NULL;
 	lstadd_back_token(&token, lstnew_token(mal_lst));
 	printf("--------Command lst token--------\n");
-
-	while (lexed_lst)
+	while (lex_lst)
 	{
-		if (lexed_lst->operator == PIPE)
+		if (lex_lst->operator == PIPE)
 		{
 			read_lst_array(token->options, "options");
 			printf("intput_fd: %d\n", token->input_fd);
@@ -21,47 +32,18 @@ void token(t_lex_lst *lexed_lst, t_mal_lst **mal_lst)
 			printf("-----------------\n");
 			lstadd_back_token(&token, lstnew_token(mal_lst));
 			token = token->next;
-			lexed_lst = lexed_lst->next;
-			continue;
+			lex_lst = lex_lst->next;
 		}
-		if (lexed_lst->operator == HERE_DOC)
-		{
-			token->input_fd = HERE_DOC;
-			lexed_lst = lexed_lst->next;
-			lstadd_back_array(&token->delimiter, lstnew_array(lexed_lst->content, mal_lst));
-			lexed_lst = lexed_lst->next;
-			continue;
-		}
-		if (lexed_lst->operator == REDIR_INPUT)
-		{
-			token->input_fd = REDIR_INPUT;
-			lexed_lst = lexed_lst->next;
-			lstadd_back_array(&token->in_file, lstnew_array(lexed_lst->content, mal_lst));
-			lexed_lst = lexed_lst->next;
-			continue;
-		}
-		if (lexed_lst->operator == REDIR_OUTPUT)
-		{
-			token->output_fd = REDIR_OUTPUT;
-			lexed_lst = lexed_lst->next;
-			lstadd_back_array(&token->out_file, lstnew_array(lexed_lst->content, mal_lst));
-			lexed_lst = lexed_lst->next;
-			continue;
-		}
-		if (lexed_lst->operator == APPEND_OUTPUT)
-		{
-			token->output_fd = APPEND_OUTPUT;
-			lexed_lst = lexed_lst->next;
-			lstadd_back_array(&token->out_file, lstnew_array(lexed_lst->content, mal_lst));
-			lexed_lst = lexed_lst->next;
-			continue;
-		}
-		if (lexed_lst->operator == WORD)
-		{
-			lstadd_back_array(&token->options, lstnew_array(lexed_lst->content, mal_lst));
-			lexed_lst = lexed_lst->next;
-			continue;
-		}
+		else if (lex_lst->operator == HERE_DOC)
+			add_here_doc(&token, &lex_lst, mal_lst);
+		else if (lex_lst->operator == REDIR_IN)
+			add_redir_in(&token, &lex_lst, mal_lst);
+		else if (lex_lst->operator == REDIR_OUT)
+			add_redir_out(&token, &lex_lst, mal_lst);
+		else if (lex_lst->operator == APP_OUT)
+			add_app_out(&token, &lex_lst, mal_lst);
+		else if (lex_lst->operator == WORD)
+			add_word(&token, &lex_lst, mal_lst);
 	}
 	read_lst_array(token->options, "options");
 	printf("intput_fd: %d\n", token->input_fd);

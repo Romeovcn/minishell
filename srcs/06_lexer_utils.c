@@ -1,4 +1,16 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   06_lexer_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
+/*   Updated: 2022/11/07 20:38:59 by rvincent         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
 
 int	is_operator(char *readline_str)
 {
@@ -8,80 +20,74 @@ int	is_operator(char *readline_str)
 		return (1);
 	if (readline_str[0] == '|')
 		return (1);
-	if (readline_str[0] == '<') 
+	if (readline_str[0] == '<')
 		return (1);
 	if (readline_str[0] == '>')
 		return (1);
 	return (0);
 }
 
-int get_word_size(char *readline_str)
+int	get_word_size(char *word)
 {
-	int i;
-	int quote;
-	char quote_type;
+	char	quote_type;
+	int		quote;
+	int		i;
 
 	i = 0;
 	quote = 0;
 	quote_type = 0;
-	while (*readline_str)
+	while (*word)
 	{
-		if (quote == 0 && is_operator(readline_str))
+		if (quote == 0 && (is_operator(word) || ft_isspace(*word)))
 			break ;
-		if (ft_isspace(*readline_str) && quote == 0)
-			break ;
-		if ((*readline_str == '\'' || *readline_str == '\"') && quote == 0)
+		if ((*word == '\'' || *word == '\"') && quote == 0)
 		{
 			quote++;
-			quote_type = *readline_str;
+			quote_type = *word;
 		}
-		else if (quote == 1 && *readline_str == quote_type)
+		else if (quote == 1 && *word == quote_type)
 		{
 			quote = 0;
 			quote_type = 0;
 		}
 		i++;
-		readline_str++;
+		word++;
 	}
 	return (i);
 }
 
-void get_word(char *readline_str, char **word)
+void	get_word(char *word, char **result)
 {
-	int i;
-	int quote;
-	char quote_type;
+	char	quote_type;
+	int		quote;
+	int		i;
 
 	i = 0;
 	quote = 0;
 	quote_type = 0;
-	while (*readline_str)
+	while (*word)
 	{
-		if (quote == 0 && is_operator(readline_str))
+		if (quote == 0 && (is_operator(word) || ft_isspace(*word)))
 			break ;
-		if (ft_isspace(*readline_str) && quote == 0)
-			break ;
-		if ((*readline_str == '\'' || *readline_str == '\"') && quote == 0)
+		if ((*word == '\'' || *word == '\"') && quote == 0)
 		{
 			quote++;
-			quote_type = *readline_str;
+			quote_type = *word;
 		}
-		else if (quote == 1 && *readline_str == quote_type)
+		else if (quote == 1 && *word == quote_type)
 		{
 			quote = 0;
 			quote_type = 0;
 		}
-		(*word)[i] = *readline_str;
-		i++;
-		readline_str++;
+		(*result)[i++] = *word++;
 	}
-	(*word)[i] = 0;
+	(*result)[i] = 0;
 }
 
-void go_to_word_end(char **readline_str)
+void	go_to_word_end(char **readline_str)
 {
-	int quote;
-	char quote_type;
+	char	quote_type;
+	int		quote;
 
 	quote = 0;
 	quote_type = 0;

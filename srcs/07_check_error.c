@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   07_check_error.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
+/*   Updated: 2022/11/13 03:10:29 by rvincent         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int check_not_closed_string(char *str)
+int	check_not_closed_string(char *str)
 {
-	char quote_type;
-	int quote;
+	char	quote_type;
+	int		quote;
 
-	quote_type = 0;
 	quote = 0;
+	quote_type = 0;
 	while (*str)
 	{
 		if ((*str == '\'' || *str == '\"') && quote == 0)
@@ -26,25 +38,25 @@ int check_not_closed_string(char *str)
 	return (0);
 }
 
-int check_redir(t_lex_lst *lexed_list)
+int	check_redir(t_lex_lst *lexed_list)
 {
 	if (!lexed_list->next)
 		return (printf("No key word after redir\n"), 1);
-	if (lexed_list->next->operator != WORD) // Check next is a word
+	if (lexed_list->next->operator != WORD)
 		return (printf("Operator after redir\n"), 1);
 	return (0);
 }
 
-int check_pipe(t_lex_lst *lexed_list)
+int	check_pipe(t_lex_lst *lexed_list)
 {
 	if (!lexed_list->next)
 		return (printf("No key word after pipe\n"), 1);
-	if (lexed_list->next->operator == PIPE) // Check multiple pipe in a row
+	if (lexed_list->next->operator == PIPE)
 		return (printf("Double pipe error\n"), 1);
 	return (0);
 }
 
-int check_error(t_lex_lst *lexed_list)
+int	check_error(t_lex_lst *lexed_list)
 {
 	if (lexed_list->operator == PIPE)
 		return (printf("No command before pipe\n"), 1);
@@ -62,7 +74,7 @@ int check_error(t_lex_lst *lexed_list)
 		}
 		else if (lexed_list->operator == WORD)
 		{
-			if (check_not_closed_string(lexed_list->content)) // Check not closed string
+			if (check_not_closed_string(lexed_list->content))
 				return (printf("Not closed quote error\n"), 1);
 		}
 		lexed_list = lexed_list->next;

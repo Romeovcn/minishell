@@ -1,35 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   00_main.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
+/*   Updated: 2022/11/13 21:49:03 by rvincent         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-char *get_prompt(char **env)
+int check_empty_line(char *rl_str) // to fix
 {
-	char *prompt;
-	int i;
+	int	i;
 
 	i = 0;
-	while (env[i])
+	while (*rl_str)
 	{
-		if (ft_strnstr(env[i], "USER=", 5))
-			return prompt = env[i] + 5;
-		i++;
-	}
-	return NULL;
-}
-
-int check_empty_line(char *readline_str) // to fix
-{
-	int size;
-	int i;
-
-	size = ft_strlen(readline_str);
-	if (size == 0)
-		return (1);
-	i = 0;
-	while (readline_str[i])
-	{
-		if (!ft_isspace(readline_str[i]))
+		if (!ft_isspace(*rl_str))
 			return (1);
-		i++;
+		rl_str++;
 	}
+	if (i == 0)
+		return (1);
 	return (0);
 }
 
@@ -39,7 +34,7 @@ int main(int argc, char **argv, char **env)
 	t_mal_lst 	*mal_lst;
 	t_env_lst 	*env_lst;
 	char 			*readline_str;
-	char			cmd_line[] ="<< $USER cat |> cat | cat | cat | cat > outfile";
+	char			cmd_line[] ="<< $USER cat \"salut tu vas bien\"? |> cat \"$USER\" | cat '$USER' | cat $USER | cat > outfile";
 
 	mal_lst = NULL;
 	printf("%s\n", cmd_line);
@@ -48,11 +43,11 @@ int main(int argc, char **argv, char **env)
 // ---------------------------------------------------------- //
 	env_lst = NULL;
 	// char *unset[] = {"unset", NULL};
-	char *export[] = {"export", "RICK=MORTY", "USER=EHOH", NULL};
+	// char *export[] = {"export", "RICK=MORTY", "USER=EHOH", NULL};
 	get_env_lst(&env_lst, env, &mal_lst);
-	export_env(&env_lst, &mal_lst, export);
+	// export_env(&env_lst, &mal_lst, export);
 	// unset_env(&env_lst, unset);
-	ft_env(env_lst);
+	// ft_env(env_lst);
 	// printf("---------------------------------------------\n");
 	// export_env(&env_lst, &mal_lst, option2);
 	// ft_env(env_lst);
