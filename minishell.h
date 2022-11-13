@@ -78,10 +78,10 @@ void		ft_cd(char *path);
 //----------------------------------------------------------------------------//
 //							 		Env			 							  //
 //----------------------------------------------------------------------------//
-void		get_env(t_env_lst **env_lst, char **env, t_mal_lst **mal_lst);
+void		get_env_lst(t_env_lst **env_lst, char **env, t_mal_lst **mal_lst);
 char		*get_env_value(char *name, t_env_lst *env_lst);
 void		export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **options);
-void		unset_env(t_env_lst *env_lst, char *name);
+void		unset_env(t_env_lst **env_lst, char **options);
 //----------------------------------------------------------------------------//
 //							 	Env lst			 							  //
 //----------------------------------------------------------------------------//

@@ -47,12 +47,12 @@ int main(int argc, char **argv, char **env)
 //								Get env                       //
 // ---------------------------------------------------------- //
 	env_lst = NULL;
-	// char *options[] = {"export", "test=salut", "test2=oui", NULL};
-	// char *option2[] = {"export", "haricot=HEYYYY", "bien=", NULL};
-	get_env(&env_lst, env, &mal_lst);
-	// export_env(&env_lst, &mal_lst, options);
-	// unset_env(env_lst, "test");
-	// ft_env(env_lst);
+	char *unset[] = {"unset", NULL};
+	char *export[] = {"export", NULL};
+	get_env_lst(&env_lst, env, &mal_lst);
+	export_env(&env_lst, &mal_lst, export);
+	unset_env(&env_lst, unset);
+	ft_env(env_lst);
 	// printf("---------------------------------------------\n");
 	// export_env(&env_lst, &mal_lst, option2);
 	// ft_env(env_lst);
@@ -61,16 +61,16 @@ int main(int argc, char **argv, char **env)
 // ---------------------------------------------------------- //
 //								Lexer                         //
 // ---------------------------------------------------------- //
-	lexed_lst = lexer(cmd_line, &mal_lst);
+	// lexed_lst = lexer(cmd_line, &mal_lst);
 // ---------------------------------------------------------- //
 //						Check syntax error                    //
 // ---------------------------------------------------------- //
-	if (check_error(lexed_lst))
-		return (free_lst_malloc(mal_lst), 1);
+	// if (check_error(lexed_lst))
+	// 	return (free_lst_malloc(mal_lst), 1);
 // ---------------------------------------------------------- //
 //							parser				              //
 // ---------------------------------------------------------- //
-	parser(lexed_lst, &mal_lst, env_lst);
+	// parser(lexed_lst, &mal_lst, env_lst);
 // ---------------------------------------------------------- //
 //							Tokenizer			              //
 // ---------------------------------------------------------- //

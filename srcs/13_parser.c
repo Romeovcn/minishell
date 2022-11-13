@@ -13,11 +13,6 @@ void	parse_env(char **str, t_mal_lst **mal_lst, t_env_lst *env_lst, char **resul
 		*result = ft_strjoin(*result, env_value);
 	else
 		*result = ft_strjoin(*result, "");
-	if (!*result)
-	{
-		free_lst_malloc(*mal_lst);
-		exit (1);
-	}
 	lstadd_back_malloc(mal_lst, lstnew_malloc(*result));
 	go_end_env_name(str);
 	free(env_name);
