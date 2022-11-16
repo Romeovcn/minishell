@@ -62,6 +62,11 @@ void	ft_echo(char **cmd)
 
 void	ft_cd(char *path)
 {
-	if (chdir(path) < 0)
-		printf("Error cd\n");
+	if (chdir("Makefile") < 0)
+		perror("cd");
+	else
+	{
+		// change OLD_PWD && PWD
+		// export_env();
+	}
 }

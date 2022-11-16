@@ -16,12 +16,12 @@ CFLAGS	= -Wall -Wextra -Werror
 
 ${NAME}:	${OBJSDIR} ${OBJS} ${HEADERS} Makefile
 	@ar rcs ${NAME} ${OBJS}
-	@echo "\033[32mLibft compiled !"
+	@echo "\033[32mlibft compiled !"
 
 all:	${NAME}
 
 $(OBJSDIR):
-	@echo "\033[33mCompiling Libft..."
+	@echo "\033[33mcompiling libft..."
 	@mkdir ${OBJSDIR}
 
 ${OBJSDIR}/%.o: ${SRCSDIR}/%.c

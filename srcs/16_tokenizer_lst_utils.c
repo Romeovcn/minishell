@@ -12,15 +12,15 @@
 
 #include "minishell.h"
 
-t_tok_list	*lstnew_token(t_mal_lst **mal_lst)
+t_tok_lst	*lstnew_token(t_mal_lst **mal_lst)
 {
-	t_tok_list	*result;
+	t_tok_lst	*result;
 
-	result = malloc(sizeof(t_tok_list));
+	result = malloc(sizeof(t_tok_lst));
 	if (!result)
 		return (0);
 	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
-	result->options = NULL;
+	result->args = NULL;
 	result->input_fd = 0;
 	result->in_file = NULL;
 	result->delimiter = NULL;
@@ -30,9 +30,9 @@ t_tok_list	*lstnew_token(t_mal_lst **mal_lst)
 	return (result);
 }
 
-t_tok_list	*lstlast_token(t_tok_list *lst)
+t_tok_lst	*lstlast_token(t_tok_lst *lst)
 {
-	t_tok_list	*head;
+	t_tok_lst	*head;
 
 	if (lst == NULL)
 		return (0);
@@ -42,9 +42,9 @@ t_tok_list	*lstlast_token(t_tok_list *lst)
 	return (head);
 }
 
-void	lstadd_back_token(t_tok_list **lst, t_tok_list *new)
+void	lstadd_back_token(t_tok_lst **lst, t_tok_lst *new)
 {
-	t_tok_list	*last;
+	t_tok_lst	*last;
 
 	if (*lst)
 	{
@@ -55,7 +55,7 @@ void	lstadd_back_token(t_tok_list **lst, t_tok_list *new)
 		*lst = new;
 }
 
-void	read_lst_token(t_tok_list *lst)
+void	read_lst_token(t_tok_lst *lst)
 {
 	int	i;
 

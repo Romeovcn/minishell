@@ -12,18 +12,6 @@
 
 #include "minishell.h"
 
-void	free_string_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-		free(array[i++]);
-	if (array)
-		free(array);
-	printf("array freed\n");
-}
-
 char	*strjoin_char(char const *s1, char c, t_mal_lst **mal_lst)
 {
 	char	*result;

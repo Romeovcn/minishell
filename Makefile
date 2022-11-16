@@ -21,7 +21,7 @@ CFLAGS =
 
 # -- RULES -- #
 
-${NAME}: ${OBJS_DIR} ${OBJS} ${HEADERS} ${LIB}
+${NAME}: ${LIB} ${OBJS_DIR} ${OBJS} ${HEADERS}
 	@${CC} ${CFLAGS} ${OBJS} ${LIB} -L/usr/local/lib -I/usr/local/include -lreadline -o ${NAME}
 	@echo "\033[32m$ ${NAME} compiled !"
 	@echo "----------------------------\033[0m"
@@ -33,14 +33,14 @@ ${LIB}:
 
 $(OBJS_DIR):
 	@mkdir -p ${OBJS_DIR}
-	@echo "\033[33mCompiling Philo..."
+	@echo "\033[33mcompiling ${NAME}..."
 
 ${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c
 	@${CC} ${CFLAGS} -I. -c $< -o $@
 
 clean:
 	@rm -rf ${OBJS_DIR}
-	@echo "\033[32mClean !\033[0m"
+	@echo "\033[32mclean !\033[0m"
 
 fclean: clean
 	@make fclean -sC ./libft

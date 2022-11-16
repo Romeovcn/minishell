@@ -31,7 +31,7 @@ char	*get_env_name(char *env, t_mal_lst **mal_lst)
 	name = malloc((i + 1) * sizeof(char));
 	if (!name)
 		return (NULL);
-	lstadd_back_malloc(mal_lst, lstnew_malloc(name));
+	// lstadd_back_malloc(mal_lst, lstnew_malloc(name));
 	i = 0;
 	while (env[i])
 	{
@@ -71,6 +71,7 @@ void	change_env_value(char *name, char *new_value, t_env_lst *env_lst)
 		}
 		env_lst = env_lst->next;
 	}
+	free(name);
 }
 
 char	*get_env_value(char *name, t_env_lst *env_lst)
@@ -82,4 +83,17 @@ char	*get_env_value(char *name, t_env_lst *env_lst)
 		env_lst = env_lst->next;
 	}
 	return (NULL);
+}
+
+void free_env_lst(t_env_lst *env_lst)
+{
+	t_env_lst *tmp;
+
+	while (env_lst)
+	{
+		tmp = env_lst->next;
+		free(env_lst->name);
+		free(env_lst);
+		env_lst = tmp;
+	}
 }

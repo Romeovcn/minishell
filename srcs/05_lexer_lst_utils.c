@@ -60,16 +60,3 @@ void	read_lst(t_lex_lst *lst)
 		lst = lst->next;
 	}
 }
-
-void	free_lst(t_lex_lst *lst)
-{
-	t_lex_lst	*tmp;
-
-	while (lst)
-	{
-		tmp = lst->next;
-		free(lst->content);
-		free(lst);
-		lst = tmp;
-	}
-}

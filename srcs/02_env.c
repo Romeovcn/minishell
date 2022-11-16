@@ -12,53 +12,53 @@
 
 #include "minishell.h"
 
-void	export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **options)
+void	export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args)
 {
 	char	*value_found;
 	char	*name;
 	int		i;
 
 	i = 1;
-	while (options[i])
+	while (args[i])
 	{
-		name = get_env_name(options[i], mal_lst);
+		name = get_env_name(args[i], mal_lst);
 		if (name)
 		{
-			while (*(options[i]))
+			while (*(args[i]))
 			{
-				if (*(options[i]) == '=' && *(options[i])++)
+				if (*(args[i]) == '=' && *(args[i])++)
 					break ;
-				options[i]++;
+				args[i]++;
 			}
 			value_found = get_env_value(name, *env_lst);
 			if (value_found)
-				change_env_value(name, options[i], *env_lst);
+				change_env_value(name, args[i], *env_lst);
 			else
-				lstadd_back_env(env_lst, lstnew_env(name, options[i], mal_lst));
+				lstadd_back_env(env_lst, lstnew_env(name, args[i], mal_lst));
 		}
 		i++;
 	}
 }
 
-void	unset_env(t_env_lst **env_lst, char **options)
+void	unset_env(t_env_lst **env_lst, char **args)
 {
 	t_env_lst	*tmp_previous;
 	t_env_lst	*env_head;
 	int			i;
 
 	i = 1;
-	while (options[i])
+	while (args[i])
 	{
-		// if (ft_strchr(options[i], '='))
+		// if (ft_strchr(args[i], '='))
 		// {
-		// 	printf("unset: '%s': not a valid identifier\n", options[i++]);
+		// 	printf("unset: '%s': not a valid identifier\n", args[i++]);
 		// 	continue ;
 		// }
 		tmp_previous = NULL;
 		env_head = *env_lst;
 		while (env_head)
 		{
-			if (ft_strmatch(options[i], env_head->name))
+			if (ft_strmatch(args[i], env_head->name))
 			{
 				if (!tmp_previous)
 					*env_lst = (*env_lst)->next;

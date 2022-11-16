@@ -1,74 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/13 03:15:26 by rvincent         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "./libft/libft.h"
-# include <linux/limits.h>
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdbool.h>
-
-typedef struct command_data
-{
-	char			**env;
-	char			*readline_str;
-}					t_command_data;
-
-# define WORD 0 // file name ou command ou argument
-# define PIPE 1 // pipe
-# define REDIR_IN 2 // <
-# define REDIR_OUT 3 // >
-# define HERE_DOC 4 // <<
-# define APP_OUT 5 // >>
-
-typedef struct a_list
-{
-	char			*content;
-	struct a_list	*next;
-}					t_array_lst;
-
-typedef struct m_list
-{
-	void			*adr;
-	struct m_list	*next;
-}					t_mal_lst;
-
-typedef struct l_list
-{
-	char			*content;
-	int				operator;
-	struct l_list	*next;
-}					t_lex_lst;
-
-typedef struct env_list
-{
-	char			*name;
-	char			*value;
-	struct env_list	*next;
-}					t_env_lst;
-
-typedef struct t_list
-{
-	t_array_lst		*options;
-
-	int				input_fd;
-	t_array_lst		*in_file;
-	t_array_lst		*delimiter;
-	int				output_fd;
-	t_array_lst		*out_file;
-	struct t_list	*next;
-}					t_tok_list;
+# include "./minishell_define.h"
 
 //----------------------------------------------------------------------------//
 //						 			Utils				 					  //
@@ -92,8 +25,8 @@ void		ft_cd(char *path);
 //----------------------------------------------------------------------------//
 void		get_env_lst(t_env_lst **env_lst, char **env, t_mal_lst **mal_lst);
 char		*get_env_value(char *name, t_env_lst *env_lst);
-void		export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **options);
-void		unset_env(t_env_lst **env_lst, char **options);
+void		export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args);
+void		unset_env(t_env_lst **env_lst, char **args);
 //----------------------------------------------------------------------------//
 //							 	Env utils		 							  //
 //----------------------------------------------------------------------------//
@@ -101,6 +34,7 @@ char		*get_env_name(char *env, t_mal_lst **mal_lst);
 void		get_env_lst(t_env_lst **env_lst, char **env, t_mal_lst **mal_lst);
 void		change_env_value(char *name, char *new_value, t_env_lst *env_lst);
 char		*get_env_value(char *name, t_env_lst *env_lst);
+void		free_env_lst(t_env_lst *env_lst);
 //----------------------------------------------------------------------------//
 //							 	Env lst			 							  //
 //----------------------------------------------------------------------------//
@@ -158,27 +92,31 @@ void		free_lst_malloc(t_mal_lst *lst);
 //----------------------------------------------------------------------------//
 //							 	Token										  //
 //----------------------------------------------------------------------------//
-void		token(t_lex_lst *lexed_lst, t_mal_lst **mal_lst);
+t_tok_lst	*get_token_lst(t_lex_lst *lexed_lst, t_mal_lst **mal_lst);
 //----------------------------------------------------------------------------//
 //							 	Token utils									  //
 //----------------------------------------------------------------------------//
-void		add_here_doc(t_tok_list **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
-void		add_redir_in(t_tok_list **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
-void		add_redir_out(t_tok_list **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
-void		add_app_out(t_tok_list **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
-void		add_word(t_tok_list **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
+void		add_here_doc(t_tok_lst **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
+void		add_redir_in(t_tok_lst **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
+void		add_redir_out(t_tok_lst **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
+void		add_app_out(t_tok_lst **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
+void		add_word(t_tok_lst **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
 //----------------------------------------------------------------------------//
 //							 	Token lst utils								  //
 //----------------------------------------------------------------------------//
-t_tok_list	*lstnew_token(t_mal_lst **mal_lst);
-t_tok_list	*lstlast_token(t_tok_list *lst);
-void		lstadd_back_token(t_tok_list **lst, t_tok_list *new);
-void		read_lst_token(t_tok_list *lst);
-
+t_tok_lst	*lstnew_token(t_mal_lst **mal_lst);
+t_tok_lst	*lstlast_token(t_tok_lst *lst);
+void		lstadd_back_token(t_tok_lst **lst, t_tok_lst *new);
+void		read_lst_token(t_tok_lst *lst);
+//----------------------------------------------------------------------------//
+//							 	Exec										  //
+//----------------------------------------------------------------------------//
+void		exec(t_tok_lst *tok_lst);
 // To do :
 // Protect malloc
 // cas tricky : <<$env
 // cas tricky : << end << end << env = ctrl c should exit all
 // "" | ""
 // Norm
+
 #endif
