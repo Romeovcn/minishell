@@ -35,7 +35,7 @@ int main(int argc, char **argv, char **env)
 	t_mal_lst 	*mal_lst;
 	t_env_lst 	*env_lst;
 	char 		*readline_str;
-	char		cmd_line[] ="/usr/bin/ls";
+	char		cmd_line[] ="< test";
 
 	mal_lst = NULL;
 	printf("%s\n", cmd_line);
@@ -69,7 +69,7 @@ int main(int argc, char **argv, char **env)
 // ---------------------------------------------------------- //
 //							Exec				              //
 // ---------------------------------------------------------- //
-	exec(token_lst, env);
+	exec(token_lst, env, mal_lst);
 	// lst_to_str_array(token_lst->args, &mal_lst);
 // ---------------------------------------------------------- //
 //							Free				              //
