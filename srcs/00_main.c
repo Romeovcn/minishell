@@ -48,7 +48,7 @@ int main(int argc, char **argv, char **env)
 	get_env_lst(&env_lst, env, &mal_lst);
 	// export_env(&env_lst, &mal_lst, export);
 	// unset_env(&env_lst, unset);
-	// ft_env(env_lst);
+	ft_env(env_lst);
 // ---------------------------------------------------------- //
 //							Lexer	                          //
 // ---------------------------------------------------------- //
@@ -77,6 +77,7 @@ int main(int argc, char **argv, char **env)
 // ---------------------------------------------------------- //
 //							Readline			              //
 // ---------------------------------------------------------- //
+	test();
 	// char *test[] = {"echo", "-nn", "", NULL};
 	// ft_echo(test);
 	// ft_cd("./srcs");

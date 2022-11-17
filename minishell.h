@@ -112,6 +112,7 @@ void		read_lst_token(t_tok_lst *lst);
 //							 	Exec										  //
 //----------------------------------------------------------------------------//
 void		exec(t_tok_lst *tok_lst);
+void		test(void);
 // To do :
 // Protect malloc
 // cas tricky : <<$env
