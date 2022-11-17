@@ -19,7 +19,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
-# include "srcs/exec/pipex/pipex.h"
+// # include "srcs/exec/pipex/pipex.h"
 
 # define WORD 0 // file name ou command ou argument
 # define PIPE 1 // pipe

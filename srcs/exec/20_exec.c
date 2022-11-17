@@ -1,10 +1,5 @@
 #include "minishell.h"
 
-void test(void)
-{
-	printf("ok");
-}
-
 void	simple_exec(t_tok_lst *tok_lst, char **envp)
 {
 	char	*path;

@@ -35,7 +35,7 @@ int main(int argc, char **argv, char **env)
 	t_mal_lst 	*mal_lst;
 	t_env_lst 	*env_lst;
 	char 		*readline_str;
-	char		cmd_line[] ="ls";
+	char		cmd_line[] ="/usr/bin/ls";
 
 	mal_lst = NULL;
 	printf("%s\n", cmd_line);

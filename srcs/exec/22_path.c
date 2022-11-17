@@ -26,11 +26,7 @@ static char	*ft_abs_path(char *cmd)
 	if (access(cmd, F_OK) == 0)
 	{
 		if (access(cmd, X_OK) == 0)
-		{
-			printf("hello\n");
-			// path = ft_strdup(cmd);
 			return (cmd);
-		}
 		// if (access(cmd, X_OK) == -1)
 		// 	exit(126);
 	}
@@ -51,8 +47,8 @@ char	*find_right_access(char *path, t_array_lst *cmd)
 	i = 0;
 	while (split_path[i])
 	{
-		res = ft_strjoin(split_path[i], "/");
-		res = ft_strjoin(res, cmd->content);
+		res = ft_newstrjoin(split_path[i], "/");
+		res = ft_newstrjoin(res, cmd->content);
 		accss = access(res, X_OK);
 		if (accss == 0)
 			return (ft_strdup(res));
