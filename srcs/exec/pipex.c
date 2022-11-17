@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:14:55 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/17 14:56:05 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:55:45 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_fork_parent(t_pipex *pipex, char **envp)
 	return (1);
 }
 
-int	main(int ac, char **av, char **envp)
+int	pipex(int ac, char **av, char **envp)
 {
 	t_pipex	*pipex;
 	int		status;

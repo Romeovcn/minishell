@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/17 13:36:00 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:02:59 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 t_tok_lst	*get_token_lst(t_lex_lst *lex_lst, t_mal_lst **mal_lst)
 {
 	t_tok_lst	*token;
-	t_tok_lst	*tmp;
+	t_tok_lst	*head;
 
 	token = NULL;
 	lstadd_back_token(&token, lstnew_token(mal_lst));
 	printf("--------Command lst token--------\n");
-	tmp = token;
+	head = token;
 	while (lex_lst)
 	{
 		if (lex_lst->operator == PIPE)
@@ -54,5 +54,5 @@ t_tok_lst	*get_token_lst(t_lex_lst *lex_lst, t_mal_lst **mal_lst)
 	printf("output_fd: %d\n", token->output_fd);
 	read_lst_array(token->out_file, "out_file");
 	printf("-----------------\n");
-	return (tmp);
+	return (head);
 }
