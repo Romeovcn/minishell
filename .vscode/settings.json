@@ -4,6 +4,8 @@
 		"history.h": "c",
 		"readline.h": "c",
 		"minishell.h": "c",
-		"typeinfo": "c"
-	}
+		"typeinfo": "c",
+		"libft.h": "c"
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }

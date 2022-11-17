@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/13 21:49:03 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/11/17 16:40:27 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(int argc, char **argv, char **env)
 	t_mal_lst 	*mal_lst;
 	t_env_lst 	*env_lst;
 	char 		*readline_str;
-	char		cmd_line[] ="$USER";
+	char		cmd_line[] ="ls";
 
 	mal_lst = NULL;
 	printf("%s\n", cmd_line);
@@ -69,6 +69,7 @@ int main(int argc, char **argv, char **env)
 // ---------------------------------------------------------- //
 //							Exec				              //
 // ---------------------------------------------------------- //
+	exec(token_lst, env_lst);
 // ---------------------------------------------------------- //
 //							Free				              //
 // ---------------------------------------------------------- //
@@ -77,6 +78,7 @@ int main(int argc, char **argv, char **env)
 // ---------------------------------------------------------- //
 //							Readline			              //
 // ---------------------------------------------------------- //
+	test();
 	// char *test[] = {"echo", "-nn", "", NULL};
 	// ft_echo(test);
 	// ft_cd("./srcs");

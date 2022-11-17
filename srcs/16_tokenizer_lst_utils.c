@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   16_token_lst_utils.c                               :+:      :+:    :+:   */
+/*   16_tokenizer_lst_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/09 17:42:12 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/11/17 13:15:42 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,17 @@ void	read_lst_token(t_tok_lst *lst)
 		printf("index=%d %d\n", i, lst->output_fd);
 		lst = lst->next;
 	}
+}
+
+int	ft_lstsize_token(t_tok_lst *lst)
+{
+	int		count;
+
+	count = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		count++;
+	}
+	return (count);
 }

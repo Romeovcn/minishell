@@ -108,10 +108,12 @@ t_tok_lst	*lstnew_token(t_mal_lst **mal_lst);
 t_tok_lst	*lstlast_token(t_tok_lst *lst);
 void		lstadd_back_token(t_tok_lst **lst, t_tok_lst *new);
 void		read_lst_token(t_tok_lst *lst);
+int			ft_lstsize_token(t_tok_lst *lst);
 //----------------------------------------------------------------------------//
 //							 	Exec										  //
 //----------------------------------------------------------------------------//
-void		exec(t_tok_lst *tok_lst);
+void		exec(t_tok_lst *tok_lst, t_env_lst *env_list);
+void test(void);
 // To do :
 // Protect malloc
 // cas tricky : <<$env
