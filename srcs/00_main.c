@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/17 19:30:03 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:35:01 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int main(int argc, char **argv, char **env)
 	get_env_lst(&env_lst, env, &mal_lst);
 	// export_env(&env_lst, &mal_lst, export);
 	// unset_env(&env_lst, unset);
-	// ft_env(env_lst);
+	ft_env(env_lst);
 // ---------------------------------------------------------- //
 //							Lexer	                          //
 // ---------------------------------------------------------- //
@@ -70,6 +70,7 @@ int main(int argc, char **argv, char **env)
 //							Exec				              //
 // ---------------------------------------------------------- //
 	exec(token_lst, env);
+	// lst_to_str_array(token_lst->args, &mal_lst);
 // ---------------------------------------------------------- //
 //							Free				              //
 // ---------------------------------------------------------- //

@@ -3,16 +3,16 @@ SRCS_DIR = srcs
 OBJS_DIR = objs
 
 SRCS	:=	$(shell find srcs/*.c -exec basename \ {} \;)
-SRCS_EXEC	:=	$(shell find srcs/exec/*.c -exec basename \ {} \;)
 SRCS_BUILT_IN	:=	$(shell find srcs/built_in/*.c -exec basename \ {} \;)
-# SRCS_PARSING	:=	$(shell find srcs/parsing*.c -exec basename \ {} \;)
-# SRCS_ENV	:=	$(shell find srcs/parsing*.c -exec basename \ {} \;)
+SRCS_ENV	:=	$(shell find srcs/env/*.c -exec basename \ {} \;)
+SRCS_EXEC	:=	$(shell find srcs/exec/*.c -exec basename \ {} \;)
+SRCS_PARSING	:=	$(shell find srcs/parsing/*.c -exec basename \ {} \;)
 
 OBJS = ${patsubst %.c,${OBJS_DIR}/%.o,${SRCS}}
-OBJS_EXEC = ${patsubst %.c,${OBJS_DIR}/%.o,${SRCS_EXEC}}
 OBJS_BUILT_IN = ${patsubst %.c,${OBJS_DIR}/%.o,${SRCS_BUILT_IN}}
-# OBJS_PARSING = ${patsubst %.c,${OBJS_DIR}/%.o,${SRCS}}
-# OBJS_ENV = ${patsubst %.c,${OBJS_DIR}/%.o,${SRCS}}
+OBJS_ENV = ${patsubst %.c,${OBJS_DIR}/%.o,${SRCS_ENV}}
+OBJS_EXEC = ${patsubst %.c,${OBJS_DIR}/%.o,${SRCS_EXEC}}
+OBJS_PARSING = ${patsubst %.c,${OBJS_DIR}/%.o,${SRCS_PARSING}}
 
 HEADERS = minishell.h
 
@@ -29,8 +29,8 @@ CFLAGS =
 
 # -- RULES -- #
 
-${NAME}: ${LIB} ${OBJS_DIR} ${OBJS} ${OBJS_EXEC} ${OBJS_BUILT_IN} ${HEADERS}
-	@${CC} ${CFLAGS} ${OBJS} ${OBJS_EXEC} ${OBJS_BUILT_IN} ${LIB} -L/usr/local/lib -I/usr/local/include -lreadline -o ${NAME}
+${NAME}: ${LIB} ${OBJS_DIR} ${OBJS} ${OBJS_BUILT_IN} ${OBJS_ENV} ${OBJS_EXEC} ${OBJS_PARSING} ${HEADERS}
+	@${CC} ${CFLAGS} ${OBJS} ${OBJS_BUILT_IN} ${OBJS_ENV} ${OBJS_EXEC} ${OBJS_PARSING} ${LIB} -L/usr/local/lib -I/usr/local/include -lreadline -o ${NAME}
 	@echo "\033[32m$ ${NAME} compiled !"
 	@echo "----------------------------\033[0m"
 
@@ -49,7 +49,13 @@ ${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c
 ${OBJS_DIR}/%.o: srcs/built_in/%.c
 	@${CC} ${CFLAGS} -I. -c $< -o $@
 
+${OBJS_DIR}/%.o: srcs/env/%.c
+	@${CC} ${CFLAGS} -I. -c $< -o $@
+
 ${OBJS_DIR}/%.o: srcs/exec/%.c
+	@${CC} ${CFLAGS} -I. -c $< -o $@
+
+${OBJS_DIR}/%.o: srcs/parsing/%.c
 	@${CC} ${CFLAGS} -I. -c $< -o $@
 
 clean:
