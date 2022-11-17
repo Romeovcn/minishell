@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/17 13:34:43 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/17 18:06:23 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
+# include "srcs/exec/pipex/pipex.h"
 
 # define WORD 0 // file name ou command ou argument
 # define PIPE 1 // pipe

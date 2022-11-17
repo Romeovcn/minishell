@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:44:02 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/17 14:57:55 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:56:54 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int					ft_fork_parent(t_pipex *pipex, char **envp);
 int					ft_check_here_doc(char **av, char **envp, t_pipex *pipex);
 
 void				ft_parsing(char **envp, char **av, t_pipex *pipex, int ac);
-void				ft_check_access(t_pipex *pipex);
+char				*ft_check_access(t_pipex *pipex);
 
 int					ft_crash_pid(int pid, int fd[2]);
 void				ft_exit_error(t_pipex *pipex, t_cmd *cmd, int i);

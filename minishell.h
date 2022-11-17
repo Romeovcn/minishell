@@ -112,7 +112,8 @@ int			ft_lstsize_token(t_tok_lst *lst);
 //----------------------------------------------------------------------------//
 //							 	Exec										  //
 //----------------------------------------------------------------------------//
-void		exec(t_tok_lst *tok_lst, t_env_lst *env_list);
+void		exec(t_tok_lst *tok_lst, char **envp);
+char		*find_right_access(char *path, t_array_lst *cmd);
 void test(void);
 // To do :
 // Protect malloc
