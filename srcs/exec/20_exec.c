@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/18 16:23:52 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/18 18:19:33 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,36 @@ void	command(t_exec *exec)
 
 void	redir_out(t_exec *exec)
 {
-	t_array_lst	*file;
-	int			file_fd;
+	char	*file;
+	int		file_fd;
 
 	if (pipe(exec->fd) == -1)
 		return ;
-	file = exec->tok_lst->out_file;
-	file_fd = open(file->content, O_RDWR | O_CREAT, 0666);
+	file = exec->tok_lst->out_file->content;
+	file_fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (exec->tok_lst->args != NULL)
 	{
 		dup2(file_fd, STDOUT_FILENO);
-		close_fd(exec->fd[0], exec->fd[1]);
 		command(exec);
 	}
+	close_fd(exec->fd[0], exec->fd[1]);
+}
+
+void	redir_in(t_exec *exec)
+{
+	char	*file;
+	int		file_fd;
+
+	if (pipe(exec->fd) == -1)
+		return ;
+	file = exec->tok_lst->in_file->content;
+	file_fd = open(file, O_RDONLY);
+	if (exec->tok_lst->args != NULL)
+	{
+		dup2(file_fd, STDIN_FILENO);
+		command(exec);
+	}
+	close_fd(exec->fd[0], exec->fd[1]);
 }
 
 void	simple_exec(t_exec *exec)
@@ -44,9 +61,6 @@ void	simple_exec(t_exec *exec)
 	char	*path;
 	char	**arg;
 
-	// path = getenv("PATH");
-	// printf("path: %s\n", path);
-	// printf("test: %s\n", tok_lst->args->content);
 	if (exec->tok_lst->output_fd < 2 && exec->tok_lst->input_fd < 2)
 	{
 		printf("commande\n");
@@ -54,10 +68,14 @@ void	simple_exec(t_exec *exec)
 	}
 	else if (exec->tok_lst->output_fd == 3)
 	{
-		printf("redirection\n");
+		printf("redirection out\n");
 		redir_out(exec);
 	}
-	// free(path);
+	else if (exec->tok_lst->input_fd == 2)
+	{
+		printf("redirection in\n");
+		redir_in(exec);
+	}
 }
 
 void	pipex_exec(t_exec *exec)
