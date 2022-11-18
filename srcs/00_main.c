@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/17 19:35:01 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/18 16:23:13 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int main(int argc, char **argv, char **env)
 	t_mal_lst 	*mal_lst;
 	t_env_lst 	*env_lst;
 	char 		*readline_str;
-	char		cmd_line[] ="< test";
+	char		cmd_line[] ="> test cat";
+	int			status;
 
 	mal_lst = NULL;
 	printf("%s\n", cmd_line);
@@ -69,7 +70,7 @@ int main(int argc, char **argv, char **env)
 // ---------------------------------------------------------- //
 //							Exec				              //
 // ---------------------------------------------------------- //
-	exec(token_lst, env, mal_lst);
+	status = exec(token_lst, env, mal_lst);
 	// lst_to_str_array(token_lst->args, &mal_lst);
 // ---------------------------------------------------------- //
 //							Free				              //

@@ -1,6 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   20_exec.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
+/*   Updated: 2022/11/18 16:23:52 by jsauvage         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	simple_exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
+void	command(t_exec *exec)
+{
+	char	**arg;
+	char	*path;
+
+	path = find_right_access(getenv("PATH"), exec->tok_lst->args);
+	arg = lst_to_str_array(exec->tok_lst->args, &exec->mal_lst);
+	execve(path, arg, exec->envp);
+}
+
+void	redir_out(t_exec *exec)
+{
+	t_array_lst	*file;
+	int			file_fd;
+
+	if (pipe(exec->fd) == -1)
+		return ;
+	file = exec->tok_lst->out_file;
+	file_fd = open(file->content, O_RDWR | O_CREAT, 0666);
+	if (exec->tok_lst->args != NULL)
+	{
+		dup2(file_fd, STDOUT_FILENO);
+		close_fd(exec->fd[0], exec->fd[1]);
+		command(exec);
+	}
+}
+
+void	simple_exec(t_exec *exec)
 {
 	char	*path;
 	char	**arg;
@@ -8,39 +47,57 @@ void	simple_exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
 	// path = getenv("PATH");
 	// printf("path: %s\n", path);
 	// printf("test: %s\n", tok_lst->args->content);
-	if (tok_lst->output_fd < 2 && tok_lst->input_fd < 2)
+	if (exec->tok_lst->output_fd < 2 && exec->tok_lst->input_fd < 2)
 	{
-		path = find_right_access(getenv("PATH"), tok_lst->args);
-		printf("path: %s\n", path);
-		arg = lst_to_str_array(tok_lst->args, &mal_lst);
-		execve(path, arg, envp);
+		printf("commande\n");
+		command(exec);
+	}
+	else if (exec->tok_lst->output_fd == 3)
+	{
+		printf("redirection\n");
+		redir_out(exec);
 	}
 	// free(path);
 }
 
-void	pipex_exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
+void	pipex_exec(t_exec *exec)
 {
-	(void)tok_lst;
 }
 
-void exec(t_tok_lst *tok_lst, char	**envp, t_mal_lst *mal_lst)
+void	init_exec(t_exec *exec, t_tok_lst *tok_lst, t_mal_lst *mal_lst, char **envp)
 {
-	int			lst_size;
+	exec->tok_lst = tok_lst;
+	exec->mal_lst = mal_lst;
+	exec->pid = malloc(ft_lstsize_token(tok_lst) * sizeof(pid_t));
+	if (!exec->pid)
+		return ;
+	exec->envp = envp;
+}
 
+int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
+{
+	int		lst_size;
+	int		i;
+	int		status;
+	t_exec	*exec;
+
+	exec = malloc(sizeof(t_exec));
+	if (!exec)
+		return (0);
+	init_exec(exec, tok_lst, mal_lst, envp);
 	lst_size = ft_lstsize_token(tok_lst);
 	printf("token size: %d\n", lst_size);
-	printf("token 1: %s\n", tok_lst->args->content);
+	// printf("token 1: %s\n", tok_lst->args->content);
 	// printf("token 2: %s\n", tok_lst->next->args->content);
 	if (lst_size == 1)
-		simple_exec(tok_lst, envp, mal_lst);
+		simple_exec(exec);
 	else if (lst_size > 1)
-		pipex_exec(tok_lst, envp, mal_lst);
-}
-
-	// char **args;
-
-	// while (tok_lst)
+		pipex_exec(exec);
+	i = 0;
+	// while (i < lst_size)
 	// {
-		
-	// 	tok_lst = tok_lst->next;
+	// 	waitpid(exec->pid[i], &status, 0);
+	// 	i++;
 	// }
+	return (status);
+}

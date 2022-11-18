@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/17 18:06:23 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/18 15:16:37 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
+# include <sys/wait.h>
 // # include "srcs/exec/pipex/pipex.h"
 
 # define WORD 0 // file name ou command ou argument
@@ -65,5 +66,14 @@ typedef struct t_list
 	t_array_lst		*out_file;
 	struct t_list	*next;
 }					t_tok_lst;
+
+typedef struct e_list
+{
+	pid_t			*pid;
+	t_tok_lst		*tok_lst;
+	t_mal_lst		*mal_lst;
+	char			**envp;
+	int				fd[2];
+}					t_exec;
 
 #endif

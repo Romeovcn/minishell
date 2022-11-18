@@ -113,12 +113,13 @@ int			ft_lstsize_token(t_tok_lst *lst);
 //----------------------------------------------------------------------------//
 //							 	Exec										  //
 //----------------------------------------------------------------------------//
-void		exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst);
+int			exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst);
 char		*find_right_access(char *path, t_array_lst *cmd);
 //----------------------------------------------------------------------------//
 //							 	Exec utils									  //
 //----------------------------------------------------------------------------//
-char	       *ft_newstrjoin(char *s1, char *s2);
+char		*ft_newstrjoin(char *s1, char *s2);
+void		close_fd(int fd1, int fd2);
 // To do :
 // Protect malloc
 // cas tricky : <<$env
