@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/18 18:19:33 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/18 18:57:16 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	simple_exec(t_exec *exec)
 		printf("redirection in\n");
 		redir_in(exec);
 	}
+	
 }
 
 void	pipex_exec(t_exec *exec)
