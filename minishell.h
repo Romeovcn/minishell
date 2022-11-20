@@ -16,9 +16,9 @@ char		**get_paths(char **env);
 //----------------------------------------------------------------------------//
 //							 	Built-in			 						  //
 //----------------------------------------------------------------------------//
-void		ft_env(t_env_lst *env_lst);
-void		ft_pwd(void);
-void		ft_exit(t_mal_lst *mal_lst);
+void		ft_env(char **args, t_env_lst *env_lst);
+void		ft_pwd(char **args);
+void		ft_exit(char **args, t_mal_lst *mal_lst, t_env_lst *env_lst);
 void		ft_echo(char **cmd);
 void		ft_cd(char *path);
 //----------------------------------------------------------------------------//
@@ -115,6 +115,7 @@ void		read_lst_token(t_tok_lst *lst);
 void		exec(t_tok_lst *tok_lst);
 void		test(void);
 // To do :
+// ft_exit without args should exit last code status
 // Protect malloc
 // cas tricky : <<$env
 // cas tricky : << end << end << env = ctrl c should exit all

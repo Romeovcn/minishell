@@ -43,33 +43,34 @@ int main(int argc, char **argv, char **env)
 //							Env    			                  //
 // ---------------------------------------------------------- //
 	env_lst = NULL;
-	// char *unset[] = {"unset", NULL};
-	char *export[] = {"export", "RICK=MORTY", "USER=EHOH", NULL};
+	char *args[] = {"exit", "-654654654466456435", NULL};
+	// char *export[] = {"export", "RICK=MORTY", "USER=EHOH", NULL};
 	get_env_lst(&env_lst, env, &mal_lst);
 	// export_env(&env_lst, &mal_lst, export);
 	// unset_env(&env_lst, unset);
-	ft_env(env_lst);
+	// ft_env(test, env_lst);
+	ft_exit(args, mal_lst, env_lst);
 // ---------------------------------------------------------- //
 //							Lexer	                          //
 // ---------------------------------------------------------- //
-	lexed_lst = lexer(cmd_line, &mal_lst);
+	// lexed_lst = lexer(cmd_line, &mal_lst);
 // ---------------------------------------------------------- //
 //							Check syntax error                //
 // ---------------------------------------------------------- //
-	if (check_error(lexed_lst))
-		return (free_lst_malloc(mal_lst), printf("EXIT BEBE\n"), 1);
+	// if (check_error(lexed_lst))
+		// return (free_lst_malloc(mal_lst), printf("EXIT BEBE\n"), 1);
 // ---------------------------------------------------------- //
 //							Parser				              //
 // ---------------------------------------------------------- //
-	parser(lexed_lst, &mal_lst, env_lst);
+	// parser(lexed_lst, &mal_lst, env_lst);
 // ---------------------------------------------------------- //
 //							Tokenizer			              //
 // ---------------------------------------------------------- //
-	token_lst = get_token_lst(lexed_lst, &mal_lst);
+	// token_lst = get_token_lst(lexed_lst, &mal_lst);
 // ---------------------------------------------------------- //
 //							Exec				              //
 // ---------------------------------------------------------- //
-	lst_to_str_array(token_lst->args, &mal_lst);
+	// lst_to_str_array(token_lst->args, &mal_lst);
 // ---------------------------------------------------------- //
 //							Free				              //
 // ---------------------------------------------------------- //
