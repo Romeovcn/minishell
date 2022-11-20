@@ -7,6 +7,8 @@ void	command(t_exec *exec)
 
 	path = find_right_access(getenv("PATH"), exec->tok_lst->args);
 	arg = lst_to_str_array(exec->tok_lst->args, &exec->mal_lst);
+	dup2(exec->fd[1], STDOUT_FILENO);
+	close_fd(exec->fd[0], exec->fd[1]);
 	execve(path, arg, exec->envp);
 }
 

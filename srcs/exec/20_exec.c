@@ -20,6 +20,7 @@ void	simple_exec(t_exec *exec)
 	if (exec->tok_lst->output_fd < 2 && exec->tok_lst->input_fd < 2)
 	{
 		printf("commande\n");
+		printf("arg: %s\n", exec->tok_lst->args->content);
 		command(exec);
 	}
 	else if (exec->tok_lst->output_fd == 3)
@@ -52,15 +53,40 @@ void	simple_exec(t_exec *exec)
 	
 }
 
+void	fork_child(t_exec *exec, int i)
+{
+	exec->pid[i] = fork();
+	// if (ft_crash_pid(exec->pid[i], exec->fd) == 0)
+	// 	return (0);
+	if (exec->pid[i] == 0)
+		simple_exec(exec);
+}
+
 void	pipex_exec(t_exec *exec)
 {
+	t_exec	*tmp;
+	int		i;
+
+	tmp = exec;
+	i = 0;
+	while (i < tmp->nb_command)
+	{
+		if (pipe(tmp->fd) == -1)
+			return ;
+		fork_child(tmp, i);
+		dup2(tmp->fd[0], STDIN_FILENO);
+		close_fd(tmp->fd[0], tmp->fd[1]);
+		i++;
+		tmp->tok_lst = tmp->tok_lst->next;
+	}
 }
 
 void	init_exec(t_exec *exec, t_tok_lst *tok_lst, t_mal_lst *mal_lst, char **envp)
 {
 	exec->tok_lst = tok_lst;
 	exec->mal_lst = mal_lst;
-	exec->pid = malloc(ft_lstsize_token(tok_lst) * sizeof(pid_t));
+	exec->nb_command = ft_lstsize_token(tok_lst);
+	exec->pid = malloc(exec->nb_command * sizeof(pid_t));
 	if (!exec->pid)
 		return ;
 	exec->envp = envp;
@@ -68,7 +94,6 @@ void	init_exec(t_exec *exec, t_tok_lst *tok_lst, t_mal_lst *mal_lst, char **envp
 
 int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
 {
-	int		lst_size;
 	int		i;
 	int		status;
 	t_exec	*exec;
@@ -77,19 +102,18 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
 	if (!exec)
 		return (0);
 	init_exec(exec, tok_lst, mal_lst, envp);
-	lst_size = ft_lstsize_token(tok_lst);
-	printf("token size: %d\n", lst_size);
+	printf("token size: %d\n", exec->nb_command);
 	// printf("token 1: %s\n", tok_lst->args->content);
 	// printf("token 2: %s\n", tok_lst->next->args->content);
-	if (lst_size == 1)
+	if (exec->nb_command == 1)
 		simple_exec(exec);
-	else if (lst_size > 1)
+	else if (exec->nb_command > 1)
 		pipex_exec(exec);
 	i = 0;
-	// while (i < lst_size)
-	// {
-	// 	waitpid(exec->pid[i], &status, 0);
-	// 	i++;
-	// }
+	while (i < exec->nb_command)
+	{
+		waitpid(exec->pid[i], &status, 0);
+		i++;
+	}
 	return (status);
 }

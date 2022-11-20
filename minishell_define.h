@@ -72,6 +72,7 @@ typedef struct e_list
 	pid_t			*pid;
 	t_tok_lst		*tok_lst;
 	t_mal_lst		*mal_lst;
+	int				nb_command;
 	char			**envp;
 	int				fd[2];
 }					t_exec;
