@@ -53,12 +53,12 @@ void	simple_exec(t_exec *exec)
 	
 }
 
-void	fork_child(t_exec *exec, int i)
+void	fork_child(t_exec *exec)
 {
-	exec->pid[i] = fork();
+	exec->pid[exec->incr] = fork();
 	// if (ft_crash_pid(exec->pid[i], exec->fd) == 0)
 	// 	return (0);
-	if (exec->pid[i] == 0)
+	if (exec->pid[exec->incr] == 0)
 		simple_exec(exec);
 }
 
@@ -69,14 +69,14 @@ void	pipex_exec(t_exec *exec)
 
 	tmp = exec;
 	i = 0;
-	while (i < tmp->nb_command)
+	while (tmp->incr < tmp->nb_command)
 	{
 		if (pipe(tmp->fd) == -1)
 			return ;
-		fork_child(tmp, i);
+		fork_child(tmp);
 		dup2(tmp->fd[0], STDIN_FILENO);
 		close_fd(tmp->fd[0], tmp->fd[1]);
-		i++;
+		tmp->incr++;
 		tmp->tok_lst = tmp->tok_lst->next;
 	}
 }
@@ -90,6 +90,7 @@ void	init_exec(t_exec *exec, t_tok_lst *tok_lst, t_mal_lst *mal_lst, char **envp
 	if (!exec->pid)
 		return ;
 	exec->envp = envp;
+	exec->incr = 0;
 }
 
 int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)

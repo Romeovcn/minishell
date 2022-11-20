@@ -35,7 +35,7 @@ int main(int argc, char **argv, char **env)
 	t_mal_lst 	*mal_lst;
 	t_env_lst 	*env_lst;
 	char 		*readline_str;
-	char		cmd_line[] ="cat test | cat suppres.txt";
+	char		cmd_line[] ="cat test | grep e";
 	int			status;
 
 	mal_lst = NULL;
