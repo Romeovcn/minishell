@@ -22,6 +22,31 @@ void	command(t_exec *exec)
 	execve(path, arg, exec->envp);
 }
 
+void	here_doc(t_exec *exec)
+{
+	char	*line;
+	int		len;
+	int		here_doc_fd;
+
+	here_doc_fd = open(".here_doc", O_CREAT | O_RDWR, 0666);
+	line = get_next_line(0);
+	len = (int)ft_strlen(line) - 1;
+	if (len < (int)ft_strlen(exec->tok_lst->delimiter->content))
+		len = (int)ft_strlen(exec->tok_lst->delimiter->content);
+	while (ft_strncmp(exec->tok_lst->delimiter->content, line, len) != 0)
+	{
+		ft_putstr_fd(line, here_doc_fd);
+		free(line);
+		line = get_next_line(0);
+		len = (int)ft_strlen(line) - 1;
+		if (len < (int)ft_strlen(exec->tok_lst->delimiter->content))
+			len = (int)ft_strlen(exec->tok_lst->delimiter->content);
+	}
+	free(line);
+	close (here_doc_fd);
+	here_doc_fd = open(".here_doc", O_RDWR, 0666);
+}
+
 void	redir_out(t_exec *exec)
 {
 	char	*file;
@@ -75,6 +100,12 @@ void	simple_exec(t_exec *exec)
 	{
 		printf("redirection in\n");
 		redir_in(exec);
+	}
+	else if (exec->tok_lst->input_fd == 4)
+	{
+		printf("here_doc");
+		here_doc(exec);
+		unlink(".here_doc");
 	}
 	
 }

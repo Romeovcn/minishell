@@ -35,7 +35,7 @@ int main(int argc, char **argv, char **env)
 	t_mal_lst 	*mal_lst;
 	t_env_lst 	*env_lst;
 	char 		*readline_str;
-	char		cmd_line[] ="< test cat";
+	char		cmd_line[] ="test << END";
 	int			status;
 
 	mal_lst = NULL;
