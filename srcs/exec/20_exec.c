@@ -20,7 +20,6 @@ void	simple_exec(t_exec *exec)
 	if (exec->tok_lst->output_fd < 2 && exec->tok_lst->input_fd < 2)
 	{
 		printf("commande\n");
-		printf("arg: %s\n", exec->tok_lst->args->content);
 		command(exec);
 	}
 	else if (exec->tok_lst->output_fd == 3)
