@@ -33,10 +33,10 @@ void	here_doc(t_exec *exec)
 	int		here_doc_fd;
 	char	*delimiter;
 
-	here_doc_fd = open(".here_doc", O_CREAT | O_RDWR, 0666);
+	delimiter = exec->tok_lst->delimiter->content;
+	here_doc_fd = open(delimiter, O_CREAT | O_RDWR, 0666);
 	line = get_next_line(0);
 	len = (int)ft_strlen(line) - 1;
-	delimiter = exec->tok_lst->delimiter->content;
 	if (len < (int)ft_strlen(delimiter))
 		len = (int)ft_strlen(delimiter);
 	while (ft_strncmp(delimiter, line, len) != 0)

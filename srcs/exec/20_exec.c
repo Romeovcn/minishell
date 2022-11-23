@@ -22,7 +22,7 @@ void	simple_exec(t_exec *exec)
 		printf("commande\n");
 		command(exec);
 	}
-	else if (exec->tok_lst->output_fd == 3)
+	else if (exec->tok_lst->output_fd == 3 && exec->tok_lst->input_fd != 4)
 	{
 		printf("redirection out\n");
 		redir_out(exec);
@@ -38,9 +38,14 @@ void	simple_exec(t_exec *exec)
 	}
 	else if (exec->tok_lst->input_fd == 4)
 	{
-		printf("here_doc");
-		here_doc(exec);
-		unlink(".here_doc");
+		printf("here_doc\n");
+		while (exec->tok_lst->delimiter)
+		{
+			printf("output %d\n", exec->tok_lst->output_fd);
+			here_doc(exec);
+			unlink(exec->tok_lst->delimiter->content);
+			exec->tok_lst->delimiter = exec->tok_lst->delimiter->next;
+		}
 	}
 	else if (exec->tok_lst->output_fd == 5)
 	{
