@@ -6,56 +6,11 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/18 18:57:16 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:46:41 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	simple_exec(t_exec *exec)
-{
-	char	*path;
-	char	**arg;
-
-	if (exec->tok_lst->output_fd < 2 && exec->tok_lst->input_fd < 2)
-	{
-		printf("commande\n");
-		command(exec);
-	}
-	else if (exec->tok_lst->output_fd == 3 && exec->tok_lst->input_fd != 4)
-	{
-		printf("redirection out\n");
-		redir_out(exec);
-		if (exec->tok_lst->args != NULL)
-			command(exec);
-	}
-	else if (exec->tok_lst->input_fd == 2)
-	{
-		printf("redirection in\n");
-		redir_in(exec);
-		if (exec->tok_lst->args != NULL)
-			command(exec);
-	}
-	else if (exec->tok_lst->input_fd == 4)
-	{
-		printf("here_doc\n");
-		while (exec->tok_lst->delimiter)
-		{
-			printf("output %d\n", exec->tok_lst->output_fd);
-			here_doc(exec);
-			unlink(exec->tok_lst->delimiter->content);
-			exec->tok_lst->delimiter = exec->tok_lst->delimiter->next;
-		}
-	}
-	else if (exec->tok_lst->output_fd == 5)
-	{
-		printf("append\n");
-		append(exec);
-		if (exec->tok_lst->args != NULL)
-			command(exec);
-	}
-	
-}
 
 void	fork_child(t_exec *exec)
 {

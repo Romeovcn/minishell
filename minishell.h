@@ -120,9 +120,13 @@ char		*find_right_access(char *path, t_array_lst *cmd);
 //----------------------------------------------------------------------------//
 void	    command(t_exec *exec);
 void	    append(t_exec *exec);
-void	    here_doc(t_exec *exec);
+void	    here_doc(char *delimiter);
 void	    redir_out(t_exec *exec);
 void	    redir_in(t_exec *exec);
+//----------------------------------------------------------------------------//
+//							 	Exec simple	management						  //
+//----------------------------------------------------------------------------//
+void	    simple_exec(t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Exec utils									  //
 //----------------------------------------------------------------------------//

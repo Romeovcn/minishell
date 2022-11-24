@@ -26,14 +26,12 @@ void	append(t_exec *exec)
 		dup2(file_fd, STDOUT_FILENO);
 }
 
-void	here_doc(t_exec *exec)
+void	here_doc(char *delimiter)
 {
 	char	*line;
 	int		len;
 	int		here_doc_fd;
-	char	*delimiter;
 
-	delimiter = exec->tok_lst->delimiter->content;
 	here_doc_fd = open(delimiter, O_CREAT | O_RDWR, 0666);
 	line = get_next_line(0);
 	len = (int)ft_strlen(line) - 1;
@@ -50,7 +48,7 @@ void	here_doc(t_exec *exec)
 	}
 	free(line);
 	close (here_doc_fd);
-	// here_doc_fd = open(".here_doc", O_RDWR, 0666);
+	here_doc_fd = open(".here_doc", O_RDWR, 0666);
 }
 
 void	redir_out(t_exec *exec)
