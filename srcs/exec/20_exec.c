@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/24 16:46:41 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:34:46 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,15 @@ void	fork_child(t_exec *exec)
 void	pipex_exec(t_exec *exec)
 {
 	t_exec	*tmp;
-	int		i;
 
 	tmp = exec;
-	i = 0;
 	while (tmp->incr < tmp->nb_command)
 	{
 		if (pipe(tmp->fd) == -1)
 			return ;
+		if (exec->here_doc->position_last_heredoc != -1 &&
+			tmp->incr == exec->here_doc->position_last_heredoc)
+			dup2(exec->here_doc->fd_last_here_doc, STDIN_FILENO);
 		fork_child(tmp);
 		dup2(tmp->fd[0], STDIN_FILENO);
 		close_fd(tmp->fd[0], tmp->fd[1]);
@@ -50,6 +51,8 @@ void	init_exec(t_exec *exec, t_tok_lst *tok_lst, t_mal_lst *mal_lst, char **envp
 		return ;
 	exec->envp = envp;
 	exec->incr = 0;
+	exec->here_doc = malloc(sizeof(t_here_doc));
+	exec->here_doc->position_last_heredoc = -1;
 }
 
 int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
@@ -62,9 +65,11 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
 	if (!exec)
 		return (0);
 	init_exec(exec, tok_lst, mal_lst, envp);
-	printf("token size: %d\n", exec->nb_command);
-	// printf("token 1: %s\n", tok_lst->args->content);
-	// printf("token 2: %s\n", tok_lst->next->args->content);
+	if (check_heredoc(exec) == 1)
+	{
+		position_last_heredoc(exec);
+		here_doc_manage(exec);
+	}
 	if (exec->nb_command == 1)
 		simple_exec(exec);
 	else if (exec->nb_command > 1)
@@ -75,5 +80,7 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
 		waitpid(exec->pid[i], &status, 0);
 		i++;
 	}
+	unlink(exec->here_doc->here_doc);
+	close(exec->here_doc->fd_last_here_doc);
 	return (status);
 }

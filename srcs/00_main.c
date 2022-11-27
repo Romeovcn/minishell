@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/18 18:19:49 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:17:32 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(int argc, char **argv, char **env)
 	t_mal_lst 	*mal_lst;
 	t_env_lst 	*env_lst;
 	char 		*readline_str;
-	char		cmd_line[] ="<< end1 << end2 << end3 cat";
+	char		cmd_line[] ="<< end1 << end2 wc -l | << end3 cat | cat | wc -l";
 	int			status;
 
 	mal_lst = NULL;

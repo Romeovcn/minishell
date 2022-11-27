@@ -48,7 +48,7 @@ void	here_doc(char *delimiter)
 	}
 	free(line);
 	close (here_doc_fd);
-	here_doc_fd = open(".here_doc", O_RDWR, 0666);
+	// here_doc_fd = open(delimiter, O_RDWR, 0666);
 }
 
 void	redir_out(t_exec *exec)

@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/18 15:16:37 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:30:33 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,14 @@ typedef struct t_list
 	struct t_list	*next;
 }					t_tok_lst;
 
+typedef struct h_list
+{
+	int				position_last_heredoc;
+	int				fd_last_here_doc;
+	char			*here_doc;
+}					t_here_doc;
+
+
 typedef struct e_list
 {
 	pid_t			*pid;
@@ -76,6 +84,8 @@ typedef struct e_list
 	int				nb_command;
 	char			**envp;
 	int				fd[2];
+	t_here_doc		*here_doc;
+
 }					t_exec;
 
 #endif

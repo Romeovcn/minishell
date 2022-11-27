@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:46:29 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/24 16:54:21 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:35:49 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,23 @@
 
 void    here_doc_manage(t_exec *exec)
 {
-    t_array_lst *tmp;
-    char        *last_heredoc;
-    int         last_heredoc_fd;
+	t_array_lst	*delimiter;
 
-    printf("here_doc\n");
-    tmp = exec->tok_lst->delimiter;
-    while (tmp)
-    {
-        here_doc(tmp->content);
-        if (tmp->next != NULL)
-            unlink(tmp->content);
-        else
-            last_heredoc = ft_strdup(tmp->content);
-        tmp = tmp->next;
-    }
-    last_heredoc_fd = open(last_heredoc, O_RDONLY);
-    unlink(last_heredoc);
-    dup2(last_heredoc_fd, STDIN_FILENO);
-    if (exec->tok_lst->args != NULL)
-        command(exec);
+	delimiter = here_doc_delimiter(exec);
+	while (delimiter)
+	{
+		// printf("delimiter: %s\n", delimiter->content);
+		here_doc(delimiter->content);
+		if (delimiter->next != NULL)
+			unlink(delimiter->content);
+		else
+			exec->here_doc->here_doc = ft_strdup(delimiter->content);
+		delimiter = delimiter->next;
+	}
+	exec->here_doc->fd_last_here_doc = open(exec->here_doc->here_doc, O_RDONLY);
+	// unlink(exec->here_doc->here_doc);
+	if (exec->nb_command == 1)
+		dup2(exec->here_doc->fd_last_here_doc, STDIN_FILENO);
 }
 
 void	simple_exec(t_exec *exec)
@@ -49,11 +46,6 @@ void	simple_exec(t_exec *exec)
 	else if (exec->tok_lst->output_fd == 3)
 	{
 		printf("redirection out\n");
-		printf("input : %d\n", exec->tok_lst->input_fd);
-		if (exec->tok_lst->input_fd == 4)
-		{
-            // heredoc
-		}
 		redir_out(exec);
 		if (exec->tok_lst->args != NULL)
 			command(exec);
@@ -66,7 +58,11 @@ void	simple_exec(t_exec *exec)
 			command(exec);
 	}
 	else if (exec->tok_lst->input_fd == 4)
-        here_doc_manage(exec);
+	{
+		printf("here_doc\n");
+		if (exec->tok_lst->args != NULL)
+			command(exec);
+	}
 	else if (exec->tok_lst->output_fd == 5)
 	{
 		printf("append\n");
