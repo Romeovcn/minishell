@@ -32,11 +32,11 @@ void	simple_exec(t_exec *exec, int i)
 
 	if (exec->tok_lst->output_fd == REDIR_OUT)
 		redir_out(exec);
-	// if (exec->tok_lst->input_fd == REDIR_IN)
-	// {
-	// 	// printf("redirection in\n");
-	// 	redir_in(exec);
-	// }
+	if (exec->tok_lst->input_fd == REDIR_IN)
+	{
+		printf("redirection in\n");
+		redir_in(exec);
+	}
 	if (exec->tok_lst->input_fd == HERE_DOC)
 	{
 		int fd_here_doc = open(lstlast_array(exec->tok_lst->delimiter)->content, O_RDONLY);

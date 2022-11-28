@@ -7,8 +7,11 @@ void	command(t_exec *exec, int i)
 
 	path = find_right_access(getenv("PATH"), exec->tok_lst->args);
 	args = lst_to_str_array(exec->tok_lst->args, &exec->mal_lst);
-	if (exec->tok_lst->output_fd == 1)
+	if (exec->tok_lst->output_fd == 1 && i != exec->nb_command - 1)
+	{
+		printf("pas bon %d\n", i);
 		dup2(exec->fd[1], STDOUT_FILENO);
+	}
 	close_fd(exec->fd[0], exec->fd[1]);
 	execve(path, args, exec->envp);
 	execve(path, args, exec->envp);
@@ -66,7 +69,7 @@ void	redir_in(t_exec *exec)
 	char	*file;
 	int		file_fd;
 
-	file = exec->tok_lst->in_file->content;
+	file = lstlast_array(exec->tok_lst->in_file)->content;
 	file_fd = open(file, O_RDONLY);
 	if (exec->tok_lst->args != NULL)
 		dup2(file_fd, STDIN_FILENO);

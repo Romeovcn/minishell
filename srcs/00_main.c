@@ -35,7 +35,7 @@ int main(int argc, char **argv, char **env)
 	t_mal_lst 	*mal_lst;
 	t_env_lst 	*env_lst;
 	char 		*readline_str;
-	char		cmd_line[] ="<< end1 cat > out1 > out | << end2 cat > out2 > out3 > out4";
+	char		cmd_line[] ="< Makefile cat | wc -l";
 	int			status;
 
 	mal_lst = NULL;

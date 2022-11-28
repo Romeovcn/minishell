@@ -27,7 +27,10 @@ void	pipex_exec(t_exec *exec)
 		if (exec->pid[i] == 0)
 			simple_exec(tmp, i);
 		if (tmp->tok_lst->next && tmp->tok_lst->next->input_fd != 0)
+		{
+			printf("test\n");
 			dup2(tmp->fd[0], STDIN_FILENO);
+		}
 		close_fd(tmp->fd[0], tmp->fd[1]);
 		i++;
 		tmp->tok_lst = tmp->tok_lst->next;
