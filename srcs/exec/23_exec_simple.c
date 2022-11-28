@@ -47,7 +47,7 @@ void	here_doc(char *delimiter)
 			len = (int)ft_strlen(delimiter);
 	}
 	free(line);
-	close (here_doc_fd);
+	close(here_doc_fd);
 	// here_doc_fd = open(delimiter, O_RDWR, 0666);
 }
 

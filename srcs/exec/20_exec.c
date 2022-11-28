@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/27 18:34:46 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:46:57 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,12 @@ void	pipex_exec(t_exec *exec)
 			return ;
 		if (exec->here_doc->position_last_heredoc != -1 &&
 			tmp->incr == exec->here_doc->position_last_heredoc)
+		{
 			dup2(exec->here_doc->fd_last_here_doc, STDIN_FILENO);
+			printf("last here doc: %s\n", exec->here_doc->here_doc);
+			unlink(exec->here_doc->here_doc);
+			close(exec->here_doc->fd_last_here_doc);
+		}
 		fork_child(tmp);
 		dup2(tmp->fd[0], STDIN_FILENO);
 		close_fd(tmp->fd[0], tmp->fd[1]);
@@ -52,6 +57,8 @@ void	init_exec(t_exec *exec, t_tok_lst *tok_lst, t_mal_lst *mal_lst, char **envp
 	exec->envp = envp;
 	exec->incr = 0;
 	exec->here_doc = malloc(sizeof(t_here_doc));
+	if (!exec->here_doc)
+		return ;
 	exec->here_doc->position_last_heredoc = -1;
 }
 
@@ -80,7 +87,8 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
 		waitpid(exec->pid[i], &status, 0);
 		i++;
 	}
-	unlink(exec->here_doc->here_doc);
-	close(exec->here_doc->fd_last_here_doc);
+	// printf("last heredoc: %s\n", exec->here_doc->here_doc);
+	// unlink(exec->here_doc->here_doc);
+	// close(exec->here_doc->fd_last_here_doc);
 	return (status);
 }
