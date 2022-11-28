@@ -12,8 +12,13 @@
 
 #include "minishell.h"
 
-void	ft_env(t_env_lst *env_lst)
+void	ft_env(char **args, t_env_lst *env_lst)
 {
+	if (args[1])
+	{
+		printf("env: too many arguments\n");
+		return ;
+	}
 	while (env_lst)
 	{
 		printf("%s=%s\n", env_lst->name, env_lst->value);
@@ -21,18 +26,52 @@ void	ft_env(t_env_lst *env_lst)
 	}
 }
 
-void	ft_exit(t_mal_lst *mal_lst)
+void	ft_exit(char **args, t_mal_lst *mal_lst, t_env_lst *env_lst)
 {
+	int i;
+
+	i = 0;
+	while (args[i])
+		i++;
+	if (i > 2)
+		return (void)printf("exit: too many arguments\n");
+	if (i == 1)
+	{
+		free_env_lst(env_lst);
+		free_lst_malloc(mal_lst);
+		printf("exit\n");
+		exit(0); // print last exit status code
+	}
+	i = 0;
+	while (args[1][i])
+	{
+		if (i == 0 && args[1][i] == '-')
+			i++;
+		if (!ft_isdigit(args[1][i]) || i > 18)
+		{
+			free_env_lst(env_lst);
+			free_lst_malloc(mal_lst);
+			printf("exit: %s: numeric argument required\n", args[1]);
+			exit(2);
+		}
+		i++;
+	}
+	free_env_lst(env_lst);
 	free_lst_malloc(mal_lst);
-	printf("ft_exit...\n");
-	exit (0);
+	printf("exit\n");
+	exit(ft_atoi(args[1]) % 256);
 }
 
-void	ft_pwd(void)
+void	ft_pwd(char **args)
 {
 	char	*pwd_path;
 	char	buff[PATH_MAX];
 
+	if (args[1])
+	{
+		printf("pwd: too many arguments\n");
+		return ;
+	}
 	pwd_path = getenv("PWD");
 	if (pwd_path)
 		printf("%s\n", pwd_path);

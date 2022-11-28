@@ -16,9 +16,9 @@ char		**get_paths(char **env);
 //----------------------------------------------------------------------------//
 //							 	Built-in			 						  //
 //----------------------------------------------------------------------------//
-void		ft_env(t_env_lst *env_lst);
-void		ft_pwd(void);
-void		ft_exit(t_mal_lst *mal_lst);
+void		ft_env(char **args, t_env_lst *env_lst);
+void		ft_pwd(char **args);
+void		ft_exit(char **args, t_mal_lst *mal_lst, t_env_lst *env_lst);
 void		ft_echo(char **cmd);
 void		ft_cd(char *path);
 //----------------------------------------------------------------------------//
@@ -137,6 +137,7 @@ t_array_lst	*here_doc_delimiter(t_exec *exec);
 int	        check_heredoc(t_exec *exec);
 void	    position_last_heredoc(t_exec *exec);
 // To do :
+// ft_exit without args should exit last code status
 // Protect malloc
 // cas tricky : <<$env
 // cas tricky : << end << end << env = ctrl c should exit all
