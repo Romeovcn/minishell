@@ -14,60 +14,41 @@
 
 void    here_doc_manage(t_exec *exec)
 {
-	t_array_lst	*delimiter;
+	t_array_lst	*tmp_here_doc_lst;
 
-	delimiter = here_doc_delimiter(exec);
-	while (delimiter)
+	exec->here_doc_lst = get_here_doc_lst(exec);
+	tmp_here_doc_lst = exec->here_doc_lst;
+	while (tmp_here_doc_lst)
 	{
-		// printf("delimiter: %s\n", delimiter->content);
-		here_doc(delimiter->content);
-		if (delimiter->next != NULL)
-			unlink(delimiter->content);
-		else
-			exec->here_doc->here_doc = ft_strdup(delimiter->content);
-		delimiter = delimiter->next;
+		here_doc(tmp_here_doc_lst->content);
+		tmp_here_doc_lst = tmp_here_doc_lst->next;
 	}
-	exec->here_doc->fd_last_here_doc = open(exec->here_doc->here_doc, O_RDONLY);
-	// unlink(exec->here_doc->here_doc);
-	if (exec->nb_command == 1)
-		dup2(exec->here_doc->fd_last_here_doc, STDIN_FILENO);
 }
 
-void	simple_exec(t_exec *exec)
+void	simple_exec(t_exec *exec, int i)
 {
 	char		*path;
 	char		**arg;
 
-	if (exec->tok_lst->output_fd < 2 && exec->tok_lst->input_fd < 2)
-	{
-		printf("commande\n");
-		command(exec);
-	}
-	else if (exec->tok_lst->output_fd == 3)
-	{
-		printf("redirection out\n");
+	if (exec->tok_lst->output_fd == REDIR_OUT)
 		redir_out(exec);
-		if (exec->tok_lst->args != NULL)
-			command(exec);
-	}
-	else if (exec->tok_lst->input_fd == 2)
+	// if (exec->tok_lst->input_fd == REDIR_IN)
+	// {
+	// 	// printf("redirection in\n");
+	// 	redir_in(exec);
+	// }
+	if (exec->tok_lst->input_fd == HERE_DOC)
 	{
-		printf("redirection in\n");
-		redir_in(exec);
-		if (exec->tok_lst->args != NULL)
-			command(exec);
+		int fd_here_doc = open(lstlast_array(exec->tok_lst->delimiter)->content, O_RDONLY);
+		dup2(fd_here_doc, STDIN_FILENO);
+		// printf("here_doc\n");
 	}
-	else if (exec->tok_lst->input_fd == 4)
-	{
-		printf("here_doc\n");
-		if (exec->tok_lst->args != NULL)
-			command(exec);
-	}
-	else if (exec->tok_lst->output_fd == 5)
-	{
-		printf("append\n");
-		append(exec);
-		if (exec->tok_lst->args != NULL)
-			command(exec);
-	}
+	// if (exec->tok_lst->output_fd == APP_OUT)
+	// {
+	// 	// printf("append\n");
+	// 	append(exec);
+	// }
+	if (exec->tok_lst->args != NULL)
+		command(exec, i);
+	exit(0);
 }

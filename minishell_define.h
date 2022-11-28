@@ -67,25 +67,16 @@ typedef struct t_list
 	struct t_list	*next;
 }					t_tok_lst;
 
-typedef struct h_list
-{
-	int				position_last_heredoc;
-	int				fd_last_here_doc;
-	char			*here_doc;
-}					t_here_doc;
-
 
 typedef struct e_list
 {
 	pid_t			*pid;
 	t_tok_lst		*tok_lst;
 	t_mal_lst		*mal_lst;
-	int				incr;
 	int				nb_command;
 	char			**envp;
 	int				fd[2];
-	t_here_doc		*here_doc;
-
+	t_array_lst		*here_doc_lst;
 }					t_exec;
 
 #endif

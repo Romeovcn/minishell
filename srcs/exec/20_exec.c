@@ -12,36 +12,24 @@
 
 #include "minishell.h"
 
-void	fork_child(t_exec *exec)
-{
-	exec->pid[exec->incr] = fork();
-	// if (ft_crash_pid(exec->pid[i], exec->fd) == 0)
-	// 	return (0);
-	if (exec->pid[exec->incr] == 0)
-		simple_exec(exec);
-}
-
 void	pipex_exec(t_exec *exec)
 {
 	t_exec	*tmp;
+	int i;
 
 	tmp = exec;
-	while (tmp->incr < tmp->nb_command)
+	i = 0;
+	while (i < tmp->nb_command)
 	{
 		if (pipe(tmp->fd) == -1)
 			return ;
-		if (exec->here_doc->position_last_heredoc != -1 &&
-			tmp->incr == exec->here_doc->position_last_heredoc)
-		{
-			dup2(exec->here_doc->fd_last_here_doc, STDIN_FILENO);
-			printf("last here doc: %s\n", exec->here_doc->here_doc);
-			unlink(exec->here_doc->here_doc);
-			close(exec->here_doc->fd_last_here_doc);
-		}
-		fork_child(tmp);
-		dup2(tmp->fd[0], STDIN_FILENO);
+		exec->pid[i] = fork();
+		if (exec->pid[i] == 0)
+			simple_exec(tmp, i);
+		if (tmp->tok_lst->next && tmp->tok_lst->next->input_fd != 0)
+			dup2(tmp->fd[0], STDIN_FILENO);
 		close_fd(tmp->fd[0], tmp->fd[1]);
-		tmp->incr++;
+		i++;
 		tmp->tok_lst = tmp->tok_lst->next;
 	}
 }
@@ -55,11 +43,7 @@ void	init_exec(t_exec *exec, t_tok_lst *tok_lst, t_mal_lst *mal_lst, char **envp
 	if (!exec->pid)
 		return ;
 	exec->envp = envp;
-	exec->incr = 0;
-	exec->here_doc = malloc(sizeof(t_here_doc));
-	if (!exec->here_doc)
-		return ;
-	exec->here_doc->position_last_heredoc = -1;
+	exec->here_doc_lst = NULL;
 }
 
 int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
@@ -73,13 +57,8 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
 		return (0);
 	init_exec(exec, tok_lst, mal_lst, envp);
 	if (check_heredoc(exec) == 1)
-	{
-		position_last_heredoc(exec);
 		here_doc_manage(exec);
-	}
-	if (exec->nb_command == 1)
-		simple_exec(exec);
-	else if (exec->nb_command > 1)
+	if (exec->nb_command > 1)
 		pipex_exec(exec);
 	i = 0;
 	while (i < exec->nb_command)
@@ -87,8 +66,5 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
 		waitpid(exec->pid[i], &status, 0);
 		i++;
 	}
-	// printf("last heredoc: %s\n", exec->here_doc->here_doc);
-	// unlink(exec->here_doc->here_doc);
-	// close(exec->here_doc->fd_last_here_doc);
 	return (status);
 }

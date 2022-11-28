@@ -118,7 +118,7 @@ char		*find_right_access(char *path, t_array_lst *cmd);
 //----------------------------------------------------------------------------//
 //							 	Exec simple									  //
 //----------------------------------------------------------------------------//
-void	    command(t_exec *exec);
+void	    command(t_exec *exec, int i);
 void	    append(t_exec *exec);
 void	    here_doc(char *delimiter);
 void	    redir_out(t_exec *exec);
@@ -126,14 +126,14 @@ void	    redir_in(t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Exec simple	management						  //
 //----------------------------------------------------------------------------//
-void	    simple_exec(t_exec *exec);
+void	    simple_exec(t_exec *exec, int i);
 void        here_doc_manage(t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Exec utils									  //
 //----------------------------------------------------------------------------//
 char		*ft_newstrjoin(char *s1, char *s2);
 void		close_fd(int fd1, int fd2);
-t_array_lst	*here_doc_delimiter(t_exec *exec);
+t_array_lst	*get_here_doc_lst(t_exec *exec);
 int	        check_heredoc(t_exec *exec);
 void	    position_last_heredoc(t_exec *exec);
 // To do :

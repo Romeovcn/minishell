@@ -35,7 +35,7 @@ int main(int argc, char **argv, char **env)
 	t_mal_lst 	*mal_lst;
 	t_env_lst 	*env_lst;
 	char 		*readline_str;
-	char		cmd_line[] ="<< end1 << end2 | << end3 ";
+	char		cmd_line[] ="<< end1 cat > out1 > out | << end2 cat > out2 > out3 > out4";
 	int			status;
 
 	mal_lst = NULL;
@@ -47,27 +47,27 @@ int main(int argc, char **argv, char **env)
 	char *args[] = {"exit", NULL};
 	char *export[] = {"export", "1=2", "?=MORTY", "USER=EHOH", NULL};
 	get_env_lst(&env_lst, env, &mal_lst);
-	export_env(&env_lst, &mal_lst, export);
+	// export_env(&env_lst, &mal_lst, export);
 	// unset_env(&env_lst, unset);
 	// ft_env(test, env_lst);
 	// ft_exit(args, 32256, mal_lst, env_lst);
 // ---------------------------------------------------------- //
 //							Lexer	                          //
 // ---------------------------------------------------------- //
-	// lexed_lst = lexer(cmd_line, &mal_lst);
+	lexed_lst = lexer(cmd_line, &mal_lst);
 // ---------------------------------------------------------- //
 //							Check syntax error                //
 // ---------------------------------------------------------- //
-	// if (check_error(lexed_lst))
-		// return (free_lst_malloc(mal_lst), printf("EXIT BEBE\n"), 1);
+	if (check_error(lexed_lst))
+		return (free_lst_malloc(mal_lst), printf("EXIT BEBE\n"), 1);
 // ---------------------------------------------------------- //
 //							Parser				              //
 // ---------------------------------------------------------- //
-	// parser(lexed_lst, &mal_lst, env_lst);
+	parser(lexed_lst, &mal_lst, env_lst);
 // ---------------------------------------------------------- //
 //							Tokenizer			              //
 // ---------------------------------------------------------- //
-	// token_lst = get_token_lst(lexed_lst, &mal_lst);
+	token_lst = get_token_lst(lexed_lst, &mal_lst);
 // ---------------------------------------------------------- //
 //							Exec				              //
 // ---------------------------------------------------------- //
