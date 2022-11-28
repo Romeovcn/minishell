@@ -18,7 +18,7 @@ char		**get_paths(char **env);
 //----------------------------------------------------------------------------//
 void		ft_env(char **args, t_env_lst *env_lst);
 void		ft_pwd(char **args);
-void		ft_exit(char **args, t_mal_lst *mal_lst, t_env_lst *env_lst);
+void		ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst);
 void		ft_echo(char **cmd);
 void		ft_cd(char *path);
 //----------------------------------------------------------------------------//

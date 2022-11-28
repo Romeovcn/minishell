@@ -26,7 +26,7 @@ void	ft_env(char **args, t_env_lst *env_lst)
 	}
 }
 
-void	ft_exit(char **args, t_mal_lst *mal_lst, t_env_lst *env_lst)
+void	ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst)
 {
 	int i;
 
@@ -40,7 +40,7 @@ void	ft_exit(char **args, t_mal_lst *mal_lst, t_env_lst *env_lst)
 		free_env_lst(env_lst);
 		free_lst_malloc(mal_lst);
 		printf("exit\n");
-		exit(0); // print last exit status code
+		exit(WEXITSTATUS(status));
 	}
 	i = 0;
 	while (args[1][i])

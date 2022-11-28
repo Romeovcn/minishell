@@ -44,13 +44,13 @@ int main(int argc, char **argv, char **env)
 //							Env    			                  //
 // ---------------------------------------------------------- //
 	env_lst = NULL;
-	char *args[] = {"exit", "-654654654466456435", NULL};
-	// char *export[] = {"export", "RICK=MORTY", "USER=EHOH", NULL};
+	char *args[] = {"exit", NULL};
+	char *export[] = {"export", "1=2", "?=MORTY", "USER=EHOH", NULL};
 	get_env_lst(&env_lst, env, &mal_lst);
-	// export_env(&env_lst, &mal_lst, export);
+	export_env(&env_lst, &mal_lst, export);
 	// unset_env(&env_lst, unset);
 	// ft_env(test, env_lst);
-	ft_exit(args, mal_lst, env_lst);
+	// ft_exit(args, 32256, mal_lst, env_lst);
 // ---------------------------------------------------------- //
 //							Lexer	                          //
 // ---------------------------------------------------------- //
@@ -93,9 +93,10 @@ int main(int argc, char **argv, char **env)
 	// readline_str = readline("minishell> ");
 	// while (readline_str)
 	// {
+	// 	printf("nl=%d\n", rl_on_new_line());
 	// 	add_history(readline_str);
 	// 	printf("%s\n", readline_str);
 	// 	free(readline_str);
-	// 	readline_str = readline("\e[38;5;46mminishell> \e[0m");
+	// 	readline_str = readline("minishell> ");
 	// }
 }
