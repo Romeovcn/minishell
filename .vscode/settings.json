@@ -1,0 +1,10 @@
+{
+	"files.associations": {
+		"string.h": "c",
+		"history.h": "c",
+		"readline.h": "c",
+		"minishell.h": "c",
+		"typeinfo": "c",
+		"types.h": "c"
+	}
+}
