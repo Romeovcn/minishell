@@ -73,6 +73,6 @@ void	parser(t_lex_lst *lex_lst, t_mal_lst **mal_lst, t_env_lst *env_lst)
 			lex_lst->content = parse_quote_env(lex_lst->content, mal_lst, env_lst);
 		lex_lst = lex_lst->next;
 	}
-	printf("--------Command lst lexed after parsing--------\n");
-	read_lst(head);
+	// printf("--------Command lst lexed after parsing--------\n");
+	// read_lst(head);
 }

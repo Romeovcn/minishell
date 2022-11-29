@@ -34,41 +34,36 @@ void	pipex_exec(t_exec *exec)
 	}
 }
 
-void	init_exec(t_exec *exec, t_tok_lst *tok_lst, t_mal_lst *mal_lst, char **envp)
+void	init_exec(t_exec *exec, t_tok_lst *tok_lst, t_mal_lst **mal_lst, char **envp)
 {
 	exec->tok_lst = tok_lst;
-	exec->mal_lst = mal_lst;
+	exec->mal_lst = *mal_lst;
 	exec->nb_command = ft_lstsize_token(tok_lst);
 	exec->pid = malloc(exec->nb_command * sizeof(pid_t));
 	if (!exec->pid)
 		return ;
+	lstadd_back_malloc(mal_lst, lstnew_malloc(exec->pid));
 	exec->envp = envp;
 	exec->here_doc_lst = NULL;
 }
 
-int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
+int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst)
 {
-	int		i;
+	int 	stdin_fd;
 	int		status;
-	t_exec	*exec;
-
-	exec = malloc(sizeof(t_exec));
-	if (!exec)
-		return (0);
-	init_exec(exec, tok_lst, mal_lst, envp);
-	if (check_heredoc(exec) == 1)
-	{
-		printf("test\n");
-		here_doc_manage(exec);
-	}
-	if (exec->nb_command > 1)
-		pipex_exec(exec);
+	t_exec	exec;
+	int		i;
+	
+	stdin_fd = dup(0);
+	init_exec(&exec, tok_lst, mal_lst, envp);
+	if (check_heredoc(&exec) == 1)
+		here_doc_manage(&exec);
+	if (exec.nb_command > 0)
+		pipex_exec(&exec);
 	i = 0;
-	while (i < exec->nb_command)
-	{
-		waitpid(exec->pid[i], &status, 0);
-		i++;
-	}
-	heredoc_rm(exec->here_doc_lst);
+	while (i < exec.nb_command)
+		waitpid(exec.pid[i++], &status, 0);
+	heredoc_rm(exec.here_doc_lst);
+	dup2(stdin_fd, 0);
 	return (status);
 }
