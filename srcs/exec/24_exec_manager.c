@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   24_exec_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent <rvincent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:46:29 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/29 01:38:46 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:12:25 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void    here_doc_manage(t_exec *exec)
 {
-	t_array_lst	*tmp_here_doc_lst;
+	t_array_lst	*tmp_heredoc_lst;
 
 	exec->here_doc_lst = get_here_doc_lst(exec);
-	tmp_here_doc_lst = exec->here_doc_lst;
-	while (tmp_here_doc_lst)
+	tmp_heredoc_lst = exec->here_doc_lst;
+	while (tmp_heredoc_lst)
 	{
-		get_here_doc_file(tmp_here_doc_lst->content);
-		tmp_here_doc_lst = tmp_here_doc_lst->next;
+		get_here_doc_file(tmp_heredoc_lst->content, tmp_heredoc_lst->content2);
+		tmp_heredoc_lst = tmp_heredoc_lst->next;
 	}
 }
 

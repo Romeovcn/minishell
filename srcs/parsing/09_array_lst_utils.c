@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   16_array_lst_utils.c                               :+:      :+:    :+:   */
+/*   09_array_lst_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/09 18:04:30 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:03:51 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ t_array_lst	*lstnew_array(char *content, t_mal_lst **mal_lst)
 	if (!result)
 		return (0);
 	result->content = content;
+	result->next = NULL;
+	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
+	return (result);
+}
+
+t_array_lst	*lstnew_array_content2(char *c, char *c2, t_mal_lst **mal_lst)
+{
+	t_array_lst	*result;
+
+	result = malloc(sizeof(t_array_lst));
+	if (!result)
+		return (0);
+	result->content = c;
+	result->content2 = c2;
 	result->next = NULL;
 	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
 	return (result);

@@ -65,6 +65,7 @@ void		go_to_word_end(char **readline_str);
 //							 	Array lst utils								  //
 //----------------------------------------------------------------------------//
 t_array_lst	*lstnew_array(char *content, t_mal_lst **mal_lst);
+t_array_lst	*lstnew_array_content2(char *c, char *c2, t_mal_lst **mal_lst);
 t_array_lst	*lstlast_array(t_array_lst *lst);
 void		lstadd_back_array(t_array_lst **lst, t_array_lst *new);
 void		read_lst_array(t_array_lst *lst, char *type);
@@ -118,7 +119,7 @@ char		*find_right_access(char *path, t_array_lst *cmd);
 //----------------------------------------------------------------------------//
 //							 	Exec simple									  //
 //----------------------------------------------------------------------------//
-void	    get_here_doc_file(char *delimiter);
+void	    get_here_doc_file(char *delimiter, char *name_file);
 void	    command(t_exec *exec, int i);
 void	    append(t_tok_lst *tok_lst);
 void	    redir_out(t_tok_lst *tok_lst);
@@ -137,6 +138,7 @@ void		close_fd(int fd1, int fd2);
 t_array_lst	*get_here_doc_lst(t_exec *exec);
 int	        check_heredoc(t_exec *exec);
 void	    position_last_heredoc(t_exec *exec);
+void	    heredoc_rm(t_array_lst *here_doc_lst);
 // To do :
 // ft_exit without args should exit last code status
 // Protect malloc

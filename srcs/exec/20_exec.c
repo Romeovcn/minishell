@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   20_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent <rvincent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/29 01:32:10 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:41:21 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,6 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
 		waitpid(exec->pid[i], &status, 0);
 		i++;
 	}
-	//while (exec->here_doc_lst)
-	//{
-		//unlink;
-	//	printf("HD=%s\n", exec->here_doc_lst->content);
-	//	exec->here_doc_lst = exec->here_doc_lst->next;
-	//}
+	heredoc_rm(exec->here_doc_lst);
 	return (status);
 }
