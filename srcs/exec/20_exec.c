@@ -27,10 +27,7 @@ void	pipex_exec(t_exec *exec)
 		if (exec->pid[i] == 0)
 			exec_token(tmp, i);
 		if (tmp->tok_lst->next && tmp->tok_lst->next->input_fd == 0)
-		{
-			printf("test\n");
 			dup2(tmp->fd[0], STDIN_FILENO);
-		}
 		close_fd(tmp->fd[0], tmp->fd[1]);
 		i++;
 		tmp->tok_lst = tmp->tok_lst->next;
@@ -60,7 +57,10 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
 		return (0);
 	init_exec(exec, tok_lst, mal_lst, envp);
 	if (check_heredoc(exec) == 1)
+	{
+		printf("test\n");
 		here_doc_manage(exec);
+	}
 	if (exec->nb_command > 1)
 		pipex_exec(exec);
 	i = 0;

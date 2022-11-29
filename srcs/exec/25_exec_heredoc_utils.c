@@ -21,7 +21,7 @@ int	check_heredoc(t_exec *exec)
 	i = 0;
 	while (i < exec->nb_command)
 	{
-		if (tmp->input_fd == HERE_DOC)
+		if (tmp->delimiter)
 			return (1);
 		tmp = tmp->next;
 		i++;

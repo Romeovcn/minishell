@@ -27,10 +27,7 @@ void	redir_out(t_tok_lst *tok_lst)
 	file = lstlast_array(tok_lst->out_file)->content;
 	file_fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (tok_lst->args != NULL)
-	{
-		//printf("redir out duping\n");
 		dup2(file_fd, STDOUT_FILENO);
-	}
 }
 
 void	redir_in(t_tok_lst *tok_lst)

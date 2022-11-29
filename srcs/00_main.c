@@ -35,7 +35,7 @@ int main(int argc, char **argv, char **env)
 	t_mal_lst 	*mal_lst;
 	t_env_lst 	*env_lst;
 	char 		*readline_str;
-	char		cmd_line[] ="< Makefile cat | wc -l";
+	char		cmd_line[] ="<< end1 << end2 < Makefile cat minishell.h | tail -n1 >> out";
 	int			status;
 
 	mal_lst = NULL;
