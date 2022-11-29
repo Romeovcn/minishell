@@ -138,7 +138,7 @@ void		close_fd(int fd1, int fd2);
 t_array_lst	*get_here_doc_lst(t_exec *exec);
 int	        check_heredoc(t_exec *exec);
 void	    position_last_heredoc(t_exec *exec);
-void	    heredoc_rm(t_array_lst *here_doc_lst);
+void		heredoc_rm(t_tok_lst *tok_lst);
 // To do :
 // ft_exit without args should exit last code status
 // Protect malloc

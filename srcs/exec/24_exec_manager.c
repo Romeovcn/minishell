@@ -12,19 +12,6 @@
 
 #include "minishell.h"
 
-void    here_doc_manage(t_exec *exec)
-{
-	t_array_lst	*tmp_heredoc_lst;
-
-	exec->here_doc_lst = get_here_doc_lst(exec);
-	tmp_heredoc_lst = exec->here_doc_lst;
-	while (tmp_heredoc_lst)
-	{
-		get_here_doc_file(tmp_heredoc_lst->content, tmp_heredoc_lst->content2);
-		tmp_heredoc_lst = tmp_heredoc_lst->next;
-	}
-}
-
 void	command(t_exec *exec, int i)
 {
 	char	**args;

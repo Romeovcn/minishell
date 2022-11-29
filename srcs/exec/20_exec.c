@@ -63,7 +63,7 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst)
 	i = 0;
 	while (i < exec.nb_command)
 		waitpid(exec.pid[i++], &status, 0);
-	heredoc_rm(exec.here_doc_lst);
+	heredoc_rm(tok_lst);
 	dup2(stdin_fd, 0);
 	return (status);
 }
