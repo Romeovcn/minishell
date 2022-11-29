@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   24_exec_simple_manage.c                            :+:      :+:    :+:   */
+/*   24_exec_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rvincent <rvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:46:29 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/27 18:35:49 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/29 01:38:46 by rvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,35 @@ void    here_doc_manage(t_exec *exec)
 	tmp_here_doc_lst = exec->here_doc_lst;
 	while (tmp_here_doc_lst)
 	{
-		here_doc(tmp_here_doc_lst->content);
+		get_here_doc_file(tmp_here_doc_lst->content);
 		tmp_here_doc_lst = tmp_here_doc_lst->next;
 	}
 }
 
-void	simple_exec(t_exec *exec, int i)
+void	command(t_exec *exec, int i)
 {
-	char		*path;
-	char		**arg;
+	char	**args;
+	char	*path;
 
+	path = find_right_access(getenv("PATH"), exec->tok_lst->args);
+	args = lst_to_str_array(exec->tok_lst->args, &exec->mal_lst);
+	if (exec->tok_lst->output_fd == 1 && i != exec->nb_command - 1)
+		dup2(exec->fd[1], STDOUT_FILENO);
+	close_fd(exec->fd[0], exec->fd[1]);
+	execve(path, args, exec->envp);
+	exit(0);
+}
+
+void	exec_token(t_exec *exec, int i)
+{
 	if (exec->tok_lst->output_fd == REDIR_OUT)
-		redir_out(exec);
+		redir_out(exec->tok_lst);
 	if (exec->tok_lst->input_fd == REDIR_IN)
-	{
-		printf("redirection in\n");
-		redir_in(exec);
-	}
+		redir_in(exec->tok_lst);
 	if (exec->tok_lst->input_fd == HERE_DOC)
-	{
-		int fd_here_doc = open(lstlast_array(exec->tok_lst->delimiter)->content, O_RDONLY);
-		dup2(fd_here_doc, STDIN_FILENO);
-		// printf("here_doc\n");
-	}
-	// if (exec->tok_lst->output_fd == APP_OUT)
-	// {
-	// 	// printf("append\n");
-	// 	append(exec);
-	// }
+		here_doc(exec->tok_lst);
+	if (exec->tok_lst->output_fd == APP_OUT)
+		append(exec->tok_lst);
 	if (exec->tok_lst->args != NULL)
 		command(exec, i);
 	exit(0);

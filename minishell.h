@@ -118,15 +118,16 @@ char		*find_right_access(char *path, t_array_lst *cmd);
 //----------------------------------------------------------------------------//
 //							 	Exec simple									  //
 //----------------------------------------------------------------------------//
+void	    get_here_doc_file(char *delimiter);
 void	    command(t_exec *exec, int i);
-void	    append(t_exec *exec);
-void	    here_doc(char *delimiter);
-void	    redir_out(t_exec *exec);
-void	    redir_in(t_exec *exec);
+void	    append(t_tok_lst *tok_lst);
+void	    redir_out(t_tok_lst *tok_lst);
+void	    redir_in(t_tok_lst *tok_lst);
+void		here_doc(t_tok_lst *tok_lst);
 //----------------------------------------------------------------------------//
 //							 	Exec simple	management						  //
 //----------------------------------------------------------------------------//
-void	    simple_exec(t_exec *exec, int i);
+void	    exec_token(t_exec *exec, int i);
 void        here_doc_manage(t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Exec utils									  //

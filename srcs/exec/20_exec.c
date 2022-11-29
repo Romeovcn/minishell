@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   20_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rvincent <rvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/28 15:46:57 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/11/29 01:32:10 by rvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	pipex_exec(t_exec *exec)
 			return ;
 		exec->pid[i] = fork();
 		if (exec->pid[i] == 0)
-			simple_exec(tmp, i);
-		if (tmp->tok_lst->next && tmp->tok_lst->next->input_fd != 0)
+			exec_token(tmp, i);
+		if (tmp->tok_lst->next && tmp->tok_lst->next->input_fd == 0)
 		{
 			printf("test\n");
 			dup2(tmp->fd[0], STDIN_FILENO);
@@ -69,5 +69,11 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst *mal_lst)
 		waitpid(exec->pid[i], &status, 0);
 		i++;
 	}
+	//while (exec->here_doc_lst)
+	//{
+		//unlink;
+	//	printf("HD=%s\n", exec->here_doc_lst->content);
+	//	exec->here_doc_lst = exec->here_doc_lst->next;
+	//}
 	return (status);
 }

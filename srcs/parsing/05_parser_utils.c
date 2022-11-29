@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   14_parser_utils.c                                  :+:      :+:    :+:   */
+/*   05_parser_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: rvincent <rvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/13 03:15:11 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/11/29 01:03:14 by rvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*parse_env_name(char *str)
 	i = 0;
 	while (*str)
 	{
-		if (isspace(*str) || *str == '\'' || *str == '\"')
+		if (ft_isspace(*str) || *str == '\'' || *str == '\"')
 			break ;
 		env_name[i] = *str;
 		i++;
