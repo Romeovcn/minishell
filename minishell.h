@@ -142,9 +142,9 @@ void		heredoc_rm(t_tok_lst *tok_lst);
 // To do :
 // ft_exit without args should exit last code status
 // Protect malloc
-// cas tricky : <<$env
 // cas tricky : << end << end << env = ctrl c should exit all
 // "" | ""
 // Norm
-
+// Fix create all out file (only last file created)
+// Fix "" redir file name
 #endif

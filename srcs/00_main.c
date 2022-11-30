@@ -20,12 +20,12 @@ int check_empty_line(char *rl_str) // to fix
 	while (*rl_str)
 	{
 		if (!ft_isspace(*rl_str))
-			return (1);
+			return (0);
 		rl_str++;
 	}
 	if (i == 0)
 		return (1);
-	return (0);
+	return (1);
 }
 
 int main(int argc, char **argv, char **env)
@@ -38,7 +38,7 @@ int main(int argc, char **argv, char **env)
 	char		cmd_line[] ="cat Makefile | echo bonjour";
 	int			status;
 
-	printf("%s\n", cmd_line);
+	// printf("%s\n", cmd_line);
 // ---------------------------------------------------------- //
 //							Env    			                  //
 // ---------------------------------------------------------- //
@@ -89,11 +89,12 @@ int main(int argc, char **argv, char **env)
 	// (void)argc;
 	// (void)argv;
 
-	readline_str = readline("Minishell> ");
-	while (readline_str)
+	while (1)
 	{
+		readline_str = readline("Minishell> ");
 		add_history(readline_str);
-		printf("%s\n", readline_str);
+		if (check_empty_line(readline_str))
+			continue ;
 		mal_lst = NULL;
 		lexed_lst = lexer(readline_str, &mal_lst);
 		if (check_error(lexed_lst))
@@ -107,8 +108,7 @@ int main(int argc, char **argv, char **env)
 		status = exec(token_lst, env, &mal_lst);
 		free_lst_malloc(mal_lst);
 		free(readline_str);
-		readline_str = readline("Minishell> ");
-		// printf("%s ICI\n", readline_str);
+		// readline_str = readline("Minishell> ");
 	}
 	free_env_lst(env_lst);
 }

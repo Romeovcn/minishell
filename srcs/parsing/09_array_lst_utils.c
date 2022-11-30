@@ -66,10 +66,14 @@ void	lstadd_back_array(t_array_lst **lst, t_array_lst *new)
 
 void	read_lst_array(t_array_lst *lst, char *type)
 {
+	int i;
+
+	i = 0;
 	printf("%s:", type);
 	while (lst)
 	{
-		printf(" %s", lst->content);
+		printf(" %d:%s", i, lst->content);
+		i++;
 		lst = lst->next;
 	}
 	printf("\n");
