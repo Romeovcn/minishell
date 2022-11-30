@@ -119,11 +119,11 @@ char		*find_right_access(char *path, t_array_lst *cmd);
 //----------------------------------------------------------------------------//
 //							 	Exec simple									  //
 //----------------------------------------------------------------------------//
-void	    get_here_doc_file(char *delimiter, char *name_file);
-void	    command(t_exec *exec, int i);
-void	    append(t_tok_lst *tok_lst);
-void	    redir_out(t_tok_lst *tok_lst);
-void	    redir_in(t_tok_lst *tok_lst);
+void		get_here_doc_file(char *delimiter, char *name_file);
+void		command(t_exec *exec, int i);
+void		append(t_tok_lst *tok_lst);
+void		redir_out(t_tok_lst *tok_lst);
+void		redir_in(t_tok_lst *tok_lst);
 void		here_doc(t_tok_lst *tok_lst);
 //----------------------------------------------------------------------------//
 //							 	Exec simple	management						  //
@@ -135,10 +135,17 @@ void        here_doc_manage(t_exec *exec);
 //----------------------------------------------------------------------------//
 char		*ft_newstrjoin(char *s1, char *s2);
 void		close_fd(int fd1, int fd2);
+//----------------------------------------------------------------------------//
+//							 	Exec here_doc								  //
+//----------------------------------------------------------------------------//
 t_array_lst	*get_here_doc_lst(t_exec *exec);
-int	        check_heredoc(t_exec *exec);
-void	    position_last_heredoc(t_exec *exec);
+int			check_heredoc(t_exec *exec);
+void		position_last_heredoc(t_exec *exec);
 void		heredoc_rm(t_tok_lst *tok_lst);
+//----------------------------------------------------------------------------//
+//							 	Exec error									  //
+//----------------------------------------------------------------------------//
+int			error_manager(t_exec *exec, t_tok_lst *tok_lst);
 // To do :
 // ft_exit without args should exit last code status
 // Protect malloc

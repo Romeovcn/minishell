@@ -52,17 +52,18 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst)
 	int 	stdin_fd;
 	int		status;
 	t_exec	exec;
-	int		i;
-	
+	t_tok_lst	*head_tok_lst;
+
 	stdin_fd = dup(0);
 	init_exec(&exec, tok_lst, mal_lst, envp);
+	head_tok_lst = exec.tok_lst;
 	if (check_heredoc(&exec) == 1)
 		here_doc_manage(&exec);
 	if (exec.nb_command > 0)
 		pipex_exec(&exec);
-	i = 0;
-	while (i < exec.nb_command)
-		waitpid(exec.pid[i++], &status, 0);
+	status = error_manager(&exec, head_tok_lst);
+	// printf("seg fault\n\n");
+	// printf("status: %d\n", status);
 	heredoc_rm(tok_lst);
 	dup2(stdin_fd, 0);
 	return (status);

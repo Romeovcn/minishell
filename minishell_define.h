@@ -66,6 +66,7 @@ typedef struct t_list
 	t_array_lst		*delimiter;
 	int				output_fd;
 	t_array_lst		*out_file;
+	char			*error_file;
 	struct t_list	*next;
 }					t_tok_lst;
 

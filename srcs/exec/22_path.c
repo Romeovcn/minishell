@@ -55,5 +55,6 @@ char	*find_right_access(char *path, t_array_lst *cmd)
 		free(res);
 		i++;
 	}
-	ft_null_access(path, split_path);
+	res = NULL;
+	ft_null_access(res, split_path);
 }
