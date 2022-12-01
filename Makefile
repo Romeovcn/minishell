@@ -20,8 +20,8 @@ LIB = ./libft/libft.a
 
 NAME = minishell
 
+# CC = gcc -fsanitize=address -g3
 CC = gcc
-
 # make && valgrind --suppressions=./suppres.txt ./minishell
 # --suppressions=./suppres.txt
 CFLAGS =

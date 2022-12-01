@@ -115,7 +115,7 @@ int			ft_lstsize_token(t_tok_lst *lst);
 //							 	Exec										  //
 //----------------------------------------------------------------------------//
 int			exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst);
-char		*find_right_access(char *path, t_array_lst *cmd);
+char		*find_right_path(char *path, t_array_lst *cmd);
 //----------------------------------------------------------------------------//
 //							 	Exec simple									  //
 //----------------------------------------------------------------------------//
@@ -148,6 +148,14 @@ void		heredoc_rm(t_tok_lst *tok_lst);
 //							 	Exec error									  //
 //----------------------------------------------------------------------------//
 int			error_manager(t_exec *exec, t_tok_lst *tok_lst);
+//----------------------------------------------------------------------------//
+//							 	Exec access									  //
+//----------------------------------------------------------------------------//
+char		*get_wrong_access(t_tok_lst *tok_lst);
+void		check_outfile(t_tok_lst *tok_lst);
+void		check_infile(t_tok_lst *tok_lst);
+void		ft_null_access(char *path, char **split_path);
+char		*ft_abs_path(char *cmd);
 // To do :
 // ft_exit without args should exit last code status
 // Protect malloc

@@ -50,9 +50,9 @@ void	init_exec(t_exec *exec, t_tok_lst *tok_lst, t_mal_lst **mal_lst, char **env
 int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst)
 {
 	t_tok_lst	*head_tok_lst;
-	int 	stdin_fd;
-	int		status;
-	t_exec	exec;
+	int 		stdin_fd;
+	int			status;
+	t_exec		exec;
 
 	stdin_fd = dup(0);
 	init_exec(&exec, tok_lst, mal_lst, envp);
@@ -61,6 +61,7 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst)
 		here_doc_manage(&exec);
 	if (exec.nb_command > 0)
 		pipex_exec(&exec);
+	printf("seg fault fix\n");
 	status = error_manager(&exec, head_tok_lst);
 	heredoc_rm(tok_lst);
 	dup2(stdin_fd, 0);

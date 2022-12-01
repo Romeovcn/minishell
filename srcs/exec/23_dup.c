@@ -25,16 +25,7 @@ void	redir_out(t_tok_lst *tok_lst)
 {
 	int			file_fd;
 	char		*file;
-	t_array_lst	*tmp;
 
-	tmp = tok_lst->out_file;
-	while (tmp)
-	{
-		file_fd = open(tmp->content, O_RDWR | O_CREAT | O_TRUNC, 0666);
-		if (file_fd == -1)
-			exit(1);
-		tmp = tmp->next;
-	}
 	file = lstlast_array(tok_lst->out_file)->content;
 	file_fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (tok_lst->args != NULL)
@@ -45,16 +36,7 @@ void	redir_in(t_tok_lst *tok_lst)
 {
 	int			file_fd;
 	char		*file;
-	t_array_lst	*tmp;
 
-	tmp = tok_lst->in_file;
-	while (tmp)
-	{
-		file_fd = open(tmp->content, O_RDONLY);
-		if (file_fd == -1)
-			exit(1);
-		tmp = tmp->next;
-	}
 	file = lstlast_array(tok_lst->in_file)->content;
 	file_fd = open(file, O_RDONLY);
 	if (tok_lst->args != NULL)

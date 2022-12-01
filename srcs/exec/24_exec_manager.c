@@ -17,7 +17,7 @@ void	command(t_exec *exec, int i)
 	char	**args;
 	char	*path;
 
-	path = find_right_access(getenv("PATH"), exec->tok_lst->args);
+	path = find_right_path(getenv("PATH"), exec->tok_lst->args);
 	args = lst_to_str_array(exec->tok_lst->args, &exec->mal_lst);
 	if (exec->tok_lst->output_fd == 1 && i != exec->nb_command - 1)
 		dup2(exec->fd[1], STDOUT_FILENO);
@@ -28,14 +28,20 @@ void	command(t_exec *exec, int i)
 
 void	exec_token(t_exec *exec, int i)
 {
+	// if (exec->tok_lst->output_fd == REDIR_OUT 
+	// 	|| exec->tok_lst->output_fd == APP_OUT)
+	// 	check_outfile(exec->tok_lst);
 	if (exec->tok_lst->output_fd == REDIR_OUT)
 		redir_out(exec->tok_lst);
 	if (exec->tok_lst->input_fd == REDIR_IN)
+	{
+		// check_infile(exec->tok_lst);
 		redir_in(exec->tok_lst);
+	}
 	if (exec->tok_lst->input_fd == HERE_DOC)
 		here_doc(exec->tok_lst);
-	if (exec->tok_lst->output_fd == APP_OUT)
-		append(exec->tok_lst);
+	// if (exec->tok_lst->output_fd == APP_OUT)
+	// 	append(exec->tok_lst);
 	if (exec->tok_lst->args != NULL)
 		command(exec, i);
 	exit(0);

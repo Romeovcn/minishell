@@ -12,28 +12,7 @@
 
 #include "minishell.h"
 
-static void	ft_null_access(char *path, char **split_path)
-{
-	if (path == NULL)
-	{
-		free(split_path);
-		exit(127);
-	}
-}
-
-static char	*ft_abs_path(char *cmd)
-{
-	if (access(cmd, F_OK) == 0)
-	{
-		if (access(cmd, X_OK) == 0)
-			return (cmd);
-		if (access(cmd, X_OK) == -1)
-			exit(126);
-	}
-	return (NULL);
-}
-
-char	*find_right_access(char *path, t_array_lst *cmd)
+char	*find_right_path(char *path, t_array_lst *cmd)
 {
 	char	**split_path;
 	int		i;
