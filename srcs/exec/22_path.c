@@ -27,8 +27,8 @@ static char	*ft_abs_path(char *cmd)
 	{
 		if (access(cmd, X_OK) == 0)
 			return (cmd);
-		// if (access(cmd, X_OK) == -1)
-		// 	exit(126);
+		if (access(cmd, X_OK) == -1)
+			exit(126);
 	}
 	return (NULL);
 }

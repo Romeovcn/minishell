@@ -7,7 +7,7 @@ void	error_message_127(char *command)
 	ft_putstr_fd("' not found\n", 2);
 }
 
-void	error_message_1(char *file, char *message)
+void	error_message(char *file, char *message)
 {
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(file, 2);
@@ -45,10 +45,11 @@ void    error_status(t_tok_lst *tok_lst, int status)
 
 	file_error = check_access(tok_lst);
 	if (status == 1 && file_exist(file_error) == 0)
-		error_message_1(file_error, "No such file or directory\n");
+		error_message(file_error, "No such file or directory\n");
 	if (status == 1 && file_exec(file_error) == 0)
-		error_message_1(file_error, "Permission denied\n");
-	// if (status == 126) {}
+		error_message(file_error, "Permission denied\n");
+	if (status == 126)
+		error_message(tok_lst->args->content, "Permission denied\n");
 	if (status == 127)
 		error_message_127(tok_lst->args->content);
 }
