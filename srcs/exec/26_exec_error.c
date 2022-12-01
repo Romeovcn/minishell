@@ -21,11 +21,11 @@ int	error_manager(t_exec *exec, t_tok_lst *tok_lst)
 	int			i;
 
 	i = 0;
-	printf("arg: %s\n", tok_lst->args->content);
+	// printf("arg: %s\n", tok_lst->args->content);
 	while (i < exec->nb_command)
 	{
 		waitpid(exec->pid[i++], &status, 0);
-		printf("status: %d\n", WEXITSTATUS(status));
+		// printf("status: %d\n", WEXITSTATUS(status));
 		error_status(tok_lst, WEXITSTATUS(status));
 		tok_lst = tok_lst->next;
 	}

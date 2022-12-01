@@ -62,21 +62,17 @@ void	ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst)
 	exit(ft_atoi(args[1]) % 256);
 }
 
-void	ft_pwd(char **args)
+int	ft_pwd(void)
 {
 	char	*pwd_path;
 	char	buff[PATH_MAX];
 
-	if (args[1])
-	{
-		printf("pwd: too many arguments\n");
-		return ;
-	}
 	pwd_path = getenv("PWD");
 	if (pwd_path)
 		printf("%s\n", pwd_path);
 	else
 		printf("%s\n", getcwd(buff, PATH_MAX));
+	return (0);
 }
 
 void	ft_echo(char **cmd)
@@ -99,13 +95,12 @@ void	ft_echo(char **cmd)
 		printf("\n");
 }
 
-void	ft_cd(char *path)
+int	ft_cd(char **path)
 {
-	if (chdir("Makefile") < 0)
-		perror("cd");
-	else
-	{
-		// change OLD_PWD && PWD
-		// export_env();
-	}
+	if (chdir(path[1]) < 0)
+		return (perror("cd"), 1);
+
+	// change OLD_PWD && PWD
+	// export_env();
+	return (0);
 }

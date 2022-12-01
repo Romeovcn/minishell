@@ -26,8 +26,8 @@ char	*get_env_name(char *env, t_mal_lst **mal_lst)
 			break ;
 		i++;
 	}
-	if (env[i] != '=')
-		return (NULL);
+	// if (env[i] != '=')
+	// 	return (NULL);
 	name = malloc((i + 1) * sizeof(char));
 	if (!name)
 		return (NULL);

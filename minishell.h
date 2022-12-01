@@ -17,10 +17,16 @@ char		**get_paths(char **env);
 //							 	Built-in			 						  //
 //----------------------------------------------------------------------------//
 void		ft_env(char **args, t_env_lst *env_lst);
-void		ft_pwd(char **args);
+int			ft_pwd(void);
 void		ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst);
 void		ft_echo(char **cmd);
-void		ft_cd(char *path);
+int			ft_cd(char **path);
+//----------------------------------------------------------------------------//
+//							 	Built-in utils		 						  //
+//----------------------------------------------------------------------------//
+int			is_built_in(char *command);
+int			is_built_in_no_fork(char *command);
+int			exec_built_in(t_tok_lst *tok_lst, int status, t_mal_lst **mal_lst, t_env_lst **env_lst);
 //----------------------------------------------------------------------------//
 //							 	Env			 								  //
 //----------------------------------------------------------------------------//
@@ -114,7 +120,7 @@ int			ft_lstsize_token(t_tok_lst *lst);
 //----------------------------------------------------------------------------//
 //							 	Exec										  //
 //----------------------------------------------------------------------------//
-int			exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst);
+int			exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst, t_env_lst **env_lst);
 char		*find_right_access(char *path, t_array_lst *cmd);
 //----------------------------------------------------------------------------//
 //							 	Exec simple									  //

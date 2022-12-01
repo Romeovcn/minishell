@@ -17,11 +17,16 @@ void	command(t_exec *exec, int i)
 	char	**args;
 	char	*path;
 
-	path = find_right_access(getenv("PATH"), exec->tok_lst->args);
 	args = lst_to_str_array(exec->tok_lst->args, &exec->mal_lst);
+	// if (is_built_in(args[0]))
+	// {
+
+	// 	exit(exec_built_in());
+	// }
+	path = find_right_access(getenv("PATH"), exec->tok_lst->args);
 	if (exec->tok_lst->output_fd == 1 && i != exec->nb_command - 1)
-		dup2(exec->fd[1], STDOUT_FILENO);
-	close_fd(exec->fd[0], exec->fd[1]);
+		dup2(exec->pipe_fd[1], STDOUT_FILENO);
+	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 	execve(path, args, exec->envp);
 	exit(0);
 }

@@ -105,7 +105,7 @@ int main(int argc, char **argv, char **env)
 		}
 		parser(lexed_lst, &mal_lst, env_lst);
 		token_lst = get_token_lst(lexed_lst, &mal_lst);
-		status = exec(token_lst, env, &mal_lst);
+		status = exec(token_lst, env, &mal_lst, &env_lst);
 		free_lst_malloc(mal_lst);
 		free(readline_str);
 		// readline_str = readline("Minishell> ");

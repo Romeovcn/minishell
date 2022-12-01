@@ -49,23 +49,27 @@ void	export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args)
 			continue ;
 		}
 		printf("%s\n", name);
-		// 	while (*(args[i]))
-		// 	{
-		// 		if (*(args[i]) == '=' && *(args[i])++)
-		// 		{
-		// 			return_value = 1;
-		// 			continue ;
-		// 		}
-		// 		args[i]++;
-		// 	}
-		// 	value_found = get_env_value(name, *env_lst);
+		while (*(args[i]) != '=')
+		{
+			if (!*(args[i]))
+				break ;
+			args[i]++;
+		}
+		if (!*(args[i]))
+		{
+			i++;
+			continue ;
+		}
+		printf("result=%s\n", args[i]);
+		// value_found = get_env_value(name, *env_lst);
+		// printf("value=%s\n", value_found);
 		// 	if (value_found)
 		// 		change_env_value(name, args[i], *env_lst);
 		// 	else
 		// 		lstadd_back_env(env_lst, lstnew_env(name, args[i], mal_lst));
 		i++;
 	}
-	// exit(return_value);
+	// return(return_value);
 }
 
 void	unset_env(t_env_lst **env_lst, char **args)
