@@ -7,10 +7,48 @@ void	error_message_127(char *command)
 	ft_putstr_fd("' not found\n", 2);
 }
 
+void	error_message_1(char *file, char *message)
+{
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(message, 2);
+}
+
+char	*check_access(t_tok_lst *tok_lst)
+{
+	t_array_lst	*tmp;
+	int			file_fd;
+
+	tmp = tok_lst->in_file;
+	while (tmp)
+	{
+		file_fd = open(tmp->content, O_RDONLY);
+		if (file_fd == -1)
+			return (tmp->content);
+		tmp = tmp->next;
+	}
+	tmp = tok_lst->out_file;
+	while (tmp)
+	{
+		file_fd = open(tmp->content, O_RDONLY);
+		if (file_fd == -1)
+			return (tmp->content);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
 void    error_status(t_tok_lst *tok_lst, int status)
 {
-	// if (WEXITSTATUS(status) == 1) {}
-	// if (WEXITSTATUS(status) == 126) {}
+	char	*file_error;
+
+	file_error = check_access(tok_lst);
+	if (status == 1 && file_exist(file_error) == 0)
+		error_message_1(file_error, "No such file or directory\n");
+	if (status == 1 && file_exec(file_error) == 0)
+		error_message_1(file_error, "Permission denied\n");
+	// if (status == 126) {}
 	if (status == 127)
 		error_message_127(tok_lst->args->content);
 }

@@ -26,3 +26,17 @@ void	close_fd(int fd1, int fd2)
 	close(fd1);
 	close(fd2);
 }
+
+int	file_exist(char *file_name)
+{
+	if (access(file_name, F_OK) == 0)
+		return (1);
+	return (0);
+}
+
+int	file_exec(char *file_name)
+{
+	if (access(file_name, X_OK) == 0)
+		return (1);
+	return (0);
+}

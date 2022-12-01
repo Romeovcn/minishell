@@ -135,6 +135,8 @@ void        here_doc_manage(t_exec *exec);
 //----------------------------------------------------------------------------//
 char		*ft_newstrjoin(char *s1, char *s2);
 void		close_fd(int fd1, int fd2);
+int			file_exist(char *file_name);
+int			file_exec(char *file_name);
 //----------------------------------------------------------------------------//
 //							 	Exec here_doc								  //
 //----------------------------------------------------------------------------//
