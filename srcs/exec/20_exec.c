@@ -26,25 +26,29 @@ void	pipex_exec(t_exec *exec)
 		exec->pid[i] = fork();
 		if (exec->pid[i] == 0)
 			exec_token(tmp, i);
-		if (tmp->tok_lst->next && tmp->tok_lst->next->input_fd == 0)
-			dup2(tmp->pipe_fd[0], STDIN_FILENO);
+		if (tmp->tok_lst->next && tmp->tok_lst->next->input_fd == 0) // useless i think
+		dup2(tmp->pipe_fd[0], STDIN_FILENO);
 		close_fd(tmp->pipe_fd[0], tmp->pipe_fd[1]);
 		i++;
 		tmp->tok_lst = tmp->tok_lst->next;
 	}
 }
 
-void	init_exec(t_exec *exec, t_tok_lst *tok_lst, t_mal_lst **mal_lst, char **envp)
+t_exec	init_exec(t_tok_lst *tok_lst, t_mal_lst **mal_lst, t_env_lst **env_lst, char **envp)
 {
-	exec->tok_lst = tok_lst;
-	exec->mal_lst = *mal_lst;
-	exec->nb_command = ft_lstsize_token(tok_lst);
-	exec->pid = malloc(exec->nb_command * sizeof(pid_t));
-	if (!exec->pid)
-		return ;
-	lstadd_back_malloc(mal_lst, lstnew_malloc(exec->pid));
-	exec->envp = envp;
-	exec->here_doc_lst = NULL;
+	t_exec exec;
+
+	exec.tok_lst = tok_lst;
+	exec.mal_lst = mal_lst;
+	exec.env_lst = env_lst;
+	exec.nb_command = ft_lstsize_token(tok_lst);
+	exec.pid = malloc(exec.nb_command * sizeof(pid_t));
+	if (!exec.pid)
+		return (exec);
+	lstadd_back_malloc(mal_lst, lstnew_malloc(exec.pid));
+	exec.envp = envp;
+	exec.here_doc_lst = NULL;
+	return (exec);
 }
 
 int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst, t_env_lst **env_lst)
@@ -56,11 +60,10 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst, t_env_lst **env_l
 
 	stdin_fd = dup(0);
 	status = 0;
-	init_exec(&exec, tok_lst, mal_lst, envp);
+	exec = init_exec(tok_lst, mal_lst, env_lst, envp);
 	head_tok_lst = exec.tok_lst;
 	if (exec.nb_command == 1 && is_built_in_no_fork(tok_lst->args->content))
 	{
-		printf("command is a builtin\n");
 		exec_built_in(tok_lst, status, mal_lst, env_lst);
 		return 0;
 	}

@@ -43,8 +43,8 @@ int main(int argc, char **argv, char **env)
 //							Env    			                  //
 // ---------------------------------------------------------- //
 	env_lst = NULL;
-		mal_lst = NULL;
-	get_env_lst(&env_lst, env, &mal_lst);
+	mal_lst = NULL;
+	get_env_lst(&env_lst, env);
 	// char *args[] = {"exit", NULL};
 	// char *export[] = {"export", "1=2", "?=MORTY", "USER=EHOH", NULL};
 	// export_env(&env_lst, &mal_lst, export);
@@ -89,12 +89,15 @@ int main(int argc, char **argv, char **env)
 	// (void)argc;
 	// (void)argv;
 
-	while (1)
+	readline_str = readline("Minishell> ");
+	while (readline_str)
 	{
-		readline_str = readline("Minishell> ");
 		add_history(readline_str);
 		if (check_empty_line(readline_str))
+		{
+			readline_str = readline("Minishell> ");
 			continue ;
+		}
 		mal_lst = NULL;
 		lexed_lst = lexer(readline_str, &mal_lst);
 		if (check_error(lexed_lst))
@@ -108,7 +111,7 @@ int main(int argc, char **argv, char **env)
 		status = exec(token_lst, env, &mal_lst, &env_lst);
 		free_lst_malloc(mal_lst);
 		free(readline_str);
-		// readline_str = readline("Minishell> ");
+		readline_str = readline("Minishell> ");
 	}
 	free_env_lst(env_lst);
 }

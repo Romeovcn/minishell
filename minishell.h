@@ -30,22 +30,21 @@ int			exec_built_in(t_tok_lst *tok_lst, int status, t_mal_lst **mal_lst, t_env_l
 //----------------------------------------------------------------------------//
 //							 	Env			 								  //
 //----------------------------------------------------------------------------//
-void		get_env_lst(t_env_lst **env_lst, char **env, t_mal_lst **mal_lst);
 char		*get_env_value(char *name, t_env_lst *env_lst);
-void		export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args);
+int			export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args);
 void		unset_env(t_env_lst **env_lst, char **args);
 //----------------------------------------------------------------------------//
 //							 	Env utils		 							  //
 //----------------------------------------------------------------------------//
-char		*get_env_name(char *env, t_mal_lst **mal_lst);
-void		get_env_lst(t_env_lst **env_lst, char **env, t_mal_lst **mal_lst);
-void		change_env_value(char *name, char *new_value, t_env_lst *env_lst);
+char		*get_env_name(char *env);
+void		get_env_lst(t_env_lst **env_lst, char **env);
+int			change_env_value(char *name, char *new_value, t_env_lst *env_lst);
 char		*get_env_value(char *name, t_env_lst *env_lst);
 void		free_env_lst(t_env_lst *env_lst);
 //----------------------------------------------------------------------------//
 //							 	Env lst			 							  //
 //----------------------------------------------------------------------------//
-t_env_lst	*lstnew_env(char *name, char *value, t_mal_lst **mal_lst);
+t_env_lst	*lstnew_env(char *name, char *value);
 t_env_lst	*lstlast_env(t_env_lst *lst);
 void		lstadd_back_env(t_env_lst **lst, t_env_lst *new);
 //----------------------------------------------------------------------------//

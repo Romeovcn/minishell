@@ -4,6 +4,7 @@ int exec_built_in(t_tok_lst *tok_lst, int status, t_mal_lst **mal_lst, t_env_lst
 {
 	char **args;
 
+	printf("THIS IS BUILTIN\n");
 	args = lst_to_str_array(tok_lst->args, mal_lst);
 	if (ft_strmatch(args[0], "exit"))
 		return (ft_exit(args, status, *mal_lst, *env_lst), status);
@@ -37,6 +38,7 @@ int	is_built_in(char *command)
 		return (1);
 	if (ft_strmatch(command, "echo"))
 		return (1);
+	return (0);
 }
 
 int	is_built_in_no_fork(char *command) // execute not in fork if no pipe
@@ -49,4 +51,5 @@ int	is_built_in_no_fork(char *command) // execute not in fork if no pipe
 		return (1);
 	if (ft_strmatch(command, "cd"))
 		return (1);
+	return (0);
 }
