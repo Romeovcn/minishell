@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:46:29 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/29 16:12:25 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/03 15:05:49 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ void	command(t_exec *exec, int i)
 
 void	exec_token(t_exec *exec, int i)
 {
-	// if (exec->tok_lst->output_fd == REDIR_OUT 
-	// 	|| exec->tok_lst->output_fd == APP_OUT)
-	// 	check_outfile(exec->tok_lst);
+	if (exec->tok_lst->output_fd == REDIR_OUT
+		|| exec->tok_lst->output_fd == APP_OUT)
+		check_outfile(exec->tok_lst);
 	if (exec->tok_lst->output_fd == REDIR_OUT)
 		redir_out(exec->tok_lst);
 	if (exec->tok_lst->input_fd == REDIR_IN)
 	{
-		// check_infile(exec->tok_lst);
+		check_infile(exec->tok_lst);
 		redir_in(exec->tok_lst);
 	}
 	if (exec->tok_lst->input_fd == HERE_DOC)
 		here_doc(exec->tok_lst);
-	// if (exec->tok_lst->output_fd == APP_OUT)
-	// 	append(exec->tok_lst);
+	if (exec->tok_lst->output_fd == APP_OUT)
+		append(exec->tok_lst);
 	if (exec->tok_lst->args != NULL)
 		command(exec, i);
 	exit(0);

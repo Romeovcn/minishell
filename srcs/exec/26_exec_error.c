@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   26_exec_error.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/03 14:55:43 by jsauvage          #+#    #+#             */
+/*   Updated: 2022/12/03 15:10:15 by jsauvage         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	error_message_127(char *command)
@@ -15,7 +27,7 @@ static void	error_message(char *file, char *message)
 	ft_putstr_fd(message, 2);
 }
 
-void    error_status(t_tok_lst *tok_lst, int status)
+void	error_status(t_tok_lst *tok_lst, int status)
 {
 	char	*file_error;
 
@@ -41,7 +53,6 @@ int	error_manager(t_exec *exec, t_tok_lst *tok_lst)
 	while (i < exec->nb_command)
 	{
 		waitpid(exec->pid[i++], &status, 0);
-		printf("status: %d\n", WEXITSTATUS(status));
 		error_status(tok_lst, WEXITSTATUS(status));
 		tok_lst = tok_lst->next;
 	}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   23_dup.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/03 14:55:25 by jsauvage          #+#    #+#             */
+/*   Updated: 2022/12/03 15:11:07 by jsauvage         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	append(t_tok_lst *tok_lst)
@@ -11,10 +23,10 @@ void	append(t_tok_lst *tok_lst)
 		dup2(file_fd, STDOUT_FILENO);
 }
 
-void here_doc(t_tok_lst *tok_lst)
+void	here_doc(t_tok_lst *tok_lst)
 {
-	int fd_here_doc;
-	t_array_lst *del;
+	int			fd_here_doc;
+	t_array_lst	*del;
 
 	del = lstlast_array(tok_lst->delimiter);
 	fd_here_doc = open(del->content2, O_RDONLY);

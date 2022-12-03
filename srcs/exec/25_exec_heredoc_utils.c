@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:50:56 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/29 16:09:25 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/03 15:05:24 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ void	get_here_doc_file(char *delimiter, char *name_file)
 	close(here_doc_fd);
 }
 
-void    here_doc_manage(t_exec *exec)
+void	here_doc_manage(t_exec *exec)
 {
 	t_tok_lst	*tok_head;
 	t_array_lst	*del_head;
-	char 		*here_doc_name;
+	char		*here_doc_name;
 	int			i;
 
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/29 15:41:21 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/03 15:09:52 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	pipex_exec(t_exec *exec)
 {
 	t_exec	*tmp;
-	int i;
+	int		i;
 
 	tmp = exec;
 	i = 0;
@@ -34,23 +34,23 @@ void	pipex_exec(t_exec *exec)
 	}
 }
 
-void	init_exec(t_exec *exec, t_tok_lst *tok_lst, t_mal_lst **mal_lst, char **envp)
+void	init_exec(t_exec *exc, t_tok_lst *t_lst, t_mal_lst **m_lst, char **env)
 {
-	exec->tok_lst = tok_lst;
-	exec->mal_lst = *mal_lst;
-	exec->nb_command = ft_lstsize_token(tok_lst);
-	exec->pid = malloc(exec->nb_command * sizeof(pid_t));
-	if (!exec->pid)
+	exc->tok_lst = t_lst;
+	exc->mal_lst = *m_lst;
+	exc->nb_command = ft_lstsize_token(t_lst);
+	exc->pid = malloc(exc->nb_command * sizeof(pid_t));
+	if (!exc->pid)
 		return ;
-	lstadd_back_malloc(mal_lst, lstnew_malloc(exec->pid));
-	exec->envp = envp;
-	exec->here_doc_lst = NULL;
+	lstadd_back_malloc(m_lst, lstnew_malloc(exc->pid));
+	exc->envp = env;
+	exc->here_doc_lst = NULL;
 }
 
 int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst)
 {
 	t_tok_lst	*head_tok_lst;
-	int 		stdin_fd;
+	int			stdin_fd;
 	int			status;
 	t_exec		exec;
 
@@ -61,7 +61,6 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst)
 		here_doc_manage(&exec);
 	if (exec.nb_command > 0)
 		pipex_exec(&exec);
-	printf("seg fault fix\n");
 	status = error_manager(&exec, head_tok_lst);
 	heredoc_rm(tok_lst);
 	dup2(stdin_fd, 0);

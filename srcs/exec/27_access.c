@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   27_access.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/03 14:55:41 by jsauvage          #+#    #+#             */
+/*   Updated: 2022/12/03 15:10:42 by jsauvage         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 char	*get_wrong_access(t_tok_lst *tok_lst)
@@ -49,7 +61,7 @@ void	check_infile(t_tok_lst *tok_lst)
 	{
 		file_fd = open(tmp->content, O_RDONLY);
 		if (file_fd == -1)
-			exit(1); 
+			exit(1);
 		tmp = tmp->next;
 	}
 }
