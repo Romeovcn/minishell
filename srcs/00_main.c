@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/03 15:00:18 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/03 19:51:24 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int main(int argc, char **argv, char **env)
 		parser(lexed_lst, &mal_lst, env_lst);
 		token_lst = get_token_lst(lexed_lst, &mal_lst);
 		status = exec(token_lst, env, &mal_lst, &env_lst);
-		printf("status=%d\n", status);
+		printf("status=%d\n", WEXITSTATUS(status));
 		free_lst_malloc(mal_lst);
 		free(readline_str);
 		readline_str = readline("Minishell> ");
