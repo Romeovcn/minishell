@@ -161,6 +161,10 @@ void		check_outfile(t_tok_lst *tok_lst);
 void		check_infile(t_tok_lst *tok_lst);
 void		ft_null_access(char *path, char **split_path);
 char		*ft_abs_path(char *cmd);
+//----------------------------------------------------------------------------//
+//							 	Signal										  //
+//----------------------------------------------------------------------------//
+void		signal_manager();
 // To do :
 // ft_exit without args should exit last code status
 // Protect malloc

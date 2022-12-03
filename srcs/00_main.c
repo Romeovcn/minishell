@@ -89,6 +89,7 @@ int main(int argc, char **argv, char **env)
 	// (void)argc;
 	// (void)argv;
 
+	signal_manager();
 	readline_str = readline("Minishell> ");
 	while (readline_str)
 	{
