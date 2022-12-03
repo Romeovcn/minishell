@@ -19,9 +19,9 @@ int	is_env(char *str)
 	i = 0;
 	if (str[i] != '$' || !str[i + 1])
 		return (0);
-	if (str[i + 1] != '\'' && str[i + 1] != '\"')
-		return (1);
-	return (0);
+	if (!ft_isalpha(str[i + 1]) && str[i + 1] != '_' && str[i + 1] != '?')
+		return (0);
+	return (1);
 }
 
 char	*parse_env_name(char *str)
@@ -30,9 +30,11 @@ char	*parse_env_name(char *str)
 	char	*env_name;
 
 	i = 0;
+	if (str[i] == '?')
+		return (ft_strdup("?"));
 	while (str[i])
 	{
-		if (ft_isspace(str[i]) || str[i] == '\'' || str[i] == '\"')
+		if (!ft_isalpha(str[i]) && str[i] != '_')
 			break ;
 		i++;
 	}
@@ -42,7 +44,7 @@ char	*parse_env_name(char *str)
 	i = 0;
 	while (*str)
 	{
-		if (ft_isspace(*str) || *str == '\'' || *str == '\"')
+		if (!ft_isalpha(*str) && *str != '_')
 			break ;
 		env_name[i] = *str;
 		i++;
@@ -54,9 +56,14 @@ char	*parse_env_name(char *str)
 
 void	go_end_env_name(char **str)
 {
+	if (**str == '?')
+	{
+		(*str)++;
+		return ;
+	}
 	while (**str)
 	{
-		if (ft_isspace(**str) || **str == '\'' || **str == '\"')
+		if (!ft_isalpha(**str) && **str != '_')
 			break ;
 		(*str)++;
 	}

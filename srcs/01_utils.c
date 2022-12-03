@@ -64,7 +64,5 @@ char **lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst)
 		head = head->next;
 	}
 	result[i] = 0;
-	// for (int j = 0;result[j];j++)
-	// 	printf("%s\n", result[j]);
 	return (result);
 }

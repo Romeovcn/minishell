@@ -36,7 +36,7 @@ int main(int argc, char **argv, char **env)
 	t_env_lst 	*env_lst;
 	char 		*readline_str;
 	char		cmd_line[] ="cat Makefile | echo bonjour";
-	int			status;
+	int			status = 0;
 
 	// printf("%s\n", cmd_line);
 // ---------------------------------------------------------- //
@@ -52,33 +52,33 @@ int main(int argc, char **argv, char **env)
 	// ft_env(test, env_lst);
 	// ft_exit(args, 32256, mal_lst, env_lst);
 // // ---------------------------------------------------------- //
-// //							Lexer	                          //
+// //							Lexer	                         //
 // // ---------------------------------------------------------- //
 // 	lexed_lst = lexer(cmd_line, &mal_lst);
 // // ---------------------------------------------------------- //
-// //							Check syntax error                //
+// //							Check syntax error               //
 // // ---------------------------------------------------------- //
 // 	if (check_error(lexed_lst))
 // 		return (free_lst_malloc(mal_lst), printf("EXIT BEBE\n"), 1);
 // // ---------------------------------------------------------- //
-// //							Parser				              //
+// //							Parser				             //
 // // ---------------------------------------------------------- //
 // 	parser(lexed_lst, &mal_lst, env_lst);
 // // ---------------------------------------------------------- //
-// //							Tokenizer			              //
+// //							Tokenizer			             //
 // // ---------------------------------------------------------- //
 // 	token_lst = get_token_lst(lexed_lst, &mal_lst);
 // // ---------------------------------------------------------- //
-// //							Exec				              //
+// //							Exec				             //
 // // ---------------------------------------------------------- //
 // 	status = exec(token_lst, env, &mal_lst);
 // 	// lst_to_str_array(token_lst->args, &mal_lst);
 // // ---------------------------------------------------------- //
-// //							Free				              //
+// //							Free				             //
 // // ---------------------------------------------------------- //
 // 	free_lst_malloc(mal_lst);
 // // ---------------------------------------------------------- //
-// //							Readline			              //
+// //							Readline			             //
 // // ---------------------------------------------------------- //
 	// test();
 	// char *test[] = {"echo", "-nn", "", NULL};
@@ -104,13 +104,14 @@ int main(int argc, char **argv, char **env)
 		if (check_error(lexed_lst))
 		{
 			free_lst_malloc(mal_lst);
-			printf("EXIT BEBE\n");
+			free(readline_str);
+			readline_str = readline("Minishell> ");
 			continue ;
 		}
-		parser(lexed_lst, &mal_lst, env_lst);
+		parser(lexed_lst, &mal_lst, env_lst, WEXITSTATUS(status));
 		token_lst = get_token_lst(lexed_lst, &mal_lst);
 		status = exec(token_lst, env, &mal_lst, &env_lst);
-		printf("status=%d\n", WEXITSTATUS(status));
+		// printf("status=%d\n", WEXITSTATUS(status));
 		free_lst_malloc(mal_lst);
 		free(readline_str);
 		readline_str = readline("Minishell> ");
