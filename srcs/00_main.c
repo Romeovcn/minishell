@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent <rvincent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/29 01:25:27 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/12/03 16:48:11 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ int main(int argc, char **argv, char **env)
 
 	// (void)argc;
 	// (void)argv;
-
+	signal_manager();
+	// signal(SIGINT, handler);
 	while (1)
 	{
 		readline_str = readline("Minishell> ");

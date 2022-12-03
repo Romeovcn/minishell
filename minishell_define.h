@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/29 15:34:53 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/03 15:45:56 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdbool.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <signal.h>
 
 # define WORD 0 // file name ou command ou argument
 # define PIPE 1 // pipe

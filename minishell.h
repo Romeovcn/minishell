@@ -146,6 +146,10 @@ void		heredoc_rm(t_tok_lst *tok_lst);
 //							 	Exec error									  //
 //----------------------------------------------------------------------------//
 int			error_manager(t_exec *exec, t_tok_lst *tok_lst);
+//----------------------------------------------------------------------------//
+//							 	Signal										  //
+//----------------------------------------------------------------------------//
+void		signal_manager();
 // To do :
 // ft_exit without args should exit last code status
 // Protect malloc
