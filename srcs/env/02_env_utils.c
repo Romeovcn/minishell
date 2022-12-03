@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*get_env_name(char *env, t_mal_lst **mal_lst)
+char	*get_env_name(char *env)
 {
 	int		i;
 	char	*name;
@@ -26,12 +26,9 @@ char	*get_env_name(char *env, t_mal_lst **mal_lst)
 			break ;
 		i++;
 	}
-	if (env[i] != '=')
-		return (NULL);
 	name = malloc((i + 1) * sizeof(char));
 	if (!name)
 		return (NULL);
-	// lstadd_back_malloc(mal_lst, lstnew_malloc(name));
 	i = 0;
 	while (env[i])
 	{
@@ -44,7 +41,7 @@ char	*get_env_name(char *env, t_mal_lst **mal_lst)
 	return (name);
 }
 
-void	get_env_lst(t_env_lst **env_lst, char **env, t_mal_lst **mal_lst)
+void	get_env_lst(t_env_lst **env_lst, char **env)
 {
 	char	*value;
 	char	*name;
@@ -53,25 +50,26 @@ void	get_env_lst(t_env_lst **env_lst, char **env, t_mal_lst **mal_lst)
 	i = 0;
 	while (env[i])
 	{
-		name = get_env_name(env[i], mal_lst);
+		name = get_env_name(env[i]);
 		value = getenv(name);
-		lstadd_back_env(env_lst, lstnew_env(name, value, mal_lst));
+		lstadd_back_env(env_lst, lstnew_env(name, value));
 		i++;
 	}
 }
 
-void	change_env_value(char *name, char *new_value, t_env_lst *env_lst)
+int	change_env_value(char *name, char *new_value, t_env_lst *env_lst)
 {
 	while (env_lst)
 	{
 		if (ft_strmatch(env_lst->name, name))
 		{
+			free(name);
 			env_lst->value = new_value;
-			break ;
+			return (1);
 		}
 		env_lst = env_lst->next;
 	}
-	free(name);
+	return (0);
 }
 
 char	*get_env_value(char *name, t_env_lst *env_lst)

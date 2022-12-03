@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_env_lst	*lstnew_env(char *name, char *value, t_mal_lst **mal_lst)
+t_env_lst	*lstnew_env(char *name, char *value)
 {
 	t_env_lst	*result;
 

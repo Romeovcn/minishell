@@ -61,7 +61,7 @@ t_lex_lst	*lexer(char *rl_str, t_mal_lst **mal_lst)
 		else
 			rl_str++;
 	}
-	// printf("--------Command lst lexed--------\n");
-	// read_lst(lex_lst);
+	printf("--------Command lst lexed--------\n");
+	read_lst(lex_lst);
 	return (lex_lst);
 }

@@ -20,7 +20,7 @@ t_tok_lst	*get_token_lst(t_lex_lst *lex_lst, t_mal_lst **mal_lst)
 	token = NULL;
 	lstadd_back_token(&token, lstnew_token(mal_lst));
 	head = token;
-	// printf("--------Command lst token--------\n");
+	printf("--------Command lst token--------\n");
 	head = token;
 	while (lex_lst)
 	{

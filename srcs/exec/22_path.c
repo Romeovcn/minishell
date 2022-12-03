@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*find_right_path(char *path, t_array_lst *cmd)
+char	*get_right_path(char *path, t_array_lst *cmd)
 {
 	char	**split_path;
 	int		i;
