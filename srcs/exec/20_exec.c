@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/03 15:09:52 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/03 19:44:45 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int	exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst, t_env_lst **env_l
 	status = 0;
 	exec = init_exec(tok_lst, mal_lst, env_lst, envp);
 	head_tok_lst = exec.tok_lst;
-	if (exec.nb_command == 1 && is_built_in_no_fork(tok_lst->args->content))
+	if (exec.nb_command == 1 && tok_lst->args 
+		&& is_built_in_no_fork(tok_lst->args->content))
 	{
 		exec_built_in(tok_lst, status, mal_lst, env_lst);
 		return 0;
