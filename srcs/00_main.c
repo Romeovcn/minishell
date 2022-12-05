@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/03 19:51:24 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:37:20 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ int main(int argc, char **argv, char **env)
 		free(readline_str);
 		readline_str = readline("Minishell> ");
 	}
+	if (!readline_str)
+		write(1, "exit\n", 6);
 	free_env_lst(env_lst);
 }
