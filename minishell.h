@@ -171,5 +171,4 @@ void		signal_manager();
 // "" | ""
 // Norm
 // Fix create all out file (only last file created)
-// Fix "" redir file name
 #endif
