@@ -7,5 +7,6 @@
 		"typeinfo": "c",
 		"types.h": "c",
 		"limits.h": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }

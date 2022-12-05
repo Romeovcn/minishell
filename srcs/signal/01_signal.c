@@ -6,23 +6,45 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 15:45:32 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/05 18:18:11 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:50:19 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	handle_sigint(int num)
+static void	handle_sigint(int num, siginfo_t *info, void *context)
 {
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	char test = 0;
+	(void)context;
+	if (num == SIGINT)
+	{
+		if (!info->si_pid)
+		{
+			write(0, "\n", 1);
+		}
+		else
+		{
+			write(1, "\n", 1);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
+	}
+	else if (num == SIGQUIT)
+	{
+		// write(1, "salut\n", );
+	}
 }
 
 void	signal_manager()
 {
-	signal(SIGINT, handle_sigint);
+	struct sigaction s_sig_okok;
+	// signal(SIGINT, handle_sigint);
+	s_sig_okok.sa_sigaction = handle_sigint;
+	s_sig_okok.sa_flags = SA_SIGINFO;
+	sigemptyset(&s_sig_okok.sa_mask);
+	sigaction(SIGINT, &s_sig_okok, 0);
+	sigaction(SIGQUIT, &s_sig_okok, 0);
 }
 
 // static void	handle_pid_sigint(int num)
