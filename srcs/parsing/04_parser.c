@@ -19,7 +19,6 @@ void	parse_env(char **str, t_mal_lst **mal_lst, t_env_lst *env_lst, char **resul
 
 	(*str)++;
 	env_name = parse_env_name(*str);
-	// printf("NAME=%s\n", env_name);
 	env_value = get_env_value(env_name, env_lst, status);
 	free(env_name);
 	if (env_value)
@@ -69,14 +68,10 @@ void	parser(t_lex_lst *lex_lst, t_mal_lst **mal_lst, t_env_lst *env_lst, int sta
 	while (lex_lst)
 	{
 		if (lex_lst->operator == HERE_DOC)
-			lex_lst = lex_lst->next->next;
-		if (lex_lst->operator == WORD)
-		{
+			lex_lst = lex_lst->next;
+		else if (lex_lst->operator == WORD)
 			lex_lst->content = parse_quote_env(lex_lst->content, mal_lst, env_lst, status);
-			lex_lst = lex_lst->next;
-		}
-		else
-			lex_lst = lex_lst->next;
+		lex_lst = lex_lst->next;
 	}
 	// printf("--------Command lst lexed after parsing--------\n");
 	// read_lst(head);
