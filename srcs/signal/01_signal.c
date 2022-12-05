@@ -34,19 +34,21 @@ static void	handle_sigint(int num, siginfo_t *info, void *context)
 	}
 	else if (num == SIGQUIT)
 	{
-		// write(1, "salut\n", );
+		rl_on_new_line();
+		rl_redisplay();
+		write(2, "", 1);
+		// rl_replace_line("", 0);
 	}
 }
 
 void	signal_manager()
 {
 	struct sigaction s_sig_okok;
-	// signal(SIGINT, handle_sigint);
 	s_sig_okok.sa_sigaction = handle_sigint;
 	s_sig_okok.sa_flags = SA_SIGINFO;
-	sigemptyset(&s_sig_okok.sa_mask);
+	// sigemptyset(&s_sig_okok.sa_mask);
 	sigaction(SIGINT, &s_sig_okok, 0);
-	// sigaction(SIGQUIT, &s_sig_okok, 0);
+	sigaction(SIGQUIT, &s_sig_okok, 0);
 }
 
 // static void	handle_pid_sigint(int num)

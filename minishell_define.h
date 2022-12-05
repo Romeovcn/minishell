@@ -24,6 +24,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 
+
 # define WORD 0 // file name ou command ou argument
 # define PIPE 1 // pipe
 # define REDIR_IN 2 // <
@@ -85,7 +86,5 @@ typedef struct e_list
 	int				nb_command;
 	char			**envp;
 }					t_exec;
-
-extern int G_STATUS;
 
 #endif

@@ -12,19 +12,19 @@
 
 #include "minishell.h"
 
-static void	command(t_exec *exec, int i)
+void	command(t_exec *exec, int i)
 {
 	char	**args;
 	char	*path;
 
 	args = lst_to_str_array(exec->tok_lst->args, &exec->mal_lst);
 	if (!is_built_in(args[0]))
-	path = get_right_path(getenv("PATH"), exec->tok_lst->args);
+		path = get_right_path(getenv("PATH"), exec->tok_lst->args);
 	if (exec->tok_lst->output_fd == 1 && i != exec->nb_command - 1)
 		dup2(exec->pipe_fd[1], STDOUT_FILENO);
 	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 	if (is_built_in(args[0]))
-		exit(exec_built_in(exec->tok_lst, 0, &exec->mal_lst, &exec->env_lst));
+		exit(exec_built_in(exec->tok_lst, G_STATUS, &exec->mal_lst, &exec->env_lst));
 	execve(path, args, exec->envp);
 	exit(0);
 }
@@ -36,7 +36,6 @@ static void	handle_pid_sigint(int num)
 
 void	exec_token(t_exec *exec, int i)
 {
-	// signal(SIGINT, handle_pid_sigint);
 	if (exec->tok_lst->output_fd == REDIR_OUT
 		|| exec->tok_lst->output_fd == APP_OUT)
 		check_outfile(exec->tok_lst);

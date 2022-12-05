@@ -3,6 +3,8 @@
 
 # include "./minishell_define.h"
 
+extern int G_STATUS;
+
 //----------------------------------------------------------------------------//
 //						 			Utils				 					  //
 //----------------------------------------------------------------------------//
@@ -16,10 +18,10 @@ char		**get_paths(char **env);
 //----------------------------------------------------------------------------//
 //							 	Built-in			 						  //
 //----------------------------------------------------------------------------//
-void		ft_env(char **args, t_env_lst *env_lst);
+int			ft_env(char **args, t_env_lst *env_lst);
 int			ft_pwd(void);
-void		ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst);
-void		ft_echo(char **cmd);
+int			ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst);
+int			ft_echo(char **cmd);
 int			ft_cd(char **path);
 //----------------------------------------------------------------------------//
 //							 	Built-in utils		 						  //
@@ -31,7 +33,7 @@ int			exec_built_in(t_tok_lst *tok_lst, int status, t_mal_lst **mal_lst, t_env_l
 //							 	Env			 								  //
 //----------------------------------------------------------------------------//
 int			export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args);
-void		unset_env(t_env_lst **env_lst, char **args);
+int			unset_env(t_env_lst **env_lst, char **args);
 //----------------------------------------------------------------------------//
 //							 	Env utils		 							  //
 //----------------------------------------------------------------------------//
@@ -166,7 +168,8 @@ void		signal_manager();
 // To do :
 // ft_exit without args should exit last code status
 // Protect malloc
-// cas tricky : << end << end << env = ctrl c should exit all
+// Verify folder instead of file
+// Manage ctrl "\"
 // "" | ""
 // Norm
 // Fix create all out file (only last file created)

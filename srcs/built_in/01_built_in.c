@@ -12,21 +12,22 @@
 
 #include "minishell.h"
 
-void	ft_env(char **args, t_env_lst *env_lst)
+int	ft_env(char **args, t_env_lst *env_lst)
 {
 	if (args[1])
 	{
 		printf("env: too many arguments\n");
-		return ;
+		return (1);
 	}
 	while (env_lst)
 	{
 		printf("%s=%s\n", env_lst->name, env_lst->value);
 		env_lst = env_lst->next;
 	}
+	return (0);
 }
 
-void	ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst)
+int	ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst)
 {
 	int i;
 
@@ -34,7 +35,7 @@ void	ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst)
 	while (args[i])
 		i++;
 	if (i > 2)
-		return (void)printf("exit: too many arguments\n");
+		return (printf("exit: too many arguments\n"), 1);
 	if (i == 1)
 	{
 		free_env_lst(env_lst);
@@ -60,6 +61,7 @@ void	ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst)
 	free_lst_malloc(mal_lst);
 	printf("exit\n");
 	exit(ft_atoi(args[1]) % 256);
+	return (0);
 }
 
 int	ft_pwd(void)
@@ -75,7 +77,7 @@ int	ft_pwd(void)
 	return (0);
 }
 
-void	ft_echo(char **cmd)
+int	ft_echo(char **cmd)
 {
 	int	i;
 	int	nl;
@@ -93,6 +95,7 @@ void	ft_echo(char **cmd)
 		printf(" %s", cmd[i++]);
 	if (nl == 1)
 		printf("\n");
+	return (0);
 }
 
 int	ft_cd(char **path)

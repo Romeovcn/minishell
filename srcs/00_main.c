@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+int G_STATUS = 0;
+
 int check_empty_line(char *rl_str) // to fix
 {
 	int	i;
@@ -31,7 +33,6 @@ int main(int argc, char **argv, char **env)
 {
 	t_exec		exec_struct;
 	char 		*readline_str;
-	int			status = 0;
 
 	exec_struct.env_lst = get_env_lst(env);
 	signal_manager();
@@ -51,7 +52,7 @@ int main(int argc, char **argv, char **env)
 			free(readline_str);
 			continue ;
 		}
-		parser(exec_struct.lex_lst, &exec_struct.mal_lst, exec_struct.env_lst, WEXITSTATUS(status));
+		parser(exec_struct.lex_lst, &exec_struct.mal_lst, exec_struct.env_lst, WEXITSTATUS(G_STATUS));
 		exec_struct.tok_lst = get_token_lst(exec_struct.lex_lst, &exec_struct.mal_lst);
 		init_exec(&exec_struct, env);
 		exec(exec_struct);

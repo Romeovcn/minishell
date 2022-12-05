@@ -85,7 +85,7 @@ int	export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args)
 	return(return_value);
 }
 
-void	unset_env(t_env_lst **env_lst, char **args)
+int	unset_env(t_env_lst **env_lst, char **args) //  manage error
 {
 	t_env_lst	*tmp_previous;
 	t_env_lst	*env_head;
@@ -111,4 +111,5 @@ void	unset_env(t_env_lst **env_lst, char **args)
 		}
 		i++;
 	}
+	return (0);
 }

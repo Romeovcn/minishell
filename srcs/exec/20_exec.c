@@ -51,22 +51,19 @@ int	exec(t_exec exec)
 {
 	t_tok_lst	*head_tok_lst;
 	int			stdin_fd;
-	int			status;
 
 	stdin_fd = dup(0);
-	status = 0;
 	head_tok_lst = exec.tok_lst;
 	if (exec.nb_command == 1 && exec.tok_lst->args && is_built_in_no_fork(exec.tok_lst->args->content))
 	{
-		exec_built_in(exec.tok_lst, status, &exec.mal_lst, &exec.env_lst);
+		G_STATUS = exec_built_in(exec.tok_lst, G_STATUS, &exec.mal_lst, &exec.env_lst);
 		return 0;
 	}
 	if (check_heredoc(&exec) == 1)
 		here_doc_manage(&exec);
 	if (exec.nb_command > 0)
 		pipex_exec(&exec);
-	status = error_manager(&exec, head_tok_lst);
+	G_STATUS = error_manager(&exec, head_tok_lst);
 	heredoc_rm(exec.tok_lst);
 	dup2(stdin_fd, 0);
-	return (status);
 }
