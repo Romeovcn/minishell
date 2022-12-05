@@ -14,9 +14,11 @@
 
 static void	pipex_exec(t_exec *exec)
 {
+	t_tok_lst *head;
 	t_exec	*tmp;
 	int		i;
 
+	head = exec->tok_lst;
 	tmp = exec;
 	i = 0;
 	while (i < tmp->nb_command)
@@ -31,6 +33,7 @@ static void	pipex_exec(t_exec *exec)
 		i++;
 		tmp->tok_lst = tmp->tok_lst->next;
 	}
+	exec->tok_lst = head;
 }
 
 void init_exec(t_exec *exec, char **env)

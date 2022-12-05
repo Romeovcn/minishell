@@ -50,6 +50,7 @@ static void	get_here_doc_file(char *delimiter, char *name_file)
 	delimiter = ft_strjoin(delimiter, "\n");
 	while (line)
 	{
+		printf("LINE = %s", line);
 		if (ft_strmatch(delimiter, line))
 			break ;
 		ft_putstr_fd(line, here_doc_fd);

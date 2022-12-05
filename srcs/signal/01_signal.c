@@ -14,13 +14,15 @@
 
 static void	handle_sigint(int num, siginfo_t *info, void *context)
 {
-	char test = 0;
 	(void)context;
 	if (num == SIGINT)
 	{
 		if (!info->si_pid)
 		{
-			write(0, "\n", 1);
+			int fd = open("/dev/null", O_RDONLY);
+			dup2(fd, 0);
+			close(fd);
+			write(1, "\n", 1);
 		}
 		else
 		{
@@ -44,7 +46,7 @@ void	signal_manager()
 	s_sig_okok.sa_flags = SA_SIGINFO;
 	sigemptyset(&s_sig_okok.sa_mask);
 	sigaction(SIGINT, &s_sig_okok, 0);
-	sigaction(SIGQUIT, &s_sig_okok, 0);
+	// sigaction(SIGQUIT, &s_sig_okok, 0);
 }
 
 // static void	handle_pid_sigint(int num)
