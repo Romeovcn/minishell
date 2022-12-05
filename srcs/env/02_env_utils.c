@@ -41,20 +41,23 @@ char	*get_env_name(char *env)
 	return (name);
 }
 
-void	get_env_lst(t_env_lst **env_lst, char **env)
+t_env_lst	*get_env_lst(char **env)
 {
-	char	*value;
-	char	*name;
-	int		i;
+	t_env_lst	*env_lst;
+	char		*value;
+	char		*name;
+	int			i;
 
 	i = 0;
+	env_lst = NULL;
 	while (env[i])
 	{
 		name = get_env_name(env[i]);
 		value = getenv(name);
-		lstadd_back_env(env_lst, lstnew_env(name, value));
+		lstadd_back_env(&env_lst, lstnew_env(name, value));
 		i++;
 	}
+	return (env_lst);
 }
 
 int	change_env_value(char *name, char *new_value, t_env_lst *env_lst)

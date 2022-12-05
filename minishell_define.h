@@ -74,17 +74,18 @@ typedef struct t_list
 typedef struct e_list
 {
 	pid_t			*pid;
+	int				pipe_fd[2];
 
+	t_lex_lst		*lex_lst;
 	t_tok_lst		*tok_lst;
-	t_env_lst		**env_lst;
-	t_mal_lst		**mal_lst;
+	t_env_lst		*env_lst;
+	t_mal_lst		*mal_lst;
+	t_array_lst		*here_doc_lst;
 
 	int				nb_command;
 	char			**envp;
-	int				pipe_fd[2];
-	t_array_lst		*here_doc_lst;
 }					t_exec;
 
-extern int G_STATUS = 10;
+extern int G_STATUS;
 
 #endif

@@ -36,7 +36,7 @@ void		unset_env(t_env_lst **env_lst, char **args);
 //							 	Env utils		 							  //
 //----------------------------------------------------------------------------//
 char		*get_env_name(char *env);
-void		get_env_lst(t_env_lst **env_lst, char **env);
+t_env_lst	*get_env_lst(char **env);
 int			change_env_value(char *name, char *new_value, t_env_lst *env_lst);
 char		*get_env_value(char *name, t_env_lst *env_lst, int status);
 void		free_env_lst(t_env_lst *env_lst);
@@ -118,7 +118,8 @@ int			ft_lstsize_token(t_tok_lst *lst);
 //----------------------------------------------------------------------------//
 //							 	Exec										  //
 //----------------------------------------------------------------------------//
-int			exec(t_tok_lst *tok_lst, char **envp, t_mal_lst **mal_lst, t_env_lst **env_lst);
+int			exec(t_exec exec);
+void		init_exec(t_exec *exec, char **env);
 char		*get_right_path(char *path, t_array_lst *cmd);
 //----------------------------------------------------------------------------//
 //							 	Exec simple									  //
