@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   21_path.c                                          :+:      :+:    :+:   */
+/*   22_path.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:07:33 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/11/17 19:04:40 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/05 19:37:46 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*get_right_path(char *path, t_array_lst *cmd)
 	char	*res;
 	int		accss;
 
+	if (ft_strlen(cmd->content) == 0)
+		exit(127);
 	res = ft_abs_path(cmd->content);
 	if (res != NULL)
 		return (res);
