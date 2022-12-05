@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:41 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/03 20:26:44 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:24:19 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void	check_outfile(t_tok_lst *tok_lst)
 	tmp = tok_lst->out_file;
 	while (tmp)
 	{
-		file_fd = open(tmp->content, O_RDWR | O_CREAT | O_TRUNC, 0666);
+		if (ft_strmatch(tmp->content2, "O_TRUNC"))
+			file_fd = open(tmp->content, O_RDWR | O_CREAT | O_TRUNC, 0666);
+		else if (ft_strmatch(tmp->content2, "O_APPEND"))
+			file_fd = open(tmp->content, O_RDWR | O_CREAT | O_APPEND, 0666);
 		if (file_fd == -1)
 			exit(1);
 		tmp = tmp->next;

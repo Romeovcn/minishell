@@ -123,8 +123,6 @@ char		*get_right_path(char *path, t_array_lst *cmd);
 //----------------------------------------------------------------------------//
 //							 	Exec simple									  //
 //----------------------------------------------------------------------------//
-void		get_here_doc_file(char *delimiter, char *name_file);
-void		command(t_exec *exec, int i);
 void		append(t_tok_lst *tok_lst);
 void		redir_out(t_tok_lst *tok_lst);
 void		redir_in(t_tok_lst *tok_lst);

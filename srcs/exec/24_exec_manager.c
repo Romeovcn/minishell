@@ -6,13 +6,13 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:46:29 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/05 16:17:53 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:36:17 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	command(t_exec *exec, int i)
+static void	command(t_exec *exec, int i)
 {
 	char	**args;
 	char	*path;
@@ -29,14 +29,15 @@ void	command(t_exec *exec, int i)
 	exit(0);
 }
 
-// static void	handle_pid_sigint(int num)
-// {
-// 	write(1, "\n", 1);
-// }
+static void	handle_pid_sigint(int num)
+{
+	printf("je suis la");
+	write(1, "\n", 1);
+}
 
 void	exec_token(t_exec *exec, int i)
 {
-	// signal(SIGINT, handle_pid_sigint);
+	signal(SIGINT, handle_pid_sigint);
 	if (exec->tok_lst->output_fd == REDIR_OUT
 		|| exec->tok_lst->output_fd == APP_OUT)
 		check_outfile(exec->tok_lst);

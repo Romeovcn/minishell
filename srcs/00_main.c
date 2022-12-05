@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/05 16:37:20 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:42:52 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int main(int argc, char **argv, char **env)
 	// unset_env(&env_lst, unset);
 	// ft_env(test, env_lst);
 	// ft_exit(args, 32256, mal_lst, env_lst);
-	// ft_echo(test);
 
 	signal_manager();
 	readline_str = readline("Minishell> ");
@@ -77,7 +76,7 @@ int main(int argc, char **argv, char **env)
 		// printf("status=%d\n", WEXITSTATUS(status));
 		free_lst_malloc(mal_lst);
 		free(readline_str);
-		readline_str = readline("Minishell> ");
+		readline_str = readline("minishell> ");
 	}
 	if (!readline_str)
 		write(1, "exit\n", 6);

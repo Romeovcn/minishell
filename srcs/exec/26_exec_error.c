@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:43 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/03 20:25:06 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:38:05 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	error_message(char *file, char *message)
 	ft_putstr_fd(message, 2);
 }
 
-void	error_status(t_tok_lst *tok_lst, int status)
+static void	error_status(t_tok_lst *tok_lst, int status)
 {
 	char	*file_error;
 

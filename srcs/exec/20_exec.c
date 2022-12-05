@@ -6,13 +6,13 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/05 16:02:29 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:37:02 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	pipex_exec(t_exec *exec)
+static void	pipex_exec(t_exec *exec)
 {
 	t_exec	*tmp;
 	int		i;
@@ -33,7 +33,7 @@ void	pipex_exec(t_exec *exec)
 	}
 }
 
-t_exec	init_exec(t_tok_lst *tok_lst, t_mal_lst **mal_lst, t_env_lst **env_lst, char **env)
+static t_exec	init_exec(t_tok_lst *tok_lst, t_mal_lst **mal_lst, t_env_lst **env_lst, char **env)
 {
 	t_exec exec;
 

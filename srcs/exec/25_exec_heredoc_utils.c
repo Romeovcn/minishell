@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:50:56 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/03 15:05:24 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:34:44 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_heredoc(t_exec *exec)
 	return (0);
 }
 
-char	*get_heredoc_name(int i)
+static char	*get_heredoc_name(int i)
 {
 	char	*heredoc_name;
 
@@ -39,7 +39,7 @@ char	*get_heredoc_name(int i)
 	return (heredoc_name);
 }
 
-void	get_here_doc_file(char *delimiter, char *name_file)
+static void	get_here_doc_file(char *delimiter, char *name_file)
 {
 	char	*line;
 	int		len;

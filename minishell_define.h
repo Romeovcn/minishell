@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/03 15:45:56 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:55:23 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ typedef struct e_list
 	int				pipe_fd[2];
 	t_array_lst		*here_doc_lst;
 }					t_exec;
+
+extern int STATUS;
 
 #endif
