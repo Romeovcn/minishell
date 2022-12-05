@@ -34,7 +34,7 @@ int	check_not_closed_string(char *str)
 		str++;
 	}
 	if (quote != 0)
-		return (1);
+		return (printf("Not closed quote error\n"), 1);
 	return (0);
 }
 
@@ -75,7 +75,7 @@ int	check_error(t_lex_lst *lexed_list)
 		else if (lexed_list->operator == WORD)
 		{
 			if (check_not_closed_string(lexed_list->content))
-				return (printf("Not closed quote error\n"), 1);
+				return (1);
 		}
 		lexed_list = lexed_list->next;
 	}
