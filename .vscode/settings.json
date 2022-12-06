@@ -6,7 +6,8 @@
 		"minishell.h": "c",
 		"typeinfo": "c",
 		"types.h": "c",
-		"limits.h": "c"
+		"limits.h": "c",
+		"termios.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

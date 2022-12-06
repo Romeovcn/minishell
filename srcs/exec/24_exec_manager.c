@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:46:29 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/05 19:35:12 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/06 15:28:16 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ void	command(t_exec *exec, int i)
 		exit(exec_built_in(exec->tok_lst, G_STATUS, &exec->mal_lst, &exec->env_lst));
 	execve(path, args, exec->envp);
 	exit(0);
-}
-
-static void	handle_pid_sigint(int num)
-{
-	write(1, "\n", 1);
 }
 
 void	exec_token(t_exec *exec, int i)

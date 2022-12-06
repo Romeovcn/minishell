@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/05 19:41:16 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/06 19:01:52 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <signal.h>
-
+# include <termios.h>
 
 # define WORD 0 // file name ou command ou argument
 # define PIPE 1 // pipe
