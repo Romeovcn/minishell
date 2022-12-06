@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   07_check_error.c                                   :+:      :+:    :+:   */
+/*   02_check_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/13 03:10:29 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/12/06 23:33:05 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,23 @@ int	check_pipe(t_lex_lst *lexed_list)
 int	check_error(t_lex_lst *lexed_list)
 {
 	if (lexed_list->operator == PIPE)
-		return (printf("No command before pipe\n"), 1);
+		return (printf("bash: syntax error near unexpected token `|'\n"), G_STATUS = 750, 2);
 	while (lexed_list)
 	{
 		if (lexed_list->operator == PIPE)
 		{
 			if (check_pipe(lexed_list))
-				return (1);
+				return (G_STATUS = 500, 1);
 		}
 		else if (lexed_list->operator != PIPE && lexed_list->operator != WORD)
 		{
 			if (check_redir(lexed_list))
-				return (1);
+				return (G_STATUS = 500, 1);
 		}
 		else if (lexed_list->operator == WORD)
 		{
 			if (check_not_closed_string(lexed_list->content))
-				return (1);
+				return (G_STATUS = 500, 1);
 		}
 		lexed_list = lexed_list->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:50:56 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/05 18:34:44 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/07 00:04:29 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ static void	get_here_doc_file(char *delimiter, char *name_file)
 	int		here_doc_fd;
 
 	here_doc_fd = open(name_file, O_CREAT | O_RDWR, 0666);
-	line = get_next_line(0);
-	delimiter = ft_strjoin(delimiter, "\n");
+	line = readline("> ");
+	delimiter = ft_strjoin(delimiter, "");
 	while (line)
 	{
-		printf("LINE = %s", line);
 		if (ft_strmatch(delimiter, line))
 			break ;
+		line = ft_strjoin(line, "\n");
 		ft_putstr_fd(line, here_doc_fd);
 		free(line);
-		line = get_next_line(0);
+		line = readline("> ");
 	}
 	free(line);
 	close(here_doc_fd);

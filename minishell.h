@@ -165,12 +165,13 @@ char		*ft_abs_path(char *cmd);
 //							 	Signal										  //
 //----------------------------------------------------------------------------//
 void		signal_manager();
+void	signal_manager_pid();
 // To do :
 // ft_exit without args should exit last code status
 // Protect malloc
 // Verify folder instead of file
 // Manage ctrl "\"
-// "" | ""
+// error | sans commande
 // Norm
 // Fix create all out file (only last file created)
 #endif

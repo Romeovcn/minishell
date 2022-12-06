@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/05 18:37:02 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/06 23:59:09 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	pipex_exec(t_exec *exec)
 	{
 		if (pipe(tmp->pipe_fd) == -1)
 			return ;
+		signal_manager_pid();
 		exec->pid[i] = fork();
 		if (exec->pid[i] == 0)
 			exec_token(tmp, i);
@@ -54,13 +55,13 @@ int	exec(t_exec exec)
 
 	stdin_fd = dup(0);
 	head_tok_lst = exec.tok_lst;
+	if (check_heredoc(&exec) == 1)
+		here_doc_manage(&exec);
 	if (exec.nb_command == 1 && exec.tok_lst->args && is_built_in_no_fork(exec.tok_lst->args->content))
 	{
 		G_STATUS = exec_built_in(exec.tok_lst, G_STATUS, &exec.mal_lst, &exec.env_lst);
 		return 0;
 	}
-	if (check_heredoc(&exec) == 1)
-		here_doc_manage(&exec);
 	if (exec.nb_command > 0)
 		pipex_exec(&exec);
 	G_STATUS = error_manager(&exec, head_tok_lst);
