@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   16_tokenizer_lst_utils.c                           :+:      :+:    :+:   */
+/*   08_tokenizer_lst_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/17 13:15:42 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:27:53 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_tok_lst	*lstnew_token(t_mal_lst **mal_lst)
 
 	result = malloc(sizeof(t_tok_lst));
 	if (!result)
-		return (0);
+		exit(1);
 	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
 	result->args = NULL;
 	result->input_fd = 0;

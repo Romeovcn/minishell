@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   04_lexer.c                                         :+:      :+:    :+:   */
+/*   01_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/13 03:13:59 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:27:03 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	manage_word(char *rl_str, t_lex_lst **lex_lst, t_mal_lst **mal_lst)
 
 	size = get_word_size(rl_str);
 	word = malloc((size + 1) * sizeof(char));
+	if (!word)
+		exit(1);
 	get_word(rl_str, &word);
 	lstadd_back_lex(lex_lst, lstnew_lex(word, WORD, mal_lst));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   02_env_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/13 21:55:39 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:25:33 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*get_env_name(char *env)
 	}
 	name = malloc((i + 1) * sizeof(char));
 	if (!name)
-		return (NULL);
+		exit(1);
 	i = 0;
 	while (env[i])
 	{

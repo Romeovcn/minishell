@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:50:56 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/07 00:04:29 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:41:10 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static char	*get_heredoc_name(int i)
 	char	*heredoc_name;
 
 	heredoc_name = malloc(sizeof(char) * 9);
+	if (!heredoc_name)
+		exit(1);
 	heredoc_name = ".heredoc";
 	heredoc_name = ft_strjoin(heredoc_name, ft_itoa(i));
 	return (heredoc_name);
@@ -75,11 +77,6 @@ void	here_doc_manage(t_exec *exec)
 		del_head = exec->tok_lst->delimiter;
 		while (exec->tok_lst->delimiter)
 		{
-			// if (G_STATUS == 666)
-			// {
-			// 	G_STATUS = status_tmp;
-			// 	return ;
-			// }
 			here_doc_name = get_heredoc_name(i);
 			get_here_doc_file(exec->tok_lst->delimiter->content, here_doc_name);
 			exec->tok_lst->delimiter->content2 = here_doc_name;

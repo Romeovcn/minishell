@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   05_lexer_lst_utils.c                               :+:      :+:    :+:   */
+/*   03_lexer_lst_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/09 17:40:33 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:27:24 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_lex_lst	*lstnew_lex(void *content, int operator, t_mal_lst **mal_lst)
 
 	result = malloc(sizeof(t_lex_lst));
 	if (!result)
-		return (0);
+		exit(1);
 	result->content = content;
 	result->operator = operator;
 	result->next = NULL;

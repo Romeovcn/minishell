@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   03_env_lst_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/11 20:24:03 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:25:46 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_env_lst	*lstnew_env(char *name, char *value)
 	result = malloc(sizeof(t_env_lst));
 	if (!result)
 		return (0);
-	// lstadd_back_malloc(mal_lst, lstnew_malloc(result));
 	result->name = name;
 	result->value = value;
 	result->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:41 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/05 18:24:19 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:24:17 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ char	*get_wrong_access(t_tok_lst *tok_lst)
 	tmp = tok_lst->out_file;
 	while (tmp)
 	{
+		if (is_directory(tmp->content) == 1)
+			return (tmp->content);
 		file_fd = open(tmp->content, O_RDONLY);
 		if (file_fd == -1)
 			return (tmp->content);
@@ -44,12 +46,15 @@ void	check_outfile(t_tok_lst *tok_lst)
 	tmp = tok_lst->out_file;
 	while (tmp)
 	{
+		if (is_directory(tmp->content) == 1)
+			exit(126);
 		if (ft_strmatch(tmp->content2, "O_TRUNC"))
 			file_fd = open(tmp->content, O_RDWR | O_CREAT | O_TRUNC, 0666);
 		else if (ft_strmatch(tmp->content2, "O_APPEND"))
 			file_fd = open(tmp->content, O_RDWR | O_CREAT | O_APPEND, 0666);
 		if (file_fd == -1)
 			exit(1);
+		close(file_fd);
 		tmp = tmp->next;
 	}
 }
@@ -65,6 +70,7 @@ void	check_infile(t_tok_lst *tok_lst)
 		file_fd = open(tmp->content, O_RDONLY);
 		if (file_fd == -1)
 			exit(1);
+		close(file_fd);
 		tmp = tmp->next;
 	}
 }

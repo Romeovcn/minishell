@@ -142,6 +142,7 @@ char		*ft_newstrjoin(char *s1, char *s2);
 void		close_fd(int fd1, int fd2);
 int			file_exist(char *file_name);
 int			file_exec(char *file_name);
+int			is_directory(char *path);
 //----------------------------------------------------------------------------//
 //							 	Exec here_doc								  //
 //----------------------------------------------------------------------------//
@@ -169,11 +170,17 @@ void		signal_manager_pid();
 void		signal_manager_hd();
 void		sigquit_process(int sig);
 // To do :
-// ft_exit without args should exit last code status
+// verify status
 // Protect malloc
-// Verify folder instead of file
-// Manage ctrl "\"
-// error | sans commande
+// wrong error when a file is write instead command
+    // bash 
+    //  Makefile: command not found
+    // minishell
+    //  bash: Makefile: Permission denied
 // Norm
-// Fix create all out file (only last file created)
+// builtin :
+    // change old pwd
+    // shell level
+// export +=
+
 #endif

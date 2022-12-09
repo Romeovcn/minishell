@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/29 16:03:51 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:29:34 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_array_lst	*lstnew_array(char *content, t_mal_lst **mal_lst)
 
 	result = malloc(sizeof(t_array_lst));
 	if (!result)
-		return (0);
+		exit(1);
 	result->content = content;
 	result->next = NULL;
 	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
@@ -31,7 +31,7 @@ t_array_lst	*lstnew_array_content2(char *c, char *c2, t_mal_lst **mal_lst)
 
 	result = malloc(sizeof(t_array_lst));
 	if (!result)
-		return (0);
+		exit(1);
 	result->content = c;
 	result->content2 = c2;
 	result->next = NULL;

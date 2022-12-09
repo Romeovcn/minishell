@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent  <rvincent@student.42.fr   >      +#+  +:+       +#+        */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/09 17:40:01 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:23:09 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	error_exit(t_mal_lst *mal_lst)
 {
-	printf("Malloc error\n");
 	free_lst_malloc(mal_lst);
 	exit (1);
 }

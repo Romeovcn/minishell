@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   05_parser_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rvincent <rvincent@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/11/29 01:03:14 by rvincent         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:27:42 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*parse_env_name(char *str)
 	}
 	env_name = malloc((i + 1) * sizeof(char));
 	if (!env_name)
-		return (NULL);
+		exit(1);
 	i = 0;
 	while (*str)
 	{
