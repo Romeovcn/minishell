@@ -46,7 +46,7 @@ static void	handle_signal_hd(int signal, siginfo_t *info, void *context)
 		ft_putstr_fd("\b\b  \b\b", 0);
 }
 
-void *sigquit_process(void)
+void sigquit_process(int sig)
 {
 	ft_putstr_fd("Quit (core dumped)\n", 1);
 }
