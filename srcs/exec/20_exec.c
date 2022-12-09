@@ -21,11 +21,11 @@ static void	pipex_exec(t_exec *exec)
 	head = exec->tok_lst;
 	tmp = exec;
 	i = 0;
+	signal(SIGQUIT, sigquit_process);
 	while (i < tmp->nb_command)
 	{
 		if (pipe(tmp->pipe_fd) == -1)
 			return ;
-		signal_manager_pid();
 		exec->pid[i] = fork();
 		if (exec->pid[i] == 0)
 			exec_token(tmp, i);

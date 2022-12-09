@@ -46,18 +46,15 @@ static void	get_here_doc_file(char *delimiter, char *name_file)
 	int		here_doc_fd;
 
 	here_doc_fd = open(name_file, O_CREAT | O_RDWR, 0666);
-	line = readline("> ");
-	delimiter = ft_strjoin(delimiter, "");
-	while (line)
+	delimiter = ft_strjoin(delimiter, "\n");
+	while (1)
 	{
-		if (ft_strmatch(delimiter, line))
+		line = get_next_line(0);
+		if (!line || ft_strmatch(delimiter, line))
 			break ;
-		line = ft_strjoin(line, "\n");
 		ft_putstr_fd(line, here_doc_fd);
 		free(line);
-		line = readline("> ");
 	}
-	free(line);
 	close(here_doc_fd);
 }
 
@@ -67,14 +64,22 @@ void	here_doc_manage(t_exec *exec)
 	t_array_lst	*del_head;
 	char		*here_doc_name;
 	int			i;
+	int status_tmp;
 
 	i = 0;
 	tok_head = exec->tok_lst;
+	status_tmp = G_STATUS;
+	signal_manager_hd();
 	while (exec->tok_lst)
 	{
 		del_head = exec->tok_lst->delimiter;
 		while (exec->tok_lst->delimiter)
 		{
+			// if (G_STATUS == 666)
+			// {
+			// 	G_STATUS = status_tmp;
+			// 	return ;
+			// }
 			here_doc_name = get_heredoc_name(i);
 			get_here_doc_file(exec->tok_lst->delimiter->content, here_doc_name);
 			exec->tok_lst->delimiter->content2 = here_doc_name;
@@ -84,6 +89,7 @@ void	here_doc_manage(t_exec *exec)
 		exec->tok_lst->delimiter = del_head;
 		exec->tok_lst = exec->tok_lst->next;
 	}
+	G_STATUS = status_tmp;
 	exec->tok_lst = tok_head;
 }
 

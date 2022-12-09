@@ -35,9 +35,9 @@ int main(int argc, char **argv, char **env)
 	char 		*readline_str;
 
 	exec_struct.env_lst = get_env_lst(env);
-		signal_manager();
 	while (1)
 	{
+		signal_manager();
 		readline_str = readline("Minishell> ");
 		if (!readline_str)
 			break ;

@@ -165,7 +165,9 @@ char		*ft_abs_path(char *cmd);
 //							 	Signal										  //
 //----------------------------------------------------------------------------//
 void		signal_manager();
-void	signal_manager_pid();
+void		signal_manager_pid();
+void		signal_manager_hd();
+void		*sigquit_process(void);
 // To do :
 // ft_exit without args should exit last code status
 // Protect malloc
