@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t length)
 {
@@ -25,16 +25,16 @@ int	ft_strncmp(const char *s1, const char *s2, size_t length)
 		s1++;
 		s2++;
 	}
-	if (*s1 < 0 && *s1 != *s2)
-		return (1);
-	if (*s2 < 0 && *s1 != *s2)
-		return (-1);
 	i = *s1 - *s2;
 	return (i);
 }
 
 // int main(void)
 // {
-// 	printf("%d\n", strncmp("test/200", "test¥", 6));
-// 	printf("%d", ft_strncmp("test¥", "test¥", 6));
+// 	char s1[] = "a";
+// 	char s2[] = "ghf";
+// 	int size = 3;
+
+// 	printf("%d\n", strncmp(s1, s2, size));
+// 	printf("%d", ft_strncmp(s1, s2, size));
 // }
