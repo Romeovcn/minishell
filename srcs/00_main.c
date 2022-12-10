@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/07 00:08:00 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/10 18:39:54 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int main(int argc, char **argv, char **env)
 		exec_struct.tok_lst = get_token_lst(exec_struct.lex_lst, &exec_struct.mal_lst);
 		init_exec(&exec_struct, env);
 		exec(exec_struct);
+		printf("main status : %d\n", G_STATUS);
 		free_lst_malloc(exec_struct.mal_lst);
 		free(readline_str);
 	}

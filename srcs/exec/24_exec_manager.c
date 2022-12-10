@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:46:29 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/09 19:23:25 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/10 18:50:54 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	command(t_exec *exec, int i)
 	args = lst_to_str_array(exec->tok_lst->args, &exec->mal_lst);
 	if (!is_built_in(args[0]))
 		path = get_right_path(getenv("PATH"), exec->tok_lst->args);
-	// printf("je suis la\n");
 	if (is_directory(path) == 1)
 		exit(126);
 	if (exec->tok_lst->output_fd == 1 && i != exec->nb_command - 1)

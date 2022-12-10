@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/09 16:43:27 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:02:34 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,20 @@ int	exec(t_exec exec)
 	stdin_fd = dup(0);
 	head_tok_lst = exec.tok_lst;
 	if (check_heredoc(&exec) == 1)
+	{
 		here_doc_manage(&exec);
+		if (G_STATUS != 0)
+		{
+			heredoc_rm(exec.tok_lst);
+			dup2(stdin_fd, 0);
+			return (0);
+		}
+	}
 	if (exec.nb_command == 1 && exec.tok_lst->args
 		&& is_built_in_no_fork(exec.tok_lst->args->content))
 	{
 		G_STATUS = exec_built_in(exec.tok_lst, G_STATUS, &exec.mal_lst, &exec.env_lst);
-		return 0;
+		return (0);
 	}
 	if (exec.nb_command > 0)
 		pipex_exec(&exec);

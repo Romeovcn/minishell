@@ -170,13 +170,10 @@ void		signal_manager_pid();
 void		signal_manager_hd();
 void		sigquit_process(int sig);
 // To do :
-// verify status
+// verify status :
+    // crtl c when hd
+    // crtl \
 // Protect malloc
-// wrong error when a file is write instead command
-    // bash 
-    //  Makefile: command not found
-    // minishell
-    //  bash: Makefile: Permission denied
 // Norm
 // builtin :
     // change old pwd
