@@ -26,7 +26,7 @@ NAME = minishell
 CC = gcc
 # make && valgrind --suppressions=./suppres.txt ./minishell
 # --suppressions=./suppres.txt
-CFLAGS = -MMD
+CFLAGS =
 # CFLAGS = -Werror -Wall -Wextra
 
 # -- RULES -- #
