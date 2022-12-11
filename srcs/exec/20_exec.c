@@ -78,7 +78,7 @@ int	exec(t_exec exec)
 	}
 	if (exec.nb_command > 0)
 		pipex_exec(&exec);
-	G_STATUS = error_manager(&exec, head_tok_lst);
+	error_manager(&exec, head_tok_lst);
 	heredoc_rm(exec.tok_lst);
 	dup2(stdin_fd, 0);
 }

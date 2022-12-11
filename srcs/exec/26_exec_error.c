@@ -54,21 +54,18 @@ static void	error_status(t_tok_lst *tok_lst, int status)
 		free(file_error);
 }
 
-int	error_manager(t_exec *exec, t_tok_lst *tok_lst)
+void	error_manager(t_exec *exec, t_tok_lst *tok_lst)
 {
 	int			status;
 	int			i;
 
 	i = 0;
-	while (tok_lst)
+	while (tok_lst && waitpid(exec->pid[i], &G_STATUS, 0) > 0)
 	{
-		waitpid(exec->pid[i++], &status, 0);
-		if (status == 131)
-			status = 33536;
-		printf("error status: %d\n", status);
-		printf("error status W: %d\n", WEXITSTATUS(status));
-		error_status(tok_lst, WEXITSTATUS(status));
+		if (G_STATUS == 131)
+			G_STATUS = 33536;
+		error_status(tok_lst, WEXITSTATUS(G_STATUS));
 		tok_lst = tok_lst->next;
+		i++;
 	}
-	return (status);
 }

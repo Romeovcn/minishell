@@ -25,12 +25,8 @@ static void	handle_signal(int signal, siginfo_t *info, void *context)
 	}
 	else
 	{
-		// kill(1, SIGKILL);
 		ft_putstr_fd("\n", 1);
-		// printf("pid: %d\n", info->si_pid);
-		// kill(info->si_pid, SIGQUIT);
 		G_STATUS = 33500;
-		// kill(0, SIGKILL);
 	}
 }
 

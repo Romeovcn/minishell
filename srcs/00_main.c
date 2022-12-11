@@ -34,10 +34,12 @@ int main(int argc, char **argv, char **env)
 	t_exec		exec_struct;
 	char 		*readline_str;
 
+	G_STATUS = 0;
 	exec_struct.env_lst = get_env_lst(env);
 	while (1)
 	{
 		signal_manager();
+		printf("status=%d\n", G_STATUS);
 		readline_str = readline("Minishell> ");
 		if (!readline_str)
 			break ;
@@ -56,7 +58,6 @@ int main(int argc, char **argv, char **env)
 		exec_struct.tok_lst = get_token_lst(exec_struct.lex_lst, &exec_struct.mal_lst);
 		init_exec(&exec_struct, env);
 		exec(exec_struct);
-		printf("main status : %d\n", G_STATUS);
 		free_lst_malloc(exec_struct.mal_lst);
 		free(readline_str);
 	}

@@ -153,7 +153,7 @@ void		heredoc_rm(t_tok_lst *tok_lst);
 //----------------------------------------------------------------------------//
 //							 	Exec error									  //
 //----------------------------------------------------------------------------//
-int			error_manager(t_exec *exec, t_tok_lst *tok_lst);
+void		error_manager(t_exec *exec, t_tok_lst *tok_lst);
 //----------------------------------------------------------------------------//
 //							 	Exec access									  //
 //----------------------------------------------------------------------------//
@@ -179,5 +179,5 @@ void		sigquit_process(int sig);
     // change old pwd
     // shell level
 // export +=
-
+// if unset path, command still works because path is not unset in **env but in linked list
 #endif
