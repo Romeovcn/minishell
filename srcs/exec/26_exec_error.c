@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:43 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/10 18:51:39 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:38:21 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	error_manager(t_exec *exec, t_tok_lst *tok_lst)
 		if (status == 131)
 			status = 33536;
 		printf("error status: %d\n", status);
-		error_status(tok_lst, status);
+		printf("error status W: %d\n", WEXITSTATUS(status));
+		error_status(tok_lst, WEXITSTATUS(status));
 		tok_lst = tok_lst->next;
 	}
 	return (status);

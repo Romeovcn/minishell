@@ -171,8 +171,8 @@ void		signal_manager_hd();
 void		sigquit_process(int sig);
 // To do :
 // verify status :
-    // crtl c when hd
-    // crtl \
+    // crtl c on command
+    //  ex: cat or sleep 3
 // Protect malloc
 // Norm
 // builtin :

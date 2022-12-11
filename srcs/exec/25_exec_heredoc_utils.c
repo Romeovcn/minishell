@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:50:56 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/10 16:35:31 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:20:27 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,15 @@ void	here_doc_manage(t_exec *exec)
 	t_array_lst	*del_head;
 	char		*here_doc_name;
 	int			i;
-	// int status_tmp;
 
 	i = 0;
 	tok_head = exec->tok_lst;
-	// status_tmp = G_STATUS;
-	// printf("status hd: %d\n", G_STATUS);
 	signal_manager_hd();
 	while (exec->tok_lst)
 	{
 		del_head = exec->tok_lst->delimiter;
 		while (exec->tok_lst->delimiter)
 		{
-			// printf("i: %d\n", i);
 			here_doc_name = get_heredoc_name(i);
 			get_here_doc_file(exec->tok_lst->delimiter->content, here_doc_name);
 			exec->tok_lst->delimiter->content2 = here_doc_name;
@@ -88,7 +84,6 @@ void	here_doc_manage(t_exec *exec)
 		exec->tok_lst->delimiter = del_head;
 		exec->tok_lst = exec->tok_lst->next;
 	}
-	// G_STATUS = status_tmp;
 	exec->tok_lst = tok_head;
 }
 

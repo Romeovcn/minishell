@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/10 19:02:34 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:42:15 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	pipex_exec(t_exec *exec)
 {
-	t_tok_lst *head;
-	t_exec	*tmp;
-	int		i;
+	t_tok_lst	*head;
+	t_exec		*tmp;
+	int			i;
 
 	head = exec->tok_lst;
 	tmp = exec;
@@ -27,6 +27,11 @@ static void	pipex_exec(t_exec *exec)
 		if (pipe(tmp->pipe_fd) == -1)
 			return ;
 		exec->pid[i] = fork();
+		if (exec->pid[i] < 0)
+		{
+			close_fd(tmp->pipe_fd[0], tmp->pipe_fd[1]);
+			exit(1);
+		}
 		if (exec->pid[i] == 0)
 			exec_token(tmp, i);
 		dup2(tmp->pipe_fd[0], STDIN_FILENO);

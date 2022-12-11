@@ -6,12 +6,11 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 15:45:32 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/10 18:50:18 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:34:18 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <term.h>
 
 static void	handle_signal(int signal, siginfo_t *info, void *context)
 {
@@ -26,7 +25,12 @@ static void	handle_signal(int signal, siginfo_t *info, void *context)
 	}
 	else
 	{
+		// kill(1, SIGKILL);
 		ft_putstr_fd("\n", 1);
+		// printf("pid: %d\n", info->si_pid);
+		// kill(info->si_pid, SIGQUIT);
+		G_STATUS = 33500;
+		// kill(0, SIGKILL);
 	}
 }
 
@@ -42,7 +46,6 @@ static void	handle_signal_hd(int signal, siginfo_t *info, void *context)
 		close(fd);
 		ft_putstr_fd("\n", 1);
 		G_STATUS = 33500;
-		// printf("status: %d\n\n", G_STATUS);
 	}
 	if (signal == SIGQUIT)
 		ft_putstr_fd("\b\b  \b\b", 0);
@@ -52,7 +55,6 @@ void sigquit_process(int sig)
 {
 	ft_putstr_fd("Quit (core dumped)\n", 1);
 	G_STATUS = 33536;
-	printf("status: %d\n", G_STATUS);
 }
 
 void	signal_manager_hd()

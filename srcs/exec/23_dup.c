@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:25 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/09 18:07:51 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/11 16:37:53 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	append(t_tok_lst *tok_lst)
 {
-	char	*file;
 	int		file_fd;
+	char	*file;
 
 	file = lstlast_array(tok_lst->out_file)->content;
 	file_fd = open(file, O_RDWR | O_CREAT | O_APPEND, 0666);
@@ -35,8 +35,8 @@ void	here_doc(t_tok_lst *tok_lst)
 
 void	redir_out(t_tok_lst *tok_lst)
 {
-	int			file_fd;
-	char		*file;
+	int		file_fd;
+	char	*file;
 
 	file = lstlast_array(tok_lst->out_file)->content;
 	file_fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0666);
@@ -46,8 +46,8 @@ void	redir_out(t_tok_lst *tok_lst)
 
 void	redir_in(t_tok_lst *tok_lst)
 {
-	int			file_fd;
-	char		*file;
+	int		file_fd;
+	char	*file;
 
 	file = lstlast_array(tok_lst->in_file)->content;
 	file_fd = open(file, O_RDONLY);
