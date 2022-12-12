@@ -28,8 +28,8 @@ char	*get_right_path(char *path, t_array_lst *cmd)
 	i = 0;
 	while (split_path[i])
 	{
-		res = ft_newstrjoin(split_path[i], "/");
-		res = ft_newstrjoin(res, cmd->content);
+		res = ft_strjoin(split_path[i], "/");
+		res = ft_strjoin(res, cmd->content);
 		accss = access(res, X_OK);
 		if (accss == 0)
 			return (ft_strdup(res));

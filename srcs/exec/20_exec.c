@@ -69,8 +69,7 @@ int	exec(t_exec exec)
 			return (0);
 		}
 	}
-	if (exec.nb_command == 1 && exec.tok_lst->args
-		&& is_built_in_no_fork(exec.tok_lst->args->content))
+	if (exec.nb_command == 1 && exec.tok_lst->args && is_built_in_no_fork(exec.tok_lst->args->content))
 	{
 		G_STATUS = exec_built_in(exec.tok_lst, G_STATUS, &exec.mal_lst, &exec.env_lst);
 		return (0);

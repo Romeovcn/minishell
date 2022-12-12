@@ -113,3 +113,24 @@ char **envp_to_str_array(t_env_lst *lst, char **old_envp)
 	res[i] = NULL;
 	return (res);
 }
+
+char	*ft_strjoin_mal(char const *s1, char const *s2, t_mal_lst **mal_lst)
+{
+	char	*result;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	result = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!result)
+		return (NULL);
+	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
+	while (s1[i])
+		result[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		result[j++] = s2[i++];
+	result[j] = 0;
+	return (result);
+}

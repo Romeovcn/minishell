@@ -29,19 +29,19 @@ int	check_heredoc(t_exec *exec)
 	return (0);
 }
 
-static char	*get_heredoc_name(int i)
+static char	*get_heredoc_name(int i, t_mal_lst **mal_lst)
 {
 	char	*heredoc_name;
+	char 	*index;
 
-	heredoc_name = malloc(sizeof(char) * 9);
-	if (!heredoc_name)
-		exit(1);
-	heredoc_name = ".heredoc";
-	heredoc_name = ft_strjoin(heredoc_name, ft_itoa(i));
+	index = ft_itoa(i);
+	heredoc_name = ft_strjoin(".heredoc", index);
+	lstadd_back_malloc(mal_lst, lstnew_malloc(heredoc_name));
+	free(index);
 	return (heredoc_name);
 }
 
-static void	get_here_doc_file(char *delimiter, char *name_file)
+static void	get_here_doc_file(char *delimiter, char *name_file, t_mal_lst **mal_lst)
 {
 	char	*line;
 	int		len;
@@ -49,11 +49,15 @@ static void	get_here_doc_file(char *delimiter, char *name_file)
 
 	here_doc_fd = open(name_file, O_CREAT | O_RDWR, 0666);
 	delimiter = ft_strjoin(delimiter, "\n");
+	lstadd_back_malloc(mal_lst, lstnew_malloc(delimiter));
 	while (1)
 	{
 		line = get_next_line(0);
 		if (!line || ft_strmatch(delimiter, line))
+		{
+			free(line);
 			break ;
+		}
 		ft_putstr_fd(line, here_doc_fd);
 		free(line);
 	}
@@ -75,8 +79,8 @@ void	here_doc_manage(t_exec *exec)
 		del_head = exec->tok_lst->delimiter;
 		while (exec->tok_lst->delimiter)
 		{
-			here_doc_name = get_heredoc_name(i);
-			get_here_doc_file(exec->tok_lst->delimiter->content, here_doc_name);
+			here_doc_name = get_heredoc_name(i, &exec->mal_lst);
+			get_here_doc_file(exec->tok_lst->delimiter->content, here_doc_name, &exec->mal_lst);
 			exec->tok_lst->delimiter->content2 = here_doc_name;
 			exec->tok_lst->delimiter = exec->tok_lst->delimiter->next;
 			i++;

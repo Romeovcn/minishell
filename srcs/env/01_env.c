@@ -85,7 +85,6 @@ int	export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args)
 	while (args[++i])
 	{
 		name = get_env_name(args[i]);
-		// printf("%s\n", name);
 		if (!name || check_env_name(name))
 		{
 			printf("export: '%s': not a valid identifier\n", args[i]);
@@ -93,11 +92,10 @@ int	export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args)
 			continue ;
 		}
 		env_value = get_env_str_value(args[i]);
-		// printf("%s\n", env_value);
 		if (!env_value)
 			continue ;
 		if (is_concatenate(args[i]))
-			env_value = ft_strjoin(get_env_value(name, *env_lst), env_value);
+			env_value = ft_newstrjoin(get_env_value(name, *env_lst), env_value);
 		if (change_env_value(name, env_value, *env_lst))
 			continue ;
 		lstadd_back_env(env_lst, lstnew_env(name, env_value));
@@ -124,6 +122,9 @@ int	unset_env(t_env_lst **env_lst, char **args) //  manage error
 					*env_lst = (*env_lst)->next;
 				else
 					tmp_previous->next = env_head->next;
+				free(env_head->name);
+				free(env_head->value);
+				free(env_head);
 				break ;
 			}
 			tmp_previous = env_head;

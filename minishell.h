@@ -13,6 +13,7 @@ char		*strjoin_char(char const *s1, char c, t_mal_lst **mal_lst);
 char		**lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst);
 char        **envp_to_str_array(t_env_lst *lst, char **old_envp);
 void	    free_array(char **arr);
+char	    *ft_strjoin_mal(char const *s1, char const *s2, t_mal_lst **mal_lst);
 //----------------------------------------------------------------------------//
 //							 	Check access			 					  //
 //----------------------------------------------------------------------------//
@@ -39,7 +40,7 @@ int			unset_env(t_env_lst **env_lst, char **args);
 //----------------------------------------------------------------------------//
 //							 	Env utils		 							  //
 //----------------------------------------------------------------------------//
-char		*get_env_name(char *env);
+char	    *get_env_name(char *env);
 t_env_lst	*get_env_lst(char **env);
 int			change_env_value(char *name, char *new_value, t_env_lst *env_lst);
 char		*get_env_value(char *name, t_env_lst *env_lst);

@@ -55,7 +55,7 @@ t_env_lst	*get_env_lst(char **env)
 	while (env[i])
 	{
 		name = get_env_name(env[i]);
-		value = getenv(name);
+		value = ft_strdup(getenv(name));
 		lstadd_back_env(&env_lst, lstnew_env(name, value));
 		i++;
 	}
@@ -98,6 +98,7 @@ void free_env_lst(t_env_lst *env_lst)
 	{
 		tmp = env_lst->next;
 		free(env_lst->name);
+		free(env_lst->value);
 		free(env_lst);
 		env_lst = tmp;
 	}
