@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:25 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/11 16:37:53 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/12 22:29:15 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	append(t_tok_lst *tok_lst)
 	file_fd = open(file, O_RDWR | O_CREAT | O_APPEND, 0666);
 	if (tok_lst->args != NULL)
 		dup2(file_fd, STDOUT_FILENO);
+	close(file_fd);
 }
 
 void	here_doc(t_tok_lst *tok_lst)
@@ -31,6 +32,7 @@ void	here_doc(t_tok_lst *tok_lst)
 	del = lstlast_array(tok_lst->delimiter);
 	fd_here_doc = open(del->content2, O_RDONLY);
 	dup2(fd_here_doc, STDIN_FILENO);
+	close(file_fd);
 }
 
 void	redir_out(t_tok_lst *tok_lst)
@@ -42,6 +44,7 @@ void	redir_out(t_tok_lst *tok_lst)
 	file_fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (tok_lst->args != NULL)
 		dup2(file_fd, STDOUT_FILENO);
+	close(file_fd);
 }
 
 void	redir_in(t_tok_lst *tok_lst)
@@ -53,4 +56,5 @@ void	redir_in(t_tok_lst *tok_lst)
 	file_fd = open(file, O_RDONLY);
 	if (tok_lst->args != NULL)
 		dup2(file_fd, STDIN_FILENO);
+	close(file_fd);
 }

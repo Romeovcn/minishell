@@ -177,7 +177,6 @@ void		sigquit_process(int sig);
 // echo -nnnnnnn not working
 // Protect malloc
 // Norm
-// export +=
 // if unset path, command still works because path is not unset in **env but in linked list
 //echo :
     // echo $HOME9
