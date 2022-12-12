@@ -101,19 +101,21 @@ int	ft_echo(char **cmd)
 
 int	ft_cd(char **path, t_env_lst *env_lst)
 {
-	// char	buff[PATH_MAX];
-	// char	*old_pwd;
-	// char	*new_pwd;
+	char	buff[PATH_MAX];
+	char	*old_pwd;
+	char	*new_pwd;
 
-	// old_pwd = ft_strdup(getcwd(buff, PATH_MAX));
-	// if (path[2])
-	// 	return (printf("cd: too many arguments\n"), 1);
-	// if (path[1] && chdir(path[1]) < 0)
+	old_pwd = ft_strdup(getcwd(buff, PATH_MAX));
+	if (!path[1] && chdir("/") < 0)
+	{
+		printf("ok\n");
+		return (perror("cd"), 1);
+	}
+	if (path[2])
+		return (printf("cd: too many arguments\n"), 1);
+	// else if (path[1] && chdir(path[1]) < 0)
 	// 	return (perror("cd"), 1);
-	// // else if (chdir("/") < 0)
-	// 	// return (perror("cd"), 1);
-	// new_pwd = ft_strjoin(old_pwd, "/");
-	// new_pwd = ft_strjoin(new_pwd, path[1]);
+	// new_pwd = ft_strdup(getcwd(buff, PATH_MAX));
 	// printf("PWD=%s\nOLD=%s\n", old_pwd, new_pwd);
 	// change_env_value(ft_strdup("OLDPWD"), old_pwd, env_lst);
 	// change_env_value(ft_strdup("PWD"), new_pwd, env_lst);
