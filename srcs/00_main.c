@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/12 17:43:45 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:46:44 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,6 @@ int check_empty_line(char *rl_str) // to fix
 	return (1);
 }
 
-void print_envp(char **envp)
-{
-	int i;
-
-	i = 0;
-	while (envp[i])
-	{
-		printf("%s\n", envp[i]);
-		i++;
-	}
-}
-
 int main(int argc, char **argv, char **env)
 {
 	t_exec		exec_struct;
@@ -49,7 +37,6 @@ int main(int argc, char **argv, char **env)
 	G_STATUS = 0;
 	exec_struct.env_lst = get_env_lst(env);
 	exec_struct.envp = envp_to_str_array(exec_struct.env_lst, NULL);
-	print_envp(exec_struct.envp);
 	while (1)
 	{
 		signal_manager();

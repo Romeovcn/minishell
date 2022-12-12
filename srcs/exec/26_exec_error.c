@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:43 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/11 18:38:21 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:53:01 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ static void	error_message_127(char *command)
 {
 	if (!command)
 		return ;
-	ft_putstr_fd("Command '", 2);
 	ft_putstr_fd(command, 2);
-	ft_putstr_fd("' not found\n", 2);
+	ft_putstr_fd(": command not found\n", 2);
 }
 
 static void	error_message(char *file, char *message)

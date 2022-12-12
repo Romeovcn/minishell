@@ -182,4 +182,8 @@ void		sigquit_process(int sig);
     // shell level
 // export +=
 // if unset path, command still works because path is not unset in **env but in linked list
+//echo :
+    // echo $HOME9
+    // echo $9HOME
+    // echo | |
 #endif
