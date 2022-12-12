@@ -51,9 +51,9 @@ int	ft_exit(char **args, t_mal_lst *mal_lst, t_env_lst *env_lst)
 			i++;
 		if (!ft_isdigit(args[1][i]) || i > 18)
 		{
+			printf("exit: %s: numeric argument required\n", args[1]);
 			free_env_lst(env_lst);
 			free_lst_malloc(mal_lst);
-			printf("exit: %s: numeric argument required\n", args[1]);
 			exit(2);
 		}
 		i++;
