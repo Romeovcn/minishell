@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/09 16:23:09 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:42:56 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,52 @@ char **lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst)
 	}
 	result[i] = 0;
 	return (result);
+}
+
+void	free_array(char **arr)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	while (arr[count])
+		count++;
+	i = 0;
+	while (i < count)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+char **envp_to_str_array(t_env_lst *lst, char **old_envp)
+{
+	char		**res;
+	t_env_lst	*head;
+	char		*tmp;
+	int			i;
+
+	if (old_envp)
+		free_array(old_envp);
+	head = lst;
+	i = 0;
+	while (head)
+	{
+		i++;
+		head = head->next;
+	}
+	res = malloc((i + 1) * sizeof(char *));
+	head = lst;
+	i = 0;
+	while (head)
+	{
+		tmp = ft_strjoin(head->name, "=");
+		res[i] = ft_strjoin(tmp, head->value);
+		free(tmp);
+		i++;
+		head = head->next;
+	}
+	res[i] = NULL;
+	return (res);
 }

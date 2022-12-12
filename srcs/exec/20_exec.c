@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/11 15:42:15 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:43:29 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,13 @@ static void	pipex_exec(t_exec *exec)
 	exec->tok_lst = head;
 }
 
-void init_exec(t_exec *exec, char **env)
+void init_exec(t_exec *exec)
 {
 	exec->nb_command = ft_lstsize_token(exec->tok_lst);
 	exec->pid = malloc(exec->nb_command * sizeof(pid_t));
 	if (!exec->pid)
 		return ;
 	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(exec->pid));
-	exec->envp = env;
 	exec->here_doc_lst = NULL;
 }
 

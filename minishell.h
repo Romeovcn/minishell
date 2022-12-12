@@ -11,6 +11,8 @@ extern int G_STATUS;
 void		error_exit(t_mal_lst *mal_lst);
 char		*strjoin_char(char const *s1, char c, t_mal_lst **mal_lst);
 char		**lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst);
+char        **envp_to_str_array(t_env_lst *lst, char **old_envp);
+void	    free_array(char **arr);
 //----------------------------------------------------------------------------//
 //							 	Check access			 					  //
 //----------------------------------------------------------------------------//
@@ -121,7 +123,7 @@ int			ft_lstsize_token(t_tok_lst *lst);
 //							 	Exec										  //
 //----------------------------------------------------------------------------//
 int			exec(t_exec exec);
-void		init_exec(t_exec *exec, char **env);
+void		init_exec(t_exec *exec);
 char		*get_right_path(char *path, t_array_lst *cmd);
 //----------------------------------------------------------------------------//
 //							 	Exec simple									  //

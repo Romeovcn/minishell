@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/10 18:39:54 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:43:45 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ int check_empty_line(char *rl_str) // to fix
 	return (1);
 }
 
+void print_envp(char **envp)
+{
+	int i;
+
+	i = 0;
+	while (envp[i])
+	{
+		printf("%s\n", envp[i]);
+		i++;
+	}
+}
+
 int main(int argc, char **argv, char **env)
 {
 	t_exec		exec_struct;
@@ -36,6 +48,8 @@ int main(int argc, char **argv, char **env)
 
 	G_STATUS = 0;
 	exec_struct.env_lst = get_env_lst(env);
+	exec_struct.envp = envp_to_str_array(exec_struct.env_lst, NULL);
+	print_envp(exec_struct.envp);
 	while (1)
 	{
 		signal_manager();
@@ -56,11 +70,12 @@ int main(int argc, char **argv, char **env)
 		}
 		parser(exec_struct.lex_lst, &exec_struct.mal_lst, exec_struct.env_lst);
 		exec_struct.tok_lst = get_token_lst(exec_struct.lex_lst, &exec_struct.mal_lst);
-		init_exec(&exec_struct, env);
+		init_exec(&exec_struct);
 		exec(exec_struct);
 		free_lst_malloc(exec_struct.mal_lst);
 		free(readline_str);
 	}
+	free_array(exec_struct.envp);
 	free_env_lst(exec_struct.env_lst);
 	write(1, "exit\n", 6);
 }

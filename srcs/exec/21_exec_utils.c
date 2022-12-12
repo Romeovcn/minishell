@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:32 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/11 18:39:12 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:36:04 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,9 @@ int	file_exec(char *file_name)
 
 int	is_directory(char *path)
 {
-	// struct stat statbuf;
+	struct stat statbuf;
 
-	// if (stat(path, &statbuf) != 0)
-	// 	return (0);
-	// return (S_ISDIR(statbuf.st_mode));
-	return (0);
+	if (stat(path, &statbuf) != 0)
+		return (0);
+	return (S_ISDIR(statbuf.st_mode));
 }

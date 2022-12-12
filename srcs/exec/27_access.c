@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:41 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/11 19:08:42 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:34:29 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,7 @@ char	*ft_abs_path(char *cmd)
 		if (access(cmd, X_OK) == 0)
 			return (cmd);
 		if (access(cmd, X_OK) == -1)
-		{
-			printf("je suis la\n");
 			exit(126);
-		}
 	}
 	else if ((cmd[0] == '/' || cmd[0] == '.') && access(cmd, F_OK) == -1)
 		exit(126);
