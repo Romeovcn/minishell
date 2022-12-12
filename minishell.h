@@ -45,7 +45,7 @@ void		free_env_lst(t_env_lst *env_lst);
 //----------------------------------------------------------------------------//
 //							 	Env lst			 							  //
 //----------------------------------------------------------------------------//
-t_env_lst	*lstnew_env(char *name, char *value);
+t_env_lst	*lstnew_env(char *content);
 t_env_lst	*lstlast_env(t_env_lst *lst);
 void		lstadd_back_env(t_env_lst **lst, t_env_lst *new);
 //----------------------------------------------------------------------------//

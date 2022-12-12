@@ -12,15 +12,14 @@
 
 #include "minishell.h"
 
-t_env_lst	*lstnew_env(char *name, char *value)
+t_env_lst	*lstnew_env(char *content)
 {
 	t_env_lst	*result;
 
 	result = malloc(sizeof(t_env_lst));
 	if (!result)
 		return (0);
-	result->name = name;
-	result->value = value;
+	result->content = content;
 	result->next = NULL;
 	return (result);
 }

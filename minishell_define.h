@@ -56,8 +56,7 @@ typedef struct l_list
 
 typedef struct env_list
 {
-	char			*name;
-	char			*value;
+	char			*content;
 	struct env_list	*next;
 }					t_env_lst;
 

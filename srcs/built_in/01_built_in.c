@@ -21,7 +21,7 @@ int	ft_env(char **args, t_env_lst *env_lst)
 	}
 	while (env_lst)
 	{
-		printf("%s=%s\n", env_lst->name, env_lst->value);
+		printf("%s\n", env_lst->content);
 		env_lst = env_lst->next;
 	}
 	return (0);
