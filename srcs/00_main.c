@@ -14,7 +14,7 @@
 
 int G_STATUS = 0;
 
-int check_empty_line(char *rl_str) // to fix
+int check_empty_line(char *rl_str)
 {
 	int	i;
 
@@ -40,7 +40,6 @@ int main(int argc, char **argv, char **env)
 	while (1)
 	{
 		signal_manager();
-		printf("status=%d\n", G_STATUS);
 		readline_str = readline("Minishell> ");
 		if (!readline_str)
 			break ;

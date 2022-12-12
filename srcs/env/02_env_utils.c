@@ -26,13 +26,15 @@ char	*get_env_name(char *env)
 			break ;
 		i++;
 	}
+	if (env[i - 1] == '+')
+		i--;
 	name = malloc((i + 1) * sizeof(char));
 	if (!name)
 		exit(1);
 	i = 0;
 	while (env[i])
 	{
-		if (env[i] == '=')
+		if (env[i] == '=' || (env[i] == '+' && env[i + 1] == '='))
 			break ;
 		name[i] = env[i];
 		i++;
@@ -85,7 +87,7 @@ char	*get_env_value(char *name, t_env_lst *env_lst)
 			return (env_lst->value);
 		env_lst = env_lst->next;
 	}
-	return (NULL);
+	return ("");
 }
 
 void free_env_lst(t_env_lst *env_lst)

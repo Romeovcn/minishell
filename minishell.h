@@ -172,14 +172,9 @@ void		signal_manager_pid();
 void		signal_manager_hd();
 void		sigquit_process(int sig);
 // To do :
-// verify status :
-    // crtl c on command
-    //  ex: cat or sleep 3
+// echo -nnnnnnn not working
 // Protect malloc
 // Norm
-// builtin :
-    // change old pwd
-    // shell level
 // export +=
 // if unset path, command still works because path is not unset in **env but in linked list
 //echo :

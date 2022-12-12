@@ -59,6 +59,20 @@ char *get_env_str_value(char *env)
 	return (value);
 }
 
+int is_concatenate(char *env)
+{
+	int i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (env[i] == '+' && env[i + 1] == '=')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args)
 {
 	int		return_value;
@@ -71,6 +85,7 @@ int	export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args)
 	while (args[++i])
 	{
 		name = get_env_name(args[i]);
+		// printf("%s\n", name);
 		if (!name || check_env_name(name))
 		{
 			printf("export: '%s': not a valid identifier\n", args[i]);
@@ -78,8 +93,11 @@ int	export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args)
 			continue ;
 		}
 		env_value = get_env_str_value(args[i]);
+		// printf("%s\n", env_value);
 		if (!env_value)
 			continue ;
+		if (is_concatenate(args[i]))
+			env_value = ft_strjoin(get_env_value(name, *env_lst), env_value);
 		if (change_env_value(name, env_value, *env_lst))
 			continue ;
 		lstadd_back_env(env_lst, lstnew_env(name, env_value));
