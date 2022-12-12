@@ -75,10 +75,10 @@ int	change_env_value(char *name, char *new_value, t_env_lst *env_lst)
 	return (0);
 }
 
-char	*get_env_value(char *name, t_env_lst *env_lst, int status)
+char	*get_env_value(char *name, t_env_lst *env_lst)
 {
 	if (ft_strmatch(name, "?"))
-		return (ft_itoa(status));
+		return (ft_itoa( WEXITSTATUS(G_STATUS)));
 	while (env_lst)
 	{
 		if (ft_strmatch(name, env_lst->name))

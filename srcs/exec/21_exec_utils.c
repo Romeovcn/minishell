@@ -47,9 +47,10 @@ int	file_exec(char *file_name)
 
 int	is_directory(char *path)
 {
-	struct stat statbuf;
+	// struct stat statbuf;
 
-	if (stat(path, &statbuf) != 0)
-		return (0);
-	return (S_ISDIR(statbuf.st_mode));
+	// if (stat(path, &statbuf) != 0)
+	// 	return (0);
+	// return (S_ISDIR(statbuf.st_mode));
+	return (0);
 }

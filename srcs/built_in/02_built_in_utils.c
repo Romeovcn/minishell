@@ -15,9 +15,9 @@ int exec_built_in(t_tok_lst *tok_lst, int status, t_mal_lst **mal_lst, t_env_lst
 	else if (ft_strmatch(args[0], "env"))
 		return (ft_env(args, *env_lst));
 	else if (ft_strmatch(args[0], "cd"))
-		return (ft_cd(args));
+		return (ft_cd(args, *env_lst));
 	else if (ft_strmatch(args[0], "pwd"))
-		return (ft_pwd());
+		return (ft_pwd(*env_lst));
 	else if (ft_strmatch(args[0], "echo"))
 		return (ft_echo(args));
 }

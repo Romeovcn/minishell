@@ -54,7 +54,7 @@ int main(int argc, char **argv, char **env)
 			free(readline_str);
 			continue ;
 		}
-		parser(exec_struct.lex_lst, &exec_struct.mal_lst, exec_struct.env_lst, WEXITSTATUS(G_STATUS));
+		parser(exec_struct.lex_lst, &exec_struct.mal_lst, exec_struct.env_lst);
 		exec_struct.tok_lst = get_token_lst(exec_struct.lex_lst, &exec_struct.mal_lst);
 		init_exec(&exec_struct, env);
 		exec(exec_struct);

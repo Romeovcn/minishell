@@ -19,10 +19,10 @@ char		**get_paths(char **env);
 //							 	Built-in			 						  //
 //----------------------------------------------------------------------------//
 int			ft_env(char **args, t_env_lst *env_lst);
-int			ft_pwd(void);
+int			ft_pwd(t_env_lst *env_lst);
 int			ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst);
 int			ft_echo(char **cmd);
-int			ft_cd(char **path);
+int			ft_cd(char **path, t_env_lst *env_lst);
 //----------------------------------------------------------------------------//
 //							 	Built-in utils		 						  //
 //----------------------------------------------------------------------------//
@@ -40,7 +40,7 @@ int			unset_env(t_env_lst **env_lst, char **args);
 char		*get_env_name(char *env);
 t_env_lst	*get_env_lst(char **env);
 int			change_env_value(char *name, char *new_value, t_env_lst *env_lst);
-char		*get_env_value(char *name, t_env_lst *env_lst, int status);
+char		*get_env_value(char *name, t_env_lst *env_lst);
 void		free_env_lst(t_env_lst *env_lst);
 //----------------------------------------------------------------------------//
 //							 	Env lst			 							  //
@@ -82,7 +82,7 @@ int			check_error(t_lex_lst *lexed_list);
 //----------------------------------------------------------------------------//
 //							 	Parser										  //
 //----------------------------------------------------------------------------//
-void		parser(t_lex_lst *lex_lst, t_mal_lst **mal_lst, t_env_lst *env_lst, int status);
+void		parser(t_lex_lst *lex_lst, t_mal_lst **mal_lst, t_env_lst *env_lst);
 char		*manage_quotes(char *str, t_mal_lst **mal_lst, t_env_lst *env_lst);
 //----------------------------------------------------------------------------//
 //							 	Parser utils								  //
