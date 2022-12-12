@@ -96,10 +96,6 @@ int	ft_echo(char **cmd, t_exec exec)
 		printf(" %s", cmd[i++]);
 	if (nl == 1)
 		printf("\n");
-	free_lst_malloc(exec.mal_lst);
-	free_env_lst(exec.env_lst);
-	// free_arrays
-	printf("OK\n");
 	return (0);
 }
 
