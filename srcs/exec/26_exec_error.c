@@ -56,7 +56,6 @@ static void	error_status(t_tok_lst *tok_lst, int status)
 
 void	error_manager(t_exec *exec, t_tok_lst *tok_lst)
 {
-	int			status;
 	int			i;
 
 	i = 0;
@@ -64,7 +63,7 @@ void	error_manager(t_exec *exec, t_tok_lst *tok_lst)
 	{
 		if (G_STATUS == 131)
 			G_STATUS = 33536;
-		error_status(tok_lst, WEXITSTATUS(status));
+		error_status(tok_lst, WEXITSTATUS(G_STATUS));
 		tok_lst = tok_lst->next;
 		i++;
 	}
