@@ -24,15 +24,15 @@ char		**get_paths(char **env);
 //----------------------------------------------------------------------------//
 int			ft_env(char **args, t_env_lst *env_lst);
 int			ft_pwd(t_env_lst *env_lst);
-int			ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst);
-int			ft_echo(char **cmd);
+int			ft_exit(char **args, t_mal_lst *mal_lst, t_env_lst *env_lst);
+int			ft_echo(char **cmd, t_exec exec);
 int			ft_cd(char **path, t_env_lst *env_lst);
 //----------------------------------------------------------------------------//
 //							 	Built-in utils		 						  //
 //----------------------------------------------------------------------------//
 int			is_built_in(char *command);
 int			is_built_in_no_fork(char *command);
-int			exec_built_in(t_tok_lst *tok_lst, int status, t_mal_lst **mal_lst, t_env_lst **env_lst);
+int			exec_built_in(t_exec exec, t_tok_lst *tok_lst, t_mal_lst **mal_lst, t_env_lst **env_lst);
 //----------------------------------------------------------------------------//
 //							 	Env			 								  //
 //----------------------------------------------------------------------------//
@@ -150,7 +150,7 @@ int			is_directory(char *path);
 //----------------------------------------------------------------------------//
 //							 	Exec here_doc								  //
 //----------------------------------------------------------------------------//
-t_array_lst	*get_here_doc_lst(t_exec *exec);
+t_array_lst *get_here_doc_lst(t_exec *exec);
 int			check_heredoc(t_exec *exec);
 void		position_last_heredoc(t_exec *exec);
 void		heredoc_rm(t_tok_lst *tok_lst);
@@ -183,4 +183,8 @@ void		sigquit_process(int sig);
     // echo $HOME9
     // echo $9HOME
     // echo | |
+// env -i :
+    // export doesnt work
+    // should print cmd not found
+    // env doesnt work
 #endif

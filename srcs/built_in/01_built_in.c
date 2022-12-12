@@ -27,7 +27,7 @@ int	ft_env(char **args, t_env_lst *env_lst)
 	return (0);
 }
 
-int	ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst)
+int	ft_exit(char **args, t_mal_lst *mal_lst, t_env_lst *env_lst)
 {
 	int exit_status;
 	int i;
@@ -42,7 +42,7 @@ int	ft_exit(char **args, int status, t_mal_lst *mal_lst, t_env_lst *env_lst)
 		free_env_lst(env_lst);
 		free_lst_malloc(mal_lst);
 		printf("exit\n");
-		exit(WEXITSTATUS(status));
+		exit(WEXITSTATUS(G_STATUS));
 	}
 	i = 0;
 	while (args[1][i])
@@ -78,7 +78,7 @@ int	ft_pwd(t_env_lst *env_lst)
 	return (0);
 }
 
-int	ft_echo(char **cmd)
+int	ft_echo(char **cmd, t_exec exec)
 {
 	int	i;
 	int	nl;
@@ -96,6 +96,10 @@ int	ft_echo(char **cmd)
 		printf(" %s", cmd[i++]);
 	if (nl == 1)
 		printf("\n");
+	free_lst_malloc(exec.mal_lst);
+	free_env_lst(exec.env_lst);
+	// free_arrays
+	printf("OK\n");
 	return (0);
 }
 

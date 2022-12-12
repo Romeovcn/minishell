@@ -1,13 +1,13 @@
 #include "minishell.h"
 
-int exec_built_in(t_tok_lst *tok_lst, int status, t_mal_lst **mal_lst, t_env_lst **env_lst)
+int exec_built_in(t_exec exec, t_tok_lst *tok_lst, t_mal_lst **mal_lst, t_env_lst **env_lst)
 {
 	char **args;
 
 	// printf("THIS IS BUILTIN\n");
 	args = lst_to_str_array(tok_lst->args, mal_lst);
 	if (ft_strmatch(args[0], "exit"))
-		return (ft_exit(args, status, *mal_lst, *env_lst));
+		return (ft_exit(args, *mal_lst, *env_lst));
 	else if (ft_strmatch(args[0], "export"))
 		return (export_env(env_lst, mal_lst, args));
 	else if (ft_strmatch(args[0], "unset"))
@@ -19,7 +19,7 @@ int exec_built_in(t_tok_lst *tok_lst, int status, t_mal_lst **mal_lst, t_env_lst
 	else if (ft_strmatch(args[0], "pwd"))
 		return (ft_pwd(*env_lst));
 	else if (ft_strmatch(args[0], "echo"))
-		return (ft_echo(args));
+		return (ft_echo(args, exec));
 }
 
 int	is_built_in(char *command)
