@@ -13,6 +13,7 @@ char		*strjoin_char(char const *s1, char c, t_mal_lst **mal_lst);
 char		**lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst);
 char        **envp_to_str_array(t_env_lst *lst, char **old_envp);
 void	    free_array(char **arr);
+void	    free_exit(t_exec *exec, int exit);
 char	    *ft_strjoin_mal(char const *s1, char const *s2, t_mal_lst **mal_lst);
 //----------------------------------------------------------------------------//
 //							 	Check access			 					  //
@@ -125,7 +126,7 @@ int			ft_lstsize_token(t_tok_lst *lst);
 //----------------------------------------------------------------------------//
 int			exec(t_exec exec);
 void		init_exec(t_exec *exec);
-char		*get_right_path(char *path, t_array_lst *cmd);
+char		*get_right_path(char *path, t_array_lst *cmd, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Exec simple									  //
 //----------------------------------------------------------------------------//
@@ -161,10 +162,10 @@ void		error_manager(t_exec *exec, t_tok_lst *tok_lst);
 //							 	Exec access									  //
 //----------------------------------------------------------------------------//
 char		*get_wrong_access(t_tok_lst *tok_lst);
-void		check_outfile(t_tok_lst *tok_lst);
-void		check_infile(t_tok_lst *tok_lst);
-void		ft_null_access(char *path, char **split_path);
-char		*ft_abs_path(char *cmd);
+void		check_outfile(t_tok_lst *tok_lst, t_exec *exec);
+void		check_infile(t_tok_lst *tok_lst, t_exec *exec);
+void		ft_null_access(char *path, char **split_path, t_exec *exec);
+char		*ft_abs_path(char *cmd, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Signal										  //
 //----------------------------------------------------------------------------//

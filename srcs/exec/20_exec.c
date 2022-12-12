@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/12 17:43:29 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/12 21:26:06 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	pipex_exec(t_exec *exec)
 		if (exec->pid[i] < 0)
 		{
 			close_fd(tmp->pipe_fd[0], tmp->pipe_fd[1]);
-			exit(1);
+			free_exit(exec, 1);
 		}
 		if (exec->pid[i] == 0)
 			exec_token(tmp, i);

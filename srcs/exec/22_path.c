@@ -6,36 +6,36 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:07:33 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/05 19:37:46 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/12 21:06:48 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_right_path(char *path, t_array_lst *cmd)
+char	*get_right_path(char *path, t_array_lst *cmd, t_exec *exec)
 {
 	char	**split_path;
 	int		i;
 	char	*res;
-	int		accss;
+	char	*tmp;
 
 	if (ft_strlen(cmd->content) == 0)
-		exit(127);
-	res = ft_abs_path(cmd->content);
+		free_exit(exec, 127);
+	res = ft_abs_path(cmd->content, exec);
 	if (res != NULL)
 		return (res);
 	split_path = ft_split(path, ':');
 	i = 0;
 	while (split_path[i])
 	{
-		res = ft_strjoin(split_path[i], "/");
-		res = ft_strjoin(res, cmd->content);
-		accss = access(res, X_OK);
-		if (accss == 0)
+		tmp = ft_strjoin(split_path[i], "/");
+		res = ft_strjoin(tmp, cmd->content);
+		free(tmp);
+		if (access(res, X_OK) == 0)
 			return (ft_strdup(res));
 		free(res);
 		i++;
 	}
 	res = NULL;
-	ft_null_access(res, split_path);
+	ft_null_access(res, split_path, exec);
 }

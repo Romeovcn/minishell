@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:43 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/12 18:53:01 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/12 21:36:42 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ static void	error_message(char *file, char *message)
 	ft_putstr_fd(message, 2);
 }
 
-static void	error_status(t_tok_lst *tok_lst, int status)
+static void	error_status(t_tok_lst *tok_lst)
 {
 	char	*file_error;
+	int		status;
 
+	status = WEXITSTATUS(G_STATUS);
 	file_error = get_wrong_access(tok_lst);
 	if (status == 1 && file_exist(file_error) == 0)
 		error_message(file_error, "No such file or directory\n");
@@ -55,14 +57,14 @@ static void	error_status(t_tok_lst *tok_lst, int status)
 
 void	error_manager(t_exec *exec, t_tok_lst *tok_lst)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (tok_lst && waitpid(exec->pid[i], &G_STATUS, 0) > 0)
 	{
 		if (G_STATUS == 131)
 			G_STATUS = 33536;
-		error_status(tok_lst, WEXITSTATUS(G_STATUS));
+		error_status(tok_lst);
 		tok_lst = tok_lst->next;
 		i++;
 	}
