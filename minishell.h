@@ -179,11 +179,8 @@ void		sigquit_process(int sig);
 // Norm
 // if unset path, command still works because path is not unset in **env but in linked list
 //echo :
-    // echo $HOME9
-    // echo $9HOME
     // echo | |
 // env -i :
-    // export doesnt work
     // should print cmd not found
-    // env doesnt work
+// fix error message syntax
 #endif
