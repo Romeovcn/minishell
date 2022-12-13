@@ -12,20 +12,28 @@
 
 #include "minishell.h"
 
-static void	handle_signal(int signal, siginfo_t *info, void *context)
+void	handle_signal(int sig_num)
 {
-	(void)context;
-	if (info->si_pid)
+	if (sig_num == SIGQUIT)
+	{
+		ft_putstr_fd(" Quit (core dumped)\n", 1);
+		G_STATUS = 33536;
+	}
+	else if (sig_num == SIGINT)
+	{
+		ft_putstr_fd("\n", 1);
+		G_STATUS = 33500;
+	}
+}
+
+void	handler(int sig_num)
+{
+	if (sig_num == SIGINT)
 	{
 		ft_putstr_fd("\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		G_STATUS = 33500;
-	}
-	else
-	{
-		ft_putstr_fd("\n", 1);
 		G_STATUS = 33500;
 	}
 }
@@ -47,12 +55,6 @@ static void	handle_signal_hd(int signal, siginfo_t *info, void *context)
 		ft_putstr_fd("\b\b  \b\b", 0);
 }
 
-void sigquit_process(int sig)
-{
-	ft_putstr_fd("Quit (core dumped)\n", 1);
-	G_STATUS = 33536;
-}
-
 void	signal_manager_hd()
 {
 	struct sigaction s_sig;
@@ -62,15 +64,4 @@ void	signal_manager_hd()
 	sigemptyset(&s_sig.sa_mask);
 	sigaction(SIGINT, &s_sig, 0);
 	sigaction(SIGQUIT, &s_sig, 0);
-}
-
-void	signal_manager()
-{
-	struct sigaction s_sig;
-
-	s_sig.sa_sigaction = handle_signal;
-	s_sig.sa_flags = SA_SIGINFO;
-	sigemptyset(&s_sig.sa_mask);
-	sigaction(SIGINT, &s_sig, 0);
-	signal(SIGQUIT, SIG_IGN);
 }

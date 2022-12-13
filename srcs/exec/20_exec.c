@@ -17,11 +17,12 @@ static void	pipex_exec(t_exec *exec)
 	t_tok_lst	*head;
 	t_exec		*tmp;
 	int			i;
+	int status;
 
 	head = exec->tok_lst;
 	tmp = exec;
 	i = 0;
-	signal(SIGQUIT, sigquit_process);
+	// signal(SIGQUIT, sigquit_process);
 	while (i < tmp->nb_command)
 	{
 		if (pipe(tmp->pipe_fd) == -1)
@@ -31,6 +32,15 @@ static void	pipex_exec(t_exec *exec)
 		{
 			close_fd(tmp->pipe_fd[0], tmp->pipe_fd[1]);
 			free_exit(exec, 1);
+		}
+		if (exec->pid[i] > 0)
+		{
+			signal(SIGINT, handle_signal);
+			signal(SIGQUIT, handle_signal);
+			waitpid(exec->pid[i], &status, 0);
+			if (WIFEXITED(status))
+				G_STATUS = WEXITSTATUS(status);
+			kill(exec->pid[i], SIGTERM);
 		}
 		if (exec->pid[i] == 0)
 			exec_token(tmp, i);

@@ -26,6 +26,7 @@
 # include <signal.h>
 # include <termios.h>
 # include <term.h>
+#include <sys/ioctl.h>
 
 # define WORD 0 // file name ou command ou argument
 # define PIPE 1 // pipe

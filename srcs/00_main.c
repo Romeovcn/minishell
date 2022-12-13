@@ -39,7 +39,9 @@ int main(int argc, char **argv, char **env)
 	exec_struct.envp = envp_to_str_array(exec_struct.env_lst, NULL);
 	while (1)
 	{
-		signal_manager();
+		// signal_manager();
+		signal(SIGINT, handler);
+		signal(SIGQUIT, SIG_IGN);
 		rl_outstream = stderr;
 		readline_str = readline("Minishell> ");
 		if (!readline_str)

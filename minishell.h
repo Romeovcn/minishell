@@ -166,9 +166,9 @@ char		*ft_abs_path(char *cmd, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Signal										  //
 //----------------------------------------------------------------------------//
-void		signal_manager();
-void		signal_manager_hd();
-void		sigquit_process(int sig);
+void    	handler(int sig_num);
+void	    signal_manager_hd();
+void    	handle_signal(int sig_num);
 // To do :
 // Protect malloc
 // Norm
@@ -178,5 +178,5 @@ void		sigquit_process(int sig);
 // check error msg are print in stderr
 // cd unset PWD OLDPWD doesnt change value
 // leak simple here_doc with no command
-// overwrite when exec ./minishell multi time and ctrl c
+// cat | cat | ls doesnt work correctly
 #endif

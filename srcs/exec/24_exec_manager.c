@@ -31,6 +31,7 @@ void	command(t_exec *exec, int i)
 
 void	exec_token(t_exec *exec, int i)
 {
+	signal(SIGQUIT, handler);
 	if (exec->tok_lst->output_fd == REDIR_OUT
 		|| exec->tok_lst->output_fd == APP_OUT)
 		check_outfile(exec->tok_lst, exec);
