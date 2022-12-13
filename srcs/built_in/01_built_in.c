@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/13 14:08:47 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:20:05 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_env(char **args, t_env_lst *env_lst)
 	return (0);
 }
 
-int	ft_exit(char **args, t_mal_lst *mal_lst, t_env_lst *env_lst)
+int	ft_exit(char **args, t_exec *exec)
 {
 	int exit_status;
 	int i;
@@ -39,8 +39,9 @@ int	ft_exit(char **args, t_mal_lst *mal_lst, t_env_lst *env_lst)
 		return (printf("exit: too many arguments\n"), 1);
 	if (i == 1)
 	{
-		free_env_lst(env_lst);
-		free_lst_malloc(mal_lst);
+		free_array(exec->envp);
+		free_env_lst(exec->env_lst);
+		free_lst_malloc(exec->mal_lst);
 		ft_putstr_fd("exit\n", 2);
 		exit(WEXITSTATUS(G_STATUS));
 	}
@@ -52,15 +53,17 @@ int	ft_exit(char **args, t_mal_lst *mal_lst, t_env_lst *env_lst)
 		if (!ft_isdigit(args[1][i]) || i > 18)
 		{
 			printf("exit: %s: numeric argument required\n", args[1]);
-			free_env_lst(env_lst);
-			free_lst_malloc(mal_lst);
+			free_array(exec->envp);
+			free_env_lst(exec->env_lst);
+			free_lst_malloc(exec->mal_lst);
 			exit(2);
 		}
 		i++;
 	}
 	exit_status = ft_atoi(args[1]) % 256;
-	free_env_lst(env_lst);
-	free_lst_malloc(mal_lst);
+	free_array(exec->envp);
+	free_env_lst(exec->env_lst);
+	free_lst_malloc(exec->mal_lst);
 	exit(exit_status);
 	return (0);
 }

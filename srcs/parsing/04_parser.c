@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/13 15:02:24 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:38:38 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	parse_env(char **str, t_mal_lst **mal_lst, t_env_lst *env_lst, char **resul
 	env_name = parse_env_name(*str);
 	// printf("name=%s\n", env_name);
 	env_value = get_env_value(env_name, env_lst);
-	free(env_name);
 	*result = ft_strjoin(*result, env_value);
+	free(env_name);
 	lstadd_back_malloc(mal_lst, lstnew_malloc(*result));
 	go_end_env_name(str);
 	free(env_value);

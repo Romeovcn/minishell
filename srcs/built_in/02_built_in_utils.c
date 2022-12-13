@@ -9,7 +9,7 @@ int exec_built_in(t_exec *exec, int is_fork)
 	// printf("THIS IS BUILTIN\n");
 	args = lst_to_str_array(exec->tok_lst->args, &exec->mal_lst);
 	if (ft_strmatch(args[0], "exit"))
-		return_value = ft_exit(args, exec->mal_lst, exec->env_lst);
+		return_value = ft_exit(args, exec);
 	else if (ft_strmatch(args[0], "export"))
 		return_value = export_env(exec, &exec->mal_lst, args);
 	else if (ft_strmatch(args[0], "unset"))
