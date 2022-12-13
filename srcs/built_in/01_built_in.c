@@ -16,7 +16,7 @@ int	ft_env(char **args, t_env_lst *env_lst)
 {
 	if (args[1])
 	{
-		printf("env: too many arguments\n");
+		ft_putstr_fd("env: too many arguments\n", 2);
 		return (300);
 	}
 	while (env_lst)
@@ -36,7 +36,7 @@ int	ft_exit(char **args, t_exec *exec)
 	while (args[i])
 		i++;
 	if (i > 2)
-		return (printf("exit: too many arguments\n"), 1);
+		return (ft_putstr_fd("exit: too many arguments\n", 2), 1);
 	if (i == 1)
 	{
 		free_array(exec->envp);
@@ -127,7 +127,7 @@ int	ft_cd(char **path, t_env_lst *env_lst)
 			return (free(old_pwd), perror("cd"), 300);
 	}
 	else
-		return (free(old_pwd), ft_putstr_fd("cd: too many arguments\n", 2), 1);
+		return (free(old_pwd), ft_putstr_fd("cd: too many arguments\n", 2), 300);
 	new_pwd = ft_strdup(getcwd(buff, PATH_MAX));
 	change_env_value(ft_strdup("OLDPWD"), old_pwd, env_lst);
 	change_env_value(ft_strdup("PWD"), new_pwd, env_lst);

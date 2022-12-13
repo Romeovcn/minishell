@@ -34,32 +34,32 @@ int	check_not_closed_string(char *str)
 		str++;
 	}
 	if (quote != 0)
-		return (printf("bash: syntax error: not closed quote ici\n"), 1);
+		return (ft_putstr_fd("bash: syntax error: not closed quote ici\n", 2), 1);
 	return (0);
 }
 
 int	check_redir(t_lex_lst *lexed_list)
 {
 	if (!lexed_list->next)
-		return (printf("bash: syntax error: no key word after redir\n"), 1);
+		return (ft_putstr_fd("bash: syntax error: no key word after redir\n", 2), 1);
 	if (lexed_list->next->operator != WORD)
-		return (printf("bash: syntax error: operator after redir\n"), 1);
+		return (ft_putstr_fd("bash: syntax error: operator after redir\n", 2), 1);
 	return (0);
 }
 
 int	check_pipe(t_lex_lst *lexed_list)
 {
 	if (!lexed_list->next)
-		return (printf("bash: syntax error: no word after pipe\n"), 1);
+		return (ft_putstr_fd("bash: syntax error: no word after pipe\n", 2), 1);
 	if (lexed_list->next->operator == PIPE)
-		return (printf("bash: syntax error near unexpected token `|'\n"), 1);
+		return (ft_putstr_fd("bash: syntax error near unexpected token `|'\n", 2), 1);
 	return (0);
 }
 
 int	check_error(t_lex_lst *lexed_list)
 {
 	if (lexed_list->operator == PIPE)
-		return (printf("bash: syntax error near unexpected token `|'\n"), G_STATUS = 750, 2);
+		return (ft_putstr_fd("bash: syntax error near unexpected token `|'\n", 2), G_STATUS = 750, 2);
 	while (lexed_list)
 	{
 		if (lexed_list->operator == PIPE)
