@@ -1,0 +1,6 @@
+cmd: unset cd
+echo $?
+bash output:
+0
+minishell output:
+0

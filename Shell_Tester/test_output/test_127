@@ -1,0 +1,37 @@
+cmd: echo $?
+export HOLA="" hola et $HOLA""
+bash output:
+0
+minishell output:
+0
+==1330693== Invalid free() / delete / delete[] / realloc()
+==1330693==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1330693==    by 0x10CDB3: parse_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x10CE8C: parse_quote_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x10CF40: parser (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x1096A1: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==  Address 0x10f1b8 is in a r-- mapped file /mnt/nfs/homes/rvincent/code/minishell/minishell segment
+==1330693== 
+==1330693== Invalid read of size 1
+==1330693==    at 0x10AE49: get_env_name (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x10AB86: export_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x10A65B: exec_built_in (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x10B4AE: exec (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x1096D4: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==  Address 0x4b6e9ff is 1 bytes before a block of size 1 alloc'd
+==1330693==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1330693==    by 0x10E423: ft_strjoin (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x10CD67: parse_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x10CE8C: parse_quote_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x10CF40: parser (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x1096A1: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693== 
+export: '': not a valid identifier
+==1330693== 8 bytes in 2 blocks are definitely lost in loss record 3 of 67
+==1330693==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1330693==    by 0x10AE63: get_env_name (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x10AB86: export_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x10A65B: exec_built_in (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x10B4AE: exec (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693==    by 0x1096D4: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330693== 

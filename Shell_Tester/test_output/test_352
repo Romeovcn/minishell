@@ -1,0 +1,6 @@
+cmd: echo $?
+ifconfig | grep hola
+bash output:
+0
+minishell output:
+0

@@ -1,0 +1,6 @@
+cmd: cd '$PWD/srcs'
+echo $?
+bash output:
+1
+minishell output:
+0

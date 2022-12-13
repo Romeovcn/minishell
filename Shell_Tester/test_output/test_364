@@ -1,0 +1,6 @@
+cmd: echo $?
+ls -la | grep ""'.'"""
+bash output:
+0
+minishell output:
+0

@@ -1,0 +1,17 @@
+cmd: echo $?
+export HOLA=""cat Makefile | grep NAME""
+bash output:
+0
+minishell output:
+0
+==1330600== 9 bytes in 1 blocks are definitely lost in loss record 3 of 68
+==1330600==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1330600==    by 0x10AE63: get_env_name (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330600==    by 0x10AB86: export_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330600==    by 0x10A65B: exec_built_in (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330600==    by 0x10BA4C: command (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330600==    by 0x10BB7A: exec_token (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330600==    by 0x10B2FF: pipex_exec (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330600==    by 0x10B4D2: exec (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330600==    by 0x1096D4: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330600== 

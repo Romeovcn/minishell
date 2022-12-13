@@ -1,0 +1,6 @@
+cmd: echo $?
+echo oui | echo non | echo hola | grep non
+bash output:
+0
+minishell output:
+0

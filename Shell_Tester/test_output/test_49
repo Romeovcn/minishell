@@ -1,0 +1,7 @@
+cmd: env hola que tal
+echo $?
+bash output:
+125
+minishell output:
+env: too many arguments
+1

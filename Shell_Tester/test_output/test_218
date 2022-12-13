@@ -1,0 +1,6 @@
+cmd: /bin/cd Desktop
+echo $?
+bash output:
+127
+minishell output:
+126

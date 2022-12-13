@@ -1,0 +1,6 @@
+cmd: unset _______
+echo $?
+bash output:
+0
+minishell output:
+0

@@ -1,0 +1,6 @@
+cmd: echo $?
+export SHLVL=""1""
+bash output:
+0
+minishell output:
+0

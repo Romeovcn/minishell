@@ -1,0 +1,8 @@
+cmd: cd / | echo $?
+echo $?
+bash output:
+0
+0
+minishell output:
+0
+0

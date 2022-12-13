@@ -1,0 +1,6 @@
+cmd: echo $?
+exit '2'66'32'
+bash output:
+0
+minishell output:
+0

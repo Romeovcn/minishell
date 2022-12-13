@@ -1,0 +1,22 @@
+cmd: cd minishell Docs crashtest.c
+echo $?
+bash output:
+1
+minishell output:
+0
+==1332164== 52 bytes in 1 blocks are definitely lost in loss record 20 of 68
+==1332164==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1332164==    by 0x10E37C: ft_strdup (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332164==    by 0x10A458: ft_cd (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332164==    by 0x10A706: exec_built_in (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332164==    by 0x10B4AE: exec (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332164==    by 0x1096D4: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332164== 
+==1332162== 52 bytes in 1 blocks are definitely lost in loss record 19 of 67
+==1332162==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1332162==    by 0x10E37C: ft_strdup (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332162==    by 0x10A458: ft_cd (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332162==    by 0x10A706: exec_built_in (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332162==    by 0x10B4AE: exec (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332162==    by 0x1096D4: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332162== 

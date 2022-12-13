@@ -1,0 +1,43 @@
+cmd: cd $HOME/home/vietdu91
+echo $?
+bash output:
+1
+minishell output:
+==1332078== Invalid free() / delete / delete[] / realloc()
+==1332078==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1332078==    by 0x10B111: free_env_lst (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078==    by 0x10A7AF: exec_built_in (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078==    by 0x10BA4C: command (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078==    by 0x10BB7A: exec_token (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078==    by 0x10B2FF: pipex_exec (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078==    by 0x10B4D2: exec (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078==    by 0x1096D4: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078==  Address 0x4b256b0 is 0 bytes inside a block of size 24 free'd
+==1332078==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1332078==    by 0x10CDB3: parse_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078==    by 0x10CE8C: parse_quote_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078==    by 0x10CF40: parser (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078==    by 0x1096A1: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078==  Block was alloc'd at
+==1332078==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1332078==    by 0x10E37C: ft_strdup (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078==    by 0x10AF74: get_env_lst (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078==    by 0x1095CD: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332078== 
+0
+==1332074== Invalid free() / delete / delete[] / realloc()
+==1332074==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1332074==    by 0x10B111: free_env_lst (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332074==    by 0x109710: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332074==  Address 0x4b256b0 is 0 bytes inside a block of size 24 free'd
+==1332074==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1332074==    by 0x10CDB3: parse_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332074==    by 0x10CE8C: parse_quote_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332074==    by 0x10CF40: parser (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332074==    by 0x1096A1: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332074==  Block was alloc'd at
+==1332074==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1332074==    by 0x10E37C: ft_strdup (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332074==    by 0x10AF74: get_env_lst (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332074==    by 0x1095CD: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332074== 

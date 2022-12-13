@@ -1,0 +1,15 @@
+cmd: echo $?
+export HOLA=""  bonjour  hey  ""
+bash output:
+0
+minishell output:
+0
+export: '': not a valid identifier
+==1330651== 12 bytes in 2 blocks are definitely lost in loss record 5 of 67
+==1330651==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1330651==    by 0x10AE63: get_env_name (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330651==    by 0x10AB86: export_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330651==    by 0x10A65B: exec_built_in (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330651==    by 0x10B4AE: exec (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330651==    by 0x1096D4: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330651== 

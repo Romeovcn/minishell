@@ -34,7 +34,7 @@ int	check_not_closed_string(char *str)
 		str++;
 	}
 	if (quote != 0)
-		return (printf("bash: syntax error: not closed quote\n"), 1);
+		return (printf("bash: syntax error: not closed quote ici\n"), 1);
 	return (0);
 }
 

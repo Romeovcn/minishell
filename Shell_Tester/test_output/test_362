@@ -1,0 +1,8 @@
+cmd: echo $?
+ls | ls | echo hola | rev
+bash output:
+0
+aloh
+minishell output:
+0
+aloh

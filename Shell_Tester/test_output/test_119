@@ -1,0 +1,6 @@
+cmd: echo $?
+export HOLA=hey
+bash output:
+0
+minishell output:
+0

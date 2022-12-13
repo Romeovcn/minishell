@@ -1,0 +1,8 @@
+cmd: export 9HOLA=
+echo $?
+bash output:
+1
+minishell output:
+export: '9HOLA=': not a valid identifier
+0
+export: '9HOLA=': not a valid identifier

@@ -1,0 +1,8 @@
+cmd: echo test.c | cat -e| cat -e| cat -e| cat -e| cat -e| cat -e| cat -e| cat -e|cat -e|cat -e|cat -e
+echo $?
+bash output:
+test.c$$$$$$$$$$$
+0
+minishell output:
+test.c$$$$$$$$$$$
+0

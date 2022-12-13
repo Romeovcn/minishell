@@ -1,0 +1,7 @@
+cmd: echo $?
+export HOLA=""s -la""
+bash output:
+0
+minishell output:
+0
+export: '-la': not a valid identifier

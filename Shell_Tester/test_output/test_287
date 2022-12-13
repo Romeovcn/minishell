@@ -1,0 +1,6 @@
+cmd: echo $?
+chmod 000 minishell
+bash output:
+0
+minishell output:
+0

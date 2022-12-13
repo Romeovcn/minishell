@@ -1,0 +1,6 @@
+cmd: echo $?
+export PWD=""/mnt/nfs/homes/emtran/Desktop/42_minishell""
+bash output:
+0
+minishell output:
+0

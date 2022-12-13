@@ -1,0 +1,6 @@
+cmd: echo $?
+exit 9223372036854775807
+bash output:
+0
+minishell output:
+0

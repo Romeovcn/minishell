@@ -1,0 +1,10 @@
+cmd: echo $?
+env | grep PWD
+bash output:
+0
+PWD=/mnt/nfs/homes/rvincent/code/minishell/Shell_Tester
+OLDPWD=/mnt/nfs/homes/rvincent/code/minishell
+minishell output:
+0
+OLDPWD=/mnt/nfs/homes/rvincent/code/minishell
+PWD=/mnt/nfs/homes/rvincent/code/minishell/Shell_Tester

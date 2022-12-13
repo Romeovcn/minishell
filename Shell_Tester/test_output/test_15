@@ -1,0 +1,5 @@
+cmd: echo '""hola""'"
+echo $?
+bash output:
+minishell output:
+1

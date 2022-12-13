@@ -1,0 +1,19 @@
+cmd: export hola | unset hola | echo $?
+echo $?
+bash output:
+0
+0
+minishell output:
+0
+==1331691== 5 bytes in 1 blocks are definitely lost in loss record 1 of 68
+==1331691==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1331691==    by 0x10AE63: get_env_name (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1331691==    by 0x10AB86: export_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1331691==    by 0x10A65B: exec_built_in (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1331691==    by 0x10BA4C: command (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1331691==    by 0x10BB7A: exec_token (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1331691==    by 0x10B2FF: pipex_exec (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1331691==    by 0x10B4D2: exec (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1331691==    by 0x1096D4: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1331691== 
+0

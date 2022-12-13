@@ -1,0 +1,8 @@
+cmd: export ?=2
+echo $?
+bash output:
+1
+minishell output:
+export: '?=2': not a valid identifier
+0
+export: '?=2': not a valid identifier

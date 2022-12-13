@@ -19,13 +19,17 @@ void	parse_env(char **str, t_mal_lst **mal_lst, t_env_lst *env_lst, char **resul
 
 	(*str)++;
 	env_name = parse_env_name(*str);
-	// printf("name=%s\n", env_name);
-	env_value = get_env_value(env_name, env_lst);
+	if (ft_strmatch(env_name, "?"))
+	{
+		env_value = ft_itoa(WEXITSTATUS(G_STATUS));
+		lstadd_back_malloc(mal_lst, lstnew_malloc(env_value));
+	}
+	else
+		env_value = get_env_value(env_name, env_lst);
 	*result = ft_strjoin(*result, env_value);
-	free(env_name);
 	lstadd_back_malloc(mal_lst, lstnew_malloc(*result));
 	go_end_env_name(str);
-	free(env_value);
+	free(env_name);
 }
 
 char	*parse_quote_env(char *str, t_mal_lst **mal_lst, t_env_lst *env_lst)

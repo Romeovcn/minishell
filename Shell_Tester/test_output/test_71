@@ -1,0 +1,8 @@
+cmd: export HOL@=bonjour
+echo $?
+bash output:
+1
+minishell output:
+export: 'HOL@=bonjour': not a valid identifier
+0
+export: 'HOL@=bonjour': not a valid identifier

@@ -1,0 +1,6 @@
+cmd: echo $?
+unset HOLA HOL?A
+bash output:
+0
+minishell output:
+0

@@ -1,0 +1,7 @@
+cmd: echo $?
+exit exit
+bash output:
+0
+minishell output:
+0
+exit: exit: numeric argument required

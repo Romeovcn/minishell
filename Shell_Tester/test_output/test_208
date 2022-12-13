@@ -1,0 +1,8 @@
+cmd: cat Makefile | grep srcs | grep srcs | cat -e
+echo $?
+bash output:
+	@rm -rf cat a hola pwd srcs/bonjour srcs/hello '$$HOLA' hola1 hola2 inoutfile ls1 hey HOLA$
+0
+minishell output:
+	@rm -rf cat a hola pwd srcs/bonjour srcs/hello '$$HOLA' hola1 hola2 inoutfile ls1 hey HOLA$
+0

@@ -47,5 +47,8 @@ void	exec_token(t_exec *exec, int i)
 		append(exec->tok_lst);
 	if (exec->tok_lst->args != NULL)
 		command(exec, i);
+	// free_lst_malloc(exec->mal_lst);
+	// free_env_lst(exec->env_lst);
+	// free_array(exec->envp);
 	exit(0);
 }

@@ -1,0 +1,42 @@
+cmd: ls | hola | ls
+echo $?
+bash output:
+cat
+expected_output
+ls
+Makefile
+minishell_output
+our_test
+pwd)
+readline_ignore.txt
+README.md
+script_cut.sh
+test
+test_bonus
+tester.sh
+test_list
+test_list_bis
+test_list_bonus
+test_mandatory
+test_output
+0
+minishell output:
+cat
+expected_output
+ls
+Makefile
+minishell_output
+our_test
+pwd)
+readline_ignore.txt
+README.md
+script_cut.sh
+test
+test_bonus
+tester.sh
+test_list
+test_list_bis
+test_list_bonus
+test_mandatory
+test_output
+0

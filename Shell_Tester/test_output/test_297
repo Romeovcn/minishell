@@ -1,0 +1,8 @@
+cmd: echo $?
+expr 1 + 1
+bash output:
+0
+2
+minishell output:
+0
+2

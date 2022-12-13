@@ -1,0 +1,6 @@
+cmd: echo $?
+export HOL=A=""""
+bash output:
+0
+minishell output:
+0

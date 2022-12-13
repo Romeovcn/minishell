@@ -1,0 +1,22 @@
+cmd: echo $?
+export HOLA$USER=bonjour
+bash output:
+0
+minishell output:
+0
+==1330430== Invalid free() / delete / delete[] / realloc()
+==1330430==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1330430==    by 0x10B111: free_env_lst (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330430==    by 0x109710: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330430==  Address 0x4b251a0 is 0 bytes inside a block of size 9 free'd
+==1330430==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1330430==    by 0x10CDB3: parse_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330430==    by 0x10CE8C: parse_quote_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330430==    by 0x10CF40: parser (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330430==    by 0x1096A1: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330430==  Block was alloc'd at
+==1330430==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1330430==    by 0x10E37C: ft_strdup (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330430==    by 0x10AF74: get_env_lst (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330430==    by 0x1095CD: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1330430== 

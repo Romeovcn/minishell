@@ -1,0 +1,14 @@
+cmd: unset $HOLA
+echo $?
+bash output:
+0
+minishell output:
+==1331454== Invalid free() / delete / delete[] / realloc()
+==1331454==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1331454==    by 0x10CDB3: parse_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1331454==    by 0x10CE8C: parse_quote_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1331454==    by 0x10CF40: parser (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1331454==    by 0x1096A1: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1331454==  Address 0x10f1b8 is in a r-- mapped file /mnt/nfs/homes/rvincent/code/minishell/minishell segment
+==1331454== 
+0

@@ -1,0 +1,6 @@
+cmd: unset HOL@
+echo $?
+bash output:
+0
+minishell output:
+0

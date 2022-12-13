@@ -1,0 +1,7 @@
+cmd: echo $?
+export ''=''
+bash output:
+0
+minishell output:
+0
+export: '=': not a valid identifier

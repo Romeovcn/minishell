@@ -88,12 +88,16 @@ int	export_env(t_exec *exec, t_mal_lst **mal_lst, char **args)
 		if (!name || check_env_name(name))
 		{
 			printf("export: '%s': not a valid identifier\n", args[i]);
+			free(name);
 			return_value = 1;
 			continue ;
 		}
 		env_value = get_env_str_value(args[i]);
 		if (!env_value)
+		{
+			free(name);
 			continue ;
+		}
 		if (is_concatenate(args[i]))
 			env_value = ft_newstrjoin(get_env_value(name, exec->env_lst), env_value);
 		if (change_env_value(name, env_value, exec->env_lst))

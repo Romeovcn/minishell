@@ -1,0 +1,22 @@
+cmd: export HOME
+echo $?
+bash output:
+0
+minishell output:
+0
+==1332154== 5 bytes in 1 blocks are definitely lost in loss record 1 of 68
+==1332154==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1332154==    by 0x10AE63: get_env_name (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332154==    by 0x10AB86: export_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332154==    by 0x10A65B: exec_built_in (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332154==    by 0x10B4AE: exec (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332154==    by 0x1096D4: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332154== 
+==1332151== 5 bytes in 1 blocks are definitely lost in loss record 1 of 67
+==1332151==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1332151==    by 0x10AE63: get_env_name (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332151==    by 0x10AB86: export_env (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332151==    by 0x10A65B: exec_built_in (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332151==    by 0x10B4AE: exec (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332151==    by 0x1096D4: main (in /mnt/nfs/homes/rvincent/code/minishell/minishell)
+==1332151== 

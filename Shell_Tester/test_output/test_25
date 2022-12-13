@@ -1,0 +1,6 @@
+cmd: sleep 3 | exit
+echo $?
+bash output:
+0
+minishell output:
+0
