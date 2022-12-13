@@ -116,12 +116,12 @@ int	ft_cd(char **path, t_env_lst *env_lst)
 	if (!path[1])
 	{
 		if (chdir(get_env_value("HOME", env_lst)) < 0)
-			return (perror("cd"), 1);
+			return (free(old_pwd), perror("cd"), 1);
 	}
 	else if (!path[2])
 	{
 		if (chdir(path[1]) < 0)
-			return (perror("cd"), 1);
+			return (free(old_pwd), perror("cd"), 1);
 	}
 	else
 		return (ft_putstr_fd("cd: too many arguments\n", 2), 1);
