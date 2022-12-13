@@ -127,7 +127,7 @@ int	ft_cd(char **path, t_env_lst *env_lst)
 			return (free(old_pwd), perror("cd"), 300);
 	}
 	else
-		return (ft_putstr_fd("cd: too many arguments\n", 2), 1);
+		return (free(old_pwd), ft_putstr_fd("cd: too many arguments\n", 2), 1);
 	new_pwd = ft_strdup(getcwd(buff, PATH_MAX));
 	change_env_value(ft_strdup("OLDPWD"), old_pwd, env_lst);
 	change_env_value(ft_strdup("PWD"), new_pwd, env_lst);

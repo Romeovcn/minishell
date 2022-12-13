@@ -17,7 +17,7 @@ int check_env_name(char *env_name)
 	int i;
 
 	i = 0;
-	if (!ft_isalpha(env_name[i]) && env_name[i] != '_')
+	if (env_name[i] && !ft_isalpha(env_name[i]) && env_name[i] != '_')
 		return (1);
 	i++;
 	while (env_name[i])
