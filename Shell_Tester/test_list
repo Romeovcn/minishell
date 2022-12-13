@@ -14,35 +14,20 @@ sleep 3 | exit
 exit | sleep 3
 echo hola > a
 >>b echo que tal
-pwd && ls
 pwd || ls
 echo hola || echo bonjour
 echo hola && echo bonjour
 echo bonjour || echo hola
 echo bonjour && echo hola
 echo -n bonjour && echo -n hola
-pwd && ls && echo hola
 pwd || ls && echo hola
-pwd && ls || echo hola
 pwd || ls || echo hola
 ls || export """""
 export """" || ls"
-ls && export """""
 export """" && ls"
 ls || <
-ls && <
 cat | echo || ls
-cat | echo && ls
 ls || cat | echo
-ls && cat | echo
-(ls)
-( ( ls ) )
-( ( ) ls )
-ls && (ls)
-(ls && pwd)
-( ( ls&&pwd ) )
-( ( ls ) &&pwd )
-(ls && ( ( pwd ) ) )
 echo hola | cat
 echo hola| cat
 echo hola |cat

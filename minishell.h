@@ -63,7 +63,6 @@ t_lex_lst	*lstnew_lex(void *content, int operator, t_mal_lst **mal_lst);
 t_lex_lst	*lstlast_lexer(t_lex_lst *lst);
 void		lstadd_back_lex(t_lex_lst **lst, t_lex_lst *new);
 void		read_lst(t_lex_lst *lst);
-void		free_lst(t_lex_lst *lst);
 //----------------------------------------------------------------------------//
 //							 	Lexer utils									  //
 //----------------------------------------------------------------------------//
@@ -87,7 +86,6 @@ int			check_error(t_lex_lst *lexed_list);
 //							 	Parser										  //
 //----------------------------------------------------------------------------//
 void		parser(t_lex_lst *lex_lst, t_mal_lst **mal_lst, t_env_lst *env_lst);
-char		*manage_quotes(char *str, t_mal_lst **mal_lst, t_env_lst *env_lst);
 //----------------------------------------------------------------------------//
 //							 	Parser utils								  //
 //----------------------------------------------------------------------------//
@@ -150,7 +148,6 @@ int			is_directory(char *path);
 //----------------------------------------------------------------------------//
 //							 	Exec here_doc								  //
 //----------------------------------------------------------------------------//
-t_array_lst *get_here_doc_lst(t_exec *exec);
 int			check_heredoc(t_exec *exec);
 void		position_last_heredoc(t_exec *exec);
 void		heredoc_rm(t_tok_lst *tok_lst);
@@ -170,7 +167,6 @@ char		*ft_abs_path(char *cmd, t_exec *exec);
 //							 	Signal										  //
 //----------------------------------------------------------------------------//
 void		signal_manager();
-void		signal_manager_pid();
 void		signal_manager_hd();
 void		sigquit_process(int sig);
 // To do :

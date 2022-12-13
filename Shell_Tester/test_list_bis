@@ -701,31 +701,6 @@ echo hola | cat | cat | cat | cat | cat | grep hola
 echo $?
 echo $?
 echo $?
-echo $?
-(> pwd)
-echo $?
-(< pwd)
-echo $?
-(< pwd)
-echo $?
-( ( ( ( ( pwd) ) ) ) )
-echo $?
-() pwd
-echo $?
-> pwd (ls)
-echo $?
-echo $?
-echo $?
-echo $?
-echo $?
-echo $?
-echo $?
-echo $?
-echo $?
-(pwd | wc) < hola
-echo $?
-echo $?
-echo $?
 echo hey > hola
 echo $?
 echo hey > hola
