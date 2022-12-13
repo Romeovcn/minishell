@@ -184,4 +184,6 @@ void		sigquit_process(int sig);
 // check error msg are print in stderr
 // leak cd
 // cd unset PWD OLDPWD doesnt change value
+// leak simple here_doc with no command
+// overwrite when exec ./minishell multi time and ctrl c
 #endif

@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:07:33 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/12 21:06:48 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:29:38 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*get_right_path(char *path, t_array_lst *cmd, t_exec *exec)
 	res = ft_abs_path(cmd->content, exec);
 	if (res)
 		return (res);
+	if (!path)
+		free_exit(exec, 127);
 	split_path = ft_split(path, ':');
 	i = 0;
 	while (split_path[i])

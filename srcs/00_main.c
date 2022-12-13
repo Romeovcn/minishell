@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/12 21:21:19 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:09:56 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int main(int argc, char **argv, char **env)
 	while (1)
 	{
 		signal_manager();
+		rl_outstream = stderr;
 		readline_str = readline("Minishell> ");
 		if (!readline_str)
 			break ;
@@ -63,5 +64,5 @@ int main(int argc, char **argv, char **env)
 	}
 	free_array(exec_struct.envp);
 	free_env_lst(exec_struct.env_lst);
-	write(1, "exit\n", 6);
+	write(2, "exit\n", 6);
 }

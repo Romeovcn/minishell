@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/06 23:41:32 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:08:47 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_exit(char **args, t_mal_lst *mal_lst, t_env_lst *env_lst)
 	{
 		free_env_lst(env_lst);
 		free_lst_malloc(mal_lst);
-		printf("exit\n");
+		ft_putstr_fd("exit\n", 2);
 		exit(WEXITSTATUS(G_STATUS));
 	}
 	i = 0;
