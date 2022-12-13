@@ -70,7 +70,7 @@ int	ft_pwd(t_env_lst *env_lst)
 	char	*pwd_path;
 	char	buff[PATH_MAX];
 
-	pwd_path = get_env_value(ft_strdup("PWD"), env_lst);
+	pwd_path = get_env_value("PWD", env_lst);
 	if (pwd_path)
 		printf("%s\n", pwd_path);
 	else
@@ -124,7 +124,7 @@ int	ft_cd(char **path, t_env_lst *env_lst)
 			return (perror("cd"), 1);
 	}
 	else
-		return (printf("cd: too many arguments\n"), 1);
+		return (ft_putstr_fd("cd: too many arguments\n", 2), 1);
 	new_pwd = ft_strdup(getcwd(buff, PATH_MAX));
 	// printf("old=%s\nnew=%s\n", old_pwd, new_pwd);
 	change_env_value(ft_strdup("OLDPWD"), old_pwd, env_lst);

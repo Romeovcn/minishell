@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int exec_built_in(t_exec *exec, int is_fork) //clean arguments
+int exec_built_in(t_exec *exec, int is_fork)
 {
 	char **args;
 	int return_value;

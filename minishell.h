@@ -176,7 +176,12 @@ void		sigquit_process(int sig);
 // To do :
 // Protect malloc
 // Norm
+// echo -n -n -n hello
 // if unset path, command still works because path is not unset in **env but in linked list
 // env -i :
     // should print cmd not found
+// leaks first cmd exit
+// check error msg are print in stderr
+// leak cd
+// cd unset PWD OLDPWD doesnt change value
 #endif

@@ -19,7 +19,7 @@ void	parse_env(char **str, t_mal_lst **mal_lst, t_env_lst *env_lst, char **resul
 
 	(*str)++;
 	env_name = parse_env_name(*str);
-	printf("name=%s\n", env_name);
+	// printf("name=%s\n", env_name);
 	env_value = get_env_value(env_name, env_lst);
 	free(env_name);
 	*result = ft_strjoin(*result, env_value);
