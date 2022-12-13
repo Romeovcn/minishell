@@ -34,25 +34,25 @@ int	check_not_closed_string(char *str)
 		str++;
 	}
 	if (quote != 0)
-		return (printf("Not closed quote error\n"), 1);
+		return (printf("bash: syntax error: not closed quote\n"), 1);
 	return (0);
 }
 
 int	check_redir(t_lex_lst *lexed_list)
 {
 	if (!lexed_list->next)
-		return (printf("No key word after redir\n"), 1);
+		return (printf("bash: syntax error: no key word after redir\n"), 1);
 	if (lexed_list->next->operator != WORD)
-		return (printf("Operator after redir\n"), 1);
+		return (printf("bash: syntax error: operator after redir\n"), 1);
 	return (0);
 }
 
 int	check_pipe(t_lex_lst *lexed_list)
 {
 	if (!lexed_list->next)
-		return (printf("No key word after pipe\n"), 1);
+		return (printf("bash: syntax error: no word after pipe\n"), 1);
 	if (lexed_list->next->operator == PIPE)
-		return (printf("Double pipe error\n"), 1);
+		return (printf("bash: syntax error near unexpected token `|'\n"), 1);
 	return (0);
 }
 

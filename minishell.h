@@ -174,13 +174,9 @@ void		signal_manager_pid();
 void		signal_manager_hd();
 void		sigquit_process(int sig);
 // To do :
-// echo -nnnnnnn not working
 // Protect malloc
 // Norm
 // if unset path, command still works because path is not unset in **env but in linked list
-//echo :
-    // echo | |
 // env -i :
     // should print cmd not found
-// fix error message syntax
 #endif

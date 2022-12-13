@@ -82,13 +82,20 @@ int	ft_echo(char **cmd, t_exec exec)
 {
 	int	i;
 	int	nl;
+	int j;
 
 	i = 1;
 	nl = 1;
-	if (cmd[i] && ft_strmatch(cmd[i], "-n"))
+	if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
 	{
-		nl = 0;
-		i++;
+		j = 1;
+		while (cmd[i][j] == 'n')
+			j++;;
+		if (!cmd[i][j])
+		{
+			nl = 0;
+			i++;
+		}
 	}
 	if (cmd[i])
 		printf("%s", cmd[i++]);
