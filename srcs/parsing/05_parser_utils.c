@@ -19,7 +19,7 @@ int	is_env(char *str)
 	i = 0;
 	if (str[i] != '$' || !str[i + 1])
 		return (0);
-	if (!ft_isalnum(str[i + 1]) && str[i + 1] != '_' && str[i + 1] != '?')
+	if (!ft_isalnum(str[i + 1]) && str[i + 1] != '_' && str[i + 1] != '?' && str[i + 1] != '\'' && str[i + 1] != '"')
 		return (0);
 	return (1);
 }
