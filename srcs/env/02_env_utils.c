@@ -69,6 +69,7 @@ int	change_env_value(char *name, char *new_value, t_env_lst *env_lst)
 		if (ft_strmatch(env_lst->name, name))
 		{
 			free(name);
+			free(env_lst->value);
 			env_lst->value = new_value;
 			return (1);
 		}

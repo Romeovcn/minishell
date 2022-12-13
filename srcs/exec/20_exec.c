@@ -52,31 +52,31 @@ void init_exec(t_exec *exec)
 	exec->here_doc_lst = NULL;
 }
 
-int	exec(t_exec exec)
+int	exec(t_exec *exec)
 {
 	t_tok_lst	*head_tok_lst;
 	int			stdin_fd;
 
 	stdin_fd = dup(0);
-	head_tok_lst = exec.tok_lst;
-	if (check_heredoc(&exec) == 1)
+	head_tok_lst = exec->tok_lst;
+	if (check_heredoc(exec) == 1)
 	{
-		here_doc_manage(&exec);
+		here_doc_manage(exec);
 		if (G_STATUS != 0)
 		{
-			heredoc_rm(exec.tok_lst);
+			heredoc_rm(exec->tok_lst);
 			dup2(stdin_fd, 0);
 			return (0);
 		}
 	}
-	if (exec.nb_command == 1 && exec.tok_lst->args && is_built_in_no_fork(exec.tok_lst->args->content))
+	if (exec->nb_command == 1 && exec->tok_lst->args && is_built_in_no_fork(exec->tok_lst->args->content))
 	{
-		G_STATUS = exec_built_in(exec, exec.tok_lst, &exec.mal_lst, &exec.env_lst);
+		G_STATUS = exec_built_in(exec, FALSE);
 		return (0);
 	}
-	else if (exec.nb_command > 0)
-		pipex_exec(&exec);
-	error_manager(&exec, head_tok_lst);
-	heredoc_rm(exec.tok_lst);
+	if (exec->nb_command > 0)
+		pipex_exec(exec);
+	error_manager(exec, head_tok_lst);
+	heredoc_rm(exec->tok_lst);
 	dup2(stdin_fd, 0);
 }

@@ -36,6 +36,11 @@ ${NAME}: ${LIB} ${OBJS_DIR} ${OBJS} ${OBJS_BUILT_IN} ${OBJS_ENV} ${OBJS_EXEC} ${
 	@echo "\033[32m$ ${NAME} compiled !"
 	@echo "----------------------------\033[0m"
 
+debug: ${LIB} ${OBJS_DIR} ${OBJS} ${OBJS_BUILT_IN} ${OBJS_ENV} ${OBJS_EXEC} ${OBJS_PARSING} ${OBJS_SIGNAL} ${HEADERS}
+	@${CC} ${CFLAGS} -fsanitize=address -g3 ${OBJS} ${OBJS_BUILT_IN} ${OBJS_ENV} ${OBJS_EXEC} ${OBJS_PARSING} ${OBJS_SIGNAL} ${LIB} -L/usr/local/lib -I/usr/local/include -lreadline -ltinfo -o ${NAME}
+	@echo "\033[32m$ ${NAME} compiled !"
+	@echo "----------------------------\033[0m"
+
 all: ${NAME}
 
 ${LIB}:

@@ -73,7 +73,7 @@ int is_concatenate(char *env)
 	return (0);
 }
 
-int	export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args)
+int	export_env(t_exec *exec, t_mal_lst **mal_lst, char **args)
 {
 	int		return_value;
 	char	*env_value;
@@ -95,10 +95,10 @@ int	export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args)
 		if (!env_value)
 			continue ;
 		if (is_concatenate(args[i]))
-			env_value = ft_newstrjoin(get_env_value(name, *env_lst), env_value);
-		if (change_env_value(name, env_value, *env_lst))
+			env_value = ft_newstrjoin(get_env_value(name, exec->env_lst), env_value);
+		if (change_env_value(name, env_value, exec->env_lst))
 			continue ;
-		lstadd_back_env(env_lst, lstnew_env(name, env_value));
+		lstadd_back_env(&exec->env_lst, lstnew_env(name, env_value));
 	}
 	return(return_value);
 }

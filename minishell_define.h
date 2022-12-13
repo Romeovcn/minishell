@@ -33,6 +33,8 @@
 # define REDIR_OUT 3 // >
 # define HERE_DOC 4 // <<
 # define APP_OUT 5 // >>
+# define TRUE 1
+# define FALSE 0
 
 typedef struct a_list
 {

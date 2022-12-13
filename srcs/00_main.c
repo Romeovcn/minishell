@@ -57,7 +57,7 @@ int main(int argc, char **argv, char **env)
 		parser(exec_struct.lex_lst, &exec_struct.mal_lst, exec_struct.env_lst);
 		exec_struct.tok_lst = get_token_lst(exec_struct.lex_lst, &exec_struct.mal_lst);
 		init_exec(&exec_struct);
-		exec(exec_struct);
+		exec(&exec_struct);
 		free_lst_malloc(exec_struct.mal_lst);
 		free(readline_str);
 	}

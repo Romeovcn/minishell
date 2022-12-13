@@ -32,11 +32,11 @@ int			ft_cd(char **path, t_env_lst *env_lst);
 //----------------------------------------------------------------------------//
 int			is_built_in(char *command);
 int			is_built_in_no_fork(char *command);
-int			exec_built_in(t_exec exec, t_tok_lst *tok_lst, t_mal_lst **mal_lst, t_env_lst **env_lst);
+int			exec_built_in(t_exec *exec, int is_fork);
 //----------------------------------------------------------------------------//
 //							 	Env			 								  //
 //----------------------------------------------------------------------------//
-int			export_env(t_env_lst **env_lst, t_mal_lst **mal_lst, char **args);
+int			export_env(t_exec *exec, t_mal_lst **mal_lst, char **args);
 int			unset_env(t_env_lst **env_lst, char **args);
 //----------------------------------------------------------------------------//
 //							 	Env utils		 							  //
@@ -124,7 +124,7 @@ int			ft_lstsize_token(t_tok_lst *lst);
 //----------------------------------------------------------------------------//
 //							 	Exec										  //
 //----------------------------------------------------------------------------//
-int			exec(t_exec exec);
+int			exec(t_exec *exec);
 void		init_exec(t_exec *exec);
 char		*get_right_path(char *path, t_array_lst *cmd, t_exec *exec);
 //----------------------------------------------------------------------------//

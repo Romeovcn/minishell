@@ -7,7 +7,8 @@
 		"typeinfo": "c",
 		"types.h": "c",
 		"limits.h": "c",
-		"termios.h": "c"
+		"termios.h": "c",
+		"functional": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

@@ -22,7 +22,7 @@ char	*get_right_path(char *path, t_array_lst *cmd, t_exec *exec)
 	if (ft_strlen(cmd->content) == 0)
 		free_exit(exec, 127);
 	res = ft_abs_path(cmd->content, exec);
-	if (res != NULL)
+	if (res)
 		return (res);
 	split_path = ft_split(path, ':');
 	i = 0;

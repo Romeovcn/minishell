@@ -32,7 +32,7 @@ void	here_doc(t_tok_lst *tok_lst)
 	del = lstlast_array(tok_lst->delimiter);
 	fd_here_doc = open(del->content2, O_RDONLY);
 	dup2(fd_here_doc, STDIN_FILENO);
-	close(file_fd);
+	close(fd_here_doc);
 }
 
 void	redir_out(t_tok_lst *tok_lst)
