@@ -1,5 +1,0 @@
-cmd: export | grep ""HOME"""
-echo $?
-bash output:
-minishell output:
-1

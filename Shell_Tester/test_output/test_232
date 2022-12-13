@@ -1,6 +1,0 @@
-cmd: cd ../minishell/home/vietdu91/42_works/minishell
-echo $?
-bash output:
-1
-minishell output:
-0

@@ -1,6 +1,0 @@
-cmd: echo $?
-mkdir a
-bash output:
-0
-minishell output:
-0

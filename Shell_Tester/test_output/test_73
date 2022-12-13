@@ -1,8 +1,0 @@
-cmd: export HO-LA=bonjour
-echo $?
-bash output:
-1
-minishell output:
-export: 'HO-LA=bonjour': not a valid identifier
-0
-export: 'HO-LA=bonjour': not a valid identifier

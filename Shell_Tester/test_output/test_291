@@ -1,8 +1,0 @@
-cmd: echo $?
-env | grep SHLVL
-bash output:
-0
-SHLVL=2
-minishell output:
-0
-SHLVL=2

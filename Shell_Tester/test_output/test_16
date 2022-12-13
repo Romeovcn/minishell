@@ -1,5 +1,0 @@
-cmd: echo '''ho""''''l""a'''"
-echo $?
-bash output:
-minishell output:
-1

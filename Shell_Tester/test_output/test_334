@@ -1,6 +1,0 @@
-cmd: echo $?
-ls | exit
-bash output:
-0
-minishell output:
-0

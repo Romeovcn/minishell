@@ -1,5 +1,0 @@
-cmd: export """""
-echo $?
-bash output:
-minishell output:
-1

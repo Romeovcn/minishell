@@ -1,6 +1,0 @@
-cmd: export HOLA=bonjour
-echo $?
-bash output:
-0
-minishell output:
-0

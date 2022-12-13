@@ -182,9 +182,7 @@ void		sigquit_process(int sig);
     // should print cmd not found
 // leaks first cmd exit
 // check error msg are print in stderr
-// leak cd
 // cd unset PWD OLDPWD doesnt change value
 // leak simple here_doc with no command
 // overwrite when exec ./minishell multi time and ctrl c
-// ?$HOME invalid free
 #endif

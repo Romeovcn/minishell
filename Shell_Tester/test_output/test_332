@@ -1,6 +1,0 @@
-cmd: echo $?
-exit 9223372036854775808
-bash output:
-0
-minishell output:
-0

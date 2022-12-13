@@ -1,7 +1,0 @@
-cmd: echo $?
-export """" HOLA=bonjour
-bash output:
-0
-minishell output:
-0
-export: '': not a valid identifier

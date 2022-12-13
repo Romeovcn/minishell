@@ -1,7 +1,0 @@
-cmd: echo $?
-exit hola 666 666
-bash output:
-0
-minishell output:
-0
-exit: too many arguments

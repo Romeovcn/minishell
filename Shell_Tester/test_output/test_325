@@ -1,6 +1,0 @@
-cmd: echo $?
-exit '6'66
-bash output:
-0
-minishell output:
-0

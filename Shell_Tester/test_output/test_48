@@ -1,7 +1,0 @@
-cmd: env hola
-echo $?
-bash output:
-125
-minishell output:
-env: too many arguments
-1

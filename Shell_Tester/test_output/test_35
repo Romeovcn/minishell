@@ -1,5 +1,0 @@
-cmd: echo ""$DONTEXIST"" ""Makefile"""
-echo $?
-bash output:
-minishell output:
-1

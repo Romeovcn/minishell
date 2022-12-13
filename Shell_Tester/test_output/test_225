@@ -1,8 +1,0 @@
-cmd: pwd ls env
-echo $?
-bash output:
-/mnt/nfs/homes/rvincent/code/minishell/Shell_Tester
-0
-minishell output:
-/mnt/nfs/homes/rvincent/code/minishell/Shell_Tester
-0

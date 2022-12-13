@@ -1,6 +1,0 @@
-cmd: export _HO_LA_=bonjour
-echo $?
-bash output:
-0
-minishell output:
-0

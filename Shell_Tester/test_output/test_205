@@ -1,6 +1,0 @@
-cmd: unset ++++++
-echo $?
-bash output:
-0
-minishell output:
-0

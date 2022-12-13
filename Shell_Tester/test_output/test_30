@@ -1,5 +1,0 @@
-cmd: echo hola""""bonjour"
-echo $?
-bash output:
-minishell output:
-1

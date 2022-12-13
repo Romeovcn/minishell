@@ -17,7 +17,7 @@ int	ft_env(char **args, t_env_lst *env_lst)
 	if (args[1])
 	{
 		printf("env: too many arguments\n");
-		return (1);
+		return (300);
 	}
 	while (env_lst)
 	{
@@ -119,12 +119,12 @@ int	ft_cd(char **path, t_env_lst *env_lst)
 	if (!path[1])
 	{
 		if (chdir(get_env_value("HOME", env_lst)) < 0)
-			return (free(old_pwd), perror("cd"), 1);
+			return (free(old_pwd), perror("cd"), 300);
 	}
 	else if (!path[2])
 	{
 		if (chdir(path[1]) < 0)
-			return (free(old_pwd), perror("cd"), 1);
+			return (free(old_pwd), perror("cd"), 300);
 	}
 	else
 		return (ft_putstr_fd("cd: too many arguments\n", 2), 1);

@@ -1,8 +1,0 @@
-cmd: echo $?
-echo oui | cat -e
-bash output:
-0
-oui$
-minishell output:
-0
-oui$

@@ -1,8 +1,0 @@
-cmd: ls | ls | echo hola | rev
-echo $?
-bash output:
-aloh
-0
-minishell output:
-aloh
-0

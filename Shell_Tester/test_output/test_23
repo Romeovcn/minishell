@@ -1,5 +1,0 @@
-cmd: echo ""hola     "" | cat -e"
-echo $?
-bash output:
-minishell output:
-1

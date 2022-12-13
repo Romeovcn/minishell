@@ -1,8 +1,0 @@
-cmd: echo $?
-echo hola | cat | cat | cat | cat | cat | grep hola
-bash output:
-0
-hola
-minishell output:
-0
-hola

@@ -1,8 +1,0 @@
-cmd: export =
-echo $?
-bash output:
-1
-minishell output:
-export: '=': not a valid identifier
-0
-export: '=': not a valid identifier

@@ -1,8 +1,0 @@
-cmd: echo $?
-pwd | echo hola
-bash output:
-0
-hola
-minishell output:
-0
-hola

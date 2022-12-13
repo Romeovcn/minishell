@@ -1,5 +1,0 @@
-cmd: """"e""'c'ho 'b'""o""nj""o""'u'r"""
-echo $?
-bash output:
-minishell output:
-1

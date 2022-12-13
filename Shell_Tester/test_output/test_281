@@ -1,6 +1,0 @@
-cmd: echo $?
-rm -r ../a
-bash output:
-0
-minishell output:
-0

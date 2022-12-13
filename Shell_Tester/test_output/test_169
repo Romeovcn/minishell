@@ -1,8 +1,0 @@
-cmd: echo $?
-pwd
-bash output:
-0
-/mnt/nfs/homes/rvincent/code/minishell/Shell_Tester
-minishell output:
-0
-/mnt/nfs/homes/rvincent/code/minishell/Shell_Tester

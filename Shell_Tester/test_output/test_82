@@ -1,7 +1,0 @@
-cmd: echo $?
-export HOL+A=bonjour
-bash output:
-0
-minishell output:
-0
-export: 'HOL+A=bonjour': not a valid identifier

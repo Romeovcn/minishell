@@ -1,5 +1,0 @@
-cmd: cd /e""tc"""/etc
-echo $?
-bash output:
-minishell output:
-1

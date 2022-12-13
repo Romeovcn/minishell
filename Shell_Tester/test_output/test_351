@@ -1,6 +1,0 @@
-cmd: echo $?
-ifconfig | grep "":"""MULTICAST>  mtu 1500
-bash output:
-0
-minishell output:
-0

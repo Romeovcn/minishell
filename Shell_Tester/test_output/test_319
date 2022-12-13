@@ -1,7 +1,0 @@
-cmd: echo $?
-exit ++++666
-bash output:
-0
-minishell output:
-0
-exit: ++++666: numeric argument required

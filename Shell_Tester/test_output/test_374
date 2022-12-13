@@ -1,5 +1,0 @@
-cmd: () pwd
-echo $?
-bash output:
-minishell output:
-127

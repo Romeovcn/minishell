@@ -1,7 +1,0 @@
-cmd: ( ( ( ( ( pwd) ) ) ) )
-echo $?
-bash output:
-/mnt/nfs/homes/rvincent/code/minishell/Shell_Tester
-0
-minishell output:
-127

@@ -1,6 +1,0 @@
-cmd: echo $?
-exit 259
-bash output:
-0
-minishell output:
-0

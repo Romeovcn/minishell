@@ -1,8 +1,0 @@
-cmd: <> cat
-echo $?
-bash output:
-0
-minishell output:
-bash: syntax error: operator after redir
-1
-bash: syntax error: operator after redir

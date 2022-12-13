@@ -1,8 +1,0 @@
-cmd: echo $?
-echo hola | echo que tal
-bash output:
-0
-que tal
-minishell output:
-0
-que tal

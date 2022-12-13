@@ -1,7 +1,0 @@
-cmd: echo $?
-export TE+S=T
-bash output:
-0
-minishell output:
-0
-export: 'TE+S=T': not a valid identifier

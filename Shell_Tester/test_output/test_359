@@ -1,6 +1,0 @@
-cmd: echo $?
-ls | ls | hola
-bash output:
-0
-minishell output:
-0

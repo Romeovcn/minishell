@@ -24,7 +24,7 @@ void	command(t_exec *exec, int i)
 		dup2(exec->pipe_fd[1], STDOUT_FILENO);
 	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 	if (is_built_in(args[0]))
-		exit(exec_built_in(exec, TRUE));
+		exit(G_STATUS = exec_built_in(exec, TRUE));
 	execve(path, args, exec->envp);
 	exit(0);
 }
@@ -47,8 +47,8 @@ void	exec_token(t_exec *exec, int i)
 		append(exec->tok_lst);
 	if (exec->tok_lst->args != NULL)
 		command(exec, i);
-	// free_lst_malloc(exec->mal_lst);
-	// free_env_lst(exec->env_lst);
-	// free_array(exec->envp);
+	free_lst_malloc(exec->mal_lst);
+	free_env_lst(exec->env_lst);
+	free_array(exec->envp);
 	exit(0);
 }

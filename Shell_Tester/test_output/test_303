@@ -1,7 +1,0 @@
-cmd: echo $?
-exit hola
-bash output:
-0
-minishell output:
-0
-exit: hola: numeric argument required
