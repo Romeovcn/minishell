@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:41 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/12 21:27:48 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/13 19:30:46 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,6 @@ char	*ft_abs_path(char *cmd, t_exec *exec)
 			free_exit(exec, 126);
 	}
 	else if ((cmd[0] == '/' || cmd[0] == '.') && access(cmd, F_OK) == -1)
-		free_exit(exec, 126);
+		free_exit(exec, 127);
 	return (NULL);
 }

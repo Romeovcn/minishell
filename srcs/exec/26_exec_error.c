@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:43 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/12 21:36:42 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/13 19:34:04 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static void	error_status(t_tok_lst *tok_lst)
 		error_message(tok_lst->args->content, "Is a directory\n");
 	else if (status == 126)
 		error_message(tok_lst->args->content, "Permission denied\n");
+	else if (status == 127 && file_exist(tok_lst->args->content) == 0)
+		error_message(tok_lst->args->content, "No such file or directory\n");
 	else if (status == 127)
 		error_message_127(tok_lst->args->content);
 	if (!file_error)
