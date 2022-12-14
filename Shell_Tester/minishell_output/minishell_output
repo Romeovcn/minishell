@@ -1,4 +1,4 @@
-a
+0
 expected_output
 hey
 hola
@@ -24,4 +24,3 @@ test_list_bis
 test_list_bonus
 test_mandatory
 test_output
-0
