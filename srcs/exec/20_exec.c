@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/13 19:19:25 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:41:07 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	pipex_exec(t_exec *exec)
 	head = exec->tok_lst;
 	tmp = exec;
 	i = 0;
-	// signal(SIGQUIT, sigquit_process);
 	while (i < tmp->nb_command)
 	{
 		if (pipe(tmp->pipe_fd) == -1)
@@ -37,10 +36,6 @@ static void	pipex_exec(t_exec *exec)
 		{
 			signal(SIGINT, handle_signal);
 			signal(SIGQUIT, handle_signal);
-			waitpid(exec->pid[i], &status, 0);
-			if (WIFEXITED(status))
-				G_STATUS = WEXITSTATUS(status);
-			kill(exec->pid[i], SIGTERM);
 		}
 		if (exec->pid[i] == 0)
 			exec_token(tmp, i);

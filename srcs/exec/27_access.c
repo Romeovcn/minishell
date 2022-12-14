@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:41 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/13 19:30:46 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:28:43 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	ft_null_access(char *path, char **split_path, t_exec *exec)
 {
 	if (path == NULL)
 	{
+		printf("je usis la\n");
 		free_array(split_path);
 		free_exit(exec, 127);
 	}
