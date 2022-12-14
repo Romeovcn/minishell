@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/09 16:25:33 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:41:50 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ char	*get_env_name(char *env)
 		i++;
 	}
 	name[i] = 0;
+	if (ft_strlen(name) == 0)
+	{
+		free(name);
+		return (NULL);
+	}
 	return (name);
 }
 
