@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/11 15:17:15 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:07:21 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include <signal.h>
 # include <termios.h>
 # include <term.h>
-#include <sys/ioctl.h>
 
 # define WORD 0 // file name ou command ou argument
 # define PIPE 1 // pipe
