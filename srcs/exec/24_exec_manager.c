@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:46:29 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/14 17:27:22 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/14 19:20:05 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	command(t_exec *exec, int i)
 
 	args = lst_to_str_array(exec->tok_lst->args, &exec->mal_lst);
 	if (!is_built_in(args[0]))
-		path = get_right_path(getenv("PATH"), exec->tok_lst->args, exec);
+		path = get_right_path(get_path_envp(exec), exec->tok_lst->args, exec);
 	if (exec->tok_lst->output_fd == 1 && i != exec->nb_command - 1)
 		dup2(exec->pipe_fd[1], STDOUT_FILENO);
 	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);

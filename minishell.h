@@ -125,6 +125,7 @@ int			ft_lstsize_token(t_tok_lst *lst);
 int			exec(t_exec *exec);
 void		init_exec(t_exec *exec);
 char		*get_right_path(char *path, t_array_lst *cmd, t_exec *exec);
+char	    *get_path_envp(t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Exec simple									  //
 //----------------------------------------------------------------------------//
@@ -173,10 +174,6 @@ void    	handle_signal(int sig_num);
 // Protect malloc
 // Norm
 // echo -n -n -n hello
-// if unset path, command still works because path is not unset in **env but in linked list
-// leaks first cmd exit
 // check error msg are print in stderr
 // cd unset PWD OLDPWD doesnt change value
-// leak simple here_doc with no command
-// cat | cat | ls doesnt work correctly
 #endif
