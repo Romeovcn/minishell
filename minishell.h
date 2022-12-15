@@ -173,4 +173,10 @@ void    	handle_signal(int sig_num);
 // Protect malloc
 // Norm
 // echo -n -n -n hello
+// export without args should display env
+// check unset error
+// echo lol > Test | << Test cat >> Test | cat < Test
+// echo bjr >'a'
+// cd into dir, delete dir ..
+// export salut=ok >'c'
 #endif
