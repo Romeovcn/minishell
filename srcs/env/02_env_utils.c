@@ -67,20 +67,23 @@ t_env_lst	*get_env_lst(char **env)
 	return (env_lst);
 }
 
-int	change_env_value(char *name, char *new_value, t_env_lst *env_lst)
+void	change_env_value(char *name, char *new_value, t_env_lst **env_lst) // add it if doesnt exist
 {
-	while (env_lst)
+	t_env_lst *lst_head;
+
+	lst_head = *env_lst;
+	while (lst_head)
 	{
-		if (ft_strmatch(env_lst->name, name))
+		if (ft_strmatch(lst_head->name, name))
 		{
 			free(name);
-			free(env_lst->value);
-			env_lst->value = new_value;
-			return (1);
+			free(lst_head->value);
+			lst_head->value = new_value;
+			return ;
 		}
-		env_lst = env_lst->next;
+		lst_head = lst_head->next;
 	}
-	return (0);
+	lstadd_back_env(env_lst, lstnew_env(name, new_value));
 }
 
 char	*get_env_value(char *name, t_env_lst *env_lst)

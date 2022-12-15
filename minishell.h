@@ -26,7 +26,7 @@ int			ft_env(char **args, t_env_lst *env_lst);
 int			ft_pwd(t_env_lst *env_lst);
 int			ft_exit(char **args, t_exec *exec);
 int			ft_echo(char **cmd, t_exec exec);
-int			ft_cd(char **path, t_env_lst *env_lst);
+int			ft_cd(char **path, t_env_lst **env_lst);
 //----------------------------------------------------------------------------//
 //							 	Built-in utils		 						  //
 //----------------------------------------------------------------------------//
@@ -43,7 +43,7 @@ int			unset_env(t_env_lst **env_lst, char **args);
 //----------------------------------------------------------------------------//
 char	    *get_env_name(char *env);
 t_env_lst	*get_env_lst(char **env);
-int			change_env_value(char *name, char *new_value, t_env_lst *env_lst);
+void		change_env_value(char *name, char *new_value, t_env_lst **env_lst);
 char		*get_env_value(char *name, t_env_lst *env_lst);
 void		free_env_lst(t_env_lst *env_lst);
 //----------------------------------------------------------------------------//
@@ -176,4 +176,5 @@ void    	handle_signal(int sig_num);
 // echo -n -n -n hello
 // check error msg are print in stderr
 // cd unset PWD OLDPWD doesnt change value
+// cd --
 #endif

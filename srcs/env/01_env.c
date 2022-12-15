@@ -100,9 +100,7 @@ int	export_env(t_exec *exec, t_mal_lst **mal_lst, char **args)
 		}
 		if (is_concatenate(args[i]))
 			env_value = ft_newstrjoin(get_env_value(name, exec->env_lst), env_value);
-		if (change_env_value(name, env_value, exec->env_lst))
-			continue ;
-		lstadd_back_env(&exec->env_lst, lstnew_env(name, env_value));
+		change_env_value(name, env_value, &exec->env_lst);
 	}
 	return(return_value);
 }

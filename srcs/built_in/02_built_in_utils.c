@@ -17,7 +17,7 @@ int exec_built_in(t_exec *exec, int is_fork)
 	else if (ft_strmatch(args[0], "env"))
 		return_value = ft_env(args, exec->env_lst);
 	else if (ft_strmatch(args[0], "cd"))
-		return_value = ft_cd(args, exec->env_lst);
+		return_value = ft_cd(args, &exec->env_lst);
 	else if (ft_strmatch(args[0], "pwd"))
 		return_value = ft_pwd(exec->env_lst);
 	else if (ft_strmatch(args[0], "echo"))

@@ -109,25 +109,27 @@ int	ft_echo(char **cmd, t_exec exec)
 	return (0);
 }
 
-int	ft_cd(char **path, t_env_lst *env_lst)
+int	ft_cd(char **path, t_env_lst **env_lst)
 {
 	char	buff[PATH_MAX];
 	char	*old_pwd;
 	char	*new_pwd;
+	int		chdir_value;
 
 	old_pwd = ft_strdup(getcwd(buff, PATH_MAX));
 	if (!path[1])
-	{
-		if (chdir(get_env_value("HOME", env_lst)) < 0)
-			return (free(old_pwd), perror("cd"), 300);
-	}
+		chdir_value = chdir(get_env_value("HOME", *env_lst)) < 0;
 	else if (!path[2])
 	{
-		if (chdir(path[1]) < 0)
-			return (free(old_pwd), perror("cd"), 300);
+		if (ft_strmatch(path[1], "--"))
+			chdir_value = chdir(get_env_value("OLDPWD", *env_lst));
+		else
+			chdir_value = chdir(path[1]);
 	}
 	else
 		return (free(old_pwd), ft_putstr_fd("cd: too many arguments\n", 2), 300);
+	if (chdir_value < 0)
+		return (free(old_pwd), perror("cd"), 300);
 	new_pwd = ft_strdup(getcwd(buff, PATH_MAX));
 	change_env_value(ft_strdup("OLDPWD"), old_pwd, env_lst);
 	change_env_value(ft_strdup("PWD"), new_pwd, env_lst);
