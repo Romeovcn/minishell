@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:46:29 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/14 19:20:05 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/15 19:55:43 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	exec_token(t_exec *exec, int i)
 		append(exec->tok_lst);
 	if (exec->tok_lst->args != NULL)
 		command(exec, i);
+	close(3);
+	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 	free_lst_malloc(exec->mal_lst);
 	free_env_lst(exec->env_lst);
 	free_array(exec->envp);

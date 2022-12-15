@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:03:32 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/14 17:30:55 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/15 19:57:56 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	free_exit(t_exec *exec, int code_exit)
 {
+	close(3);
+	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 	free_lst_malloc(exec->mal_lst);
 	free_array(exec->envp);
 	free_env_lst(exec->env_lst);

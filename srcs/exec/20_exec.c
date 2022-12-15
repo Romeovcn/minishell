@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/14 17:41:07 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/15 19:54:23 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,5 @@ int	exec(t_exec *exec)
 	error_manager(exec, head_tok_lst);
 	heredoc_rm(exec->tok_lst);
 	dup2(stdin_fd, 0);
+	close(stdin_fd);
 }
