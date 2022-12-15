@@ -24,6 +24,7 @@ int exec_built_in(t_exec *exec, int is_fork)
 		return_value = ft_echo(args, *exec);
 	if (is_fork)
 	{
+		close(3);
 		free_lst_malloc(exec->mal_lst);
 		free_env_lst(exec->env_lst);
 		free_array(exec->envp);

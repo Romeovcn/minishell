@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/15 19:54:23 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/15 20:45:04 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	exec(t_exec *exec)
 	if (exec->nb_command == 1 && exec->tok_lst->args && is_built_in_no_fork(exec->tok_lst->args->content))
 	{
 		G_STATUS = exec_built_in(exec, FALSE);
+		close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 		return (0);
 	}
 	if (exec->nb_command > 0)
