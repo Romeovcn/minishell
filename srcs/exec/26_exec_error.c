@@ -33,29 +33,27 @@ static void	error_message(char *file, char *message)
 static void	error_status(t_tok_lst *tok_lst)
 {
 	char	*file_error;
-	int		status;
 
-	status = G_STATUS;
 	file_error = get_wrong_access(tok_lst);
-	if (status == 1 && file_exist(file_error) == 0)
+	if (G_STATUS == 1 && file_exist(file_error) == 0)
 		error_message(file_error, "No such file or directory\n");
-	else if (status == 1 && file_exec(file_error) == 0)
+	else if (G_STATUS == 1 && file_exec(file_error) == 0)
 		error_message(file_error, "Permission denied\n");
-	else if (status == 126 && is_directory(file_error) == 1)
+	else if (G_STATUS == 126 && is_directory(file_error) == 1)
 		error_message(file_error, "Is a directory\n");
-	else if (status == 126 && file_exist(tok_lst->args->content) == 0)
+	else if (G_STATUS == 126 && file_exist(tok_lst->args->content) == 0)
 		error_message(tok_lst->args->content, "No such file or directory\n");
-	else if (status == 126 && is_directory(tok_lst->args->content))
+	else if (G_STATUS == 126 && is_directory(tok_lst->args->content))
 		error_message(tok_lst->args->content, "Is a directory\n");
-	else if (status == 126)
+	else if (G_STATUS == 126)
 		error_message(tok_lst->args->content, "Permission denied\n");
-	else if (status == 127 && (tok_lst->args->content[0] == '/' 
+	else if (G_STATUS == 127 && (tok_lst->args->content[0] == '/' 
 		|| tok_lst->args->content[0] == '.'))
 		error_message(tok_lst->args->content, "No such file or directory\n");
-	else if (status == 127)
+	else if (G_STATUS == 127)
 		error_message_127(tok_lst->args->content);
 	if (!file_error)
-		free(file_error);
+		free(file_error); // free null ?
 }
 
 void	error_manager(t_exec *exec, t_tok_lst *tok_lst)

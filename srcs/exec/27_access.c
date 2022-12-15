@@ -40,7 +40,7 @@ char	*get_wrong_access(t_tok_lst *tok_lst)
 	return (NULL);
 }
 
-void	check_outfile(t_tok_lst *tok_lst, t_exec *exec)
+int	check_outfile(t_tok_lst *tok_lst, t_exec *exec)
 {
 	int			file_fd;
 	t_array_lst	*tmp;
@@ -49,32 +49,34 @@ void	check_outfile(t_tok_lst *tok_lst, t_exec *exec)
 	while (tmp)
 	{
 		if (is_directory(tmp->content) == 1)
-			free_exit(exec, 126);
+			return (G_STATUS = 126, 1);
 		if (ft_strmatch(tmp->content2, "O_TRUNC"))
 			file_fd = open(tmp->content, O_RDWR | O_CREAT | O_TRUNC, 0666);
 		else if (ft_strmatch(tmp->content2, "O_APPEND"))
 			file_fd = open(tmp->content, O_RDWR | O_CREAT | O_APPEND, 0666);
 		if (file_fd == -1)
-			free_exit(exec, 1);
+			return (G_STATUS = 1, 1);
 		close(file_fd);
 		tmp = tmp->next;
 	}
+	return (0);
 }
 
-void	check_infile(t_tok_lst *tok_lst, t_exec *exec)
+int	check_infile(t_tok_lst *tok_lst, t_exec *exec)
 {
 	int			file_fd;
-	t_array_lst	*tmp;
+	t_array_lst	*in_file;
 
-	tmp = tok_lst->in_file;
-	while (tmp)
+	in_file = tok_lst->in_file;
+	while (in_file)
 	{
-		file_fd = open(tmp->content, O_RDONLY);
+		file_fd = open(in_file->content, O_RDONLY);
 		if (file_fd == -1)
-			free_exit(exec, 1);
+			return (G_STATUS = 1, 1);
 		close(file_fd);
-		tmp = tmp->next;
+		in_file = in_file->next;
 	}
+	return (0);
 }
 
 void	ft_null_access(char *path, char **split_path, t_exec *exec)

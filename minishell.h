@@ -122,7 +122,7 @@ int			ft_lstsize_token(t_tok_lst *lst);
 //----------------------------------------------------------------------------//
 //							 	Exec										  //
 //----------------------------------------------------------------------------//
-int			exec(t_exec *exec);
+void		exec(t_exec *exec);
 void		init_exec(t_exec *exec);
 char		*get_right_path(char *path, t_array_lst *cmd, t_exec *exec);
 //----------------------------------------------------------------------------//
@@ -159,8 +159,8 @@ void		error_manager(t_exec *exec, t_tok_lst *tok_lst);
 //							 	Exec access									  //
 //----------------------------------------------------------------------------//
 char		*get_wrong_access(t_tok_lst *tok_lst);
-void		check_outfile(t_tok_lst *tok_lst, t_exec *exec);
-void		check_infile(t_tok_lst *tok_lst, t_exec *exec);
+int			check_outfile(t_tok_lst *tok_lst, t_exec *exec);
+int			check_infile(t_tok_lst *tok_lst, t_exec *exec);
 void		ft_null_access(char *path, char **split_path, t_exec *exec);
 char		*ft_abs_path(char *cmd, t_exec *exec);
 //----------------------------------------------------------------------------//
@@ -173,10 +173,10 @@ void    	handle_signal(int sig_num);
 // Protect malloc
 // Norm
 // echo -n -n -n hello
-// export without args should display env
 // check unset error
-// echo lol > Test | << Test cat >> Test | cat < Test
-// echo bjr >'a'
 // cd into dir, delete dir ..
 // export salut=ok >'c'
+//< srcs cat > out2
+// cat: -: Is a directory --------- what is "-" ?
+// export USER=OKOKOKOKOK >> out1 doesnt dsplay out1 perm denied
 #endif

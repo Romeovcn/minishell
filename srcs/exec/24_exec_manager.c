@@ -31,21 +31,24 @@ void	command(t_exec *exec, int i)
 
 void	exec_token(t_exec *exec, int i)
 {
+	int output_fd;
+	int input_fd;
+
+	output_fd = exec->tok_lst->output_fd;
+	input_fd = exec->tok_lst->input_fd;
 	signal(SIGQUIT, handler);
-	if (exec->tok_lst->output_fd == REDIR_OUT
-		|| exec->tok_lst->output_fd == APP_OUT)
-		check_outfile(exec->tok_lst, exec);
-	if (exec->tok_lst->output_fd == REDIR_OUT)
+	if (check_infile(exec->tok_lst, exec) || check_outfile(exec->tok_lst, exec))
+		free_exit(exec, G_STATUS);
+	if (output_fd == REDIR_OUT)
 		redir_out(exec->tok_lst);
-	if (exec->tok_lst->input_fd == REDIR_IN)
+	if (output_fd == APP_OUT)
+		append(exec->tok_lst);
+	if (input_fd == REDIR_IN)
 	{
-		check_infile(exec->tok_lst, exec);
 		redir_in(exec->tok_lst);
 	}
-	if (exec->tok_lst->input_fd == HERE_DOC)
+	if (input_fd == HERE_DOC)
 		here_doc(exec->tok_lst);
-	if (exec->tok_lst->output_fd == APP_OUT)
-		append(exec->tok_lst);
 	if (exec->tok_lst->args != NULL)
 		command(exec, i);
 	close(3);

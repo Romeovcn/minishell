@@ -73,11 +73,7 @@ int	ft_pwd(t_env_lst *env_lst)
 	char	*pwd_path;
 	char	buff[PATH_MAX];
 
-	pwd_path = get_env_value("PWD", env_lst);
-	if (pwd_path)
-		printf("%s\n", pwd_path);
-	else
-		printf("%s\n", getcwd(buff, PATH_MAX));
+	printf("%s\n", getcwd(buff, PATH_MAX));
 	return (0);
 }
 
@@ -121,7 +117,7 @@ int	ft_cd(char **path, t_env_lst **env_lst)
 		chdir_value = chdir(get_env_value("HOME", *env_lst)) < 0;
 	else if (!path[2])
 	{
-		if (ft_strmatch(path[1], "--"))
+		if (ft_strmatch(path[1], "-"))
 			chdir_value = chdir(get_env_value("OLDPWD", *env_lst));
 		else
 			chdir_value = chdir(path[1]);

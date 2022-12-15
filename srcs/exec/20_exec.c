@@ -57,7 +57,7 @@ void init_exec(t_exec *exec)
 	exec->here_doc_lst = NULL;
 }
 
-int	exec(t_exec *exec)
+void	exec(t_exec *exec)
 {
 	t_tok_lst	*head_tok_lst;
 	int			stdin_fd;
@@ -71,14 +71,18 @@ int	exec(t_exec *exec)
 		{
 			heredoc_rm(exec->tok_lst);
 			dup2(stdin_fd, 0);
-			return (0);
+			return ;
 		}
 	}
 	if (exec->nb_command == 1 && exec->tok_lst->args && is_built_in_no_fork(exec->tok_lst->args->content))
 	{
+		if (check_outfile(exec->tok_lst, exec))
+			return ;
+		if (check_infile(exec->tok_lst, exec))
+			return ;
 		G_STATUS = exec_built_in(exec, FALSE);
-		close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
-		return (0);
+		close(stdin_fd);
+		return ;
 	}
 	if (exec->nb_command > 0)
 		pipex_exec(exec);
