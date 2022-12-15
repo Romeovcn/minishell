@@ -17,12 +17,12 @@ void	handle_signal(int sig_num)
 	if (sig_num == SIGQUIT)
 	{
 		ft_putstr_fd(" Quit (core dumped)\n", 1);
-		G_STATUS = 33536;
+		G_STATUS = 131;
 	}
 	else if (sig_num == SIGINT)
 	{
 		ft_putstr_fd("\n", 1);
-		G_STATUS = 33500;
+		G_STATUS = 130;
 	}
 }
 
@@ -34,7 +34,7 @@ void	handler(int sig_num)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		G_STATUS = 33500;
+		G_STATUS = 130;
 	}
 }
 
@@ -49,7 +49,7 @@ static void	handle_signal_hd(int signal, siginfo_t *info, void *context)
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 		ft_putstr_fd("\n", 1);
-		G_STATUS = 33500;
+		G_STATUS = 130;
 	}
 	if (signal == SIGQUIT)
 		ft_putstr_fd("\b\b  \b\b", 0);

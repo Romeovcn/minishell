@@ -125,7 +125,6 @@ int			ft_lstsize_token(t_tok_lst *lst);
 int			exec(t_exec *exec);
 void		init_exec(t_exec *exec);
 char		*get_right_path(char *path, t_array_lst *cmd, t_exec *exec);
-char	    *get_path_envp(t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Exec simple									  //
 //----------------------------------------------------------------------------//
@@ -174,6 +173,4 @@ void    	handle_signal(int sig_num);
 // Protect malloc
 // Norm
 // echo -n -n -n hello
-// cd unset PWD OLDPWD doesnt change value
-// cd --
 #endif

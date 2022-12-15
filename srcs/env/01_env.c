@@ -92,7 +92,7 @@ int	export_env(t_exec *exec, t_mal_lst **mal_lst, char **args)
 			ft_putstr_fd(args[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
 			free(name);
-			return_value = 300;
+			return_value = 1;
 			continue ;
 		}
 		env_value = get_env_str_value(args[i]);

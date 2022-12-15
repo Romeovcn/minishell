@@ -1,11 +1,13 @@
+NOP 0
+NOP 0
+NOP 0
 0
-expected_output
-hey
-hola
-HOLA
-hola1
-hola2
-inoutfile
+status=0
+NOP 0
+NOP 0
+NOP 0
+NOP 0
+
 ls
 ls1
 Makefile

@@ -21,7 +21,7 @@ void	parse_env(char **str, t_mal_lst **mal_lst, t_env_lst *env_lst, char **resul
 	env_name = parse_env_name(*str);
 	if (ft_strmatch(env_name, "?"))
 	{
-		env_value = ft_itoa(WEXITSTATUS(G_STATUS));
+		env_value = ft_itoa(G_STATUS);
 		lstadd_back_malloc(mal_lst, lstnew_malloc(env_value));
 	}
 	else

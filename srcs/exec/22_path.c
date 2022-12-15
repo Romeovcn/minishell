@@ -41,20 +41,3 @@ char	*get_right_path(char *path, t_array_lst *cmd, t_exec *exec)
 	res = NULL;
 	ft_null_access(res, split_path, exec);
 }
-
-char	*get_path_envp(t_exec *exec)
-{
-	t_env_lst	*tmp;
-	
-	tmp = exec->env_lst;
-	while (tmp)
-	{
-		if (tmp->name[0] == 'P' && tmp->name[1] == 'A' && tmp->name[2] == 'T' 
-			&& tmp->name[3] == 'H' && tmp->name[4] == '\0')
-			break ;
-		tmp = tmp->next;
-	}
-	if (tmp == NULL)
-		free_exit(exec, 127);
-	return(tmp->value);
-}

@@ -19,12 +19,12 @@ void	command(t_exec *exec, int i)
 
 	args = lst_to_str_array(exec->tok_lst->args, &exec->mal_lst);
 	if (!is_built_in(args[0]))
-		path = get_right_path(get_path_envp(exec), exec->tok_lst->args, exec);
+		path = get_right_path(get_env_value("PATH", exec->env_lst), exec->tok_lst->args, exec);
 	if (exec->tok_lst->output_fd == 1 && i != exec->nb_command - 1)
 		dup2(exec->pipe_fd[1], STDOUT_FILENO);
 	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 	if (is_built_in(args[0]))
-		exit(G_STATUS = exec_built_in(exec, TRUE));
+		exit(exec_built_in(exec, TRUE));
 	execve(path, args, exec->envp);
 	exit(0);
 }

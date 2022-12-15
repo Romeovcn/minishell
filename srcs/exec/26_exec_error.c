@@ -35,7 +35,7 @@ static void	error_status(t_tok_lst *tok_lst)
 	char	*file_error;
 	int		status;
 
-	status = WEXITSTATUS(G_STATUS);
+	status = G_STATUS;
 	file_error = get_wrong_access(tok_lst);
 	if (status == 1 && file_exist(file_error) == 0)
 		error_message(file_error, "No such file or directory\n");
@@ -61,12 +61,14 @@ static void	error_status(t_tok_lst *tok_lst)
 void	error_manager(t_exec *exec, t_tok_lst *tok_lst)
 {
 	int	i;
+	int status;
 
 	i = 0;
-	while (tok_lst && waitpid(exec->pid[i], &G_STATUS, 0) > 0)
+	while (tok_lst && waitpid(exec->pid[i], &status, 0) > 0)
 	{
+		G_STATUS = WEXITSTATUS(status);
 		if (G_STATUS == 131)
-			G_STATUS = 33536;
+			G_STATUS = 33536; // to fix
 		error_status(tok_lst);
 		tok_lst = tok_lst->next;
 		i++;

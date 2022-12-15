@@ -34,7 +34,6 @@ int main(int argc, char **argv, char **env)
 	t_exec		exec_struct;
 	char 		*readline_str;
 
-	G_STATUS = 0;
 	exec_struct.env_lst = get_env_lst(env);
 	exec_struct.envp = envp_to_str_array(exec_struct.env_lst, NULL);
 	while (1)
