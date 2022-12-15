@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/13 19:21:06 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/15 18:43:48 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ int main(int argc, char **argv, char **env)
 	}
 	free_array(exec_struct.envp);
 	free_env_lst(exec_struct.env_lst);
-	write(2, "exit\n", 6);
+	ft_putstr_fd("exit\n", 2);
 }

@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/14 17:58:02 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/15 18:41:22 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ int	export_env(t_exec *exec, t_mal_lst **mal_lst, char **args)
 		name = get_env_name(args[i]);
 		if (!name || check_env_name(name))
 		{
-			printf("export: '%s': not a valid identifier\n", args[i]);
+			// printf("export: '%s': not a valid identifier\n", args[i]);
+			ft_putstr_fd("export: '", 2);
+			ft_putstr_fd(args[i], 2);
+			ft_putstr_fd("': not a valid identifier\n", 2);
 			free(name);
 			return_value = 300;
 			continue ;

@@ -174,7 +174,6 @@ void    	handle_signal(int sig_num);
 // Protect malloc
 // Norm
 // echo -n -n -n hello
-// check error msg are print in stderr
 // cd unset PWD OLDPWD doesnt change value
 // cd --
 #endif
