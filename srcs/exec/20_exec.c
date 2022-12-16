@@ -75,8 +75,8 @@ void	exec(t_exec *exec)
 	if (exec->nb_command == 1 && exec->tok_lst->args && is_built_in_no_fork(exec->tok_lst->args->content))
 	{
 		built_in_error_manage(exec, stdin_fd);
-		G_STATUS = exec_built_in(exec, FALSE);
 		close(stdin_fd);
+		G_STATUS = exec_built_in(exec, FALSE);
 		return ;
 	}
 	if (exec->nb_command > 0)
