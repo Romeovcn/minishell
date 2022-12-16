@@ -17,11 +17,9 @@ t_array_lst	*lstnew_array(char *content, t_mal_lst **mal_lst)
 	t_array_lst	*result;
 
 	result = malloc(sizeof(t_array_lst));
-	if (!result)
-		exit(1);
+	lstadd_back_malloc(mal_lst, lstnew_malloc(result, *mal_lst));
 	result->content = content;
 	result->next = NULL;
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result, *mal_lst));
 	return (result);
 }
 
@@ -30,12 +28,10 @@ t_array_lst	*lstnew_array_content2(char *c, char *c2, t_mal_lst **mal_lst)
 	t_array_lst	*result;
 
 	result = malloc(sizeof(t_array_lst));
-	if (!result)
-		exit(1);
+	lstadd_back_malloc(mal_lst, lstnew_malloc(result, *mal_lst));
 	result->content = c;
 	result->content2 = c2;
 	result->next = NULL;
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result, *mal_lst));
 	return (result);
 }
 

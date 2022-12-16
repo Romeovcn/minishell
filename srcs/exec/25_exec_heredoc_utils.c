@@ -35,9 +35,10 @@ static char	*get_heredoc_name(int i, t_mal_lst **mal_lst)
 	char 	*index;
 
 	index = ft_itoa(i);
+	lstadd_back_malloc(mal_lst, lstnew_malloc(index, *mal_lst));
 	heredoc_name = ft_strjoin(".heredoc", index);
 	lstadd_back_malloc(mal_lst, lstnew_malloc(heredoc_name, *mal_lst));
-	free(index);
+	// free(index);
 	return (heredoc_name);
 }
 

@@ -40,17 +40,13 @@ void	manage_operator(char **rl_str, t_exec *exec)
 
 void	manage_word(char *rl_str, t_exec *exec)
 {
-	t_mal_lst **mal_lst;
 	char	*word;
 	int		size;
 
-	mal_lst = &exec->mal_lst;
 	size = get_word_size(rl_str);
 	word = malloc((size + 1) * sizeof(char));
-	if (!word)
-		exit(1);
-	get_word(rl_str, &word);
 	lstadd_back_lex(&exec->lex_lst, lstnew_lex(word, WORD, exec));
+	get_word(rl_str, &word);
 }
 
 void lexer(char *rl_str, t_exec *exec)

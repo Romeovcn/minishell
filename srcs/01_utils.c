@@ -18,7 +18,7 @@ void	error_exit(t_mal_lst *mal_lst)
 	exit (1);
 }
 
-char	*strjoin_char(char const *s1, char c, t_mal_lst **mal_lst)
+char	*strjoin_char(char const *s1, char c, t_exec *exec)
 {
 	char	*result;
 	int		i;
@@ -27,9 +27,7 @@ char	*strjoin_char(char const *s1, char c, t_mal_lst **mal_lst)
 	i = 0;
 	j = 0;
 	result = malloc((ft_strlen(s1) + 1 + 1) * sizeof(char));
-	if (!result)
-		return (NULL);
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result, *mal_lst));
+	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(result, exec->mal_lst));
 	while (s1[i])
 		result[j++] = s1[i++];
 	i = 0;

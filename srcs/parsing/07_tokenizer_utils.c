@@ -14,6 +14,10 @@
 
 void add_here_doc(t_tok_lst **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst)
 {
+	// t_tok_lst **token = exec->token_lst;
+	// t_lex_lst **lex_lst;
+	// t_mal_lst **mal_lst;
+
 	(*token)->input_fd = HERE_DOC;
 	*lex_lst = (*lex_lst)->next;
 	lstadd_back_array(&(*token)->delimiter, lstnew_array((*lex_lst)->content, mal_lst));

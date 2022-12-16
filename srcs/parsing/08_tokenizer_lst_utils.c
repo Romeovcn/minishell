@@ -12,14 +12,12 @@
 
 #include "minishell.h"
 
-t_tok_lst	*lstnew_token(t_mal_lst **mal_lst)
+t_tok_lst	*lstnew_token(t_exec *exec)
 {
 	t_tok_lst	*result;
 
 	result = malloc(sizeof(t_tok_lst));
-	if (!result)
-		exit(1);
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result, *mal_lst));
+	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(result, exec->mal_lst));
 	result->args = NULL;
 	result->input_fd = 0;
 	result->in_file = NULL;

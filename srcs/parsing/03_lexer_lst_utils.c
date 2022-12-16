@@ -16,16 +16,12 @@ t_lex_lst	*lstnew_lex(void *content, int operator, t_exec *exec)
 {
 	t_lex_lst	*result;
 
+	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(content, exec->mal_lst));
 	result = malloc(sizeof(t_lex_lst));
-	if (!result)
-	{
-		exit(1);
-	}
+	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(result, exec->mal_lst));
 	result->content = content;
 	result->operator = operator;
 	result->next = NULL;
-	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(result->content, exec->mal_lst));
-	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(result, exec->mal_lst));
 	return (result);
 }
 

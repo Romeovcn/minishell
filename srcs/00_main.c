@@ -39,8 +39,8 @@ int parser(t_exec *exec, char *readline_str)
 		free(readline_str);
 		return (1);
 	}
-	expander(exec->lex_lst, &exec->mal_lst, exec->env_lst);
-	exec->tok_lst = get_token_lst(exec->lex_lst, &exec->mal_lst);
+	expander(exec);
+	exec->tok_lst = get_token_lst(exec);
 	return (0);
 }
 
@@ -55,7 +55,7 @@ int main(int argc, char **argv, char **env)
 	{
 		signal(SIGINT, sig_int_rl);
 		signal(SIGQUIT, SIG_IGN);
-		rl_outstream = stderr; // to delete
+		// rl_outstream = stderr; // to delete
 		readline_str = readline("Minishell> ");
 		if (!readline_str)
 			break ;

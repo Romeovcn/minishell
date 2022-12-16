@@ -62,8 +62,6 @@ void init_exec(t_exec *exec)
 {
 	exec->nb_command = ft_lstsize_token(exec->tok_lst);
 	exec->pid = malloc(exec->nb_command * sizeof(pid_t));
-	if (!exec->pid)
-		return ;
 	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(exec->pid, exec->mal_lst));
 	exec->here_doc_lst = NULL;
 }

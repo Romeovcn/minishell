@@ -12,10 +12,15 @@
 
 #include "minishell.h"
 
-void	free_exit(t_exec *exec, int code_exit)
+void free_close_exit(t_exec *exec, int code_exit, int fd1, int fd2)
 {
 	close(3);
 	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
+	free_exit(exec, code_exit);
+}
+
+void	free_exit(t_exec *exec, int code_exit)
+{
 	free_lst_malloc(exec->mal_lst);
 	free_env_lst(exec->env_lst);
 	exit(code_exit);

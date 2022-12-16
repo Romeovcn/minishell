@@ -12,16 +12,18 @@
 
 #include "minishell.h"
 
-t_tok_lst	*get_token_lst(t_lex_lst *lex_lst, t_mal_lst **mal_lst)
+t_tok_lst	*get_token_lst(t_exec *exec)
 {
 	t_tok_lst	*token;
 	t_tok_lst	*head;
 
+	t_lex_lst *lex_lst = exec->lex_lst;
+	t_mal_lst **mal_lst = &exec->mal_lst;
+
 	token = NULL;
-	lstadd_back_token(&token, lstnew_token(mal_lst));
+	lstadd_back_token(&token, lstnew_token(exec));
 	head = token;
 	// printf("--------Command lst token--------\n");
-	head = token;
 	while (lex_lst)
 	{
 		if (lex_lst->operator == PIPE)
@@ -33,7 +35,7 @@ t_tok_lst	*get_token_lst(t_lex_lst *lex_lst, t_mal_lst **mal_lst)
 			// printf("output_fd: %d\n", token->output_fd);
 			// read_lst_array(token->out_file, "out_file");
 			// printf("-----------------\n");
-			lstadd_back_token(&token, lstnew_token(mal_lst));
+			lstadd_back_token(&token, lstnew_token(exec));
 			token = token->next;
 			lex_lst = lex_lst->next;
 		}
