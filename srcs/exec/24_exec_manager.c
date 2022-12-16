@@ -25,7 +25,7 @@ void	command(t_exec *exec, int i)
 	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 	if (is_built_in(args[0]))
 		exit(exec_built_in(exec, TRUE));
-	execve(path, args, NULL);
+	execve(path, args, exec->envp);
 	exit(0);
 }
 

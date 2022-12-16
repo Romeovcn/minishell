@@ -50,6 +50,7 @@ int main(int argc, char **argv, char **env)
 	char 		*readline_str;
 
 	exec_struct.env_lst = get_env_lst(env);
+	exec_struct.envp = env;
 	while (1)
 	{
 		signal(SIGINT, sig_int_rl);

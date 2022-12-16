@@ -34,13 +34,8 @@ static void	pipex_exec(t_exec *exec)
 			close_fd(tmp->pipe_fd[0], tmp->pipe_fd[1]);
 			free_exit(exec, 1);
 		}
-		// signal(SIGINT, SIG_IGN);
-		// signal(SIGQUIT, SIG_IGN);
-		// if (exec->pid[i] == 0)
-		// {
-			signal(SIGQUIT, sig_process);
-			signal(SIGINT, sig_process);
-		// }
+		signal(SIGQUIT, sig_process);
+		signal(SIGINT, sig_process);
 		if (exec->pid[i] == 0)
 			exec_token(tmp, i);
 		dup2(tmp->pipe_fd[0], STDIN_FILENO);
