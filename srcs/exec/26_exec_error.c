@@ -52,8 +52,6 @@ static void	error_status(t_tok_lst *tok_lst)
 		error_message(tok_lst->args->content, "No such file or directory\n");
 	else if (G_STATUS == 127)
 		error_message_127(tok_lst->args->content);
-	if (!file_error)
-		free(file_error); // free null ?
 }
 
 void	error_manager(t_exec exec)
@@ -67,7 +65,7 @@ void	error_manager(t_exec exec)
 	{
 		if (WTERMSIG(status) == 2)
 			ft_putstr_fd("\n", 1);
-		else if (WTERMSIG(status) == 3 && !exec.pid[i + 1])
+		else if (WTERMSIG(status) == 3)
 			ft_putstr_fd(" Quit (core dumped)\n", 1);
 		if (WIFEXITED(status))
 			G_STATUS = WEXITSTATUS(status);
@@ -75,5 +73,4 @@ void	error_manager(t_exec exec)
 		exec.tok_lst = exec.tok_lst->next;
 		i++;
 	}
-	// if (!WIFEXITED(status))
 }

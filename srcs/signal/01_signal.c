@@ -43,7 +43,7 @@ static void	handle_signal_hd(int signal, siginfo_t *info, void *context)
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 		ft_putstr_fd("\n", 1);
-		G_STATUS = 130;
+		G_STATUS = 777;
 	}
 	if (signal == SIGQUIT)
 		ft_putstr_fd("\b\b  \b\b", 0);

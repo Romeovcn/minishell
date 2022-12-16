@@ -64,12 +64,14 @@ void	exec(t_exec *exec)
 	if (check_heredoc(exec) == 1)
 	{
 		here_doc_manage(exec);
-		// if (G_STATUS == 130)
-		// {
-		// 	heredoc_rm(exec->tok_lst);
-		// 	close(stdin_fd);
-		// 	return ;
-		// }
+		if (G_STATUS == 777)
+		{
+			heredoc_rm(exec->tok_lst);
+			dup2(stdin_fd, 0);
+			close(stdin_fd);
+			G_STATUS = 130;
+			return ;
+		}
 	}
 	if (exec->nb_command == 1 && exec->tok_lst->args && is_built_in_no_fork(exec->tok_lst->args->content))
 	{
