@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/15 20:45:04 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:38:27 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	pipex_exec(t_exec *exec)
 	t_tok_lst	*head;
 	t_exec		*tmp;
 	int			i;
-	int status;
 
 	head = exec->tok_lst;
 	tmp = exec;
@@ -58,7 +57,7 @@ void init_exec(t_exec *exec)
 
 void	exec(t_exec *exec)
 {
-	int			stdin_fd;
+	int		stdin_fd;
 
 	stdin_fd = dup(0);
 	if (check_heredoc(exec) == 1)
@@ -75,10 +74,7 @@ void	exec(t_exec *exec)
 	}
 	if (exec->nb_command == 1 && exec->tok_lst->args && is_built_in_no_fork(exec->tok_lst->args->content))
 	{
-		if (check_outfile(exec->tok_lst, exec))
-			return ;
-		if (check_infile(exec->tok_lst, exec))
-			return ;
+		built_in_error_manage(exec, stdin_fd);
 		G_STATUS = exec_built_in(exec, FALSE);
 		close(stdin_fd);
 		return ;
