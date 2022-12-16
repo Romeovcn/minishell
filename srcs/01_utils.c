@@ -29,7 +29,7 @@ char	*strjoin_char(char const *s1, char c, t_mal_lst **mal_lst)
 	result = malloc((ft_strlen(s1) + 1 + 1) * sizeof(char));
 	if (!result)
 		return (NULL);
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
+	lstadd_back_malloc(mal_lst, lstnew_malloc(result, *mal_lst));
 	while (s1[i])
 		result[j++] = s1[i++];
 	i = 0;
@@ -54,7 +54,7 @@ char **lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst)
 	result = malloc((i + 1) * sizeof(char *));
 	if (!result)
 		error_exit(*mal_lst);
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
+	lstadd_back_malloc(mal_lst, lstnew_malloc(result, *mal_lst));
 	i = 0;
 	while (head)
 	{
@@ -77,7 +77,7 @@ char	*ft_strjoin_mal(char const *s1, char const *s2, t_mal_lst **mal_lst)
 	result = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!result)
 		return (NULL);
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
+	lstadd_back_malloc(mal_lst, lstnew_malloc(result, *mal_lst));
 	while (s1[i])
 		result[j++] = s1[i++];
 	i = 0;

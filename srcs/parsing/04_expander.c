@@ -22,14 +22,14 @@ void	expand_env(char **str, t_mal_lst **mal_lst, t_env_lst *env_lst, char **resu
 	if (ft_strmatch(env_name, "?"))
 	{
 		env_value = ft_itoa(G_STATUS);
-		lstadd_back_malloc(mal_lst, lstnew_malloc(env_value));
+		lstadd_back_malloc(mal_lst, lstnew_malloc(env_value, *mal_lst));
 	}
 	else
 		env_value = get_env_value(env_name, env_lst);
 	if (ft_strlen(env_value) != 0)
 	{
 		*result = ft_strjoin(*result, env_value);
-		lstadd_back_malloc(mal_lst, lstnew_malloc(*result));
+		lstadd_back_malloc(mal_lst, lstnew_malloc(*result, *mal_lst));
 	}
 	go_end_env_name(str);
 	free(env_name);

@@ -12,6 +12,16 @@
 
 #include "minishell.h"
 
+void	kill_process(t_exec exec, int i)
+{
+	i--;
+	while (i > 0)
+	{
+		kill(exec.pid[i], SIGKILL);
+		i--;
+	}
+}
+
 static void	pipex_exec(t_exec *exec)
 {
 	t_tok_lst	*head;
@@ -26,11 +36,14 @@ static void	pipex_exec(t_exec *exec)
 	while (i < tmp->nb_command)
 	{
 		if (pipe(tmp->pipe_fd) == -1)
-			return ;
-		exec->pid[i] = fork();
-		if (exec->pid[i] < 0)
 		{
-			close_fd(tmp->pipe_fd[0], tmp->pipe_fd[1]);
+			kill_process(*exec, i);
+			free_exit(exec, 1);
+		}
+		exec->pid[i] = fork();
+		if (exec->pid[i] == -1)
+		{
+			kill_process(*exec, i);
 			free_exit(exec, 1);
 		}
 		signal(SIGQUIT, sig_process);
@@ -51,7 +64,7 @@ void init_exec(t_exec *exec)
 	exec->pid = malloc(exec->nb_command * sizeof(pid_t));
 	if (!exec->pid)
 		return ;
-	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(exec->pid));
+	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(exec->pid, exec->mal_lst));
 	exec->here_doc_lst = NULL;
 }
 

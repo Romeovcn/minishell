@@ -19,7 +19,7 @@ t_tok_lst	*lstnew_token(t_mal_lst **mal_lst)
 	result = malloc(sizeof(t_tok_lst));
 	if (!result)
 		exit(1);
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
+	lstadd_back_malloc(mal_lst, lstnew_malloc(result, *mal_lst));
 	result->args = NULL;
 	result->input_fd = 0;
 	result->in_file = NULL;

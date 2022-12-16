@@ -54,11 +54,11 @@ void		lstadd_back_env(t_env_lst **lst, t_env_lst *new);
 //----------------------------------------------------------------------------//
 //							 	Lexer										  //
 //----------------------------------------------------------------------------//
-t_lex_lst	*lexer(char *readline_str, t_mal_lst **mal_lst);
+void lexer(char *readline_str, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Lexer lst utils								  //
 //----------------------------------------------------------------------------//
-t_lex_lst	*lstnew_lex(void *content, int operator, t_mal_lst **mal_lst);
+t_lex_lst	*lstnew_lex(void *content, int operator, t_exec *exec);
 t_lex_lst	*lstlast_lexer(t_lex_lst *lst);
 void		lstadd_back_lex(t_lex_lst **lst, t_lex_lst *new);
 void		read_lst(t_lex_lst *lst);
@@ -94,7 +94,7 @@ void		go_end_env_name(char **str);
 //----------------------------------------------------------------------------//
 //							 	Malloc lst utils							  //
 //----------------------------------------------------------------------------//
-t_mal_lst	*lstnew_malloc(void *adr);
+t_mal_lst	*lstnew_malloc(void *adr, t_mal_lst *mal_lst);
 t_mal_lst	*lstlast_malloc(t_mal_lst *lst);
 void		lstadd_back_malloc(t_mal_lst **lst, t_mal_lst *new);
 void		free_lst_malloc(t_mal_lst *lst);

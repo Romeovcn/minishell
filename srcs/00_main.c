@@ -32,7 +32,7 @@ int check_empty_line(char *rl_str)
 int parser(t_exec *exec, char *readline_str)
 {
 	exec->mal_lst = NULL;
-	exec->lex_lst = lexer(readline_str, &exec->mal_lst);
+	lexer(readline_str, exec);
 	if (check_error(exec->lex_lst))
 	{
 		free_lst_malloc(exec->mal_lst);
@@ -55,7 +55,7 @@ int main(int argc, char **argv, char **env)
 	{
 		signal(SIGINT, sig_int_rl);
 		signal(SIGQUIT, SIG_IGN);
-		rl_outstream = stderr;
+		rl_outstream = stderr; // to delete
 		readline_str = readline("Minishell> ");
 		if (!readline_str)
 			break ;

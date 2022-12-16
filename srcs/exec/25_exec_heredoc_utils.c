@@ -36,7 +36,7 @@ static char	*get_heredoc_name(int i, t_mal_lst **mal_lst)
 
 	index = ft_itoa(i);
 	heredoc_name = ft_strjoin(".heredoc", index);
-	lstadd_back_malloc(mal_lst, lstnew_malloc(heredoc_name));
+	lstadd_back_malloc(mal_lst, lstnew_malloc(heredoc_name, *mal_lst));
 	free(index);
 	return (heredoc_name);
 }
@@ -49,7 +49,7 @@ static void	get_here_doc_file(char *delimiter, char *name_file, t_mal_lst **mal_
 
 	here_doc_fd = open(name_file, O_CREAT | O_RDWR, 0666);
 	delimiter = ft_strjoin(delimiter, "\n");
-	lstadd_back_malloc(mal_lst, lstnew_malloc(delimiter));
+	lstadd_back_malloc(mal_lst, lstnew_malloc(delimiter, *mal_lst));
 	while (1)
 	{
 		line = get_next_line(0);

@@ -12,13 +12,17 @@
 
 #include "minishell.h"
 
-t_mal_lst	*lstnew_malloc(void *adr)
+t_mal_lst	*lstnew_malloc(void *adr, t_mal_lst *mal_lst)
 {
 	t_mal_lst	*result;
 
 	result = malloc(sizeof(t_mal_lst));
 	if (!result)
-		return (0);
+	{
+		free(adr);
+		free_lst_malloc(mal_lst);
+		exit (1);
+	}
 	result->adr = adr;
 	result->next = NULL;
 	return (result);
