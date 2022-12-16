@@ -6,13 +6,13 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:03:32 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/15 19:57:56 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/16 22:59:41 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_close_exit(t_exec *exec, int code_exit, int fd1, int fd2)
+void	free_close_exit(t_exec *exec, int code_exit, int fd1, int fd2)
 {
 	close(3);
 	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);

@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/14 16:54:05 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/16 22:30:09 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	expand_env(char **str, char **result, t_exec *exec)
 	char	*env_value;
 
 	(*str)++;
-	env_name = expand_env_name(*str);
+	env_name = expand_env_name(*str, exec);
 	lstadd_back_malloc(mal_lst, lstnew_malloc(env_name, *mal_lst));
 	if (ft_strmatch(env_name, "?"))
 	{

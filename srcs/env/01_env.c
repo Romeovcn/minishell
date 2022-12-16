@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/15 18:41:22 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/16 22:43:05 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int check_env_name(char *env_name)
 	return (0);
 }
 
-char *get_env_str_value(char *env)
+static char *get_env_str_value(char *env, t_exec *exec)
 {
 	char	*value;
 	int		i;
@@ -47,7 +47,7 @@ char *get_env_str_value(char *env)
 	while (env[i])
 		i++;
 	value = malloc((i + 1) * sizeof(char));
-	if (!value)
+	if (!value) // protect
 		exit(1);
 	i = 0;
 	while (env[i])
@@ -73,7 +73,7 @@ int is_concatenate(char *env)
 	return (0);
 }
 
-int	export_env(t_exec *exec, t_mal_lst **mal_lst, char **args)
+int	export_env(t_exec *exec, char **args)
 {
 	int		return_value;
 	char	*env_value;
@@ -84,7 +84,7 @@ int	export_env(t_exec *exec, t_mal_lst **mal_lst, char **args)
 	return_value = 0;
 	while (args[++i])
 	{
-		name = get_env_name(args[i]);
+		name = get_env_name(args[i], exec);
 		if (!name || check_env_name(name))
 		{
 			// printf("export: '%s': not a valid identifier\n", args[i]);
@@ -95,7 +95,7 @@ int	export_env(t_exec *exec, t_mal_lst **mal_lst, char **args)
 			return_value = 1;
 			continue ;
 		}
-		env_value = get_env_str_value(args[i]);
+		env_value = get_env_str_value(args[i], exec);
 		if (!env_value)
 		{
 			free(name);
@@ -103,7 +103,7 @@ int	export_env(t_exec *exec, t_mal_lst **mal_lst, char **args)
 		}
 		if (is_concatenate(args[i]))
 			env_value = ft_newstrjoin(get_env_value(name, exec->env_lst), env_value);
-		change_env_value(name, env_value, &exec->env_lst);
+		change_env_value(name, env_value, exec);
 	}
 	return(return_value);
 }

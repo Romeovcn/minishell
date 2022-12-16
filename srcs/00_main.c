@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/15 18:43:48 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/16 22:17:16 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int main(int argc, char **argv, char **env)
 	t_exec		exec_struct;
 	char 		*readline_str;
 
-	exec_struct.env_lst = get_env_lst(env);
+	exec_struct.env_lst = get_env_lst(env, &exec_struct);
 	exec_struct.envp = env;
 	while (1)
 	{

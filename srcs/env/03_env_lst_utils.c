@@ -6,18 +6,18 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/09 16:25:46 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/16 22:18:49 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env_lst	*lstnew_env(char *name, char *value)
+t_env_lst	*lstnew_env(char *name, char *value, t_exec *exec)
 {
 	t_env_lst	*result;
 
 	result = malloc(sizeof(t_env_lst));
-	if (!result)
+	if (!result) // protect
 		return (0);
 	result->name = name;
 	result->value = value;

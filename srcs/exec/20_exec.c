@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/16 17:38:27 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/16 23:02:38 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ static void	pipex_exec(t_exec *exec)
 		if (pipe(tmp->pipe_fd) == -1)
 		{
 			kill_process(*exec, i);
-			free_exit(exec, 1);
+			free_close_exit(exec, 1, exec->pipe_fd[0], exec->pipe_fd[1]);
 		}
 		exec->pid[i] = fork();
 		if (exec->pid[i] == -1)
 		{
 			kill_process(*exec, i);
-			free_exit(exec, 1);
+			free_close_exit(exec, 1, exec->pipe_fd[0], exec->pipe_fd[1]);
 		}
 		signal(SIGQUIT, sig_process);
 		signal(SIGINT, sig_process);

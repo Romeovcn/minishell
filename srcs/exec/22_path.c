@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:07:33 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/14 19:20:12 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/16 23:04:09 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ char	*get_right_path(char *path, t_array_lst *cmd, t_exec *exec)
 	char	*tmp;
 
 	if (ft_strlen(cmd->content) == 0)
-		free_exit(exec, 127);
+		free_close_exit(exec, 127, exec->pipe_fd[0], exec->pipe_fd[1]);
 	res = ft_abs_path(cmd->content, exec);
 	if (res)
 		return (res);
 	if (!path)
-		free_exit(exec, 127);
+		free_close_exit(exec, 127, exec->pipe_fd[0], exec->pipe_fd[1]);
 	split_path = ft_split(path, ':');
 	i = 0;
 	while (split_path[i])

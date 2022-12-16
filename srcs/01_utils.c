@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/12 21:03:53 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/16 22:10:35 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,5 @@ char **lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst)
 		head = head->next;
 	}
 	result[i] = 0;
-	return (result);
-}
-
-char	*ft_strjoin_mal(char const *s1, char const *s2, t_mal_lst **mal_lst)
-{
-	char	*result;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	result = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!result)
-		return (NULL);
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result, *mal_lst));
-	while (s1[i])
-		result[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		result[j++] = s2[i++];
-	result[j] = 0;
 	return (result);
 }

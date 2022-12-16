@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:41 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/14 19:26:22 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/16 23:01:36 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_null_access(char *path, char **split_path, t_exec *exec)
 	if (path == NULL)
 	{
 		free_array(split_path);
-		free_exit(exec, 127);
+		free_close_exit(exec, 127, exec->pipe_fd[0], exec->pipe_fd[1]);
 	}
 }
 
@@ -93,13 +93,13 @@ char	*ft_abs_path(char *cmd, t_exec *exec)
 	if ((cmd[0] == '/' || cmd[0] == '.') && access(cmd, F_OK) == 0)
 	{
 		if (is_directory(cmd) == 1)
-			free_exit(exec, 126);
+			free_close_exit(exec, 126, exec->pipe_fd[0], exec->pipe_fd[1]);
 		if (access(cmd, X_OK) == 0)
 			return (cmd);
 		if (access(cmd, X_OK) == -1)
-			free_exit(exec, 126);
+			free_close_exit(exec, 126, exec->pipe_fd[0], exec->pipe_fd[1]);
 	}
 	else if ((cmd[0] == '/' || cmd[0] == '.') && access(cmd, F_OK) == -1)
-		free_exit(exec, 127);
+		free_close_exit(exec, 127, exec->pipe_fd[0], exec->pipe_fd[1]);
 	return (NULL);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   05_parser_utils.c                                  :+:      :+:    :+:   */
+/*   05_expander_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/09 16:27:42 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/16 22:29:47 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_env(char *str)
 	return (1);
 }
 
-char	*expand_env_name(char *str)
+char	*expand_env_name(char *str, t_exec *exec)
 {
 	int		i;
 	char	*env_name;
@@ -41,7 +41,7 @@ char	*expand_env_name(char *str)
 		i++;
 	}
 	env_name = malloc((i + 1) * sizeof(char));
-	if (!env_name)
+	if (!env_name) // protect
 		exit(1);
 	i = 0;
 	while (str[i])

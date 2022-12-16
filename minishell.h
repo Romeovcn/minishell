@@ -13,7 +13,7 @@ char		*strjoin_char(char const *s1, char c, t_exec *exec);
 char		**lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst);
 void	    free_array(char **arr);
 void	    free_exit(t_exec *exec, int exit);
-char	    *ft_strjoin_mal(char const *s1, char const *s2, t_mal_lst **mal_lst);
+void        free_close_exit(t_exec *exec, int code_exit, int fd1, int fd2);
 //----------------------------------------------------------------------------//
 //							 	Check access			 					  //
 //----------------------------------------------------------------------------//
@@ -25,7 +25,7 @@ int			ft_env(char **args, t_env_lst *env_lst);
 int			ft_pwd(t_env_lst *env_lst);
 int			ft_exit(char **args, t_exec *exec);
 int			ft_echo(char **cmd, t_exec exec);
-int			ft_cd(char **path, t_env_lst **env_lst);
+int			ft_cd(char **path, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Built-in utils		 						  //
 //----------------------------------------------------------------------------//
@@ -35,20 +35,20 @@ int			exec_built_in(t_exec *exec, int is_fork);
 //----------------------------------------------------------------------------//
 //							 	Env			 								  //
 //----------------------------------------------------------------------------//
-int			export_env(t_exec *exec, t_mal_lst **mal_lst, char **args);
+int			export_env(t_exec *exec, char **args);
 int			unset_env(t_env_lst **env_lst, char **args);
 //----------------------------------------------------------------------------//
 //							 	Env utils		 							  //
 //----------------------------------------------------------------------------//
-char	    *get_env_name(char *env);
-t_env_lst	*get_env_lst(char **env);
-void		change_env_value(char *name, char *new_value, t_env_lst **env_lst);
+char	    *get_env_name(char *env, t_exec *exec);
+t_env_lst	*get_env_lst(char **env, t_exec *exec);
+void		change_env_value(char *name, char *new_value, t_exec *exec);
 char		*get_env_value(char *name, t_env_lst *env_lst);
 void		free_env_lst(t_env_lst *env_lst);
 //----------------------------------------------------------------------------//
 //							 	Env lst			 							  //
 //----------------------------------------------------------------------------//
-t_env_lst	*lstnew_env(char *name, char *value);
+t_env_lst	*lstnew_env(char *name, char *value, t_exec *exec);
 t_env_lst	*lstlast_env(t_env_lst *lst);
 void		lstadd_back_env(t_env_lst **lst, t_env_lst *new);
 //----------------------------------------------------------------------------//
@@ -89,7 +89,7 @@ void		expander(t_exec *exec);
 //							 	Parser utils								  //
 //----------------------------------------------------------------------------//
 int			is_env(char *str);
-char		*expand_env_name(char *str);
+char		*expand_env_name(char *str, t_exec *exec);
 void		go_end_env_name(char **str);
 //----------------------------------------------------------------------------//
 //							 	Malloc lst utils							  //
