@@ -22,6 +22,8 @@ static void	pipex_exec(t_exec *exec)
 	head = exec->tok_lst;
 	tmp = exec;
 	i = 0;
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	while (i < tmp->nb_command)
 	{
 		if (pipe(tmp->pipe_fd) == -1)
@@ -32,11 +34,13 @@ static void	pipex_exec(t_exec *exec)
 			close_fd(tmp->pipe_fd[0], tmp->pipe_fd[1]);
 			free_exit(exec, 1);
 		}
-		if (exec->pid[i] > 0)
-		{
-			signal(SIGINT, handle_signal);
-			signal(SIGQUIT, handle_signal);
-		}
+		// signal(SIGINT, SIG_IGN);
+		// signal(SIGQUIT, SIG_IGN);
+		// if (exec->pid[i] == 0)
+		// {
+			signal(SIGQUIT, sig_process);
+			signal(SIGINT, sig_process);
+		// }
 		if (exec->pid[i] == 0)
 			exec_token(tmp, i);
 		dup2(tmp->pipe_fd[0], STDIN_FILENO);
@@ -59,20 +63,18 @@ void init_exec(t_exec *exec)
 
 void	exec(t_exec *exec)
 {
-	t_tok_lst	*head_tok_lst;
 	int			stdin_fd;
 
 	stdin_fd = dup(0);
-	head_tok_lst = exec->tok_lst;
 	if (check_heredoc(exec) == 1)
 	{
 		here_doc_manage(exec);
-		if (G_STATUS != 0)
-		{
-			heredoc_rm(exec->tok_lst);
-			dup2(stdin_fd, 0);
-			return ;
-		}
+		// if (G_STATUS == 130)
+		// {
+		// 	heredoc_rm(exec->tok_lst);
+		// 	close(stdin_fd);
+		// 	return ;
+		// }
 	}
 	if (exec->nb_command == 1 && exec->tok_lst->args && is_built_in_no_fork(exec->tok_lst->args->content))
 	{
@@ -86,7 +88,7 @@ void	exec(t_exec *exec)
 	}
 	if (exec->nb_command > 0)
 		pipex_exec(exec);
-	error_manager(exec, head_tok_lst);
+	error_manager(*exec);
 	heredoc_rm(exec->tok_lst);
 	dup2(stdin_fd, 0);
 	close(stdin_fd);

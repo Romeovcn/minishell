@@ -11,7 +11,6 @@ extern int G_STATUS;
 void		error_exit(t_mal_lst *mal_lst);
 char		*strjoin_char(char const *s1, char c, t_mal_lst **mal_lst);
 char		**lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst);
-char        **envp_to_str_array(t_env_lst *lst, char **old_envp);
 void	    free_array(char **arr);
 void	    free_exit(t_exec *exec, int exit);
 char	    *ft_strjoin_mal(char const *s1, char const *s2, t_mal_lst **mal_lst);
@@ -83,14 +82,14 @@ void		read_lst_array(t_array_lst *lst, char *type);
 //----------------------------------------------------------------------------//
 int			check_error(t_lex_lst *lexed_list);
 //----------------------------------------------------------------------------//
-//							 	Parser										  //
+//							 	Expander									  //
 //----------------------------------------------------------------------------//
-void		parser(t_lex_lst *lex_lst, t_mal_lst **mal_lst, t_env_lst *env_lst);
+void		expander(t_lex_lst *lex_lst, t_mal_lst **mal_lst, t_env_lst *env_lst);
 //----------------------------------------------------------------------------//
 //							 	Parser utils								  //
 //----------------------------------------------------------------------------//
 int			is_env(char *str);
-char		*parse_env_name(char *str);
+char		*expand_env_name(char *str);
 void		go_end_env_name(char **str);
 //----------------------------------------------------------------------------//
 //							 	Malloc lst utils							  //
@@ -154,7 +153,7 @@ void		heredoc_rm(t_tok_lst *tok_lst);
 //----------------------------------------------------------------------------//
 //							 	Exec error									  //
 //----------------------------------------------------------------------------//
-void		error_manager(t_exec *exec, t_tok_lst *tok_lst);
+void		error_manager(t_exec exec);
 //----------------------------------------------------------------------------//
 //							 	Exec access									  //
 //----------------------------------------------------------------------------//
@@ -166,9 +165,9 @@ char		*ft_abs_path(char *cmd, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Signal										  //
 //----------------------------------------------------------------------------//
-void    	handler(int sig_num);
+void    	sig_int_rl(int sig_num);
 void	    signal_manager_hd();
-void    	handle_signal(int sig_num);
+void    	sig_process(int sig_num);
 // To do :
 // Protect malloc
 // Norm

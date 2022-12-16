@@ -39,7 +39,6 @@ int	ft_exit(char **args, t_exec *exec)
 		return (ft_putstr_fd("exit: too many arguments\n", 2), 1);
 	if (i == 1)
 	{
-		free_array(exec->envp);
 		free_env_lst(exec->env_lst);
 		free_lst_malloc(exec->mal_lst);
 		ft_putstr_fd("exit\n", 2);
@@ -53,7 +52,6 @@ int	ft_exit(char **args, t_exec *exec)
 		if (!ft_isdigit(args[1][i]) || i > 18)
 		{
 			printf("exit: %s: numeric argument required\n", args[1]);
-			free_array(exec->envp);
 			free_env_lst(exec->env_lst);
 			free_lst_malloc(exec->mal_lst);
 			exit(2);
@@ -61,7 +59,6 @@ int	ft_exit(char **args, t_exec *exec)
 		i++;
 	}
 	exit_status = ft_atoi(args[1]) % 256;
-	free_array(exec->envp);
 	free_env_lst(exec->env_lst);
 	free_lst_malloc(exec->mal_lst);
 	exit(exit_status);

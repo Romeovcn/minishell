@@ -29,17 +29,30 @@ int check_empty_line(char *rl_str)
 	return (1);
 }
 
+int parser(t_exec *exec, char *readline_str)
+{
+	exec->mal_lst = NULL;
+	exec->lex_lst = lexer(readline_str, &exec->mal_lst);
+	if (check_error(exec->lex_lst))
+	{
+		free_lst_malloc(exec->mal_lst);
+		free(readline_str);
+		return (1);
+	}
+	expander(exec->lex_lst, &exec->mal_lst, exec->env_lst);
+	exec->tok_lst = get_token_lst(exec->lex_lst, &exec->mal_lst);
+	return (0);
+}
+
 int main(int argc, char **argv, char **env)
 {
 	t_exec		exec_struct;
 	char 		*readline_str;
 
 	exec_struct.env_lst = get_env_lst(env);
-	exec_struct.envp = envp_to_str_array(exec_struct.env_lst, NULL);
 	while (1)
 	{
-		// signal_manager();
-		signal(SIGINT, handler);
+		signal(SIGINT, sig_int_rl);
 		signal(SIGQUIT, SIG_IGN);
 		rl_outstream = stderr;
 		readline_str = readline("Minishell> ");
@@ -48,22 +61,12 @@ int main(int argc, char **argv, char **env)
 		add_history(readline_str);
 		if (check_empty_line(readline_str))
 			continue ;
-		exec_struct.mal_lst = NULL;
-		exec_struct.lex_lst = lexer(readline_str, &exec_struct.mal_lst);
-		if (check_error(exec_struct.lex_lst))
-		{
-			free_lst_malloc(exec_struct.mal_lst);
-			free(readline_str);
+		if (parser(&exec_struct, readline_str))
 			continue ;
-		}
-		parser(exec_struct.lex_lst, &exec_struct.mal_lst, exec_struct.env_lst);
-		exec_struct.tok_lst = get_token_lst(exec_struct.lex_lst, &exec_struct.mal_lst);
 		init_exec(&exec_struct);
 		exec(&exec_struct);
 		free_lst_malloc(exec_struct.mal_lst);
-		free(readline_str);
 	}
-	free_array(exec_struct.envp);
 	free_env_lst(exec_struct.env_lst);
 	ft_putstr_fd("exit\n", 2);
 }

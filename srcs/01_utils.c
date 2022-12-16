@@ -66,37 +66,6 @@ char **lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst)
 	return (result);
 }
 
-char **envp_to_str_array(t_env_lst *lst, char **old_envp)
-{
-	char		**res;
-	t_env_lst	*head;
-	char		*tmp;
-	int			i;
-
-	if (old_envp)
-		free_array(old_envp);
-	head = lst;
-	i = 0;
-	while (head)
-	{
-		i++;
-		head = head->next;
-	}
-	res = malloc((i + 1) * sizeof(char *));
-	head = lst;
-	i = 0;
-	while (head)
-	{
-		tmp = ft_strjoin(head->name, "=");
-		res[i] = ft_strjoin(tmp, head->value);
-		free(tmp);
-		i++;
-		head = head->next;
-	}
-	res[i] = NULL;
-	return (res);
-}
-
 char	*ft_strjoin_mal(char const *s1, char const *s2, t_mal_lst **mal_lst)
 {
 	char	*result;

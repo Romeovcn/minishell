@@ -12,21 +12,15 @@
 
 #include "minishell.h"
 
-void	handle_signal(int sig_num)
+void	sig_process(int sig_num)
 {
 	if (sig_num == SIGQUIT)
-	{
-		ft_putstr_fd(" Quit (core dumped)\n", 1);
 		G_STATUS = 131;
-	}
 	else if (sig_num == SIGINT)
-	{
-		ft_putstr_fd("\n", 1);
 		G_STATUS = 130;
-	}
 }
 
-void	handler(int sig_num)
+void	sig_int_rl(int sig_num)
 {
 	if (sig_num == SIGINT)
 	{

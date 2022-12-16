@@ -25,7 +25,7 @@ void	command(t_exec *exec, int i)
 	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 	if (is_built_in(args[0]))
 		exit(exec_built_in(exec, TRUE));
-	execve(path, args, exec->envp);
+	execve(path, args, NULL);
 	exit(0);
 }
 
@@ -36,7 +36,6 @@ void	exec_token(t_exec *exec, int i)
 
 	output_fd = exec->tok_lst->output_fd;
 	input_fd = exec->tok_lst->input_fd;
-	signal(SIGQUIT, handler);
 	if (check_infile(exec->tok_lst, exec) || check_outfile(exec->tok_lst, exec))
 		free_exit(exec, G_STATUS);
 	if (output_fd == REDIR_OUT)
@@ -55,6 +54,5 @@ void	exec_token(t_exec *exec, int i)
 	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 	free_lst_malloc(exec->mal_lst);
 	free_env_lst(exec->env_lst);
-	free_array(exec->envp);
 	exit(0);
 }

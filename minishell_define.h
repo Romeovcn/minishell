@@ -88,7 +88,6 @@ typedef struct e_list
 	t_array_lst		*here_doc_lst;
 
 	int				nb_command;
-	char			**envp;
 }					t_exec;
 
 #endif

@@ -24,7 +24,7 @@ int	is_env(char *str)
 	return (1);
 }
 
-char	*parse_env_name(char *str)
+char	*expand_env_name(char *str)
 {
 	int		i;
 	char	*env_name;

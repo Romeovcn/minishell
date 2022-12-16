@@ -56,19 +56,24 @@ static void	error_status(t_tok_lst *tok_lst)
 		free(file_error); // free null ?
 }
 
-void	error_manager(t_exec *exec, t_tok_lst *tok_lst)
+void	error_manager(t_exec exec)
 {
 	int	i;
 	int status;
 
 	i = 0;
-	while (tok_lst && waitpid(exec->pid[i], &status, 0) > 0)
+	status = 0;
+	while (exec.tok_lst && waitpid(exec.pid[i], &status, 0) > 0)
 	{
-		G_STATUS = WEXITSTATUS(status);
-		if (G_STATUS == 131)
-			G_STATUS = 33536; // to fix
-		error_status(tok_lst);
-		tok_lst = tok_lst->next;
+		if (WTERMSIG(status) == 2)
+			ft_putstr_fd("\n", 1);
+		else if (WTERMSIG(status) == 3 && !exec.pid[i + 1])
+			ft_putstr_fd(" Quit (core dumped)\n", 1);
+		if (WIFEXITED(status))
+			G_STATUS = WEXITSTATUS(status);
+		error_status(exec.tok_lst);
+		exec.tok_lst = exec.tok_lst->next;
 		i++;
 	}
+	// if (!WIFEXITED(status))
 }
