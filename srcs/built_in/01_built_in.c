@@ -69,8 +69,15 @@ int	ft_pwd(t_env_lst *env_lst)
 {
 	char	*pwd_path;
 	char	buff[PATH_MAX];
+	char	*path;
 
-	printf("%s\n", getcwd(buff, PATH_MAX));
+	path = get_env_value("PWD", env_lst);
+	if (path)
+		return (printf("%s\n", path), 0);
+	path = getcwd(buff, PATH_MAX);
+	if (!path)
+		return (perror("pwd"), 1);
+	printf("%s\n", path);
 	return (0);
 }
 
@@ -109,7 +116,6 @@ int	ft_cd(char **path, t_exec *exec)
 	char	*new_pwd;
 	int		chdir_value;
 
-	old_pwd = ft_strdup(getcwd(buff, PATH_MAX));
 	if (!path[1])
 		chdir_value = chdir(get_env_value("HOME", exec->env_lst)) < 0;
 	else if (!path[2])
@@ -120,11 +126,12 @@ int	ft_cd(char **path, t_exec *exec)
 			chdir_value = chdir(path[1]);
 	}
 	else
-		return (free(old_pwd), ft_putstr_fd("cd: too many arguments\n", 2), 1);
-	if (chdir_value < 0)
-		return (free(old_pwd), perror("cd"), 1);
+		return (ft_putstr_fd("cd: too many arguments\n", 2), 1);
+	if (chdir_value == -1)
+		return (perror("cd"), 1);
 	new_pwd = ft_strdup(getcwd(buff, PATH_MAX));
-	change_env_value(ft_strdup("OLDPWD"), old_pwd, exec);
-	change_env_value(ft_strdup("PWD"), new_pwd, exec);
+	old_pwd = ft_strdup(get_env_value("PWD", exec->env_lst));
+	change_env_value(ft_strdup("OLDPWD"), old_pwd, exec->env_lst);
+	change_env_value(ft_strdup("PWD"), new_pwd, exec->env_lst);
 	return (0);
 }

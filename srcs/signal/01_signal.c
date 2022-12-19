@@ -46,7 +46,7 @@ static void	handle_signal_hd(int signal, siginfo_t *info, void *context)
 		G_STATUS = 777;
 	}
 	if (signal == SIGQUIT)
-		ft_putstr_fd("\b\b  \b\b", 0);
+		ft_putstr_fd("\b\b", 0);
 }
 
 void	signal_manager_hd()

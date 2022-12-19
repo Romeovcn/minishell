@@ -55,7 +55,7 @@ int main(int argc, char **argv, char **env)
 	{
 		signal(SIGINT, sig_int_rl);
 		signal(SIGQUIT, SIG_IGN);
-		// rl_outstream = stderr; // to delete
+		rl_outstream = stderr; // to delete
 		readline_str = readline("Minishell> ");
 		if (!readline_str)
 			break ;
