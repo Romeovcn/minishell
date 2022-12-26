@@ -14,7 +14,7 @@
 
 void	free_exit(t_exec *exec, int code_exit)
 {
-	close(3);
+	close(exec->stdin_fd);
 	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 	free_lst_malloc(exec->mal_lst);
 	free_env_lst(exec->env_lst);

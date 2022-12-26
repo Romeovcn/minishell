@@ -22,9 +22,9 @@ void	command(t_exec *exec, int i)
 		path = get_right_path(get_env_value("PATH", exec->env_lst), exec->tok_lst->args, exec);
 	if (exec->tok_lst->output_fd == 1 && i != exec->nb_command - 1)
 		dup2(exec->pipe_fd[1], STDOUT_FILENO);
-	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 	if (is_built_in(args[0]))
 		exit(exec_built_in(exec, TRUE));
+	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 	execve(path, args, exec->envp);
 	exit(0);
 }
@@ -43,14 +43,12 @@ void	exec_token(t_exec *exec, int i)
 	if (output_fd == APP_OUT)
 		append(exec->tok_lst);
 	if (input_fd == REDIR_IN)
-	{
 		redir_in(exec->tok_lst);
-	}
 	if (input_fd == HERE_DOC)
 		here_doc(exec->tok_lst);
 	if (exec->tok_lst->args != NULL)
 		command(exec, i);
-	close(3);
+	close(exec->stdin_fd);
 	close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 	free_lst_malloc(exec->mal_lst);
 	free_env_lst(exec->env_lst);

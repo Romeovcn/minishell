@@ -80,6 +80,7 @@ typedef struct e_list
 {
 	pid_t			*pid;
 	int				pipe_fd[2];
+	int				stdin_fd;
 
 	t_lex_lst		*lex_lst;
 	t_tok_lst		*tok_lst;

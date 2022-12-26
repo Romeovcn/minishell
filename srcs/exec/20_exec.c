@@ -57,25 +57,23 @@ void init_exec(t_exec *exec)
 
 void	exec(t_exec *exec)
 {
-	int		stdin_fd;
-
-	stdin_fd = dup(0);
+	exec->stdin_fd = dup(0);
 	if (check_heredoc(exec) == 1)
 	{
 		here_doc_manage(exec);
 		if (G_STATUS == 777)
 		{
 			heredoc_rm(exec->tok_lst);
-			dup2(stdin_fd, 0);
-			close(stdin_fd);
+			dup2(exec->stdin_fd, 0);
+			close(exec->stdin_fd);
 			G_STATUS = 130;
 			return ;
 		}
 	}
 	if (exec->nb_command == 1 && exec->tok_lst->args && is_built_in_no_fork(exec->tok_lst->args->content))
 	{
-		built_in_error_manage(exec, stdin_fd);
-		close(stdin_fd);
+		built_in_error_manage(exec);
+		close(exec->stdin_fd);
 		G_STATUS = exec_built_in(exec, FALSE);
 		return ;
 	}
@@ -83,6 +81,6 @@ void	exec(t_exec *exec)
 		pipex_exec(exec);
 	error_manager(*exec);
 	heredoc_rm(exec->tok_lst);
-	dup2(stdin_fd, 0);
-	close(stdin_fd);
+	dup2(exec->stdin_fd, 0);
+	close(exec->stdin_fd);
 }
