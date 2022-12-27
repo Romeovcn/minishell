@@ -178,6 +178,6 @@ void    	sig_process(int sig_num);
 // cd into dir, delete dir ..
 // export salut=ok >'c'
 //< srcs cat > out2
-// cat: -: Is a directory --------- what is "-" ?
 // export USER=OKOKOKOKOK >> out1 doesnt dsplay out1 perm denied
+// exit if heredoc file open == -1
 #endif

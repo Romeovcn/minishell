@@ -30,7 +30,7 @@ char	*get_env_name(char *env)
 		i--;
 	name = malloc((i + 1) * sizeof(char));
 	if (!name)
-		exit(1);
+		return (NULL);
 	i = 0;
 	while (env[i])
 	{
@@ -60,7 +60,17 @@ t_env_lst	*get_env_lst(char **env)
 	while (env[i])
 	{
 		name = get_env_name(env[i]);
+		if (!name)
+		{
+			free_env_lst(env_lst);
+			exit(1);
+		}
 		value = ft_strdup(getenv(name));
+		if (!value)
+		{
+			free_env_lst(env_lst);
+			exit(1);
+		}
 		lstadd_back_env(&env_lst, lstnew_env(name, value));
 		i++;
 	}
