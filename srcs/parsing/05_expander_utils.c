@@ -42,7 +42,7 @@ char	*expand_env_name(char *str)
 	}
 	env_name = malloc((i + 1) * sizeof(char));
 	if (!env_name)
-		exit(1);
+		return (NULL);
 	i = 0;
 	while (str[i])
 	{

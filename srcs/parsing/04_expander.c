@@ -19,6 +19,8 @@ void	expand_env(char **str, t_mal_lst **mal_lst, t_env_lst *env_lst, char **resu
 
 	(*str)++;
 	env_name = expand_env_name(*str);
+	if (!env_name)
+		exit (1); // free all
 	if (ft_strmatch(env_name, "?"))
 	{
 		env_value = ft_itoa(G_STATUS);

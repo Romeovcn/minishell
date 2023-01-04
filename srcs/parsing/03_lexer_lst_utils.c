@@ -12,19 +12,16 @@
 
 #include "minishell.h"
 
-t_lex_lst	*lstnew_lex(void *content, int operator, t_mal_lst **mal_lst)
+t_lex_lst	*lstnew_lex(char *content, int operator, t_exec *exec)
 {
 	t_lex_lst	*result;
 
-	// if ()
+	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(content));
 	result = malloc(sizeof(t_lex_lst));
-	if (!result)
-		return (NULL);
+	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(result));
 	result->content = content;
 	result->operator = operator;
 	result->next = NULL;
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result->content));
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
 	return (result);
 }
 

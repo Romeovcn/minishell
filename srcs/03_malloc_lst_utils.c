@@ -16,9 +16,11 @@ t_mal_lst	*lstnew_malloc(void *adr)
 {
 	t_mal_lst	*result;
 
+	if (!adr)
+		return NULL;
 	result = malloc(sizeof(t_mal_lst));
 	if (!result)
-		return (0);
+		return (NULL);
 	result->adr = adr;
 	result->next = NULL;
 	return (result);
@@ -40,6 +42,11 @@ void	lstadd_back_malloc(t_mal_lst **lst, t_mal_lst *new)
 {
 	t_mal_lst	*last;
 
+	if (!new)
+	{
+		// free all !!!!
+		exit(1);
+	}
 	if (*lst)
 	{
 		last = lstlast_malloc(*lst);
