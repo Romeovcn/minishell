@@ -16,9 +16,10 @@ t_lex_lst	*lstnew_lex(void *content, int operator, t_mal_lst **mal_lst)
 {
 	t_lex_lst	*result;
 
+	// if ()
 	result = malloc(sizeof(t_lex_lst));
 	if (!result)
-		exit(1);
+		return (NULL);
 	result->content = content;
 	result->operator = operator;
 	result->next = NULL;

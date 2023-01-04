@@ -21,8 +21,6 @@ static void	pipex_exec(t_exec *exec)
 	head = exec->tok_lst;
 	tmp = exec;
 	i = 0;
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
 	while (i < tmp->nb_command)
 	{
 		if (pipe(tmp->pipe_fd) == -1)

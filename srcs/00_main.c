@@ -49,7 +49,7 @@ int main(int argc, char **argv, char **env)
 	t_exec		exec_struct;
 	char 		*readline_str;
 
-	exec_struct.env_lst = get_env_lst(env);
+	exec_struct.env_lst = get_env_lst(env); // ok
 	exec_struct.envp = env;
 	while (1)
 	{

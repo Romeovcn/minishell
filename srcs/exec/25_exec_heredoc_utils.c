@@ -48,10 +48,13 @@ static void	get_here_doc_file(char *delimiter, char *name_file, t_mal_lst **mal_
 	int		here_doc_fd;
 
 	here_doc_fd = open(name_file, O_CREAT | O_RDWR, 0666);
+	if (here_doc_fd == -1)
+		return (void)perror(name_file);
 	delimiter = ft_strjoin(delimiter, "\n");
 	lstadd_back_malloc(mal_lst, lstnew_malloc(delimiter));
 	while (1)
 	{
+		write(1, "> ", 2);
 		line = get_next_line(0);
 		if (!line || ft_strmatch(delimiter, line))
 		{
