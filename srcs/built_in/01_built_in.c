@@ -82,16 +82,18 @@ int	ft_echo(char **cmd, t_exec exec)
 
 	i = 1;
 	nl = 1;
-	if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
+	while (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
 	{
 		j = 1;
 		while (cmd[i][j] == 'n')
-			j++;;
+			j++;
 		if (!cmd[i][j])
 		{
 			nl = 0;
 			i++;
 		}
+		else
+			break;
 	}
 	if (cmd[i])
 		printf("%s", cmd[i++]);
