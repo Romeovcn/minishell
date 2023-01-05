@@ -6,13 +6,13 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/15 18:43:48 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 18:33:31 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int G_STATUS = 0;
+int g_status = 0;
 
 int check_empty_line(char *rl_str)
 {

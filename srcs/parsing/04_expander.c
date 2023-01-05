@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/14 16:54:05 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 18:33:31 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	expand_env(char **str, t_mal_lst **mal_lst, t_env_lst *env_lst, char **resu
 		exit (1); // free all
 	if (ft_strmatch(env_name, "?"))
 	{
-		env_value = ft_itoa(G_STATUS);
+		env_value = ft_itoa(g_status);
 		lstadd_back_malloc(mal_lst, lstnew_malloc(env_value));
 	}
 	else

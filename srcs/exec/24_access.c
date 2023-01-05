@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:41 by jsauvage          #+#    #+#             */
-/*   Updated: 2023/01/05 17:35:47 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 18:33:31 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ int	check_outfile(t_tok_lst *tok_lst, t_exec *exec)
 	while (tmp)
 	{
 		if (is_directory(tmp->content) == 1)
-			return (G_STATUS = 126, 1);
+			return (g_status = 126, 1);
 		if (ft_strmatch(tmp->content2, "O_TRUNC"))
 			file_fd = open(tmp->content, O_RDWR | O_CREAT | O_TRUNC, 0666);
 		else if (ft_strmatch(tmp->content2, "O_APPEND"))
 			file_fd = open(tmp->content, O_RDWR | O_CREAT | O_APPEND, 0666);
 		if (file_fd == -1)
-			return (G_STATUS = 1, 1);
+			return (g_status = 1, 1);
 		close(file_fd);
 		tmp = tmp->next;
 	}
@@ -72,7 +72,7 @@ int	check_infile(t_tok_lst *tok_lst, t_exec *exec)
 	{
 		file_fd = open(in_file->content, O_RDONLY);
 		if (file_fd == -1)
-			return (G_STATUS = 1, 1);
+			return (g_status = 1, 1);
 		close(file_fd);
 		in_file = in_file->next;
 	}

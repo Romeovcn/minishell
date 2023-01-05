@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 18:25:31 by jsauvage          #+#    #+#             */
+/*   Updated: 2023/01/05 18:33:31 by jsauvage         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "./minishell_define.h"
 
-extern int G_STATUS;
+extern int	g_status;
 
 //----------------------------------------------------------------------------//
 //						 			Utils				 					  //
@@ -11,9 +23,9 @@ extern int G_STATUS;
 void		error_exit(t_mal_lst *mal_lst);
 char		*strjoin_char(char const *s1, char c, t_mal_lst **mal_lst);
 char		**lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst);
-void	    free_array(char **arr);
-void	    free_exit(t_exec *exec, int exit);
-char	    *ft_strjoin_mal(char const *s1, char const *s2, t_mal_lst **mal_lst);
+void		free_array(char **arr);
+void		free_exit(t_exec *exec, int exit);
+char		*ft_strjoin_mal(char const *s1, char const *s2, t_mal_lst **mal_ls);
 //----------------------------------------------------------------------------//
 //							 	Check access			 					  //
 //----------------------------------------------------------------------------//
@@ -40,7 +52,7 @@ int			unset_env(t_env_lst **env_lst, char **args);
 //----------------------------------------------------------------------------//
 //							 	Env utils		 							  //
 //----------------------------------------------------------------------------//
-char	    *get_env_name(char *env);
+char		*get_env_name(char *env);
 t_env_lst	*get_env_lst(char **env);
 void		change_env_value(char *name, char *new_value, t_env_lst **env_lst);
 char		*get_env_value(char *name, t_env_lst *env_lst);
@@ -84,7 +96,7 @@ int			check_error(t_lex_lst *lexed_list);
 //----------------------------------------------------------------------------//
 //							 	Expander									  //
 //----------------------------------------------------------------------------//
-void		expander(t_lex_lst *lex_lst, t_mal_lst **mal_lst, t_env_lst *env_lst);
+void		expander(t_lex_lst *lex_lst, t_mal_lst **mal_ls, t_env_lst *env_ls);
 //----------------------------------------------------------------------------//
 //							 	Parser utils								  //
 //----------------------------------------------------------------------------//
@@ -105,11 +117,11 @@ t_tok_lst	*get_token_lst(t_lex_lst *lexed_lst, t_mal_lst **mal_lst);
 //----------------------------------------------------------------------------//
 //							 	Token utils									  //
 //----------------------------------------------------------------------------//
-void		add_here_doc(t_tok_lst **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
-void		add_redir_in(t_tok_lst **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
-void		add_redir_out(t_tok_lst **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
-void		add_app_out(t_tok_lst **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
-void		add_word(t_tok_lst **token, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
+void		add_here_doc(t_tok_lst **tok, t_lex_lst **lex_lst, t_mal_lst **mal);
+void		add_redir_in(t_tok_lst **tok, t_lex_lst **lex_lst, t_mal_lst **mal);
+void		add_redir_out(t_tok_lst **tok, t_lex_lst **lex_ls, t_mal_lst **mal);
+void		add_app_out(t_tok_lst **tok, t_lex_lst **lex_lst, t_mal_lst **mal);
+void		add_word(t_tok_lst **tok, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
 //----------------------------------------------------------------------------//
 //							 	Token lst utils								  //
 //----------------------------------------------------------------------------//
@@ -134,8 +146,8 @@ void		here_doc(t_tok_lst *tok_lst);
 //----------------------------------------------------------------------------//
 //							 	Exec simple	management						  //
 //----------------------------------------------------------------------------//
-void	    exec_token(t_exec *exec, int i);
-void        here_doc_manage(t_exec *exec);
+void		exec_token(t_exec *exec, int i);
+void		here_doc_manage(t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Exec utils									  //
 //----------------------------------------------------------------------------//
@@ -154,9 +166,9 @@ void		heredoc_rm(t_tok_lst *tok_lst);
 //							 	Exec error									  //
 //----------------------------------------------------------------------------//
 void		error_manager(t_exec exec);
-void	    error_message(char *file, char *message);
-void	    built_in_error_manage(t_exec *exec);
-int     	error_here_doc(t_exec *exec, int stdin_fd);
+void		error_message(char *file, char *message);
+void		built_in_error_manage(t_exec *exec);
+int			error_here_doc(t_exec *exec, int stdin_fd);
 //----------------------------------------------------------------------------//
 //							 	Exec access									  //
 //----------------------------------------------------------------------------//
@@ -168,9 +180,9 @@ char		*ft_abs_path(char *cmd, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Signal										  //
 //----------------------------------------------------------------------------//
-void    	sig_int_rl(int sig_num);
-void	    signal_manager_hd();
-void    	sig_process(int sig_num);
+void		sig_int_rl(int sig_num);
+void		signal_manager_hd(void);
+void		sig_process(int sig_num);
 // To do :
 // Protect malloc
 // Norm

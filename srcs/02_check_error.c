@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/06 23:33:05 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 18:33:31 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,23 @@ int	check_pipe(t_lex_lst *lexed_list)
 int	check_error(t_lex_lst *lexed_list)
 {
 	if (lexed_list->operator == PIPE)
-		return (ft_putstr_fd("bash: syntax error near unexpected token `|'\n", 2), G_STATUS = 2, 2);
+		return (ft_putstr_fd("bash: syntax error near unexpected token `|'\n", 2), g_status = 2, 2);
 	while (lexed_list)
 	{
 		if (lexed_list->operator == PIPE)
 		{
 			if (check_pipe(lexed_list))
-				return (G_STATUS = 1, 1);
+				return (g_status = 1, 1);
 		}
 		else if (lexed_list->operator != PIPE && lexed_list->operator != WORD)
 		{
 			if (check_redir(lexed_list))
-				return (G_STATUS = 2, 1);
+				return (g_status = 2, 1);
 		}
 		else if (lexed_list->operator == WORD)
 		{
 			if (check_not_closed_string(lexed_list->content))
-				return (G_STATUS = 1, 1);
+				return (g_status = 1, 1);
 		}
 		lexed_list = lexed_list->next;
 	}

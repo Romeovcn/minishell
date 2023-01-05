@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2023/01/05 17:42:39 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 18:33:31 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	exec(t_exec *exec)
 	{
 		built_in_error_manage(exec);
 		close(exec->stdin_fd);
-		G_STATUS = exec_built_in(exec, FALSE);
+		g_status = exec_built_in(exec, FALSE);
 		return ;
 	}
 	if (exec->nb_command > 0)

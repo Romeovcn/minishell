@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/14 17:07:21 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 18:35:07 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct t_list
 	t_array_lst		*out_file;
 	struct t_list	*next;
 }					t_tok_lst;
-
 
 typedef struct e_list
 {

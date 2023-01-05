@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 15:45:32 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/13 19:23:52 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 18:33:31 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	sig_process(int sig_num)
 {
 	if (sig_num == SIGQUIT)
-		G_STATUS = 131;
+		g_status = 131;
 	else if (sig_num == SIGINT)
-		G_STATUS = 130;
+		g_status = 130;
 }
 
 void	sig_int_rl(int sig_num)
@@ -28,7 +28,7 @@ void	sig_int_rl(int sig_num)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		G_STATUS = 130;
+		g_status = 130;
 	}
 }
 
@@ -43,7 +43,7 @@ static void	handle_signal_hd(int signal, siginfo_t *info, void *context)
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 		ft_putstr_fd("\n", 1);
-		G_STATUS = 777;
+		g_status = 777;
 	}
 	if (signal == SIGQUIT)
 		ft_putstr_fd("\b\b  \b\b", 0);

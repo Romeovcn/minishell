@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:46:29 by jsauvage          #+#    #+#             */
-/*   Updated: 2023/01/05 17:34:38 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 18:33:31 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	exec_token(t_exec *exec, int i)
 	output_fd = exec->tok_lst->output_fd;
 	input_fd = exec->tok_lst->input_fd;
 	if (check_infile(exec->tok_lst, exec) || check_outfile(exec->tok_lst, exec))
-		free_exit(exec, G_STATUS);
+		free_exit(exec, g_status);
 	if (output_fd == REDIR_OUT)
 		redir_out(exec->tok_lst);
 	if (output_fd == APP_OUT)
