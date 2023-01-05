@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   24_exec_manager.c                                  :+:      :+:    :+:   */
+/*   21_manager.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:46:29 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/15 19:55:43 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:34:38 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	command(t_exec *exec, int i)
 
 	args = lst_to_str_array(exec->tok_lst->args, &exec->mal_lst);
 	if (!is_built_in(args[0]))
-		path = get_right_path(get_env_value("PATH", exec->env_lst), exec->tok_lst->args, exec);
+		path = get_right_path(get_env_value("PATH", exec->env_lst),
+				exec->tok_lst->args, exec);
 	if (exec->tok_lst->output_fd == 1 && i != exec->nb_command - 1)
 		dup2(exec->pipe_fd[1], STDOUT_FILENO);
 	if (is_built_in(args[0]))
@@ -31,8 +32,8 @@ void	command(t_exec *exec, int i)
 
 void	exec_token(t_exec *exec, int i)
 {
-	int output_fd;
-	int input_fd;
+	int	output_fd;
+	int	input_fd;
 
 	output_fd = exec->tok_lst->output_fd;
 	input_fd = exec->tok_lst->input_fd;

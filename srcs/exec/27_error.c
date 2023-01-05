@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   26_exec_error.c                                    :+:      :+:    :+:   */
+/*   27_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:43 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/16 16:02:08 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:42:07 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static void	error_status(t_tok_lst *tok_lst)
 		error_message(tok_lst->args->content, "Is a directory\n");
 	else if (G_STATUS == 126)
 		error_message(tok_lst->args->content, "Permission denied\n");
-	else if (G_STATUS == 127 && (tok_lst->args->content[0] == '/' 
-		|| tok_lst->args->content[0] == '.'))
+	else if (G_STATUS == 127 && (tok_lst->args->content[0] == '/'
+			|| tok_lst->args->content[0] == '.'))
 		error_message(tok_lst->args->content, "No such file or directory\n");
 	else if (G_STATUS == 127)
 		error_message_127(tok_lst->args->content);
@@ -57,7 +57,7 @@ static void	error_status(t_tok_lst *tok_lst)
 void	error_manager(t_exec exec)
 {
 	int	i;
-	int status;
+	int	status;
 
 	i = 0;
 	status = 0;
@@ -73,4 +73,17 @@ void	error_manager(t_exec exec)
 		exec.tok_lst = exec.tok_lst->next;
 		i++;
 	}
+}
+
+int	error_here_doc(t_exec *exec, int stdin_fd)
+{
+	if (G_STATUS == 777)
+	{
+		heredoc_rm(exec->tok_lst);
+		dup2(stdin_fd, 0);
+		close(stdin_fd);
+		G_STATUS = 130;
+		return (0);
+	}
+	return (1);
 }

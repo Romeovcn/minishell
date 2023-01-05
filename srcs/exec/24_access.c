@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   27_access.c                                        :+:      :+:    :+:   */
+/*   24_access.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:55:41 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/14 19:26:22 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:35:47 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,9 @@ int	check_infile(t_tok_lst *tok_lst, t_exec *exec)
 
 void	ft_null_access(char *path, char **split_path, t_exec *exec)
 {
-	if (path == NULL)
-	{
-		free_array(split_path);
-		free_exit(exec, 127);
-	}
+	path = NULL;
+	free_array(split_path);
+	free_exit(exec, 127);
 }
 
 char	*ft_abs_path(char *cmd, t_exec *exec)

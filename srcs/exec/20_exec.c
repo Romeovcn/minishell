@@ -6,7 +6,7 @@
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:18 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/16 17:38:27 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:42:39 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,33 @@
 static void	pipex_exec(t_exec *exec)
 {
 	t_tok_lst	*head;
-	t_exec		*tmp;
 	int			i;
 
 	head = exec->tok_lst;
-	tmp = exec;
 	i = 0;
-	while (i < tmp->nb_command)
+	while (i < exec->nb_command)
 	{
-		if (pipe(tmp->pipe_fd) == -1)
+		if (pipe(exec->pipe_fd) == -1)
 			return ;
 		exec->pid[i] = fork();
 		if (exec->pid[i] < 0)
 		{
-			close_fd(tmp->pipe_fd[0], tmp->pipe_fd[1]);
+			close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 			free_exit(exec, 1);
 		}
 		signal(SIGQUIT, sig_process);
 		signal(SIGINT, sig_process);
 		if (exec->pid[i] == 0)
-			exec_token(tmp, i);
-		dup2(tmp->pipe_fd[0], STDIN_FILENO);
-		close_fd(tmp->pipe_fd[0], tmp->pipe_fd[1]);
+			exec_token(exec, i);
+		dup2(exec->pipe_fd[0], STDIN_FILENO);
+		close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
 		i++;
-		tmp->tok_lst = tmp->tok_lst->next;
+		exec->tok_lst = exec->tok_lst->next;
 	}
 	exec->tok_lst = head;
 }
 
-void init_exec(t_exec *exec)
+void	init_exec(t_exec *exec)
 {
 	exec->nb_command = ft_lstsize_token(exec->tok_lst);
 	exec->pid = malloc(exec->nb_command * sizeof(pid_t));
@@ -59,16 +57,11 @@ void	exec(t_exec *exec)
 	if (check_heredoc(exec) == 1)
 	{
 		here_doc_manage(exec);
-		if (G_STATUS == 777)
-		{
-			heredoc_rm(exec->tok_lst);
-			dup2(exec->stdin_fd, 0);
-			close(exec->stdin_fd);
-			G_STATUS = 130;
+		if (error_here_doc(exec, exec->stdin_fd) == 0)
 			return ;
-		}
 	}
-	if (exec->nb_command == 1 && exec->tok_lst->args && is_built_in_no_fork(exec->tok_lst->args->content))
+	if (exec->nb_command == 1 && exec->tok_lst->args
+		&& is_built_in_no_fork(exec->tok_lst->args->content))
 	{
 		built_in_error_manage(exec);
 		close(exec->stdin_fd);

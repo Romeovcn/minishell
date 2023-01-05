@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   21_exec_utils.c                                    :+:      :+:    :+:   */
+/*   25_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:14:32 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/12 16:36:04 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:36:34 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	file_exec(char *file_name)
 
 int	is_directory(char *path)
 {
-	struct stat statbuf;
+	struct stat	statbuf;
 
 	if (stat(path, &statbuf) != 0)
 		return (0);

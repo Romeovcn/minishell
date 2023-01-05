@@ -156,6 +156,7 @@ void		heredoc_rm(t_tok_lst *tok_lst);
 void		error_manager(t_exec exec);
 void	    error_message(char *file, char *message);
 void	    built_in_error_manage(t_exec *exec);
+int     	error_here_doc(t_exec *exec, int stdin_fd);
 //----------------------------------------------------------------------------//
 //							 	Exec access									  //
 //----------------------------------------------------------------------------//

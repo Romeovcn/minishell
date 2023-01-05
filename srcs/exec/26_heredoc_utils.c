@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   25_exec_heredoc_utils.c                            :+:      :+:    :+:   */
+/*   26_heredoc_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:50:56 by jsauvage          #+#    #+#             */
-/*   Updated: 2022/12/15 20:29:03 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:43:22 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_heredoc(t_exec *exec)
 static char	*get_heredoc_name(int i, t_mal_lst **mal_lst)
 {
 	char	*heredoc_name;
-	char 	*index;
+	char	*index;
 
 	index = ft_itoa(i);
 	heredoc_name = ft_strjoin(".heredoc", index);
@@ -41,7 +41,7 @@ static char	*get_heredoc_name(int i, t_mal_lst **mal_lst)
 	return (heredoc_name);
 }
 
-static void	get_here_doc_file(char *delimiter, char *name_file, t_mal_lst **mal_lst)
+static void	get_here_doc_file(char *del, char *name_file, t_mal_lst **mal_lst)
 {
 	char	*line;
 	int		len;
@@ -49,14 +49,14 @@ static void	get_here_doc_file(char *delimiter, char *name_file, t_mal_lst **mal_
 
 	here_doc_fd = open(name_file, O_CREAT | O_RDWR, 0666);
 	if (here_doc_fd == -1)
-		return (void)perror(name_file);
-	delimiter = ft_strjoin(delimiter, "\n");
-	lstadd_back_malloc(mal_lst, lstnew_malloc(delimiter));
+		return ((void)perror(name_file));
+	del = ft_strjoin(del, "\n");
+	lstadd_back_malloc(mal_lst, lstnew_malloc(del));
 	while (1)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(0);
-		if (!line || ft_strmatch(delimiter, line))
+		if (!line || ft_strmatch(del, line))
 		{
 			free(line);
 			break ;
@@ -83,7 +83,8 @@ void	here_doc_manage(t_exec *exec)
 		while (exec->tok_lst->delimiter)
 		{
 			here_doc_name = get_heredoc_name(i, &exec->mal_lst);
-			get_here_doc_file(exec->tok_lst->delimiter->content, here_doc_name, &exec->mal_lst);
+			get_here_doc_file(exec->tok_lst->delimiter->content,
+				here_doc_name, &exec->mal_lst);
 			exec->tok_lst->delimiter->content2 = here_doc_name;
 			exec->tok_lst->delimiter = exec->tok_lst->delimiter->next;
 			i++;
