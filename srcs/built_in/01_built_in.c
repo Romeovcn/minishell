@@ -29,34 +29,20 @@ int	ft_env(char **args, t_env_lst *env_lst)
 
 int	ft_exit(char **args, t_exec *exec)
 {
-	int exit_status;
-	int i;
+	int	exit_status;
+	int	i;
 
 	i = 0;
 	while (args[i])
 		i++;
-	if (i > 2)
-		return (ft_putstr_fd("exit: too many arguments\n", 2), 1);
+	if (check_exit_error(i, args, exec))
+		return (1);
 	if (i == 1)
 	{
 		free_env_lst(exec->env_lst);
 		free_lst_malloc(exec->mal_lst);
 		ft_putstr_fd("exit\n", 2);
 		exit(g_status);
-	}
-	i = 0;
-	while (args[1][i])
-	{
-		if (i == 0 && args[1][i] == '-')
-			i++;
-		if (!ft_isdigit(args[1][i]) || i > 18)
-		{
-			printf("exit: %s: numeric argument required\n", args[1]);
-			free_env_lst(exec->env_lst);
-			free_lst_malloc(exec->mal_lst);
-			exit(2);
-		}
-		i++;
 	}
 	exit_status = ft_atoi(args[1]) % 256;
 	free_env_lst(exec->env_lst);
@@ -76,12 +62,12 @@ int	ft_pwd(t_env_lst *env_lst)
 
 int	ft_echo(char **cmd, t_exec exec)
 {
-	int	i;
-	int	nl;
-	int j;
+	int		i;
+	char	*nl;
+	int 	j;
 
 	i = 1;
-	nl = 1;
+	nl = "\n";
 	while (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
 	{
 		j = 1;
@@ -89,7 +75,7 @@ int	ft_echo(char **cmd, t_exec exec)
 			j++;
 		if (!cmd[i][j])
 		{
-			nl = 0;
+			nl = "";
 			i++;
 		}
 		else
@@ -99,8 +85,7 @@ int	ft_echo(char **cmd, t_exec exec)
 		printf("%s", cmd[i++]);
 	while (cmd[i])
 		printf(" %s", cmd[i++]);
-	if (nl == 1)
-		printf("\n");
+	printf("%s", nl);
 	return (0);
 }
 

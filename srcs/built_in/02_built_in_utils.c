@@ -64,3 +64,26 @@ int	is_built_in_no_fork(char *command) // execute not in fork if no pipe
 		return (1);
 	return (0);
 }
+
+int	check_exit_error(int i, char **args, t_exec *exec)
+{
+	if (i == 1)
+		return (0);
+	if (i > 2)
+		return (ft_putstr_fd("exit: too many arguments\n", 2), 1);
+	i = 0;
+	while (args[1][i])
+	{
+		if (i == 0 && args[1][i] == '-')
+			i++;
+		if (!ft_isdigit(args[1][i]) || i > 18)
+		{
+			printf("exit: %s: numeric argument required\n", args[1]);
+			free_env_lst(exec->env_lst);
+			free_lst_malloc(exec->mal_lst);
+			exit(2);
+		}
+		i++;
+	}
+	return (0);
+}

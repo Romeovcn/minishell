@@ -44,6 +44,7 @@ int			ft_cd(char **path, t_env_lst **env_lst);
 int			is_built_in(char *command);
 int			is_built_in_no_fork(char *command);
 int			exec_built_in(t_exec *exec, int is_fork);
+int         check_exit_error(int i, char **args, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Env			 								  //
 //----------------------------------------------------------------------------//
