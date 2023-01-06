@@ -118,11 +118,11 @@ t_tok_lst	*get_token_lst(t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Token utils									  //
 //----------------------------------------------------------------------------//
-void		add_here_doc(t_tok_lst **tok, t_lex_lst **lex_lst, t_mal_lst **mal);
-void		add_redir_in(t_tok_lst **tok, t_lex_lst **lex_lst, t_mal_lst **mal);
-void		add_redir_out(t_tok_lst **tok, t_lex_lst **lex_ls, t_mal_lst **mal);
-void		add_app_out(t_tok_lst **tok, t_lex_lst **lex_lst, t_mal_lst **mal);
-void		add_word(t_tok_lst **tok, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
+void		add_here_doc(t_tok_lst **tok, t_lex_lst **lex_lst, t_exec *exec);
+void		add_redir_in(t_tok_lst **tok, t_lex_lst **lex_lst, t_exec *exec);
+void		add_redir_out(t_tok_lst **tok, t_lex_lst **lex_ls, t_exec *exec);
+void		add_app_out(t_tok_lst **tok, t_lex_lst **lex_lst, t_exec *exec);
+void		add_word(t_tok_lst **tok, t_lex_lst **lex_lst, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Token lst utils								  //
 //----------------------------------------------------------------------------//
