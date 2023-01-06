@@ -29,6 +29,22 @@ int check_empty_line(char *rl_str)
 	return (1);
 }
 
+void print_tok(t_tok_lst *token)
+{
+	printf("--------Command lst token--------\n");
+	while (token)
+	{
+		read_lst_array(token->args, "args");
+		printf("intput_fd: %d\n", token->input_fd);
+		read_lst_array(token->delimiter, "delimiter");
+		read_lst_array(token->in_file, "in_file");
+		printf("output_fd: %d\n", token->output_fd);
+		read_lst_array(token->out_file, "out_file");
+		printf("-----------------\n");
+		token = token->next;
+	}
+}
+
 int parser(t_exec *exec, char *readline_str)
 {
 	exec->mal_lst = NULL;
@@ -39,8 +55,9 @@ int parser(t_exec *exec, char *readline_str)
 		free(readline_str);
 		return (1);
 	}
-	expander(exec->lex_lst, &exec->mal_lst, exec->env_lst);
-	exec->tok_lst = get_token_lst(exec->lex_lst, &exec->mal_lst);
+	expander(exec);
+	exec->tok_lst = get_token_lst(exec);
+	print_tok(exec->tok_lst);
 	return (0);
 }
 

@@ -12,28 +12,21 @@
 
 #include "minishell.h"
 
-t_tok_lst	*get_token_lst(t_lex_lst *lex_lst, t_mal_lst **mal_lst)
+t_tok_lst	*get_token_lst(t_exec *exec)
 {
 	t_tok_lst	*token;
 	t_tok_lst	*head;
+	t_lex_lst *lex_lst = exec->lex_lst;
+	t_mal_lst **mal_lst = &exec->mal_lst;
 
 	token = NULL;
-	lstadd_back_token(&token, lstnew_token(mal_lst));
-	head = token;
-	// printf("--------Command lst token--------\n");
+	lstadd_back_token(&token, lstnew_token(exec));
 	head = token;
 	while (lex_lst)
 	{
 		if (lex_lst->operator == PIPE)
 		{
-			// read_lst_array(token->args, "args");
-			// printf("intput_fd: %d\n", token->input_fd);
-			// read_lst_array(token->delimiter, "delimiter");
-			// read_lst_array(token->in_file, "in_file");
-			// printf("output_fd: %d\n", token->output_fd);
-			// read_lst_array(token->out_file, "out_file");
-			// printf("-----------------\n");
-			lstadd_back_token(&token, lstnew_token(mal_lst));
+			lstadd_back_token(&token, lstnew_token(exec));
 			token = token->next;
 			lex_lst = lex_lst->next;
 		}
@@ -48,12 +41,5 @@ t_tok_lst	*get_token_lst(t_lex_lst *lex_lst, t_mal_lst **mal_lst)
 		else if (lex_lst->operator == WORD)
 			add_word(&token, &lex_lst, mal_lst);
 	}
-	// read_lst_array(token->args, "args");
-	// printf("intput_fd: %d\n", token->input_fd);
-	// read_lst_array(token->delimiter, "delimiter");
-	// read_lst_array(token->in_file, "in_file");
-	// printf("output_fd: %d\n", token->output_fd);
-	// read_lst_array(token->out_file, "out_file");
-	// printf("-----------------\n");
 	return (head);
 }

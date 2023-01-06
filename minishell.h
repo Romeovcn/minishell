@@ -21,7 +21,7 @@ extern int	g_status;
 //						 			Utils				 					  //
 //----------------------------------------------------------------------------//
 void		error_exit(t_mal_lst *mal_lst);
-char		*strjoin_char(char const *s1, char c, t_mal_lst **mal_lst);
+char		*strjoin_char(char const *s1, char c, t_exec *exec);
 char		**lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst);
 void		free_array(char **arr);
 void		free_exit(t_exec *exec, int exit);
@@ -97,7 +97,7 @@ int			check_error(t_lex_lst *lexed_list);
 //----------------------------------------------------------------------------//
 //							 	Expander									  //
 //----------------------------------------------------------------------------//
-void		expander(t_lex_lst *lex_lst, t_mal_lst **mal_ls, t_env_lst *env_ls);
+void		expander(t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Parser utils								  //
 //----------------------------------------------------------------------------//
@@ -114,7 +114,7 @@ void		free_lst_malloc(t_mal_lst *lst);
 //----------------------------------------------------------------------------//
 //							 	Token										  //
 //----------------------------------------------------------------------------//
-t_tok_lst	*get_token_lst(t_lex_lst *lexed_lst, t_mal_lst **mal_lst);
+t_tok_lst	*get_token_lst(t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Token utils									  //
 //----------------------------------------------------------------------------//
@@ -126,7 +126,7 @@ void		add_word(t_tok_lst **tok, t_lex_lst **lex_lst, t_mal_lst **mal_lst);
 //----------------------------------------------------------------------------//
 //							 	Token lst utils								  //
 //----------------------------------------------------------------------------//
-t_tok_lst	*lstnew_token(t_mal_lst **mal_lst);
+t_tok_lst	*lstnew_token(t_exec *exec);
 t_tok_lst	*lstlast_token(t_tok_lst *lst);
 void		lstadd_back_token(t_tok_lst **lst, t_tok_lst *new);
 void		read_lst_token(t_tok_lst *lst);
