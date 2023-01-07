@@ -22,12 +22,12 @@ static void	pipex_exec(t_exec *exec)
 	while (i < exec->nb_command)
 	{
 		if (pipe(exec->pipe_fd) == -1)
-			error_exit(exec);
+			free_exit(exec, 1, FALSE);
 		exec->pid[i] = fork();
 		if (exec->pid[i] < 0)
 		{
 			close_fds(2, exec->pipe_fd[0], exec->pipe_fd[1]);
-			free_exit(exec, 1);
+			free_exit(exec, 1, TRUE);
 		}
 		signal(SIGQUIT, sig_process);
 		signal(SIGINT, sig_process);
@@ -63,7 +63,7 @@ void	exec(t_exec *exec)
 	{
 		built_in_error_manage(exec);
 		close(exec->stdin_fd);
-		g_status = exec_built_in(exec, FALSE);
+		g_status = exec_built_in(exec);
 		return ;
 	}
 	if (exec->nb_command > 0)

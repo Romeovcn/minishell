@@ -43,7 +43,7 @@ void	lstadd_back_malloc(t_exec *exec, t_mal_lst *new)
 	t_mal_lst	*last;
 
 	if (!new)
-		error_exit(exec);
+		free_exit(exec, 1, FALSE);
 	if (exec->mal_lst)
 	{
 		last = lstlast_malloc(exec->mal_lst);

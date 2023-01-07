@@ -83,7 +83,7 @@ void	ft_null_access(char *path, char **split_path, t_exec *exec)
 {
 	path = NULL;
 	free_array(split_path);
-	free_exit(exec, 127);
+	free_exit(exec, 127, TRUE);
 }
 
 char	*ft_abs_path(char *cmd, t_exec *exec)
@@ -91,13 +91,13 @@ char	*ft_abs_path(char *cmd, t_exec *exec)
 	if ((cmd[0] == '/' || cmd[0] == '.') && access(cmd, F_OK) == 0)
 	{
 		if (is_directory(cmd) == 1)
-			free_exit(exec, 126);
+			free_exit(exec, 126, TRUE);
 		if (access(cmd, X_OK) == 0)
 			return (cmd);
 		if (access(cmd, X_OK) == -1)
-			free_exit(exec, 126);
+			free_exit(exec, 126, TRUE);
 	}
 	else if ((cmd[0] == '/' || cmd[0] == '.') && access(cmd, F_OK) == -1)
-		free_exit(exec, 127);
+		free_exit(exec, 127, TRUE);
 	return (NULL);
 }

@@ -20,12 +20,12 @@ char	*get_right_path(char *path, t_array_lst *cmd, t_exec *exec)
 	char	*tmp;
 
 	if (ft_strlen(cmd->content) == 0)
-		free_exit(exec, 127);
+		free_exit(exec, 127, TRUE);
 	res = ft_abs_path(cmd->content, exec);
 	if (res)
 		return (res);
 	if (!path)
-		free_exit(exec, 127);
+		free_exit(exec, 127, TRUE);
 	split_path = ft_split(path, ':');
 	i = 0;
 	while (split_path[i])

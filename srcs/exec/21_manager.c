@@ -24,7 +24,7 @@ void	command(t_exec *exec, int i)
 	if (exec->tok_lst->output_fd == 1 && i != exec->nb_command - 1)
 		dup2(exec->pipe_fd[1], STDOUT_FILENO);
 	if (is_built_in(args[0]))
-		exit(exec_built_in(exec, TRUE));
+		free_exit(exec, exec_built_in(exec), TRUE);
 	close_fds(2, exec->pipe_fd[0], exec->pipe_fd[1]);
 	execve(path, args, exec->envp);
 	exit(0);
@@ -38,7 +38,7 @@ void	exec_token(t_exec *exec, int i)
 	output_fd = exec->tok_lst->output_fd;
 	input_fd = exec->tok_lst->input_fd;
 	if (check_infile(exec->tok_lst, exec) || check_outfile(exec->tok_lst, exec))
-		free_exit(exec, g_status);
+		free_exit(exec, g_status, TRUE);
 	if (output_fd == REDIR_OUT)
 		redir_out(exec->tok_lst);
 	if (output_fd == APP_OUT)

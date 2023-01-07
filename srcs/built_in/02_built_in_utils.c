@@ -1,6 +1,8 @@
 #include "minishell.h"
 
-int exec_built_in(t_exec *exec, int is_fork)
+
+
+int exec_built_in(t_exec *exec)
 {
 	char **args;
 	int return_value;
@@ -21,14 +23,14 @@ int exec_built_in(t_exec *exec, int is_fork)
 		return_value = ft_pwd(exec->env_lst);
 	else if (ft_strmatch(args[0], "echo"))
 		return_value = ft_echo(args, *exec);
-	if (is_fork)
-	{
-		close(exec->pipe_fd[0]);
-		close(exec->pipe_fd[1]);
-		close(exec->stdin_fd);
-		free_lst_malloc(exec->mal_lst);
-		free_env_lst(exec->env_lst);
-	}
+	// if (is_fork)
+	// {
+	// 	close(exec->pipe_fd[0]);
+	// 	close(exec->pipe_fd[1]);
+	// 	close(exec->stdin_fd);
+	// 	free_lst_malloc(exec->mal_lst);
+	// 	free_env_lst(exec->env_lst);
+	// }
 	return (return_value);
 }
 

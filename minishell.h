@@ -20,11 +20,10 @@ extern int	g_status;
 //----------------------------------------------------------------------------//
 //						 			Utils				 					  //
 //----------------------------------------------------------------------------//
-void		error_exit(t_exec *exec);
 char		*strjoin_char(char const *s1, char c, t_exec *exec);
 char		**lst_to_str_array(t_array_lst *lst, t_exec *exec);
 void		free_array(char **arr);
-void		free_exit(t_exec *exec, int exit);
+void		free_exit(t_exec *exec, int exit, bool close_fd);
 //----------------------------------------------------------------------------//
 //							 	Check access			 					  //
 //----------------------------------------------------------------------------//
@@ -42,7 +41,7 @@ int			ft_cd(char **path, t_env_lst **env_lst);
 //----------------------------------------------------------------------------//
 int			is_built_in(char *command);
 int			is_built_in_no_fork(char *command);
-int			exec_built_in(t_exec *exec, int is_fork);
+int			exec_built_in(t_exec *exec);
 int         check_exit_error(int i, char **args, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Env			 								  //

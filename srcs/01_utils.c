@@ -12,13 +12,6 @@
 
 #include "minishell.h"
 
-void	error_exit(t_exec *exec)
-{
-	free_lst_malloc(exec->mal_lst);
-	free_env_lst(exec->env_lst);
-	exit (1);
-}
-
 char	*strjoin_char(char const *s1, char c, t_exec *exec)
 {
 	char	*result;
