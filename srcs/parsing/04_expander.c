@@ -28,14 +28,14 @@ void	expand_env(char **str, char **result, t_exec *exec)
 	if (ft_strmatch(env_name, "?"))
 	{
 		env_value = ft_itoa(g_status);
-		lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(env_value));
+		lstadd_back_malloc(exec, lstnew_malloc(env_value));
 	}
 	else
 		env_value = get_env_value(env_name, exec->env_lst);
 	if (ft_strlen(env_value) != 0)
 	{
 		*result = ft_strjoin(*result, env_value);
-		lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(*result));
+		lstadd_back_malloc(exec, lstnew_malloc(*result));
 	}
 	go_end_env_name(str);
 	free(env_name);

@@ -20,12 +20,11 @@ extern int	g_status;
 //----------------------------------------------------------------------------//
 //						 			Utils				 					  //
 //----------------------------------------------------------------------------//
-void		error_exit(t_mal_lst *mal_lst);
+void		error_exit(t_exec *exec);
 char		*strjoin_char(char const *s1, char c, t_exec *exec);
-char		**lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst);
+char		**lst_to_str_array(t_array_lst *lst, t_exec *exec);
 void		free_array(char **arr);
 void		free_exit(t_exec *exec, int exit);
-char		*ft_strjoin_mal(char const *s1, char const *s2, t_mal_lst **mal_ls);
 //----------------------------------------------------------------------------//
 //							 	Check access			 					  //
 //----------------------------------------------------------------------------//
@@ -85,8 +84,8 @@ void		go_to_word_end(char **readline_str);
 //----------------------------------------------------------------------------//
 //							 	Array lst utils								  //
 //----------------------------------------------------------------------------//
-t_array_lst	*lstnew_array(char *content, t_mal_lst **mal_lst);
-t_array_lst	*lstnew_array_content2(char *c, char *c2, t_mal_lst **mal_lst);
+t_array_lst	*lstnew_array(char *content, t_exec *exec);
+t_array_lst	*lstnew_array_content2(char *c, char *c2, t_exec *exec);
 t_array_lst	*lstlast_array(t_array_lst *lst);
 void		lstadd_back_array(t_array_lst **lst, t_array_lst *new);
 void		read_lst_array(t_array_lst *lst, char *type);
@@ -109,7 +108,7 @@ void		go_end_env_name(char **str);
 //----------------------------------------------------------------------------//
 t_mal_lst	*lstnew_malloc(void *adr);
 t_mal_lst	*lstlast_malloc(t_mal_lst *lst);
-void		lstadd_back_malloc(t_mal_lst **lst, t_mal_lst *new);
+void		lstadd_back_malloc(t_exec *exec, t_mal_lst *new);
 void		free_lst_malloc(t_mal_lst *lst);
 //----------------------------------------------------------------------------//
 //							 	Token										  //
@@ -153,7 +152,7 @@ void		here_doc_manage(t_exec *exec);
 //							 	Exec utils									  //
 //----------------------------------------------------------------------------//
 char		*ft_newstrjoin(char *s1, char *s2);
-void		close_fd(int fd1, int fd2);
+void		close_fds(int fd_nbr, ...);
 int			file_exist(char *file_name);
 int			file_exec(char *file_name);
 int			is_directory(char *path);
@@ -187,11 +186,5 @@ void		sig_process(int sig_num);
 // To do :
 // Protect malloc
 // Norm
-// echo -n -n -n hello
 // check unset error
-// cd into dir, delete dir ..
-// export salut=ok >'c'
-//< srcs cat > out2
-// export USER=OKOKOKOKOK >> out1 doesnt dsplay out1 perm denied
-// exit if heredoc file open == -1
 #endif

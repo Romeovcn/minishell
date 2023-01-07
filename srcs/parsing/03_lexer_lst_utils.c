@@ -16,9 +16,9 @@ t_lex_lst	*lstnew_lex(char *content, int operator, t_exec *exec)
 {
 	t_lex_lst	*result;
 
-	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(content));
+	lstadd_back_malloc(exec, lstnew_malloc(content));
 	result = malloc(sizeof(t_lex_lst));
-	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(result));
+	lstadd_back_malloc(exec, lstnew_malloc(result));
 	result->content = content;
 	result->operator = operator;
 	result->next = NULL;

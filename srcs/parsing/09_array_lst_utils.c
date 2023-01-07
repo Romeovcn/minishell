@@ -12,18 +12,18 @@
 
 #include "minishell.h"
 
-t_array_lst	*lstnew_array(char *content, t_mal_lst **mal_lst)
+t_array_lst	*lstnew_array(char *content, t_exec *exec)
 {
 	t_array_lst	*result;
 
 	result = malloc(sizeof(t_array_lst));
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
+	lstadd_back_malloc(exec, lstnew_malloc(result));
 	result->content = content;
 	result->next = NULL;
 	return (result);
 }
 
-t_array_lst	*lstnew_array_content2(char *c, char *c2, t_mal_lst **mal_lst)
+t_array_lst	*lstnew_array_content2(char *c, char *c2, t_exec *exec)
 {
 	t_array_lst	*result;
 
@@ -33,7 +33,7 @@ t_array_lst	*lstnew_array_content2(char *c, char *c2, t_mal_lst **mal_lst)
 	result->content = c;
 	result->content2 = c2;
 	result->next = NULL;
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
+	lstadd_back_malloc(exec, lstnew_malloc(result));
 	return (result);
 }
 

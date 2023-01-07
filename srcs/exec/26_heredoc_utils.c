@@ -29,19 +29,19 @@ int	check_heredoc(t_exec *exec)
 	return (0);
 }
 
-static char	*get_heredoc_name(int i, t_mal_lst **mal_lst)
+static char	*get_heredoc_name(int i, t_exec *exec)
 {
 	char	*heredoc_name;
 	char	*index;
 
 	index = ft_itoa(i);
 	heredoc_name = ft_strjoin(".heredoc", index);
-	lstadd_back_malloc(mal_lst, lstnew_malloc(heredoc_name));
+	lstadd_back_malloc(exec, lstnew_malloc(heredoc_name));
 	free(index);
 	return (heredoc_name);
 }
 
-static void	get_here_doc_file(char *del, char *name_file, t_mal_lst **mal_lst)
+static void	get_here_doc_file(char *del, char *name_file, t_exec *exec)
 {
 	char	*line;
 	int		len;
@@ -51,7 +51,7 @@ static void	get_here_doc_file(char *del, char *name_file, t_mal_lst **mal_lst)
 	if (here_doc_fd == -1)
 		return ((void)perror(name_file));
 	del = ft_strjoin(del, "\n");
-	lstadd_back_malloc(mal_lst, lstnew_malloc(del));
+	lstadd_back_malloc(exec, lstnew_malloc(del));
 	while (1)
 	{
 		write(1, "> ", 2);
@@ -82,9 +82,9 @@ void	here_doc_manage(t_exec *exec)
 		del_head = exec->tok_lst->delimiter;
 		while (exec->tok_lst->delimiter)
 		{
-			here_doc_name = get_heredoc_name(i, &exec->mal_lst);
+			here_doc_name = get_heredoc_name(i, exec);
 			get_here_doc_file(exec->tok_lst->delimiter->content,
-				here_doc_name, &exec->mal_lst);
+				here_doc_name, exec);
 			exec->tok_lst->delimiter->content2 = here_doc_name;
 			exec->tok_lst->delimiter = exec->tok_lst->delimiter->next;
 			i++;

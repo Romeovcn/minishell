@@ -21,10 +21,19 @@ char	*ft_newstrjoin(char *s1, char *s2)
 	return (newstr);
 }
 
-void	close_fd(int fd1, int fd2)
+void	close_fds(int fd_nbr, ...)
 {
-	close(fd1);
-	close(fd2);
+	va_list	args;
+	int next_fd;
+
+	va_start(args, fd_nbr);
+	next_fd = va_arg(args, int);
+	while (fd_nbr)
+	{
+		close(next_fd);
+		next_fd = va_arg(args, int);
+		fd_nbr--;
+	}
 }
 
 int	file_exist(char *file_name)

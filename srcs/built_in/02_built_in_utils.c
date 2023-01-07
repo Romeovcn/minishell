@@ -6,7 +6,7 @@ int exec_built_in(t_exec *exec, int is_fork)
 	int return_value;
 
 	return_value = 0;
-	args = lst_to_str_array(exec->tok_lst->args, &exec->mal_lst);
+	args = lst_to_str_array(exec->tok_lst->args, exec);
 	if (ft_strmatch(args[0], "exit"))
 		return_value = ft_exit(args, exec);
 	else if (ft_strmatch(args[0], "export"))

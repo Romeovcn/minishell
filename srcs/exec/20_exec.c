@@ -22,11 +22,11 @@ static void	pipex_exec(t_exec *exec)
 	while (i < exec->nb_command)
 	{
 		if (pipe(exec->pipe_fd) == -1)
-			return ;
+			error_exit(exec);
 		exec->pid[i] = fork();
 		if (exec->pid[i] < 0)
 		{
-			close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
+			close_fds(2, exec->pipe_fd[0], exec->pipe_fd[1]);
 			free_exit(exec, 1);
 		}
 		signal(SIGQUIT, sig_process);
@@ -34,7 +34,7 @@ static void	pipex_exec(t_exec *exec)
 		if (exec->pid[i] == 0)
 			exec_token(exec, i);
 		dup2(exec->pipe_fd[0], STDIN_FILENO);
-		close_fd(exec->pipe_fd[0], exec->pipe_fd[1]);
+		close_fds(2, exec->pipe_fd[0], exec->pipe_fd[1]);
 		i++;
 		exec->tok_lst = exec->tok_lst->next;
 	}
@@ -45,9 +45,7 @@ void	init_exec(t_exec *exec)
 {
 	exec->nb_command = ft_lstsize_token(exec->tok_lst);
 	exec->pid = malloc(exec->nb_command * sizeof(pid_t));
-	if (!exec->pid)
-		exit(1);
-	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(exec->pid));
+	lstadd_back_malloc(exec, lstnew_malloc(exec->pid));
 	exec->here_doc_lst = NULL;
 }
 

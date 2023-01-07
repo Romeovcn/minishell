@@ -14,7 +14,6 @@
 # define FT_PRINTF_H
 
 # include "libft.h"
-# include <stdarg.h>
 
 int	ft_putnbr_hexa(long nbr, int upper);
 int	ft_putnbr_u(unsigned int nb);

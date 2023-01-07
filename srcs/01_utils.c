@@ -12,9 +12,10 @@
 
 #include "minishell.h"
 
-void	error_exit(t_mal_lst *mal_lst)
+void	error_exit(t_exec *exec)
 {
-	free_lst_malloc(mal_lst);
+	free_lst_malloc(exec->mal_lst);
+	free_env_lst(exec->env_lst);
 	exit (1);
 }
 
@@ -27,7 +28,7 @@ char	*strjoin_char(char const *s1, char c, t_exec *exec)
 	i = 0;
 	j = 0;
 	result = malloc((ft_strlen(s1) + 1 + 1) * sizeof(char));
-	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(result));
+	lstadd_back_malloc(exec, lstnew_malloc(result));
 	while (s1[i])
 		result[j++] = s1[i++];
 	i = 0;
@@ -36,7 +37,7 @@ char	*strjoin_char(char const *s1, char c, t_exec *exec)
 	return (result);
 }
 
-char **lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst)
+char **lst_to_str_array(t_array_lst *lst, t_exec *exec)
 {
 	char 		**result;
 	t_array_lst *head;
@@ -50,9 +51,7 @@ char **lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst)
 		lst = lst->next;
 	}
 	result = malloc((i + 1) * sizeof(char *));
-	if (!result)
-		error_exit(*mal_lst);
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
+	lstadd_back_malloc(exec, lstnew_malloc(result));
 	i = 0;
 	while (head)
 	{
@@ -61,26 +60,5 @@ char **lst_to_str_array(t_array_lst *lst, t_mal_lst **mal_lst)
 		head = head->next;
 	}
 	result[i] = 0;
-	return (result);
-}
-
-char	*ft_strjoin_mal(char const *s1, char const *s2, t_mal_lst **mal_lst)
-{
-	char	*result;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	result = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!result)
-		return (NULL);
-	lstadd_back_malloc(mal_lst, lstnew_malloc(result));
-	while (s1[i])
-		result[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		result[j++] = s2[i++];
-	result[j] = 0;
 	return (result);
 }

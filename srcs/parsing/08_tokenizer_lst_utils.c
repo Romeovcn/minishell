@@ -17,7 +17,7 @@ t_tok_lst	*lstnew_token(t_exec *exec)
 	t_tok_lst	*result;
 
 	result = malloc(sizeof(t_tok_lst));
-	lstadd_back_malloc(&exec->mal_lst, lstnew_malloc(result));
+	lstadd_back_malloc(exec, lstnew_malloc(result));
 	result->args = NULL;
 	result->input_fd = 0;
 	result->in_file = NULL;

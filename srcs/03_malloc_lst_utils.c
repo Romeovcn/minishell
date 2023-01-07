@@ -17,7 +17,7 @@ t_mal_lst	*lstnew_malloc(void *adr)
 	t_mal_lst	*result;
 
 	if (!adr)
-		return NULL;
+		return (NULL);
 	result = malloc(sizeof(t_mal_lst));
 	if (!result)
 		return (NULL);
@@ -38,22 +38,19 @@ t_mal_lst	*lstlast_malloc(t_mal_lst *lst)
 	return (head);
 }
 
-void	lstadd_back_malloc(t_mal_lst **lst, t_mal_lst *new)
+void	lstadd_back_malloc(t_exec *exec, t_mal_lst *new)
 {
 	t_mal_lst	*last;
 
 	if (!new)
+		error_exit(exec);
+	if (exec->mal_lst)
 	{
-		// free all !!!!
-		exit(1);
-	}
-	if (*lst)
-	{
-		last = lstlast_malloc(*lst);
+		last = lstlast_malloc(exec->mal_lst);
 		last->next = new;
 	}
 	else
-		*lst = new;
+		exec->mal_lst = new;
 }
 
 void	free_lst_malloc(t_mal_lst *lst)
