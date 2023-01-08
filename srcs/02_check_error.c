@@ -75,8 +75,8 @@ int	check_error(t_lex_lst *lexed_list)
 {
 	if (lexed_list->operator == PIPE)
 	{
-		g_status = 2;
-		return (ft_putstr_fd("bash: syntax error near unexpected token `|'\n", 2), 1);
+		ft_putstr_fd("bash: syntax error near unexpected token `|'\n", 2);
+		return (g_status = 2, 1);
 	}
 	while (lexed_list)
 	{
