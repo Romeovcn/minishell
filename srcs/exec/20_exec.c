@@ -25,10 +25,7 @@ static void	pipex_exec(t_exec *exec)
 			free_exit(exec, 1, FALSE);
 		exec->pid[i] = fork();
 		if (exec->pid[i] < 0)
-		{
-			close_fds(2, exec->pipe_fd[0], exec->pipe_fd[1]);
 			free_exit(exec, 1, TRUE);
-		}
 		signal(SIGQUIT, sig_process);
 		signal(SIGINT, sig_process);
 		if (exec->pid[i] == 0)

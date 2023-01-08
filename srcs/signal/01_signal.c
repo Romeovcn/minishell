@@ -49,9 +49,9 @@ static void	handle_signal_hd(int signal, siginfo_t *info, void *context)
 		ft_putstr_fd("\b\b  \b\b", 0);
 }
 
-void	signal_manager_hd()
+void	signal_manager_hd(void)
 {
-	struct sigaction s_sig;
+	struct sigaction	s_sig;
 
 	s_sig.sa_sigaction = handle_signal_hd;
 	s_sig.sa_flags = SA_SIGINFO;

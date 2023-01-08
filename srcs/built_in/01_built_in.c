@@ -64,7 +64,7 @@ int	ft_echo(char **cmd, t_exec exec)
 {
 	int		i;
 	char	*nl;
-	int 	j;
+	int		j;
 
 	i = 1;
 	nl = "\n";
@@ -79,7 +79,7 @@ int	ft_echo(char **cmd, t_exec exec)
 			i++;
 		}
 		else
-			break;
+			break ;
 	}
 	if (cmd[i])
 		printf("%s", cmd[i++]);

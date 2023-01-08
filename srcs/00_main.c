@@ -49,6 +49,8 @@ int parser(t_exec *exec, char *readline_str)
 {
 	exec->mal_lst = NULL;
 	exec->lex_lst = lexer(readline_str, exec);
+	// printf("--------Command lst lexed--------\n");
+	// read_lst(exec->lex_lst);
 	if (check_error(exec->lex_lst))
 	{
 		free_lst_malloc(exec->mal_lst);
@@ -56,6 +58,8 @@ int parser(t_exec *exec, char *readline_str)
 		return (1);
 	}
 	expander(exec);
+	// printf("--------Command lst lexed after parsing--------\n");
+	// read_lst(exec->lex_lst);
 	exec->tok_lst = get_token_lst(exec);
 	// print_tok(exec->tok_lst);
 	return (0);

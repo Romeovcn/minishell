@@ -45,22 +45,18 @@ char	*expand_quote_env(char *str, t_exec *exec)
 {
 	char	quote_type;
 	char	*result;
-	int		quote;
 
-	quote = 0;
 	result = "";
 	quote_type = 0;
 	while (*str)
 	{
-		if ((*str == '\'' || *str == '\"') && quote == 0)
+		if ((*str == '\'' || *str == '\"') && quote_type == 0)
 		{
-			quote++;
 			quote_type = *str;
 			str++;
 		}
-		else if (*str == quote_type && quote == 1)
+		else if (*str == quote_type && quote_type != 0)
 		{
-			quote = 0;
 			quote_type = 0;
 			str++;
 		}
@@ -74,12 +70,9 @@ char	*expand_quote_env(char *str, t_exec *exec)
 
 void	expander(t_exec *exec)
 {
-	t_lex_lst	*head;
-	t_lex_lst *lex_lst = exec->lex_lst;
-	t_mal_lst **mal_lst = &exec->mal_lst;
-	t_env_lst *env_lst = exec->env_lst;
+	t_lex_lst	*lex_lst;
 
-	head = lex_lst;
+	lex_lst = exec->lex_lst;
 	while (lex_lst)
 	{
 		if (lex_lst->operator == HERE_DOC)
@@ -88,6 +81,4 @@ void	expander(t_exec *exec)
 			lex_lst->content = expand_quote_env(lex_lst->content, exec);
 		lex_lst = lex_lst->next;
 	}
-	// printf("--------Command lst lexed after parsing--------\n");
-	// read_lst(head);
 }

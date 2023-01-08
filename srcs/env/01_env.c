@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-int check_env_name(char *env_name)
+int	check_env_name(char *env_name)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (env_name[i] && !ft_isalpha(env_name[i]) && env_name[i] != '_')
@@ -29,18 +29,14 @@ int check_env_name(char *env_name)
 	return (0);
 }
 
-char *get_env_str_value(char *env)
+char	*get_env_str_value(char *env)
 {
 	char	*value;
 	int		i;
 
 	i = 0;
-	while (*env)
-	{
-		if (*env == '=')
-			break ;
+	while (*env && *env != '=')
 		env++;
-	}
 	if (*env != '=')
 		return (NULL);
 	env++;
@@ -48,7 +44,7 @@ char *get_env_str_value(char *env)
 		i++;
 	value = malloc((i + 1) * sizeof(char));
 	if (!value)
-		exit(1);
+		return (NULL);
 	i = 0;
 	while (env[i])
 	{
@@ -59,9 +55,9 @@ char *get_env_str_value(char *env)
 	return (value);
 }
 
-int is_concatenate(char *env)
+int	is_concatenate(char *env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (env[i])
@@ -87,7 +83,6 @@ int	export_env(t_exec *exec, t_mal_lst **mal_lst, char **args)
 		name = get_env_name(args[i]);
 		if (!name || check_env_name(name))
 		{
-			// printf("export: '%s': not a valid identifier\n", args[i]);
 			ft_putstr_fd("export: '", 2);
 			ft_putstr_fd(args[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
@@ -105,10 +100,10 @@ int	export_env(t_exec *exec, t_mal_lst **mal_lst, char **args)
 			env_value = ft_newstrjoin(get_env_value(name, exec->env_lst), env_value);
 		change_env_value(name, env_value, &exec->env_lst);
 	}
-	return(return_value);
+	return (return_value);
 }
 
-int	unset_env(t_env_lst **env_lst, char **args) //  manage error
+int	unset_env(t_env_lst **env_lst, char **args)
 {
 	t_env_lst	*tmp_previous;
 	t_env_lst	*env_head;

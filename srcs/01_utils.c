@@ -30,11 +30,11 @@ char	*strjoin_char(char const *s1, char c, t_exec *exec)
 	return (result);
 }
 
-char **lst_to_str_array(t_array_lst *lst, t_exec *exec)
+char	**lst_to_str_array(t_array_lst *lst, t_exec *exec)
 {
-	char 		**result;
-	t_array_lst *head;
-	int 		i;
+	char		**result;
+	t_array_lst	*head;
+	int			i;
 
 	i = 0;
 	head = lst;

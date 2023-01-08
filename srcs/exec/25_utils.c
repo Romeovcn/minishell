@@ -24,7 +24,7 @@ char	*ft_newstrjoin(char *s1, char *s2)
 void	close_fds(int fd_nbr, ...)
 {
 	va_list	args;
-	int next_fd;
+	int		next_fd;
 
 	va_start(args, fd_nbr);
 	next_fd = va_arg(args, int);

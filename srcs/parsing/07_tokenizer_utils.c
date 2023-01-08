@@ -12,40 +12,57 @@
 
 #include "minishell.h"
 
-void add_here_doc(t_tok_lst **token, t_lex_lst **lex_lst, t_exec *exec)
+void	add_here_doc(t_tok_lst **token, t_lex_lst **lex_lst, t_exec *exec)
 {
+	t_array_lst	*new_array;
+
 	(*token)->input_fd = HERE_DOC;
 	*lex_lst = (*lex_lst)->next;
-	lstadd_back_array(&(*token)->delimiter, lstnew_array((*lex_lst)->content, exec));
+	new_array = lstnew_array((*lex_lst)->content, exec);
+	lstadd_back_array(&(*token)->delimiter, new_array);
 	*lex_lst = (*lex_lst)->next;
 }
 
-void add_redir_in(t_tok_lst **token, t_lex_lst **lex_lst, t_exec *exec)
+void	add_redir_in(t_tok_lst **token, t_lex_lst **lex_lst, t_exec *exec)
 {
+	t_array_lst	*new_array;
+
 	(*token)->input_fd = REDIR_IN;
 	*lex_lst = (*lex_lst)->next;
-	lstadd_back_array(&(*token)->in_file, lstnew_array((*lex_lst)->content, exec));
+	new_array = lstnew_array((*lex_lst)->content, exec);
+	lstadd_back_array(&(*token)->in_file, new_array);
 	*lex_lst = (*lex_lst)->next;
 }
 
-void add_redir_out(t_tok_lst **token, t_lex_lst **lex_lst, t_exec *exec)
+void	add_redir_out(t_tok_lst **token, t_lex_lst **lex_lst, t_exec *exec)
 {
+	t_array_lst	*new_array;
+
 	(*token)->output_fd = REDIR_OUT;
 	*lex_lst = (*lex_lst)->next;
-	lstadd_back_array(&(*token)->out_file, lstnew_array_content2((*lex_lst)->content, "O_TRUNC", exec));
+	new_array = lstnew_array((*lex_lst)->content, exec);
+	new_array->content2 = "O_TRUNC";
+	lstadd_back_array(&(*token)->out_file, new_array);
 	*lex_lst = (*lex_lst)->next;
 }
 
-void add_app_out(t_tok_lst **token, t_lex_lst **lex_lst, t_exec *exec)
+void	add_app_out(t_tok_lst **token, t_lex_lst **lex_lst, t_exec *exec)
 {
+	t_array_lst	*new_array;
+
 	(*token)->output_fd = APP_OUT;
 	*lex_lst = (*lex_lst)->next;
-	lstadd_back_array(&(*token)->out_file, lstnew_array_content2((*lex_lst)->content, "O_APPEND", exec));
+	new_array = lstnew_array((*lex_lst)->content, exec);
+	new_array->content2 = "O_APPEND";
+	lstadd_back_array(&(*token)->out_file, new_array);
 	*lex_lst = (*lex_lst)->next;
 }
 
-void add_word(t_tok_lst **token, t_lex_lst **lex_lst, t_exec *exec)
+void	add_word(t_tok_lst **token, t_lex_lst **lex_lst, t_exec *exec)
 {
-	lstadd_back_array(&(*token)->args, lstnew_array((*lex_lst)->content, exec));
+	t_array_lst	*new_array;
+
+	new_array = lstnew_array((*lex_lst)->content, exec);
+	lstadd_back_array(&(*token)->args, new_array);
 	*lex_lst = (*lex_lst)->next;
 }

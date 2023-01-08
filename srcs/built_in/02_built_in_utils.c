@@ -1,11 +1,9 @@
 #include "minishell.h"
 
-
-
-int exec_built_in(t_exec *exec)
+int	exec_built_in(t_exec *exec)
 {
-	char **args;
-	int return_value;
+	char	**args;
+	int		return_value;
 
 	return_value = 0;
 	args = lst_to_str_array(exec->tok_lst->args, exec);
@@ -23,14 +21,6 @@ int exec_built_in(t_exec *exec)
 		return_value = ft_pwd(exec->env_lst);
 	else if (ft_strmatch(args[0], "echo"))
 		return_value = ft_echo(args, *exec);
-	// if (is_fork)
-	// {
-	// 	close(exec->pipe_fd[0]);
-	// 	close(exec->pipe_fd[1]);
-	// 	close(exec->stdin_fd);
-	// 	free_lst_malloc(exec->mal_lst);
-	// 	free_env_lst(exec->env_lst);
-	// }
 	return (return_value);
 }
 
@@ -53,7 +43,7 @@ int	is_built_in(char *command)
 	return (0);
 }
 
-int	is_built_in_no_fork(char *command) // execute not in fork if no pipe
+int	is_built_in_no_fork(char *command)
 {
 	if (ft_strmatch(command, "exit"))
 		return (1);

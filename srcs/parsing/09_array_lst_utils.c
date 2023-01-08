@@ -19,21 +19,8 @@ t_array_lst	*lstnew_array(char *content, t_exec *exec)
 	result = malloc(sizeof(t_array_lst));
 	lstadd_back_malloc(exec, lstnew_malloc(result));
 	result->content = content;
+	result->content2 = NULL;
 	result->next = NULL;
-	return (result);
-}
-
-t_array_lst	*lstnew_array_content2(char *c, char *c2, t_exec *exec)
-{
-	t_array_lst	*result;
-
-	result = malloc(sizeof(t_array_lst));
-	if (!result)
-		exit(1);
-	result->content = c;
-	result->content2 = c2;
-	result->next = NULL;
-	lstadd_back_malloc(exec, lstnew_malloc(result));
 	return (result);
 }
 
@@ -64,7 +51,7 @@ void	lstadd_back_array(t_array_lst **lst, t_array_lst *new)
 
 void	read_lst_array(t_array_lst *lst, char *type)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	printf("%s:", type);

@@ -34,7 +34,7 @@ int	check_not_closed_string(char *str)
 		str++;
 	}
 	if (quote != 0)
-		return (ft_putstr_fd("bash: syntax error: not closed quote ici\n", 2), 1);
+		return (ft_putstr_fd("bash: syntax error: not closed quote\n", 2), 1);
 	return (0);
 }
 
@@ -59,7 +59,10 @@ int	check_pipe(t_lex_lst *lexed_list)
 int	check_error(t_lex_lst *lexed_list)
 {
 	if (lexed_list->operator == PIPE)
-		return (ft_putstr_fd("bash: syntax error near unexpected token `|'\n", 2), g_status = 2, 2);
+	{
+		g_status = 2;
+		return (ft_putstr_fd("bash: syntax error near unexpected token `|'\n", 2), 2);
+	}
 	while (lexed_list)
 	{
 		if (lexed_list->operator == PIPE)

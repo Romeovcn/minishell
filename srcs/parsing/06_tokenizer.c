@@ -12,6 +12,12 @@
 
 #include "minishell.h"
 
+void	add_token(t_tok_lst	**token_head, t_tok_lst	**token_new, t_exec *exec)
+{
+	lstadd_back_token(token_head, *token_new);
+	*token_new = lstnew_token(exec);
+}
+
 t_tok_lst	*get_token_lst(t_exec *exec)
 {
 	t_tok_lst	*token_head;
@@ -23,8 +29,7 @@ t_tok_lst	*get_token_lst(t_exec *exec)
 	{
 		if (exec->lex_lst->operator == PIPE)
 		{
-			lstadd_back_token(&token_head, token_new);
-			token_new = lstnew_token(exec);
+			add_token(&token_head, &token_new, exec);
 			exec->lex_lst = exec->lex_lst->next;
 		}
 		else if (exec->lex_lst->operator == HERE_DOC)
