@@ -18,7 +18,7 @@ int	exec_built_in(t_exec *exec)
 	else if (ft_strmatch(args[0], "cd"))
 		return_value = ft_cd(args, exec);
 	else if (ft_strmatch(args[0], "pwd"))
-		return_value = ft_pwd(exec->env_lst);
+		return_value = ft_pwd(exec);
 	else if (ft_strmatch(args[0], "echo"))
 		return_value = ft_echo(args, *exec);
 	return (return_value);

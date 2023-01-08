@@ -31,7 +31,7 @@ char		**get_paths(char **env);
 //----------------------------------------------------------------------------//
 //							 	Built-in			 						  //
 //----------------------------------------------------------------------------//
-int			ft_pwd(t_env_lst *env_lst);
+int			ft_pwd(t_exec *exec);
 int			ft_exit(char **args, t_exec *exec);
 int			ft_echo(char **cmd, t_exec exec);
 int			ft_cd(char **path, t_exec *exec);
