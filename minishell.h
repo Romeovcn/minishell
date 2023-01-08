@@ -31,11 +31,10 @@ char		**get_paths(char **env);
 //----------------------------------------------------------------------------//
 //							 	Built-in			 						  //
 //----------------------------------------------------------------------------//
-int			ft_env(char **args, t_env_lst *env_lst);
 int			ft_pwd(t_env_lst *env_lst);
 int			ft_exit(char **args, t_exec *exec);
 int			ft_echo(char **cmd, t_exec exec);
-int			ft_cd(char **path, t_env_lst **env_lst);
+int			ft_cd(char **path, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Built-in utils		 						  //
 //----------------------------------------------------------------------------//
@@ -44,17 +43,23 @@ int			is_built_in_no_fork(char *command);
 int			exec_built_in(t_exec *exec);
 int         check_exit_error(int i, char **args, t_exec *exec);
 //----------------------------------------------------------------------------//
-//							 	Env			 								  //
+//							 	Env	built-in	 							  //
 //----------------------------------------------------------------------------//
-int			export_env(t_exec *exec, t_mal_lst **mal_lst, char **args);
-int			unset_env(t_env_lst **env_lst, char **args);
+int			ft_env(char **args, t_env_lst *env_lst);
+int			ft_export(t_exec *exec, char **args);
+int			ft_unset(t_env_lst **env_lst, char **args);
+//----------------------------------------------------------------------------//
+//							 	Env built-in utils		 					  //
+//----------------------------------------------------------------------------//
+int         export_env(char *arg, t_exec *exec);
+void        unset_env(char *arg, t_env_lst **env_lst);
 //----------------------------------------------------------------------------//
 //							 	Env utils		 							  //
 //----------------------------------------------------------------------------//
 char		*get_env_name(char *env);
 t_env_lst	*get_env_lst(char **env);
-void		change_env_value(char *name, char *new_value, t_env_lst **env_lst);
-char		*get_env_value(char *name, t_env_lst *env_lst);
+void		change_env_value(char *name, char *new_value, t_exec *exec);
+char		*get_env_value(char *name, t_exec *exec);
 void		free_env_lst(t_env_lst *env_lst);
 //----------------------------------------------------------------------------//
 //							 	Env lst			 							  //

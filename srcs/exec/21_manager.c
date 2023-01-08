@@ -19,7 +19,7 @@ void	command(t_exec *exec, int i)
 
 	args = lst_to_str_array(exec->tok_lst->args, exec);
 	if (!is_built_in(args[0]))
-		path = get_right_path(get_env_value("PATH", exec->env_lst),
+		path = get_right_path(get_env_value("PATH", exec),
 				exec->tok_lst->args, exec);
 	if (is_built_in(args[0]))
 		free_exit(exec, exec_built_in(exec), TRUE);

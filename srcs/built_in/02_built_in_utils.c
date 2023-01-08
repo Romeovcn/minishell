@@ -10,13 +10,13 @@ int	exec_built_in(t_exec *exec)
 	if (ft_strmatch(args[0], "exit"))
 		return_value = ft_exit(args, exec);
 	else if (ft_strmatch(args[0], "export"))
-		return_value = export_env(exec, &exec->mal_lst, args);
+		return_value = ft_export(exec, args);
 	else if (ft_strmatch(args[0], "unset"))
-		return_value = unset_env(&exec->env_lst, args);
+		return_value = ft_unset(&exec->env_lst, args);
 	else if (ft_strmatch(args[0], "env"))
 		return_value = ft_env(args, exec->env_lst);
 	else if (ft_strmatch(args[0], "cd"))
-		return_value = ft_cd(args, &exec->env_lst);
+		return_value = ft_cd(args, exec);
 	else if (ft_strmatch(args[0], "pwd"))
 		return_value = ft_pwd(exec->env_lst);
 	else if (ft_strmatch(args[0], "echo"))

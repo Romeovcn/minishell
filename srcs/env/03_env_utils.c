@@ -12,14 +12,11 @@
 
 #include "minishell.h"
 
-char	*get_env_name(char *env, t_exec *exec)
+int	get_env_name_size(char *env)
 {
-	int		i;
-	char	*name;
+	int	i;
 
 	i = 0;
-	if (env[0] == '=')
-		return (NULL);
 	while (env[i])
 	{
 		if (env[i] == '=')
@@ -28,6 +25,17 @@ char	*get_env_name(char *env, t_exec *exec)
 	}
 	if (env[i - 1] == '+')
 		i--;
+	return (i);
+}
+
+char	*get_env_name(char *env)
+{
+	int		i;
+	char	*name;
+
+	if (env[0] == '=')
+		return (NULL);
+	i = get_env_name_size(env);
 	name = malloc((i + 1) * sizeof(char));
 	if (!name)
 		return (NULL);
@@ -48,7 +56,7 @@ char	*get_env_name(char *env, t_exec *exec)
 	return (name);
 }
 
-t_env_lst	*get_env_lst(char **env, t_exec *exec)
+t_env_lst	*get_env_lst(char **env)
 {
 	t_env_lst	*env_lst;
 	char		*value;
@@ -59,19 +67,19 @@ t_env_lst	*get_env_lst(char **env, t_exec *exec)
 	env_lst = NULL;
 	while (env[i])
 	{
-		name = get_env_name(env[i], exec);
+		name = get_env_name(env[i]);
 		value = ft_strdup(getenv(name));
-		lstadd_back_env(&env_lst, lstnew_env(name, value, exec));
+		lstadd_back_env(&env_lst, lstnew_env(name, value));
 		i++;
 	}
 	return (env_lst);
 }
 
-void	change_env_value(char *name, char *new_value, t_env_lst *env_lst)
+void	change_env_value(char *name, char *new_value, t_exec *exec)
 {
 	t_env_lst	*tmp;
 
-	tmp = *lst_head;
+	tmp = exec->env_lst;
 	while (tmp)
 	{
 		if (ft_strmatch(tmp->name, name))
@@ -83,11 +91,14 @@ void	change_env_value(char *name, char *new_value, t_env_lst *env_lst)
 		}
 		tmp = tmp->next;
 	}
-	lstadd_back_env(&exec->env_lst, lstnew_env(name, new_value, exec));
+	lstadd_back_env(&exec->env_lst, lstnew_env(name, new_value));
 }
 
-char	*get_env_value(char *name, t_env_lst *env_lst)
+char	*get_env_value(char *name, t_exec *exec)
 {
+	t_env_lst	*env_lst;
+
+	env_lst = exec->env_lst;
 	while (env_lst)
 	{
 		if (ft_strmatch(name, env_lst->name))
@@ -95,18 +106,4 @@ char	*get_env_value(char *name, t_env_lst *env_lst)
 		env_lst = env_lst->next;
 	}
 	return ("");
-}
-
-void	free_env_lst(t_env_lst *env_lst)
-{
-	t_env_lst	*tmp;
-
-	while (env_lst)
-	{
-		tmp = env_lst->next;
-		free(env_lst->name);
-		free(env_lst->value);
-		free(env_lst);
-		env_lst = tmp;
-	}
 }

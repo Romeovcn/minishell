@@ -31,7 +31,7 @@ void	expand_env(char **str, char **result, t_exec *exec)
 		lstadd_back_malloc(exec, lstnew_malloc(env_value));
 	}
 	else
-		env_value = get_env_value(env_name, exec->env_lst);
+		env_value = get_env_value(env_name, exec);
 	if (ft_strlen(env_value) != 0)
 	{
 		*result = ft_strjoin(*result, env_value);

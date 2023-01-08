@@ -12,21 +12,6 @@
 
 #include "minishell.h"
 
-int	ft_env(char **args, t_env_lst *env_lst)
-{
-	if (args[1])
-	{
-		ft_putstr_fd("env: too many arguments\n", 2);
-		return (1);
-	}
-	while (env_lst)
-	{
-		printf("%s=%s\n", env_lst->name, env_lst->value);
-		env_lst = env_lst->next;
-	}
-	return (0);
-}
-
 int	ft_exit(char **args, t_exec *exec)
 {
 	int	exit_status;
@@ -51,7 +36,7 @@ int	ft_exit(char **args, t_exec *exec)
 	return (0);
 }
 
-int	ft_pwd(t_env_lst *env_lst)
+int	ft_pwd(t_env_lst *env_lst) // add branch malloc version
 {
 	char	*pwd_path;
 	char	buff[PATH_MAX];
@@ -89,7 +74,7 @@ int	ft_echo(char **cmd, t_exec exec)
 	return (0);
 }
 
-int	ft_cd(char **path, t_env_lst **env_lst)
+int	ft_cd(char **path, t_exec *exec)
 {
 	char	buff[PATH_MAX];
 	char	*old_pwd;
@@ -98,11 +83,11 @@ int	ft_cd(char **path, t_env_lst **env_lst)
 
 	old_pwd = ft_strdup(getcwd(buff, PATH_MAX));
 	if (!path[1])
-		chdir_value = chdir(get_env_value("HOME", *env_lst)) < 0;
+		chdir_value = chdir(get_env_value("HOME", exec)) < 0;
 	else if (!path[2])
 	{
 		if (ft_strmatch(path[1], "-"))
-			chdir_value = chdir(get_env_value("OLDPWD", *env_lst));
+			chdir_value = chdir(get_env_value("OLDPWD", exec));
 		else
 			chdir_value = chdir(path[1]);
 	}
@@ -111,7 +96,7 @@ int	ft_cd(char **path, t_env_lst **env_lst)
 	if (chdir_value < 0)
 		return (free(old_pwd), perror("cd"), 1);
 	new_pwd = ft_strdup(getcwd(buff, PATH_MAX));
-	change_env_value(ft_strdup("OLDPWD"), old_pwd, env_lst);
-	change_env_value(ft_strdup("PWD"), new_pwd, env_lst);
+	change_env_value(ft_strdup("OLDPWD"), old_pwd, exec);
+	change_env_value(ft_strdup("PWD"), new_pwd, exec);
 	return (0);
 }

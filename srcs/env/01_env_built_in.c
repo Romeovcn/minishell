@@ -1,56 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   03_env_lst_utils.c                                 :+:      :+:    :+:   */
+/*   01_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2022/12/09 16:25:46 by jsauvage         ###   ########.fr       */
+/*   Updated: 2022/12/15 18:41:22 by jsauvage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env_lst	*lstnew_env(char *name, char *value)
+int	ft_env(char **args, t_env_lst *env_lst)
 {
-	t_env_lst	*result;
-
-	result = malloc(sizeof(t_env_lst));
-	if (!result)
-		return (NULL);
-	result->name = name;
-	result->value = value;
-	result->next = NULL;
-	return (result);
+	if (args[1])
+	{
+		ft_putstr_fd("env: too many arguments\n", 2);
+		return (1);
+	}
+	while (env_lst)
+	{
+		printf("%s=%s\n", env_lst->name, env_lst->value);
+		env_lst = env_lst->next;
+	}
+	return (0);
 }
 
-t_env_lst	*lstlast_env(t_env_lst *lst)
+int	ft_export(t_exec *exec, char **args)
 {
-	t_env_lst	*head;
+	int		return_value;
+	int		i;
 
-	if (lst == NULL)
-		return (0);
-	head = lst;
-	while (head->next)
-		head = head->next;
-	return (head);
+	i = 0;
+	return_value = 0;
+	while (args[i])
+	{
+		return_value = export_env(args[i], exec);
+		i++;
+	}
+	return (return_value);
 }
 
-void	lstadd_back_env(t_env_lst **lst, t_env_lst *new)
+int	ft_unset(t_env_lst **env_lst, char **args)
 {
-	t_env_lst	*last;
+	int			i;
 
-	if (!new)
+	i = 1;
+	while (args[i])
 	{
-		free_env_lst(*lst);
-		exit(1);
+		unset_env(args[i], env_lst);
+		i++;
 	}
-	if (*lst)
-	{
-		last = lstlast_env(*lst);
-		last->next = new;
-	}
-	else
-		*lst = new;
+	return (0);
 }
