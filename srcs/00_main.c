@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   00_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsauvage <jsauvage@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rvincent <rvincent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by rvincent          #+#    #+#             */
-/*   Updated: 2023/01/05 18:33:31 by jsauvage         ###   ########.fr       */
+/*   Updated: 2023/01/09 01:03:04 by rvincent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int g_status = 0;
+int	g_status = 0;
 
-int check_empty_line(char *rl_str)
+int	check_empty_line(char *rl_str)
 {
 	int	i;
 
@@ -29,7 +29,7 @@ int check_empty_line(char *rl_str)
 	return (1);
 }
 
-void print_tok(t_tok_lst *token)
+void	print_tok(t_tok_lst *token)
 {
 	printf("--------Command lst token--------\n");
 	while (token)
@@ -45,7 +45,7 @@ void print_tok(t_tok_lst *token)
 	}
 }
 
-int parser(t_exec *exec, char *readline_str)
+int	parser(t_exec *exec, char *readline_str)
 {
 	exec->mal_lst = NULL;
 	exec->lex_lst = lexer(readline_str, exec);
@@ -65,10 +65,10 @@ int parser(t_exec *exec, char *readline_str)
 	return (0);
 }
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
-	t_exec		exec_struct;
-	char 		*readline_str;
+	t_exec	exec_struct;
+	char	*readline_str;
 
 	(void)argc;
 	(void)argv;
@@ -78,7 +78,7 @@ int main(int argc, char **argv, char **env)
 	{
 		signal(SIGINT, sig_int_rl);
 		signal(SIGQUIT, SIG_IGN);
-		// rl_outstream = stderr;
+		rl_outstream = stderr;
 		readline_str = readline("Minishell> ");
 		if (!readline_str)
 			break ;
