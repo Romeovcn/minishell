@@ -40,7 +40,7 @@ char	*get_wrong_access(t_tok_lst *tok_lst)
 	return (NULL);
 }
 
-int	check_outfile(t_tok_lst *tok_lst, t_exec *exec)
+int	check_outfile(t_tok_lst *tok_lst)
 {
 	int			file_fd;
 	t_array_lst	*tmp;
@@ -62,7 +62,7 @@ int	check_outfile(t_tok_lst *tok_lst, t_exec *exec)
 	return (0);
 }
 
-int	check_infile(t_tok_lst *tok_lst, t_exec *exec)
+int	check_infile(t_tok_lst *tok_lst)
 {
 	int			file_fd;
 	t_array_lst	*in_file;
@@ -79,9 +79,8 @@ int	check_infile(t_tok_lst *tok_lst, t_exec *exec)
 	return (0);
 }
 
-void	ft_null_access(char *path, char **split_path, t_exec *exec)
+void	ft_null_access(char **split_path, t_exec *exec)
 {
-	path = NULL;
 	free_array(split_path);
 	free_exit(exec, 127, TRUE);
 }

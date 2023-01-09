@@ -25,8 +25,7 @@ NAME = minishell
 # CC = gcc -fsanitize=address -g3
 CC = gcc
 # make && valgrind --suppressions=./suppres.txt ./minishell
-CFLAGS =
-# CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra
 
 # -- RULES -- #
 

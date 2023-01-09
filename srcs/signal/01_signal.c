@@ -36,6 +36,7 @@ static void	handle_signal_hd(int signal, siginfo_t *info, void *context)
 {
 	int	fd;
 
+	(void)info;
 	(void)context;
 	if (signal == SIGINT)
 	{

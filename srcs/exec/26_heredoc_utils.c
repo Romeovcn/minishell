@@ -44,7 +44,6 @@ static char	*get_heredoc_name(int i, t_exec *exec)
 static void	get_here_doc_file(char *del, char *name_file, t_exec *exec)
 {
 	char	*line;
-	int		len;
 	int		here_doc_fd;
 
 	here_doc_fd = open(name_file, O_CREAT | O_RDWR, 0666);

@@ -33,7 +33,7 @@ char		**get_paths(char **env);
 //----------------------------------------------------------------------------//
 int			ft_pwd(t_exec *exec);
 int			ft_exit(char **args, t_exec *exec);
-int			ft_echo(char **cmd, t_exec exec);
+int			ft_echo(char **cmd);
 int			ft_cd(char **path, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Built-in utils		 						  //
@@ -41,7 +41,7 @@ int			ft_cd(char **path, t_exec *exec);
 int			is_built_in(char *command);
 int			is_built_in_no_fork(char *command);
 int			exec_built_in(t_exec *exec);
-int         check_exit_error(int i, char **args, t_exec *exec);
+int			check_exit_error(int i, char **args, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Env	built-in	 							  //
 //----------------------------------------------------------------------------//
@@ -51,8 +51,8 @@ int			ft_unset(t_env_lst **env_lst, char **args);
 //----------------------------------------------------------------------------//
 //							 	Env built-in utils		 					  //
 //----------------------------------------------------------------------------//
-int         export_env(char *arg, t_exec *exec);
-void        unset_env(char *arg, t_env_lst **env_lst);
+int			export_env(char *arg, t_exec *exec);
+void		unset_env(char *arg, t_env_lst **env_lst);
 //----------------------------------------------------------------------------//
 //							 	Env utils		 							  //
 //----------------------------------------------------------------------------//
@@ -177,9 +177,9 @@ int			error_here_doc(t_exec *exec, int stdin_fd);
 //							 	Exec access									  //
 //----------------------------------------------------------------------------//
 char		*get_wrong_access(t_tok_lst *tok_lst);
-int			check_outfile(t_tok_lst *tok_lst, t_exec *exec);
-int			check_infile(t_tok_lst *tok_lst, t_exec *exec);
-void		ft_null_access(char *path, char **split_path, t_exec *exec);
+int			check_outfile(t_tok_lst *tok_lst);
+int			check_infile(t_tok_lst *tok_lst);
+void		ft_null_access(char **split_path, t_exec *exec);
 char		*ft_abs_path(char *cmd, t_exec *exec);
 //----------------------------------------------------------------------------//
 //							 	Signal										  //
@@ -187,8 +187,5 @@ char		*ft_abs_path(char *cmd, t_exec *exec);
 void		sig_int_rl(int sig_num);
 void		signal_manager_hd(void);
 void		sig_process(int sig_num);
-// To do :
-// Protect malloc
-// Norm
-// check unset error
+
 #endif

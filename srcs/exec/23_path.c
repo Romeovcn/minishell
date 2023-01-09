@@ -27,8 +27,8 @@ char	*get_right_path(char *path, t_array_lst *cmd, t_exec *exec)
 	if (!path)
 		free_exit(exec, 127, TRUE);
 	split_path = ft_split(path, ':');
-	i = 0;
-	while (split_path[i])
+	i = -1;
+	while (split_path[++i])
 	{
 		tmp = ft_strjoin(split_path[i], "/");
 		res = ft_strjoin(tmp, cmd->content);
@@ -36,7 +36,7 @@ char	*get_right_path(char *path, t_array_lst *cmd, t_exec *exec)
 		if (access(res, X_OK) == 0)
 			return (ft_strdup(res));
 		free(res);
-		i++;
 	}
-	ft_null_access(res, split_path, exec);
+	ft_null_access(split_path, exec);
+	return (NULL);
 }

@@ -29,7 +29,7 @@ int	check_env_name(char *env_name)
 	return (0);
 }
 
-char	*get_env_str_value(char *env, char *name)
+char	*get_env_str_value(char *env)
 {
 	char	*value;
 	int		i;
@@ -83,7 +83,7 @@ int	export_env(char *arg, t_exec *exec)
 		free(name);
 		return (1);
 	}
-	env_value = get_env_str_value(arg, name);
+	env_value = get_env_str_value(arg);
 	if (!env_value)
 	{
 		free(name);

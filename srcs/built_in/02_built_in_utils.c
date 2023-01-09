@@ -32,7 +32,7 @@ int	exec_built_in(t_exec *exec)
 	else if (ft_strmatch(args[0], "pwd"))
 		return_value = ft_pwd(exec);
 	else if (ft_strmatch(args[0], "echo"))
-		return_value = ft_echo(args, *exec);
+		return_value = ft_echo(args);
 	return (return_value);
 }
 
@@ -77,7 +77,7 @@ int	check_exit_error(int i, char **args, t_exec *exec)
 	i = 0;
 	while (args[1][i])
 	{
-		if (i == 0 && args[1][i] == '-')
+		if (i == 0 && (args[1][i] == '-' || args[1][i] == '+'))
 			i++;
 		if (!ft_isdigit(args[1][i]) || i > 18)
 		{

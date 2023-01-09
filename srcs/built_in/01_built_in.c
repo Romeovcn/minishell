@@ -38,7 +38,6 @@ int	ft_exit(char **args, t_exec *exec)
 
 int	ft_pwd(t_exec *exec)
 {
-	char	*pwd_path;
 	char	buff[PATH_MAX];
 	char	*path;
 
@@ -52,7 +51,7 @@ int	ft_pwd(t_exec *exec)
 	return (0);
 }
 
-int	ft_echo(char **cmd, t_exec exec)
+int	ft_echo(char **cmd)
 {
 	int		i;
 	char	*nl;

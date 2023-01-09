@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	command(t_exec *exec, int i)
+void	command(t_exec *exec)
 {
 	char	**args;
 	char	*path;
@@ -34,7 +34,7 @@ void	exec_token(t_exec *exec, int i)
 
 	output_fd = exec->tok_lst->output_fd;
 	input_fd = exec->tok_lst->input_fd;
-	if (check_infile(exec->tok_lst, exec) || check_outfile(exec->tok_lst, exec))
+	if (check_infile(exec->tok_lst) || check_outfile(exec->tok_lst))
 		free_exit(exec, g_status, TRUE);
 	if (i != exec->nb_command - 1)
 		dup2(exec->pipe_fd[1], STDOUT_FILENO);
@@ -47,6 +47,6 @@ void	exec_token(t_exec *exec, int i)
 	else if (input_fd == HERE_DOC)
 		here_doc(exec->tok_lst);
 	if (exec->tok_lst->args != NULL)
-		command(exec, i);
+		command(exec);
 	free_exit(exec, 0, TRUE);
 }

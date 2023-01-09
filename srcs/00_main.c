@@ -29,28 +29,26 @@ int	check_empty_line(char *rl_str)
 	return (1);
 }
 
-void	print_tok(t_tok_lst *token)
-{
-	printf("--------Command lst token--------\n");
-	while (token)
-	{
-		read_lst_array(token->args, "args");
-		printf("intput_fd: %d\n", token->input_fd);
-		read_lst_array(token->delimiter, "delimiter");
-		read_lst_array(token->in_file, "in_file");
-		printf("output_fd: %d\n", token->output_fd);
-		read_lst_array(token->out_file, "out_file");
-		printf("-----------------\n");
-		token = token->next;
-	}
-}
+// void	print_tok(t_tok_lst *token)
+// {
+// 	printf("--------Command lst token--------\n");
+// 	while (token)
+// 	{
+// 		read_lst_array(token->args, "args");
+// 		printf("intput_fd: %d\n", token->input_fd);
+// 		read_lst_array(token->delimiter, "delimiter");
+// 		read_lst_array(token->in_file, "in_file");
+// 		printf("output_fd: %d\n", token->output_fd);
+// 		read_lst_array(token->out_file, "out_file");
+// 		printf("-----------------\n");
+// 		token = token->next;
+// 	}
+// }
 
 int	parser(t_exec *exec, char *readline_str)
 {
 	exec->mal_lst = NULL;
 	exec->lex_lst = lexer(readline_str, exec);
-	// printf("--------Command lst lexed--------\n");
-	// read_lst(exec->lex_lst);
 	if (check_error(exec->lex_lst))
 	{
 		free_lst_malloc(exec->mal_lst);
@@ -58,10 +56,7 @@ int	parser(t_exec *exec, char *readline_str)
 		return (1);
 	}
 	expander(exec);
-	// printf("--------Command lst lexed after parsing--------\n");
-	// read_lst(exec->lex_lst);
 	exec->tok_lst = get_token_lst(exec);
-	// print_tok(exec->tok_lst);
 	return (0);
 }
 
@@ -78,7 +73,6 @@ int	main(int argc, char **argv, char **env)
 	{
 		signal(SIGINT, sig_int_rl);
 		signal(SIGQUIT, SIG_IGN);
-		rl_outstream = stderr;
 		readline_str = readline("Minishell> ");
 		if (!readline_str)
 			break ;

@@ -29,12 +29,12 @@ static void	built_in_error(t_tok_lst *tok_lst, int stdin_fd)
 
 void	built_in_error_manage(t_exec *exec)
 {
-	if (check_outfile(exec->tok_lst, exec))
+	if (check_outfile(exec->tok_lst))
 	{
 		built_in_error(exec->tok_lst, exec->stdin_fd);
 		return ;
 	}
-	if (check_infile(exec->tok_lst, exec))
+	if (check_infile(exec->tok_lst))
 	{
 		built_in_error(exec->tok_lst, exec->stdin_fd);
 		return ;
